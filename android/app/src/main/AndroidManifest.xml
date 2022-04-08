@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.chekin">
+    package="com.chekin.app">
    <application
-        android:label="chekin"
+        android:label="Chekin"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

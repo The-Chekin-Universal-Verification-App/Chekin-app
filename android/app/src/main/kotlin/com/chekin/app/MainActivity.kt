@@ -1,4 +1,4 @@
-package com.example.chekin
+package com.chekin.app
 
 import io.flutter.embedding.android.FlutterActivity
 
