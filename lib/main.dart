@@ -1,19 +1,23 @@
 import 'package:chekin/routes/app_pages.dart';
+import 'package:chekin/utils/colors.dart';
 import 'package:chekin/utils/size-config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
-void main() async{
-WidgetsFlutterBinding.ensureInitialized();
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
+    statusBarColor: kPrimaryColor,
+    statusBarBrightness: Brightness.light,
+  ));
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
       .then((_) {
     runApp(const InitClass());
   });
 }
-
 
 class InitClass extends StatelessWidget {
   const InitClass({Key? key}) : super(key: key);
@@ -27,7 +31,7 @@ class InitClass extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: AppPages.SPLASHSCREEN,
         getPages: AppPages.routes,
-        theme: ThemeData(fontFamily: 'Helvetica'),
+        theme: ThemeData(fontFamily: 'Lufga-Regular'),
       );
     });
   }
