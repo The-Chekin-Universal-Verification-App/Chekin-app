@@ -6,10 +6,12 @@ abstract class Routes {
   static const INITIAL = '/splash';
   static const AUTH_ONBOARDING = '/auth_onboarding';
   static const SIGNUP_SELECT = '/signup_select';
+  static const USER_ONE = '/user_one';
   static const BUSINESS_ONE = '/business_one';
   static const BUSINESS_TWO = '/business_two';
   static const BUSINESS_THREE = '/business_three';
   static const BUSINESS_IMAGE = '/business_image';
+  static const EMAIL_VERIFY = '/email_verify';
   static const PROFILE_IMAGE = '/profile_image';
   static const PAYMENT_INFO = '/payment_info';
   static const PAYMENT_INFO_TWO = '/payment_info_two';

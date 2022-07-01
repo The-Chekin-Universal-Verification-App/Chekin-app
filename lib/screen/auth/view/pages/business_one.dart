@@ -2,6 +2,7 @@ import 'package:chekin/constants/value.dart';
 import 'package:chekin/routes/app_pages.dart';
 import 'package:chekin/screen/auth/controller/auth_controller.dart';
 import 'package:chekin/shared/custom_textfield.dart';
+import 'package:chekin/shared/custom_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:chekin/shared/action_button.dart';
@@ -298,7 +299,44 @@ class BusinessOne extends StatelessWidget {
                     child: ActionButton(
                       text: 'Continue',
                       callback: () {
-                        Get.toNamed(Routes.BUSINESS_TWO);
+                        if (authController.firstName.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message: "First name field cannot be empty.");
+                        } else if (authController.middleName.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message: "Middle name field cannot be empty.");
+                        } else if (authController.lastName.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message: "Last name field cannot be empty.");
+                        } else if (authController.nationality.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message: "Nationality field cannot be empty.");
+                        } else if (authController.lga.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message: "LGA field cannot be empty.");
+                        } else if (authController.stateOfOrigin.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message:
+                                  "State of Origin field cannot be empty.");
+                        } else if (authController.businessName.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message: "Business name field cannot be empty.");
+                        } else if (authController
+                            .businessDescription.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message:
+                                  "Business Description field cannot be empty.");
+                        } else {
+                          Get.toNamed(Routes.BUSINESS_TWO);
+                        }
                       },
                     ),
                   ),

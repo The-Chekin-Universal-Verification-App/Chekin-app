@@ -24,74 +24,77 @@ class _MainAppState extends State<MainApp> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: _pages.elementAt(_selectedIndex),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: klightPrimaryColor,
-        currentIndex: _selectedIndex, //New
-        onTap: _onItemTapped,
-        elevation: 0,
-        showSelectedLabels: false,
-        showUnselectedLabels: false,
-        items: <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: _selectedIndex == 0
-                ? const Icon(
-                    Feather.home,
-                    size: 25,
-                    color: kPrimaryColor,
-                  )
-                : const Icon(
-                    Feather.home,
-                    size: 25,
-                    color: kBlackColor,
-                  ),
-            label: 'Dashboard',
-          ),
-          BottomNavigationBarItem(
-            icon: _selectedIndex == 1
-                ? const Icon(
-                    Octicons.globe,
-                    size: 25,
-                    color: kPrimaryColor,
-                  )
-                : const Icon(
-                    Octicons.globe,
-                    size: 25,
-                    color: kBlackColor,
-                  ),
-            label: 'Global',
-          ),
-          BottomNavigationBarItem(
-            icon: _selectedIndex == 2
-                ? const Icon(
-                    Feather.user,
-                    size: 25,
-                    color: kPrimaryColor,
-                  )
-                : const Icon(
-                    Feather.user,
-                    size: 25,
-                    color: kBlackColor,
-                  ),
-            label: 'User',
-          ),
-          BottomNavigationBarItem(
-            icon: _selectedIndex == 3
-                ? const Icon(
-                    Feather.settings,
-                    size: 25,
-                    color: kPrimaryColor,
-                  )
-                : const Icon(
-                    Feather.settings,
-                    size: 25,
-                    color: kBlackColor,
-                  ),
-            label: 'Dashboard',
-          ),
-        ],
+    return WillPopScope(
+      onWillPop: ()async => false,
+      child: Scaffold(
+        body: _pages.elementAt(_selectedIndex),
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          backgroundColor: klightPrimaryColor,
+          currentIndex: _selectedIndex, //New
+          onTap: _onItemTapped,
+          elevation: 0,
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: _selectedIndex == 0
+                  ? const Icon(
+                      Feather.home,
+                      size: 25,
+                      color: kPrimaryColor,
+                    )
+                  : const Icon(
+                      Feather.home,
+                      size: 25,
+                      color: kBlackColor,
+                    ),
+              label: 'Dashboard',
+            ),
+            BottomNavigationBarItem(
+              icon: _selectedIndex == 1
+                  ? const Icon(
+                      Octicons.globe,
+                      size: 25,
+                      color: kPrimaryColor,
+                    )
+                  : const Icon(
+                      Octicons.globe,
+                      size: 25,
+                      color: kBlackColor,
+                    ),
+              label: 'Global',
+            ),
+            BottomNavigationBarItem(
+              icon: _selectedIndex == 2
+                  ? const Icon(
+                      Feather.user,
+                      size: 25,
+                      color: kPrimaryColor,
+                    )
+                  : const Icon(
+                      Feather.user,
+                      size: 25,
+                      color: kBlackColor,
+                    ),
+              label: 'User',
+            ),
+            BottomNavigationBarItem(
+              icon: _selectedIndex == 3
+                  ? const Icon(
+                      Feather.settings,
+                      size: 25,
+                      color: kPrimaryColor,
+                    )
+                  : const Icon(
+                      Feather.settings,
+                      size: 25,
+                      color: kBlackColor,
+                    ),
+              label: 'Dashboard',
+            ),
+          ],
+        ),
       ),
     );
   }

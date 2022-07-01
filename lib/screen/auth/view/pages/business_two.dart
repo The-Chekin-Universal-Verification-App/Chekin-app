@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:chekin/routes/app_pages.dart';
 import 'package:chekin/screen/auth/controller/auth_controller.dart';
 import 'package:chekin/shared/custom_textfield.dart';
+import 'package:chekin/shared/custom_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:chekin/shared/action_button.dart';
@@ -278,6 +281,7 @@ class BusinessTwo extends StatelessWidget {
                                   {
                                     authController.error.value = '',
                                     authController.emailTwo.value = s,
+                                    log(authController.emailTwo.value)
                                     //print(email);
                                   }
                                 else
@@ -288,6 +292,30 @@ class BusinessTwo extends StatelessWidget {
                                   }
                               },
                             ),
+                            SizedBox(height: heightSize(15)),
+                            AuthTextField(
+                              color: klightPrimaryColor,
+                              hint: "Password",
+                              controller: authController.passwordController,
+                              error: authController.error.value,
+                              inputType: TextInputType.text,
+                              validFunction: (v) => v!,
+                              onSavedFunction: (s) => {
+                                if (s.isNotEmpty)
+                                  {
+                                    authController.error.value = '',
+                                    authController.password.value = s,
+                                    //print(email);
+                                  }
+                                else
+                                  {
+                                    authController.error.value =
+                                        "Invalid Password",
+                                    authController.password.value = '',
+                                  }
+                              },
+                            ),
+                            SizedBox(height: heightSize(15)),
                             //SizedBox(height: heightSize(41)),
                           ],
                         ),
@@ -299,7 +327,54 @@ class BusinessTwo extends StatelessWidget {
                     child: ActionButton(
                       text: 'Continue',
                       callback: () {
-                        Get.toNamed(Routes.BUSINESS_THREE);
+                        if (authController.lgaOfBusiness.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message:
+                                  "LGA of Business field cannot be empty.");
+                        } else if (authController
+                            .cityOfBusiness.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message:
+                                  "City of Business field cannot be empty.");
+                        } else if (authController
+                            .nearestLandmark.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message:
+                                  "Nearest Landmark field cannot be empty.");
+                        } else if (authController
+                            .establishmentDate.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message:
+                                  "Establishment Date field cannot be empty.");
+                        } else if (authController.phoneOne.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message:
+                                  "Phone Number One field cannot be empty.");
+                        } else if (authController.phoneTwo.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message:
+                                  "Phone Number Two field cannot be empty.");
+                        } else if (authController.emailOne.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message: "Email One field cannot be empty.");
+                        } else if (authController.emailTwo.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message: "Email Two field cannot be empty.");
+                        } else if (authController.password.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message: "Password field cannot be empty.");
+                        } else {
+                          Get.toNamed(Routes.BUSINESS_THREE);
+                        }
                       },
                     ),
                   ),

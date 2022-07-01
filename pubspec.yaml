@@ -31,12 +31,18 @@ dependencies:
   cupertino_icons: ^1.0.2
   flutter:
     sdk: flutter
+  flutter_dotenv: ^5.0.2
+  flutter_paystack:
+    git:
+      url: https://github.com/definitelyme/flutter_paystack.git
+      ref: a4a33c3dd0a12f46d655a2e63d11e9f20ba82d01
   flutter_spinkit: ^5.1.0
   flutter_svg: ^1.0.3
   flutter_vector_icons: ^1.0.0
   get: ^4.6.1
   get_storage: ^2.0.3
   http: ^0.13.4
+  pinput: ^2.2.11
 
 dev_dependencies:
   flutter_lints: ^1.0.0
@@ -56,6 +62,7 @@ flutter:
   assets:
     - assets/png/
     - assets/svg/
+    - .env
 
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

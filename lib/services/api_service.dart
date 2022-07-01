@@ -8,13 +8,13 @@ import 'storage.dart';
 
 String baseUrl = 'https://chekin-backend.herokuapp.com/api/v1/';
 
-
 class ApiService {
   static Future<Map> postData(Map data, url) async {
     try {
       var link = Uri.parse('$baseUrl$url');
       http.Response response = await http.post(link, body: data);
       Map jsonData = json.decode(response.body);
+      log(response.statusCode.toString());
 
       return jsonData;
     } catch (e) {
@@ -40,7 +40,7 @@ class ApiService {
       var token = await Storage.readData("token");
       Map<String, String> requestHeaders = {
         'Content-type': 'application/json',
-        'x-auth-token': token
+        'Authorization': 'Bearer $token'
       };
       log(token);
       var link = Uri.parse('$baseUrl$url');
@@ -60,7 +60,7 @@ class ApiService {
       var token = await Storage.readData("token");
       Map<String, String> requestHeaders = {
         'Content-type': 'application/json',
-        'x-auth-token': token
+        'Authorization': 'Bearer $token'
       };
       log(token);
       var link = Uri.parse('$baseUrl$url');
@@ -73,12 +73,13 @@ class ApiService {
       return {};
     }
   }
+
   static Future<Map> deleteDataWithToken(url) async {
     try {
       var token = await Storage.readData("token");
       Map<String, String> requestHeaders = {
         'Content-type': 'application/json',
-        'x-auth-token': token
+        'Authorization': 'Bearer $token'
       };
       log(token);
       var link = Uri.parse('$baseUrl$url');

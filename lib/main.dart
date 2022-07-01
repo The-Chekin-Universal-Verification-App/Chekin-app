@@ -3,12 +3,14 @@ import 'package:chekin/utils/colors.dart';
 import 'package:chekin/utils/size-config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  await dotenv.load();
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
     statusBarColor: kPrimaryColor,
     statusBarBrightness: Brightness.light,
@@ -31,7 +33,7 @@ class InitClass extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         initialRoute: AppPages.SPLASHSCREEN,
         getPages: AppPages.routes,
-        theme: ThemeData(fontFamily: 'Lufga-Regular'),
+        //theme: ThemeData(fontFamily: 'Lufga-Regular'),
       );
     });
   }

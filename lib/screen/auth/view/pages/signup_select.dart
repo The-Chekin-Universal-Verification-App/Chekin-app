@@ -1,7 +1,9 @@
 import 'package:chekin/constants/value.dart';
 import 'package:chekin/routes/app_pages.dart';
+import 'package:chekin/screen/auth/controller/auth_controller.dart';
 import 'package:chekin/shared/action_button.dart';
 import 'package:chekin/shared/custom_text.dart';
+import 'package:chekin/shared/custom_toast.dart';
 import 'package:chekin/utils/colors.dart';
 import 'package:chekin/utils/sizes.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,7 @@ class SignupSelect extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    AuthController authController = Get.find();
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SafeArea(
@@ -79,19 +82,30 @@ class SignupSelect extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: heightSize(14)),
-                          Container(
-                            height: heightSize(40),
-                            width: constraints.maxWidth,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(Values().buttonRadius),
-                              border: Border.all(
-                                  color: kBlackColor.withOpacity(0.5)),
-                            ),
-                            child: const Center(
-                              child: CText(
-                                text: "User",
-                                fontFamily: 'Lufga-Medium',
+                          Obx(
+                            () => GestureDetector(
+                              onTap: () {
+                                authController.selectUser();
+                              },
+                              child: Container(
+                                height: heightSize(40),
+                                width: constraints.maxWidth,
+                                decoration: BoxDecoration(
+                                  color:
+                                      authController.isSelctedUser.value == true
+                                          ? kPrimaryColor.withOpacity(0.5)
+                                          : kTransparent,
+                                  borderRadius: BorderRadius.circular(
+                                      Values().buttonRadius),
+                                  border: Border.all(
+                                      color: kBlackColor.withOpacity(0.5)),
+                                ),
+                                child: const Center(
+                                  child: CText(
+                                    text: "User",
+                                    fontFamily: 'Lufga-Medium',
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -113,19 +127,31 @@ class SignupSelect extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: heightSize(14)),
-                          Container(
-                            height: heightSize(40),
-                            width: constraints.maxWidth,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.circular(Values().buttonRadius),
-                              border: Border.all(
-                                  color: kBlackColor.withOpacity(0.5)),
-                            ),
-                            child: const Center(
-                              child: CText(
-                                text: "Business Owner",
-                                fontFamily: 'Lufga-Medium',
+                          Obx(
+                            () => GestureDetector(
+                              onTap: () {
+                                authController.selectBusiness();
+                              },
+                              child: Container(
+                                height: heightSize(40),
+                                width: constraints.maxWidth,
+                                decoration: BoxDecoration(
+                                  color:
+                                      authController.isSelectedBusiness.value ==
+                                              true
+                                          ? kPrimaryColor.withOpacity(0.5)
+                                          : kTransparent,
+                                  borderRadius: BorderRadius.circular(
+                                      Values().buttonRadius),
+                                  border: Border.all(
+                                      color: kBlackColor.withOpacity(0.5)),
+                                ),
+                                child: const Center(
+                                  child: CText(
+                                    text: "Business Owner",
+                                    fontFamily: 'Lufga-Medium',
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -133,7 +159,17 @@ class SignupSelect extends StatelessWidget {
                           ActionButton(
                             text: "Continue",
                             callback: () {
-                              Get.toNamed(Routes.BUSINESS_ONE);
+                              if (authController.isSelctedUser.value == true) {
+                                Get.toNamed(Routes.USER_ONE);
+                              } else if (authController
+                                      .isSelectedBusiness.value ==
+                                  true) {
+                                Get.toNamed(Routes.BUSINESS_ONE);
+                              } else {
+                                cToast(
+                                    title: "Notice",
+                                    message: "Please select a user preference");
+                              }
                             },
                           ),
                           SizedBox(height: heightSize(12)),
@@ -156,6 +192,5 @@ class SignupSelect extends StatelessWidget {
         ),
       ),
     );
-  
   }
 }

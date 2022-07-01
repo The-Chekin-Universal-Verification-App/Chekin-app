@@ -1,5 +1,5 @@
 import 'package:chekin/constants/assets_path.dart';
-import 'package:chekin/routes/app_pages.dart';
+import 'package:chekin/screen/auth/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:chekin/shared/action_button.dart';
@@ -12,6 +12,7 @@ class IDConfirm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AuthController authController = Get.find();
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       backgroundColor: kBackgroundColor,
@@ -79,11 +80,14 @@ class IDConfirm extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                    child: ActionButton(
-                      text: 'Get LUX Code',
-                      callback: () {
-                        Get.toNamed(Routes.VERIFICATION_ONE);
-                      },
+                    child: Obx(
+                      () => ActionButton(
+                        text: 'Get LUX Code',
+                        callback: () {
+                          authController.getLUXCode();
+                        },
+                        load: authController.load.value,
+                      ),
                     ),
                   ),
                   SizedBox(height: heightSize(12)),

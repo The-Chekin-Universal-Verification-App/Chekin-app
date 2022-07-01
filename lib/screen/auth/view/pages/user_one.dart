@@ -1,4 +1,6 @@
+import 'package:chekin/routes/app_pages.dart';
 import 'package:chekin/screen/auth/controller/auth_controller.dart';
+import 'package:chekin/services/extensions.dart';
 import 'package:chekin/shared/custom_textfield.dart';
 import 'package:chekin/shared/custom_toast.dart';
 import 'package:flutter/material.dart';
@@ -7,10 +9,9 @@ import 'package:chekin/shared/action_button.dart';
 import 'package:chekin/shared/custom_text.dart';
 import 'package:chekin/utils/colors.dart';
 import 'package:chekin/utils/sizes.dart';
-import 'package:chekin/constants/value.dart';
 
-class BusinessThree extends StatelessWidget {
-  const BusinessThree({Key? key}) : super(key: key);
+class UserOne extends StatelessWidget {
+  const UserOne({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -55,46 +56,6 @@ class BusinessThree extends StatelessWidget {
                           size: 15,
                         ),
                         const Spacer(),
-                        Row(
-                          children: [
-                            SizedBox(width: widthSize(4)),
-                            Expanded(
-                              child: Container(
-                                height: 5,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF516DB5),
-                                  borderRadius: BorderRadius.circular(
-                                    Values().buttonRadius,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: widthSize(4)),
-                            Expanded(
-                              child: Container(
-                                height: 5,
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF516DB5),
-                                  borderRadius: BorderRadius.circular(
-                                    Values().buttonRadius,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: widthSize(4)),
-                            Expanded(
-                              child: Container(
-                                height: 5,
-                                decoration: BoxDecoration(
-                                  color: kWhiteColor,
-                                  borderRadius: BorderRadius.circular(
-                                    Values().buttonRadius,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   ),
@@ -108,8 +69,8 @@ class BusinessThree extends StatelessWidget {
                             SizedBox(height: heightSize(45)),
                             AuthTextField(
                               color: klightPrimaryColor,
-                              hint: "Instagram Handle",
-                              controller: authController.instagramController,
+                              hint: "First Name",
+                              controller: authController.firstNameController,
                               error: authController.error.value,
                               inputType: TextInputType.text,
                               validFunction: (v) => v!,
@@ -117,21 +78,21 @@ class BusinessThree extends StatelessWidget {
                                 if (s.isNotEmpty)
                                   {
                                     authController.error.value = '',
-                                    authController.instagram.value = s,
+                                    authController.firstName.value = s,
                                     //print(email);
                                   }
                                 else
                                   {
                                     authController.error.value = "Invalid Name",
-                                    authController.instagram.value = '',
+                                    authController.firstName.value = '',
                                   }
                               },
                             ),
                             SizedBox(height: heightSize(15)),
                             AuthTextField(
                               color: klightPrimaryColor,
-                              hint: "Twitter Handle",
-                              controller: authController.twitterController,
+                              hint: "Middle Name",
+                              controller: authController.middleNameController,
                               error: authController.error.value,
                               inputType: TextInputType.text,
                               validFunction: (v) => v!,
@@ -139,21 +100,21 @@ class BusinessThree extends StatelessWidget {
                                 if (s.isNotEmpty)
                                   {
                                     authController.error.value = '',
-                                    authController.twitter.value = s,
+                                    authController.middleName.value = s,
                                     //print(email);
                                   }
                                 else
                                   {
                                     authController.error.value = "Invalid Name",
-                                    authController.twitter.value = '',
+                                    authController.middleName.value = '',
                                   }
                               },
                             ),
                             SizedBox(height: heightSize(15)),
                             AuthTextField(
                               color: klightPrimaryColor,
-                              hint: "Facebook Handle",
-                              controller: authController.facebookController,
+                              hint: "Last Name",
+                              controller: authController.lastNameController,
                               error: authController.error.value,
                               inputType: TextInputType.text,
                               validFunction: (v) => v!,
@@ -161,21 +122,21 @@ class BusinessThree extends StatelessWidget {
                                 if (s.isNotEmpty)
                                   {
                                     authController.error.value = '',
-                                    authController.facebook.value = s,
+                                    authController.lastName.value = s,
                                     //print(email);
                                   }
                                 else
                                   {
                                     authController.error.value = "Invalid Name",
-                                    authController.facebook.value = '',
+                                    authController.lastName.value = '',
                                   }
                               },
                             ),
                             SizedBox(height: heightSize(15)),
                             AuthTextField(
                               color: klightPrimaryColor,
-                              hint: "Tiktok Handle",
-                              controller: authController.tiktokController,
+                              hint: "Nationality",
+                              controller: authController.nationalityController,
                               error: authController.error.value,
                               inputType: TextInputType.text,
                               validFunction: (v) => v!,
@@ -183,21 +144,21 @@ class BusinessThree extends StatelessWidget {
                                 if (s.isNotEmpty)
                                   {
                                     authController.error.value = '',
-                                    authController.tiktok.value = s,
+                                    authController.nationality.value = s,
                                     //print(email);
                                   }
                                 else
                                   {
                                     authController.error.value = "Invalid Name",
-                                    authController.tiktok.value = '',
+                                    authController.nationality.value = '',
                                   }
                               },
                             ),
                             SizedBox(height: heightSize(15)),
                             AuthTextField(
                               color: klightPrimaryColor,
-                              hint: "LinkedIn Handle",
-                              controller: authController.linkedinController,
+                              hint: "Phone Number",
+                              controller: authController.phoneOneController,
                               error: authController.error.value,
                               inputType: TextInputType.text,
                               validFunction: (v) => v!,
@@ -205,18 +166,41 @@ class BusinessThree extends StatelessWidget {
                                 if (s.isNotEmpty)
                                   {
                                     authController.error.value = '',
-                                    authController.linkedin.value = s,
+                                    authController.phoneOne.value = s,
                                     //print(email);
                                   }
                                 else
                                   {
-                                    authController.error.value = "Invalid LGA",
-                                    authController.linkedin.value = '',
+                                    authController.error.value =
+                                        "Invalid Phone Number",
+                                    authController.phoneOne.value = '',
                                   }
                               },
                             ),
-
-                            //SizedBox(height: heightSize(41)),
+                            SizedBox(height: heightSize(15)),
+                            AuthTextField(
+                              color: klightPrimaryColor,
+                              hint: "Email Address",
+                              controller: authController.emailOneController,
+                              error: authController.error.value,
+                              inputType: TextInputType.text,
+                              validFunction: (v) => v!,
+                              onSavedFunction: (s) => {
+                                if (s.isValidEmail())
+                                  {
+                                    authController.error.value = '',
+                                    authController.emailOne.value = s,
+                                    //print(email);
+                                  }
+                                else
+                                  {
+                                    authController.error.value =
+                                        "Invalid Business Name",
+                                    authController.emailOne.value = '',
+                                  }
+                              },
+                            ),
+                            SizedBox(height: heightSize(15)),
                           ],
                         ),
                       ),
@@ -224,38 +208,37 @@ class BusinessThree extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 18.0),
-                    child: Obx(
-                      () => ActionButton(
-                        text: 'Continue',
-                        callback: () {
-                          if (authController.instagram.value.isEmpty) {
-                            cToast(
-                                title: "Notice",
-                                message: "Instagram field cannot be empty.");
-                          } else if (authController.twitter.value.isEmpty) {
-                            cToast(
-                                title: "Notice",
-                                message: "Twitter field cannot be empty.");
-                          } else if (authController.facebook.value.isEmpty) {
-                            cToast(
-                                title: "Notice",
-                                message: "Facebook field cannot be empty.");
-                          } else if (authController.tiktok.value.isEmpty) {
-                            cToast(
-                                title: "Notice",
-                                message: "Tiktok field cannot be empty.");
-                          } else if (authController.linkedin.value.isEmpty) {
-                            cToast(
-                                title: "Notice",
-                                message: "LinkedIn field cannot be empty.");
-                          } else {
-                            // Get.toNamed(Routes.BUSINESS_IMAGE);
-                            authController.signupBusiness();
-                            //Get.toNamed(Routes.PAYMENT_INFO);
-                          }
-                        },
-                        load: authController.load.value,
-                      ),
+                    child: ActionButton(
+                      text: 'Sign Up',
+                      callback: () {
+                        if (authController.firstName.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message: "First name field cannot be empty.");
+                        } else if (authController.middleName.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message: "Middle name field cannot be empty.");
+                        } else if (authController.lastName.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message: "Last name field cannot be empty.");
+                        } else if (authController.nationality.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message: "Nationality field cannot be empty.");
+                        } else if (authController.phoneOne.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message: "Phone number field cannot be empty.");
+                        } else if (authController.emailOne.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message: "Email address field cannot be empty.");
+                        } else {
+                          authController.signupUser();
+                        }
+                      },
                     ),
                   ),
                   SizedBox(height: heightSize(12)),

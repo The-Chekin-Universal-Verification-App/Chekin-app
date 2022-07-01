@@ -1,9 +1,10 @@
 import 'dart:async';
 
+import 'package:chekin/constants/steps.dart';
 import 'package:chekin/constants/value.dart';
 import 'package:chekin/routes/app_pages.dart';
 import 'package:chekin/screen/auth/view/components/sliding_text_widget.dart';
-import 'package:chekin/shared/action_button.dart';
+import 'package:chekin/services/storage.dart';
 import 'package:chekin/shared/custom_text.dart';
 import 'package:chekin/utils/colors.dart';
 import 'package:chekin/utils/sizes.dart';
@@ -111,7 +112,8 @@ class _AuthOnboardingState extends State<AuthOnboarding> {
                   children: [
                     Expanded(
                       child: GestureDetector(
-                        onTap: () {
+                        onTap: () async {
+                          await Storage.setStep(Steps.SIGNUP_SELECT);
                           Get.toNamed(Routes.SIGNUP_SELECT);
                         },
                         child: Container(
@@ -133,7 +135,8 @@ class _AuthOnboardingState extends State<AuthOnboarding> {
                     SizedBox(width: widthSize(19)),
                     Expanded(
                       child: GestureDetector(
-                        onTap: () {
+                        onTap: () async {
+                          await Storage.setStep(Steps.SIGN_IN);
                           Get.toNamed(Routes.SIGN_IN);
                         },
                         child: Container(

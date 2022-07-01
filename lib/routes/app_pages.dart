@@ -11,11 +11,13 @@ import 'package:chekin/screen/auth/view/pages/business_image.dart';
 import 'package:chekin/screen/auth/view/pages/business_one.dart';
 import 'package:chekin/screen/auth/view/pages/business_three.dart';
 import 'package:chekin/screen/auth/view/pages/business_two.dart';
+import 'package:chekin/screen/auth/view/pages/email_verification.dart';
 import 'package:chekin/screen/auth/view/pages/id_confirm.dart';
 import 'package:chekin/screen/auth/view/pages/payment_info.dart';
 import 'package:chekin/screen/auth/view/pages/payment_two_info.dart';
 import 'package:chekin/screen/auth/view/pages/profile_image.dart';
 import 'package:chekin/screen/auth/view/pages/signup_select.dart';
+import 'package:chekin/screen/auth/view/pages/user_one.dart';
 import 'package:chekin/screen/auth/view/pages/verification_one.dart';
 import 'package:chekin/screen/auth/view/pages/sign_in.dart';
 import 'package:chekin/screen/auth/view/pages/verification_two.dart';
@@ -41,6 +43,10 @@ class AppPages {
       page: () => const SignupSelect(),
     ),
     GetPage(
+      name: Routes.USER_ONE,
+      page: () => const UserOne(),
+    ),
+    GetPage(
       name: Routes.BUSINESS_ONE,
       page: () => const BusinessOne(),
     ),
@@ -51,6 +57,10 @@ class AppPages {
     GetPage(
       name: Routes.BUSINESS_THREE,
       page: () => const BusinessThree(),
+    ),
+    GetPage(
+      name: Routes.EMAIL_VERIFY,
+      page: () => const EmailVerify(),
     ),
     GetPage(
       name: Routes.BUSINESS_IMAGE,
