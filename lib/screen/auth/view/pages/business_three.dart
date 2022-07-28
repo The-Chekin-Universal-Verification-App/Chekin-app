@@ -250,6 +250,7 @@ class BusinessThree extends StatelessWidget {
                                 message: "LinkedIn field cannot be empty.");
                           } else {
                             // Get.toNamed(Routes.BUSINESS_IMAGE);
+                            authController.fromUser.value = false;
                             authController.signupBusiness();
                             //Get.toNamed(Routes.PAYMENT_INFO);
                           }

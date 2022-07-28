@@ -1,8 +1,13 @@
 import 'package:chekin/constants/assets_path.dart';
+import 'package:chekin/constants/steps.dart';
+import 'package:chekin/routes/app_pages.dart';
+import 'package:chekin/screen/app/user/controller/user_controller.dart';
+import 'package:chekin/services/storage.dart';
 import 'package:chekin/shared/custom_text.dart';
 import 'package:chekin/utils/colors.dart';
 import 'package:chekin/utils/sizes.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Settings extends StatefulWidget {
   const Settings({Key? key}) : super(key: key);
@@ -17,6 +22,7 @@ class _SettingsState extends State<Settings> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    UserController userController = Get.find();
     return Scaffold(
       backgroundColor: kBackgroundColor,
       body: SafeArea(
@@ -57,8 +63,8 @@ class _SettingsState extends State<Settings> {
                             size: 14,
                             fontFamily: 'Lufga-SemiBold',
                           ),
-                          const CText(
-                            text: "owoyemi818@gmail.com",
+                          CText(
+                            text: userController.userData.value.email ?? "...",
                             color: kBlackColor,
                             size: 14,
                             fontFamily: '',
@@ -104,7 +110,11 @@ class _SettingsState extends State<Settings> {
                           ),
                           item(
                             title: 'Remove this device/ Log Out',
-                            callback: () {},
+                            callback: () async {
+                              await Storage.eraseMemory();
+                              await Storage.setStep(Steps.ONBOADING);
+                              Get.offAllNamed(Routes.AUTH_ONBOARDING);
+                            },
                           )
                         ],
                       ),
@@ -170,6 +180,7 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserController userController = Get.find();
     return Row(
       children: [
         Stack(
@@ -202,8 +213,9 @@ class CustomAppBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CText(
-              text: "Hello Tosin,",
+            CText(
+              text:
+                  "Hello ${userController.userData.value.firstName ?? 'User'},",
               size: 18,
               fontWeight: FontWeight.w700,
               fontFamily: 'Lufga-Medium',

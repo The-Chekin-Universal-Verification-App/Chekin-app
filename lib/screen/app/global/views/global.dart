@@ -1,5 +1,6 @@
 import 'package:chekin/constants/assets_path.dart';
 import 'package:chekin/constants/value.dart';
+import 'package:chekin/screen/app/dashboard/controller/dashboard_controller.dart';
 import 'package:chekin/shared/appbar.dart';
 import 'package:chekin/shared/custom_text.dart';
 import 'package:chekin/shared/search_container.dart';
@@ -7,6 +8,7 @@ import 'package:chekin/utils/colors.dart';
 import 'package:chekin/utils/sizes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 
 class Global extends StatelessWidget {
   const Global({Key? key}) : super(key: key);
@@ -14,7 +16,7 @@ class Global extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-
+    DashboardController dashboardController = Get.find();
     return Scaffold(
       body: SafeArea(
         child: SizedBox(
@@ -29,7 +31,7 @@ class Global extends StatelessWidget {
                     const CustomAppBar(),
                     SizedBox(height: heightSize(40)),
                     Expanded(
-                      child: ListView(
+                      child: Column(
                         children: [
                           const SearchContainer(),
                           SizedBox(height: heightSize(20)),
@@ -140,42 +142,82 @@ class Global extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: heightSize(20)),
-                          
-                          item(
-                            title: "LUX-345839",
-                            subtitle: "Nike Air Force",
-                            callback: () {},
+
+                          // item(
+                          //   title: "LUX-345839",
+                          //   subtitle: "Nike Air Force",
+                          //   callback: () {},
+                          // ),
+                          // item(
+                          //   title: "LUX-345839",
+                          //   subtitle: "Nike Air Force",
+                          //   callback: () {},
+                          // ),
+                          // item(
+                          //   title: "LUX-345839",
+                          //   subtitle: "Nike Air Force",
+                          //   callback: () {},
+                          // ),
+                          // item(
+                          //   title: "LUX-345839",
+                          //   subtitle: "Nike Air Force",
+                          //   callback: () {},
+                          // ),
+                          // item(
+                          //   title: "LUX-345839",
+                          //   subtitle: "Nike Air Force",
+                          //   callback: () {},
+                          // ),
+                          // item(
+                          //   title: "LUX-345839",
+                          //   subtitle: "Nike Air Force",
+                          //   callback: () {},
+                          // ),
+                          // item(
+                          //   title: "LUX-345839",
+                          //   subtitle: "Nike Air Force",
+                          //   callback: () {},
+                          // ),
+                          Obx(
+                            () => dashboardController.loadingBusiness.value ==
+                                    false
+                                ? dashboardController
+                                        .businesses.value.isNotEmpty
+                                    ? Expanded(
+                                        child: ListView.builder(
+                                          itemCount: dashboardController
+                                              .businesses.value.length,
+                                          physics:
+                                              const BouncingScrollPhysics(),
+                                          itemBuilder: (context, index) {
+                                            return item(
+                                              title: "LUX-345839",
+                                              subtitle: "Aspir Stores",
+                                              callback: () {},
+                                            );
+                                          },
+                                        ),
+                                      )
+                                    : Expanded(
+                                        child: Column(
+                                          children: const [
+                                            Spacer(),
+                                            CText(
+                                              text:
+                                                  "No Business Data at the moment",
+                                              color: kBlackColor,
+                                              fontFamily: 'Lufga-SemiBold',
+                                              size: 13,
+                                            ),
+                                            Spacer(),
+                                          ],
+                                        ),
+                                      )
+                                : const Center(
+                                    child: CircularProgressIndicator(),
+                                  ),
                           ),
-                          item(
-                            title: "LUX-345839",
-                            subtitle: "Nike Air Force",
-                            callback: () {},
-                          ),
-                          item(
-                            title: "LUX-345839",
-                            subtitle: "Nike Air Force",
-                            callback: () {},
-                          ),
-                          item(
-                            title: "LUX-345839",
-                            subtitle: "Nike Air Force",
-                            callback: () {},
-                          ),
-                          item(
-                            title: "LUX-345839",
-                            subtitle: "Nike Air Force",
-                            callback: () {},
-                          ),
-                          item(
-                            title: "LUX-345839",
-                            subtitle: "Nike Air Force",
-                            callback: () {},
-                          ),
-                          item(
-                            title: "LUX-345839",
-                            subtitle: "Nike Air Force",
-                            callback: () {},
-                          ),
+
                         ],
                       ),
                     )

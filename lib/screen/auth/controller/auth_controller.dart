@@ -84,6 +84,7 @@ class AuthController extends GetxController {
   final plugin = PaystackPlugin();
 
   RxString luxCode = RxString("");
+  RxBool fromUser = RxBool(false);
 
   selectBusiness() {
     isSelectedBusiness.value = true;
@@ -186,13 +187,13 @@ class AuthController extends GetxController {
     try {
       load.value = true;
       var data = {
-        "email": emailOne.value,
-        "password": password.value,
-        "firstName": firstName.value,
-        "middleName": middleName.value,
-        "lastName": lastName.value,
-        "nationality": nationality.value,
-        "phoneNumber": phoneOne.value,
+        "email": emailOne.value.trim(),
+        "password": password.value.trim(),
+        "firstName": firstName.value.trim(),
+        "middleName": middleName.value.trim(),
+        "lastName": lastName.value.trim(),
+        "nationality": nationality.value.trim(),
+        "phoneNumber": phoneOne.value.trim(),
       };
       log(data.toString());
       var req = await APICalls().signupUser(data);
@@ -203,9 +204,8 @@ class AuthController extends GetxController {
           cToast(title: "Notice!", message: apiError.value);
           load.value = false;
         } else {
-          await Storage.setStep(Steps.PAYMENT_INFO);
           load.value = false;
-          Get.toNamed(Routes.PAYMENT_INFO);
+          Get.toNamed(Routes.EMAIL_VERIFY);
           //log(req['data'].toString());
 
           // log(moods.toString());
@@ -269,10 +269,18 @@ class AuthController extends GetxController {
           load.value = false;
         } else {
           log(req['data']['token']);
-          await Storage.setStep(Steps.PAYMENT_INFO);
-          await Storage.saveData('token', req['data']['token']);
-          load.value = false;
-          Get.toNamed(Routes.PAYMENT_INFO);
+          if (fromUser.value == false) {
+            await Storage.setStep(Steps.PAYMENT_INFO);
+            await Storage.saveData('token', req['data']['token']);
+            load.value = false;
+            Get.toNamed(Routes.PAYMENT_INFO);
+          } else {
+            log(req['data']['token']);
+            await Storage.saveData('token', req['data']['token']);
+            await Storage.setStep(Steps.DONE);
+            load.value = false;
+            Get.toNamed(Routes.MAIN_APP);
+          }
         }
       } else {
         cToast(title: "Notice!", message: "Unable to load moods at this time");
@@ -367,55 +375,8 @@ class AuthController extends GetxController {
     });
   }
 
-  navigate2() async {
-    String step = await Storage.readData("step") ?? "";
-    log("step is  $step");
-
-    switch (step) {
-      case Steps.ONBOADING:
-        Timer(const Duration(seconds: 4), () {
-          Get.toNamed(Routes.AUTH_ONBOARDING);
-        });
-        break;
-      case Steps.SIGNUP_SELECT:
-        Timer(const Duration(seconds: 4), () {
-          Get.toNamed(Routes.SIGNUP_SELECT);
-        });
-        break;
-      case Steps.SIGN_IN:
-        Timer(const Duration(seconds: 4), () {
-          Get.toNamed(Routes.SIGN_IN);
-        });
-        break;
-      case Steps.PAYMENT_INFO:
-        Timer(const Duration(seconds: 4), () {
-          Get.toNamed(Routes.PAYMENT_INFO);
-        });
-        break;
-
-      case Steps.GET_LUX_CODE:
-        Timer(const Duration(seconds: 4), () {
-          Get.toNamed(Routes.PAYMENT_INFO_TWO);
-        });
-        break;
-
-      case Steps.DONE:
-        Timer(const Duration(seconds: 4), () {
-          Get.toNamed(Routes.MAIN_APP);
-        });
-        break;
-
-      default:
-        Timer(const Duration(seconds: 4), () {
-          Get.toNamed(Routes.AUTH_ONBOARDING);
-        });
-        break;
-    }
-  }
-
   @override
   void onReady() {
-    navigate2();
     plugin.initialize(publicKey: paystackPublicKey);
     super.onReady();
   }

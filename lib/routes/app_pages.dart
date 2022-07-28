@@ -37,10 +37,12 @@ class AppPages {
     GetPage(
       name: Routes.AUTH_ONBOARDING,
       page: () => const AuthOnboarding(),
+      binding: AuthBinding(),
     ),
     GetPage(
       name: Routes.SIGNUP_SELECT,
       page: () => const SignupSelect(),
+      
     ),
     GetPage(
       name: Routes.USER_ONE,
@@ -98,9 +100,9 @@ class AppPages {
       name: Routes.MAIN_APP,
       page: () => const MainApp(),
       bindings: [
+        UserBinding(),
         DashboardBinding(),
         GlobalBinding(),
-        UserBinding(),
         SettingsBinding()
       ],
     ),

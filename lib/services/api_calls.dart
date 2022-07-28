@@ -44,5 +44,10 @@ class APICalls {
         await ApiService.getDataWithToken( "user");
     return req;
   }
+  getAllBusinesses() async {
+    var req =
+        await ApiService.getData("business/?page=1&limit=1&search=lux");
+    return req;
+  }
   
 }

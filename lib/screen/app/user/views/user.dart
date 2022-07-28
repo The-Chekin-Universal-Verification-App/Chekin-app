@@ -1,9 +1,11 @@
+import 'package:chekin/screen/app/user/controller/user_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:chekin/constants/assets_path.dart';
 import 'package:chekin/shared/custom_text.dart';
 import 'package:chekin/utils/colors.dart';
 import 'package:chekin/utils/sizes.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
+import 'package:get/get.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({Key? key}) : super(key: key);
@@ -95,6 +97,7 @@ class CustomAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserController userController = Get.find();
     return Row(
       children: [
         Stack(
@@ -127,12 +130,15 @@ class CustomAppBar extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const CText(
-              text: "Hello Tosin,",
-              size: 18,
-              fontWeight: FontWeight.w700,
-              fontFamily: 'Lufga-Medium',
-              color: kBoldPrimaryColor,
+            Obx(
+              () => CText(
+                text:
+                    "Hello ${userController.userData.value.firstName ?? 'User'}",
+                size: 18,
+                fontWeight: FontWeight.w700,
+                fontFamily: 'Lufga-Medium',
+                color: kBoldPrimaryColor,
+              ),
             ),
             SizedBox(height: heightSize(5)),
             const CText(

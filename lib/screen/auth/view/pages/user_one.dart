@@ -1,4 +1,3 @@
-import 'package:chekin/routes/app_pages.dart';
 import 'package:chekin/screen/auth/controller/auth_controller.dart';
 import 'package:chekin/services/extensions.dart';
 import 'package:chekin/shared/custom_textfield.dart';
@@ -201,6 +200,28 @@ class UserOne extends StatelessWidget {
                               },
                             ),
                             SizedBox(height: heightSize(15)),
+                            AuthTextField(
+                              color: klightPrimaryColor,
+                              hint: "Password",
+                              controller: authController.passwordController,
+                              error: authController.error.value,
+                              inputType: TextInputType.text,
+                              validFunction: (v) => v!,
+                              onSavedFunction: (s) => {
+                                if (s.isNotEmpty)
+                                  {
+                                    authController.error.value = '',
+                                    authController.password.value = s,
+                                    //print(email);
+                                  }
+                                else
+                                  {
+                                    authController.error.value =
+                                        "Invalid Password",
+                                    authController.password.value = '',
+                                  }
+                              },
+                            ),
                           ],
                         ),
                       ),
@@ -235,7 +256,12 @@ class UserOne extends StatelessWidget {
                           cToast(
                               title: "Notice",
                               message: "Email address field cannot be empty.");
+                        } else if (authController.password.value.isEmpty) {
+                          cToast(
+                              title: "Notice",
+                              message: "Password field cannot be empty.");
                         } else {
+                          authController.fromUser.value = true;
                           authController.signupUser();
                         }
                       },
