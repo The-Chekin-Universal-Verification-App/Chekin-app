@@ -31,7 +31,7 @@ class InitClass extends StatelessWidget {
       return GetMaterialApp(
         title: "Chekin",
         debugShowCheckedModeBanner: false,
-        initialRoute: AppPages.SPLASHSCREEN,
+        initialRoute: AppPages.SPLASHSCREEN ,
         getPages: AppPages.routes,
         //theme: ThemeData(fontFamily: 'Lufga-Regular'),
       );

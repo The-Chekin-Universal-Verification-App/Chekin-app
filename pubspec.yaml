@@ -29,6 +29,8 @@ environment:
 dependencies:
   animations: ^2.0.2
   cupertino_icons: ^1.0.2
+  gap:
+  flutter_rating_bar:
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.0.2

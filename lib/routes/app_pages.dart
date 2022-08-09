@@ -1,6 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
 import 'package:chekin/screen/app/dashboard/binding/dashboard_binding.dart';
+import 'package:chekin/screen/app/dashboard/views/top_rated.dart';
 import 'package:chekin/screen/app/global/binding/global_binding.dart';
 import 'package:chekin/screen/app/main_app.dart';
 import 'package:chekin/screen/app/settings/binding/settings_binding.dart';
@@ -16,10 +17,10 @@ import 'package:chekin/screen/auth/view/pages/id_confirm.dart';
 import 'package:chekin/screen/auth/view/pages/payment_info.dart';
 import 'package:chekin/screen/auth/view/pages/payment_two_info.dart';
 import 'package:chekin/screen/auth/view/pages/profile_image.dart';
+import 'package:chekin/screen/auth/view/pages/sign_in.dart';
 import 'package:chekin/screen/auth/view/pages/signup_select.dart';
 import 'package:chekin/screen/auth/view/pages/user_one.dart';
 import 'package:chekin/screen/auth/view/pages/verification_one.dart';
-import 'package:chekin/screen/auth/view/pages/sign_in.dart';
 import 'package:chekin/screen/auth/view/pages/verification_two.dart';
 import 'package:chekin/screen/splash_screen.dart';
 import 'package:get/get.dart';
@@ -42,7 +43,6 @@ class AppPages {
     GetPage(
       name: Routes.SIGNUP_SELECT,
       page: () => const SignupSelect(),
-      
     ),
     GetPage(
       name: Routes.USER_ONE,
@@ -79,6 +79,10 @@ class AppPages {
     GetPage(
       name: Routes.PAYMENT_INFO_TWO,
       page: () => const PaymentInfoTwo(),
+    ),
+    GetPage(
+        name: Routes.TOP_RATED,
+        page: () => const TopRated()
     ),
     GetPage(
       name: Routes.ID_CONFIRM,

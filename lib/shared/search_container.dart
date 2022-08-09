@@ -11,9 +11,9 @@ class SearchContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: heightSize(40),
+      height: heightSize(50),
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+      padding: const EdgeInsets.symmetric(horizontal: 10),
       decoration: BoxDecoration(
         color: klightPrimaryColor.withOpacity(0.8),
         borderRadius: BorderRadius.circular(Values().buttonRadius),
@@ -27,7 +27,7 @@ class SearchContainer extends StatelessWidget {
           SizedBox(width: widthSize(20)),
           const CText(
             text: "Input LUX Code",
-            color: kGreyColor,
+            color: kBlackColor,
             size: 14,
           ),
           const Spacer(),

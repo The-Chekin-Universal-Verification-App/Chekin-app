@@ -88,7 +88,7 @@ class SignupSelect extends StatelessWidget {
                                 authController.selectUser();
                               },
                               child: Container(
-                                height: heightSize(40),
+                                height: heightSize(55),
                                 width: constraints.maxWidth,
                                 decoration: BoxDecoration(
                                   color:
@@ -104,6 +104,7 @@ class SignupSelect extends StatelessWidget {
                                   child: CText(
                                     text: "User",
                                     fontFamily: 'Lufga-Medium',
+                                    size: 18,
                                   ),
                                 ),
                               ),
@@ -133,7 +134,7 @@ class SignupSelect extends StatelessWidget {
                                 authController.selectBusiness();
                               },
                               child: Container(
-                                height: heightSize(40),
+                                height: heightSize(55),
                                 width: constraints.maxWidth,
                                 decoration: BoxDecoration(
                                   color:
@@ -150,6 +151,7 @@ class SignupSelect extends StatelessWidget {
                                   child: CText(
                                     text: "Business Owner",
                                     fontFamily: 'Lufga-Medium',
+                                    size: 18,
                                   ),
                                 ),
                               ),

@@ -2,6 +2,7 @@
 
 import 'package:chekin/constants/assets_path.dart';
 import 'package:chekin/constants/value.dart';
+import 'package:chekin/routes/app_pages.dart';
 import 'package:chekin/shared/appbar.dart';
 import 'package:chekin/shared/custom_text.dart';
 import 'package:chekin/shared/search_container.dart';
@@ -90,36 +91,43 @@ class Dashboard extends StatelessWidget {
                             ],
                           ),
                           SizedBox(height: heightSize(20)),
-                          // Padding(
-                          //   padding: const EdgeInsets.only(left: 38.0),
-                          //   child: Row(
-                          //     children: [
-                          //       const CText(
-                          //         text: "Top Rated",
-                          //         color: kBlackColor,
-                          //         fontFamily: 'Lufga-SemiBold',
-                          //         size: 13,
-                          //       ),
-                          //       SizedBox(width: widthSize(14)),
-                          //       const Expanded(
-                          //         child: Divider(
-                          //           color: kBlackColor,
-                          //         ),
-                          //       ),
-                          //     ],
-                          //   ),
-                          // ),
-                          // SizedBox(height: heightSize(10)),
-                          // item(
-                          //   title: "LUX-345839",
-                          //   subtitle: "Aspir Stores",
-                          //   callback: () {},
-                          // ),
-                          // item(
-                          //   title: "LUX-345839",
-                          //   subtitle: "Aspir Stores",
-                          //   callback: () {},
-                          // ),
+                           Padding(
+                             padding: const EdgeInsets.only(left: 38.0),
+                             child: Row(
+                               children: [
+                                 const CText(
+                                   text: "Top Rated",
+                                   color: kBlackColor,
+                                   fontFamily: 'Lufga-SemiBold',
+                                   size: 13,
+                                 ),
+                                 SizedBox(width: widthSize(14)),
+                                 const Expanded(
+                                   child: Divider(
+                                     color: kBlackColor,
+                                   ),
+                                 ),
+                               ],
+                             ),
+                           ),
+
+                           /*
+                           top rated components
+                            */
+
+                           SizedBox(height: heightSize(10)),
+                           item(
+                             title: "LUX-345839",
+                             subtitle: "Aspir Stores",
+                             callback: () {
+                               Get.toNamed(Routes.TOP_RATED);
+                             },
+                           ),
+                           item(
+                             title: "LUX-345839",
+                             subtitle: "Aspir Stores",
+                             callback: () {},
+                           ),
                           Obx(
                             () => dashboardController
                                     .businesses.value.isNotEmpty

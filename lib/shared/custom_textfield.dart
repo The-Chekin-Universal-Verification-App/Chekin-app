@@ -35,7 +35,7 @@ class AuthTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: heightSize(height ?? 40),
+      height: heightSize(height ?? 55),
       width: size.width,
       padding: const EdgeInsets.only(left: 10, right: 10),
       decoration: BoxDecoration(
@@ -110,7 +110,7 @@ class CAuthTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: heightSize(height ?? 40),
+      height: heightSize(height ?? 55),
       width: size.width,
       padding: const EdgeInsets.only(left: 10, right: 10),
       decoration: BoxDecoration(

@@ -1,3 +1,4 @@
+import 'package:chekin/routes/app_pages.dart';
 import 'package:chekin/screen/auth/controller/auth_controller.dart';
 import 'package:chekin/services/extensions.dart';
 import 'package:chekin/shared/custom_textfield.dart';
@@ -40,7 +41,7 @@ class SignIn extends StatelessWidget {
                         children: [
                           GestureDetector(
                               onTap: () {
-                                // Get.back();
+                                Get.toNamed(Routes.AUTH_ONBOARDING);
                               },
                               child: const Icon(Icons.arrow_back_ios)),
                           SizedBox(height: heightSize(31)),

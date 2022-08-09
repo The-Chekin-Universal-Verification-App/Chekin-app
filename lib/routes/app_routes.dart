@@ -6,6 +6,7 @@ abstract class Routes {
   static const INITIAL = '/splash';
   static const AUTH_ONBOARDING = '/auth_onboarding';
   static const SIGNUP_SELECT = '/signup_select';
+  static const TOP_RATED = '/top_rated';
   static const USER_ONE = '/user_one';
   static const BUSINESS_ONE = '/business_one';
   static const BUSINESS_TWO = '/business_two';

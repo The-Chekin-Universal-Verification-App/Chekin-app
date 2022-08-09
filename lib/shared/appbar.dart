@@ -52,7 +52,7 @@ class CustomAppBar extends StatelessWidget {
                 size: 18,
                 fontWeight: FontWeight.w700,
                 fontFamily: 'Lufga-Medium',
-                color: kBoldPrimaryColor,
+                color: Colors.red,
               ),
             ),
             SizedBox(height: heightSize(5)),
