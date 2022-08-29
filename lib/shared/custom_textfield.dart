@@ -79,11 +79,11 @@ class AuthTextField extends StatelessWidget {
 
 class CAuthTextField extends StatelessWidget {
   //final Function(String) validator;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final TextInputType inputType;
   final String hint;
-  final String error;
-  final String Function(String?) validFunction;
+  final String? error;
+  final String Function(String?)? validFunction;
   final Function(String)? onSavedFunction;
   final Function(String)? onSubmitFunction;
   final Color? color;
@@ -93,10 +93,10 @@ class CAuthTextField extends StatelessWidget {
   const CAuthTextField({
     Key? key,
     required this.hint,
-    required this.controller,
+    this.controller,
     required this.inputType,
-    required this.error,
-    required this.validFunction,
+    this.error,
+    this.validFunction,
     this.onSavedFunction,
     this.color,
     this.onSubmitFunction,
