@@ -1,40 +1,54 @@
-import 'package:chekin/routes/app_pages.dart';
-import 'package:chekin/utils/colors.dart';
-import 'package:chekin/utils/size-config.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+import 'package:lookapp/routes/intro/intro_screen.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'core/providers/app_provider.dart';
+import 'core/providers/auth_provider.dart';
+import 'export.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await GetStorage.init();
-  await dotenv.load();
-  SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle.light.copyWith(
-    statusBarColor: kPrimaryColor,
-    statusBarBrightness: Brightness.light,
-  ));
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
-    runApp(const InitClass());
-  });
+void main() {
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: (_) => AppProvider()),
+    ChangeNotifierProvider(create: (_) => AuthProvider()),
+    Provider<BuildContext>(create: (c) => c),
+  ], child: const MyApp()));
 }
 
-class InitClass extends StatelessWidget {
-  const InitClass({Key? key}) : super(key: key);
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      SizeConfig().init(constraints);
-      return GetMaterialApp(
-        title: "Chekin",
+    var themeType = context.select<AppProvider, ThemeType>((val) => val.theme);
+    AppTheme theme = AppTheme.fromType(themeType);
+    Locale preferredLanguage =
+        context.select((AppProvider provider) => provider.preferredLanguage);
+    return Provider.value(
+      value: theme,
+      child: MaterialApp(
+        navigatorKey: R.N.navKey,
         debugShowCheckedModeBanner: false,
-        initialRoute: AppPages.SPLASHSCREEN,
-        getPages: AppPages.routes,
-        //theme: ThemeData(fontFamily: 'Lufga-Regular'),
-      );
-    });
+        title: 'Cheki App',
+        theme: theme.themeData,
+        home: const IntroScreen(),
+        builder: (context, child) => MediaQuery(
+          data: context.widthPx < 600
+              ? context.mq.copyWith(textScaleFactor: .8)
+              : context.mq.copyWith(textScaleFactor: 1),
+          child: child!,
+        ),
+        localizationsDelegates: const [
+          AppLocalizations.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale('en'), // English
+          Locale('es'), // Spanish
+        ],
+        locale: preferredLanguage,
+      ),
+    );
   }
 }

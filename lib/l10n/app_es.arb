@@ -1,0 +1,73 @@
+{
+"helloWorld": "¡Hola Mundo!",
+
+"login": "eLogin",
+
+"singMeUp": "eI''m new, Sign me up!",
+
+"welcomeTo": "eWelcome to",
+
+"introOneSubTitle": "eThe one app to go to for verified shop outlets around the country.",
+
+"introTwoSubTitle": "eThe one app to go to for verified shop outlets around the country.",
+
+"introThreeSubTitle": "eThe one app to go to for verified shop outlets around the country.",
+
+"byClickingTerm": "eBy Clicking this you have agreed to our",
+
+"termsOfService": "eTerms of Service ",
+
+"and": " eand  ",
+
+"whoAreYou": "eWho are you?",
+
+"pickProfile": "ePick a profile and start your journey",
+
+"youAreABuyer": "eYou're a buyer checking for  verified Dealers.",
+
+"ceo": "eC.E.O",
+"beVerified": "eBe verified. Show off your products and get buyers.",
+"a": "ea",
+"you": "eYou",
+"meet": "eMeet",
+"conti": "eContinue",
+"businessOwner": "eBusiness owner",
+"letGetStarted": "eLets get started!",
+"user": "eUser",
+"letGetYouStarted": "eHey {accountType} Let’s get you started!",
+"three": "eThree",
+"yourSignUpProcess": "eYour sign up process is divided into THREE parts. Shouldn't take much time to fill. Trust me, it’s going to be fun!",
+"yourSignUpProcessSecondPart": "eParts. Shouldn't take much time to fill. Trust me, it’s going to be",
+"fun": "eFUN!",
+"getStarted": "eGet Started!",
+"pickCountryCode": "ePick your country code and input the right digits",
+"enterYourPhone": "eEnter your phone number",
+"whatIsYourName": "eWhat’s your name?",
+"tellUsYourName": "eTell us your name so we know what to call you by",
+"firstName": "eFirst Name",
+"lastName": "eLast Name",
+"noEmojis": "eno emojis or symbols",
+"perfect": "ePerfect",
+"emailLastly": "eLastly, your email address",
+"emailAddress": "eEmail Address",
+"wantToReachOut": "eWe want to reach out to you on offers and best deals",
+"congratulations": "eCongratulations!",
+"welcome": "eWelcome",
+"accountIsSet": " eaccount is all set!",
+"getIn": "Get In!",
+"your": "eYour",
+"personalInfo": "ePersonal Information",
+"asABoss": "eAs a Boss, your customers need to trust you. How better than knowing your name",
+"middleName": "eMiddle Name",
+"nationality": "eNationality",
+"whereAreYouFrom": "eWhere are you from?",
+"stateOfOrigin": "State of Origin",
+"lga": "L.G.A of Origin",
+"businessInfo": "Business Information",
+"aboutBusiness": "Tell us about your business",
+"toGetPotentialBuyers": "For you to get potential buyers, customers need to know what your business is all about",
+
+"weLoveToKnowYouBetter": "eWe at ChekiApp would love to know you better",
+"privacyPolicy": "ePrivacy Policy"
+
+}

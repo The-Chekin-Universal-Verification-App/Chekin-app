@@ -1,6 +1,6 @@
 {
-    "name": "chekin",
-    "short_name": "chekin",
+    "name": "lookapp",
+    "short_name": "lookapp",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

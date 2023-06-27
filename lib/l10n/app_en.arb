@@ -1,0 +1,312 @@
+{
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  }
+,
+
+  "login": "Login",
+  "@login": {
+    "description": "to log in user"
+  },
+
+   "singMeUp": "Im new, Sign me up!",
+  "@singMeUp": {
+    "description": "to sign up user"
+  },
+
+   "welcomeTo": "Welcome to",
+  "@welcomeTo": {
+    "description": "welcome to note "
+  },
+   "introOneSubTitle": "The one app to go to for verified shop outlets around the country.",
+  "@introOneSubTitle": {
+    "description": " subtitle One on boarding screen"
+  },
+
+   "introTwoSubTitle": "The one app to go to for verified shop outlets around the country.",
+  "@introTwoSubTitle": {
+    "description": " subtitle Two on boarding screen"
+  },
+
+    "introThreeSubTitle": "The one app to go to for verified shop outlets around the country.",
+  "@introThreeSubTitle": {
+    "description": " subtitle Three on boarding screen"
+  }
+,
+    "byClickingTerm": "By Clicking this you have agreed to our",
+  "@byClickingTerm": {
+    "description": " the first part of the terms and condition"
+  },
+
+    "termsOfService": "Terms of Service ",
+  "@termsOfService": {
+    "description": " the terms of service part of the terms and condition "
+  }
+,
+    "and": " and  ",
+  "@and": {
+    "description": " the word and "
+  },
+
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": " Privacy Policy"
+  },
+
+   "whoAreYou": "Who are you?",
+  "@whoAreYou": {
+    "description": "A quest to know the type of user"
+  },
+
+    "pickProfile": "Pick a profile and start your journey",
+  "@pickProfile": {
+    "description": "pick a picture"
+  },
+
+    "youAreABuyer": "You're a buyer checking for  verified Dealers.",
+  "@youAreABuyer": {
+    "description": "you are a buyer in the app"
+  },
+
+    "meet": "Meet",
+  "@meet": {
+    "description": "meeting someone for the first time during introduction"
+  },
+
+    "a": "a",
+  "@a": {
+    "description": "a "
+  },
+
+    "you": "You",
+  "@you": {
+    "description": "referring to a person"
+  },
+
+    "beVerified": "Be verified. Show off your products and get buyers.",
+  "@beVerified": {
+    "description": "be verified"
+  },
+
+  "conti": "Continue",
+  "@conti": {
+    "description": "to  j proceed"
+  },
+
+    "user": "User",
+  "@user": {
+    "description": "a user of the system"
+  },
+
+   "businessOwner": "Business owner",
+  "@businessOwner": {
+    "description": "a BUSINESS OWNER using the system"
+  },
+
+   "letGetStarted": "Lets get started!",
+  "@letGetStarted": {
+    "description": "let get started note in the get started screen"
+  },
+
+   "letGetYouStarted": "Hey {accountType} Let’s get you started!",
+  "@letGetYouStarted": {
+    "description": "let get you started note with a user account type in the get  started screen"
+  },
+
+   "yourSignUpProcess": "Your sign up process is divided into ",
+  "@yourSignUpProcess": {
+    "description": "sign up process"
+  },
+
+
+ "yourSignUpProcessSecondPart": "  parts. Shouldn't take much time to fill. Trust me, it’s going to be ",
+  "@yourSignUpProcessSecondPart": {
+    "description": "sign up process second part note"
+  },
+
+  "fun": "FUN!",
+  "@fun": {
+    "description": "to enjoy ones self"
+  },
+
+  "three": "Three",
+  "@three": {
+    "description": "the number three"
+  },
+
+   "getStarted": "Get Started!",
+  "@getStarted": {
+    "description": "get started button text"
+  },
+
+"enterYourPhone": "Enter your phone number",
+  "@enterYourPhone": {
+    "description": "input phone number"
+  },
+  "pickCountryCode": "Pick your country code and input the right digits",
+  "@pickCountryCode": {
+    "description": "pick country code"
+  },
+
+   "whatIsYourName": "What’s your name?",
+  "@whatIsYourName": {
+    "description": "a question to the user trying to get his name"
+  },
+
+
+  "tellUsYourName": "Tell us your name so we know what to call you by",
+  "@tellUsYourName": {
+    "description": "a paragraph note to the user trying to get his name"
+  },
+
+  "firstName": "First Name",
+  "@firstName": {
+    "description": "A user first name"
+  },
+
+   "lastName": "Last Name",
+  "@lastName": {
+    "description": "A user last name"
+  },
+
+   "noEmojis": "no emojis or symbols",
+  "@noEmojis": {
+    "description": "no use of Emojis or symbols"
+  },
+
+    "perfect": "Perfect",
+  "@perfect": {
+    "description": "When all is well"
+  },
+
+   "emailLastly": "Lastly, your email address",
+  "@emailLastly": {
+    "description": "request for email address"
+  },
+
+   "emailAddress": "Email Address",
+  "@emailAddress": {
+    "description": "request for email address"
+  },
+
+    "wantToReachOut": "We want to reach out to you on offers and best deals",
+  "@wantToReachOut": {
+    "description": "Trying to reach out"
+  },
+
+    "congratulations": "Congratulations!",
+  "@congratulations": {
+    "description": "congratulating user"
+  },
+
+   "welcome": "Welcome",
+  "@welcome": {
+    "description": "Welcome the user of the app"
+  },
+
+    "accountIsSet": " account is all set!",
+  "@accountIsSet": {
+    "description": "Your account is set"
+  },
+
+
+   "your": "Your",
+  "@your": {
+    "description": "Your "
+  },
+
+
+ "getIn": "Get In!",
+  "@getIn": {
+    "description": "get In "
+  },
+
+  "personalInfo": "Personal Information",
+  "@personalInfo": {
+    "description": "personalInfo of user "
+  },
+
+   "asABoss": "As a Boss, your customers need to trust you. How better than knowing your name",
+  "@asABoss": {
+    "description": "a note under business account registration describing a boss"
+  },
+    "middleName": "Middle Name",
+  "@middleName": {
+    "description": "a user middle name"
+  },
+
+    "nationality": "Nationality",
+  "@nationality": {
+    "description": "country of origin"
+  },
+
+
+    "stateOfOrigin": "State of Origin",
+  "@stateOfOrigin": {
+    "description": "state of origin"
+  },
+
+     "lga": "L.G.A of Origin",
+  "@lga": {
+    "description": "Local government of origin"
+  },
+
+    "whereAreYouFrom": "Where are you from?",
+  "@whereAreYouFrom": {
+    "description": "user location and  origin"
+  },
+
+      "businessInfo": "Business Information",
+  "@businessInfo": {
+    "description": "business info"
+  },
+
+     "aboutBusiness": "Tell us about your business",
+  "@aboutBusiness": {
+    "description": "about business info"
+  },
+
+     "toGetPotentialBuyers": "For you to get potential buyers, customers need to know what your business is all about",
+  "@toGetPotentialBuyers": {
+    "description": "to get potential buyers  note to biz account user"
+  },
+
+     "businessName": "Business Name",
+  "@businessName": {
+    "description": "name of business"
+  },
+
+       "dateOfEstablishment": "Date of Establishment",
+  "@dateOfEstablishment": {
+    "description": "name of establishment"
+  },
+
+       "businessDescription": "Description of Business",
+  "@businessDescription": {
+    "description": "describe business"
+  },
+
+         "businessLocation": "Where is your business located?",
+  "@businessLocation": {
+    "description": "describe location of business"
+  },
+
+           "makeKnownBusinessLocation": "Your customers need to know where your business is located.",
+  "@makeKnownBusinessLocation": {
+    "description": "business location made public"
+  },
+
+
+    "weLoveToKnowYouBetter": "We at ChekiApp would love to know you better",
+  "@weLoveToKnowYouBetter": {
+    "description": "know a user better"
+  },
+
+    "ceo": "C.E.O",
+  "@ceo": {
+    "description": "a  business owner"
+  }
+
+
+}
