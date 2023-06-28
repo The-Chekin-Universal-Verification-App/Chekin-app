@@ -8,6 +8,7 @@ class IconRes {
   String get arrowLeftIcon => 'checkiapp_back_arrow_direction_icon';
   String get greyLogoIcon => 'grey_logo';
   String get languageIcon => 'language_icon';
+  String get cloudUploading => 'cloud-uploading';
 
   ///png image part
   String get appLogoGrey => 'grey_app_logo';
