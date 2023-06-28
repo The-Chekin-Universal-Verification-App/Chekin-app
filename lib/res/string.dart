@@ -17,7 +17,9 @@ class Strings {
   String get skip => 'Skip';
   String get appName => 'ChekiApp!';
   String get emailExample => 'e.g. name@gmail.com';
-  // String get login => 'Login';
+  String get cityExample => 'eg Jos';
+  String get landmarkExample => 'eg a Bank or Market';
+  String get localGovernmentExample => 'eg a Jos North';
   // String get singMeUp => " I’m new, Sign me up!";
 
   ///fot the on boarding part

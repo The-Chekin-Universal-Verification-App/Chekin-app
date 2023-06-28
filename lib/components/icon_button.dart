@@ -1,6 +1,6 @@
-import 'package:lookapp/components/primary_btn.dart';
+import 'package:chekinapp/components/primary_btn.dart';
 import 'package:flutter/material.dart';
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/export.dart';
 
 class IcButton extends StatelessWidget {
   final Function()? onPressed;

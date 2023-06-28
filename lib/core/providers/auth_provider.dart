@@ -1,4 +1,4 @@
-import 'package:lookapp/core/core.dart';
+import 'package:chekinapp/core/core.dart';
 
 import '../../utils/helpers/enums.dart';
 

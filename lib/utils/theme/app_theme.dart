@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/export.dart';
 
 enum ThemeType { light, dark }
 

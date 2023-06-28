@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/export.dart';
 
 import '../icon_button.dart';
 

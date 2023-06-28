@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/export.dart';
 
 import '../../res/language_and_emojis.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';

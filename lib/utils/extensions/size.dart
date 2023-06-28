@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/export.dart';
 
 extension SizedContext on BuildContext {
   /// Returns same as MediaQuery.of(context)

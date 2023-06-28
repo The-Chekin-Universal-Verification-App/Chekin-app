@@ -1,7 +1,7 @@
 library image_extension;
 
 import 'package:crypto/crypto.dart';
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/export.dart';
 
 extension AssetsExtension on String {
   //Icons

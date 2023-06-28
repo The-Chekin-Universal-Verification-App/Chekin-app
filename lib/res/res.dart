@@ -1,4 +1,4 @@
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/export.dart';
 export 'routes.dart';
 export 'text.dart';
 export 'icons.dart';

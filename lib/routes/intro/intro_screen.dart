@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lookapp/export.dart';
-import 'package:lookapp/routes/intro/oboarding/onboarding_small_screen_device.dart';
+import 'package:chekinapp/export.dart';
+import 'package:chekinapp/routes/intro/oboarding/onboarding_small_screen_device.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({Key? key}) : super(key: key);

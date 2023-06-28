@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/export.dart';
 
 class LogoIconItem extends StatelessWidget {
   const LogoIconItem({super.key, this.allRoundPadding = 15, this.iconUrl});

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/export.dart';
 
 extension ClickableExtensions on Widget {
   Widget clickable(

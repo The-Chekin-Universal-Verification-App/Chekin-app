@@ -1,4 +1,4 @@
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/export.dart';
 
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';

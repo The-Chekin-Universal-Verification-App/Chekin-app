@@ -1,27 +1,22 @@
+import 'package:chekinapp/routes/auth/user_biz_account_registration/biz_account/social_media_handle.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 
-import '../../../components/input/base_text_input.dart';
-import '../success_registration_screen.dart';
+import '../../../../../components/input/base_text_input.dart';
 
-class EmailEntryScreen extends StatefulWidget {
-  const EmailEntryScreen({Key? key}) : super(key: key);
+class BusinessContactInfoScreen extends StatefulWidget {
+  const BusinessContactInfoScreen({Key? key}) : super(key: key);
 
   @override
-  State<EmailEntryScreen> createState() => _EmailEntryScreenState();
+  State<BusinessContactInfoScreen> createState() =>
+      _BusinessContactInfoScreenState();
 }
 
-class _EmailEntryScreenState extends State<EmailEntryScreen> {
-  TextEditingController _firstName = TextEditingController();
-  @override
-  void initState() {
-    super.initState();
-    _firstName.addListener(() {
-      setState(() {});
-    });
-  }
+class _BusinessContactInfoScreenState extends State<BusinessContactInfoScreen> {
+  TextEditingController _firstMail = TextEditingController();
+  TextEditingController _secondMail = TextEditingController();
 
-  int pageIndex = 0;
+  int formIndex = 0;
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
@@ -42,20 +37,34 @@ class _EmailEntryScreenState extends State<EmailEntryScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const VSpace(23),
-                Text(
-                  context.loc.emailLastly,
-                  style: TextStyles.h5,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      context.loc.contactInfo,
+                      style: TextStyles.h5,
+                    ),
+                    Text(
+                      '${formIndex + 1}/2',
+                      style: TextStyles.h5,
+                    ),
+                  ],
                 ),
                 const VSpace(5),
                 Text(
-                  context.loc.wantToReachOut,
+                  context.loc.enterYourMailAddress,
+                  style: TextStyles.h7.weight(FontWeight.bold),
+                ),
+                const VSpace(5),
+                Text(
+                  context.loc.yourCustomerShouldContactYou,
                   style: TextStyles.body1,
                 ),
                 const VSpace(42),
                 Row(
                   children: [
                     Text(
-                      context.loc.emailAddress,
+                      context.loc.firstEmail,
                       style: TextStyles.body1
                           .copyWith(fontWeight: FontWeight.w900),
                     ),
@@ -68,10 +77,10 @@ class _EmailEntryScreenState extends State<EmailEntryScreen> {
                     )
                   ],
                 ),
-                // VSpace(context.sp(5)),
+
                 CustomFormTextField(
-                  controller: _firstName,
-                  suffix: _firstName.text.isNotEmpty
+                  controller: _firstMail,
+                  suffix: _firstMail.text.isNotEmpty
                       ? Icon(
                           Icons.cancel,
                           color: theme.black,
@@ -79,15 +88,39 @@ class _EmailEntryScreenState extends State<EmailEntryScreen> {
                       : const SizedBox.shrink(),
                   hintText: R.S.emailExample,
                 ),
+                const VSpace(25),
+                Row(
+                  children: [
+                    Text(
+                      context.loc.secondEmail,
+                      style: TextStyles.body1
+                          .copyWith(fontWeight: FontWeight.w900),
+                    ),
+                  ],
+                ),
+                VSpace(context.sp(5)),
+                CustomFormTextField(
+                  controller: _secondMail,
+                  suffix: _secondMail.text.isNotEmpty
+                      ? Icon(
+                          Icons.cancel,
+                          color: theme.black,
+                        )
+                      : const SizedBox.shrink(),
+                  hintText: R.S.emailExample,
+                ),
+                const VSpace(50),
               ],
             ),
+
+            ///for the button
             Container(
               padding: const EdgeInsets.only(
                 bottom: 20.0,
               ),
               child: PrimaryButton(
                 onPressed: () {
-                  context.push(const SuccessRegistrationScreen());
+                  context.push(const SocialMediaHandleScreen());
                 },
                 label: context.loc.conti,
                 radius: 20,

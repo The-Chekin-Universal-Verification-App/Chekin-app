@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.lookap" "\0"
-            VALUE "FileDescription", "lookapp" "\0"
+            VALUE "FileDescription", "chekinapp" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "lookapp" "\0"
+            VALUE "InternalName", "chekinapp" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2023 com.lookap. All rights reserved." "\0"
-            VALUE "OriginalFilename", "lookapp.exe" "\0"
-            VALUE "ProductName", "lookapp" "\0"
+            VALUE "OriginalFilename", "chekinapp.exe" "\0"
+            VALUE "ProductName", "chekinapp" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

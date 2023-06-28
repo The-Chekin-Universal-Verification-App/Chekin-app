@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lookapp/core/providers/auth_provider.dart';
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/core/providers/auth_provider.dart';
+import 'package:chekinapp/export.dart';
 
 String getAccountType(BuildContext context, UserType userType) {
   switch (userType) {

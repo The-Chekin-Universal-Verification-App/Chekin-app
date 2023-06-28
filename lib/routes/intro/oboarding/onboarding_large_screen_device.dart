@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/export.dart';
 import 'package:tuple/tuple.dart';
 
 import '../../../core/providers/app_provider.dart';

@@ -1,4 +1,4 @@
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/export.dart';
 
 class ChatProvider extends BaseProvider {
   List<String> _dexterMessages = [];

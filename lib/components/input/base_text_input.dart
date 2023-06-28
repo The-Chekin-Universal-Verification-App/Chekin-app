@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/export.dart';
 
 class BaseTextInput extends StatelessWidget {
   final String? label;
@@ -411,7 +411,17 @@ class _CustomFormTextFieldState extends State<CustomFormTextField> {
               autoValidate: true,
               inputDecoration: InputDecoration(
                 prefixIcon: widget.prefix,
-                suffixIcon: widget.suffix,
+                suffixIcon: widget.suffix ??
+                    (widget.controller != null
+                        ? widget.controller!.text.isNotEmpty
+                            ? Icon(
+                                Icons.cancel,
+                                color: theme.black,
+                              ).clickable(() {
+                                widget.controller?.clear();
+                              })
+                            : const SizedBox.shrink()
+                        : null),
                 contentPadding: widget.contentPadding ??
                     const EdgeInsets.symmetric(
                       vertical: 15,

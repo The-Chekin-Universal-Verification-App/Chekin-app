@@ -1,24 +1,18 @@
+import 'package:chekinapp/routes/document_upload/upload_document_main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
-import 'package:chekinapp/routes/auth/user_biz_account_registration/biz_account/biz_owner_personal_detaills.dart';
 
-import '../../../core/providers/auth_provider.dart';
-import '../../auth/user_biz_account_registration/account_creation_main_screen.dart';
-import '../../auth/user_biz_account_registration/biz_account/biz_account_creation_main_screen.dart';
-
-class GetStartedScreen extends StatelessWidget {
-  const GetStartedScreen({Key? key}) : super(key: key);
+class YouAreAlmostDoneScreen extends StatelessWidget {
+  const YouAreAlmostDoneScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
-    var accountType = context.read<AuthProvider>().accountType;
 
     return Scaffold(
       backgroundColor: theme.primary,
       appBar: CustomAppBar(
         backgroundColor: theme.primary,
-        // onTapLeadingIcon: () {},
         leadingIcon: LogoIconItem(
           iconUrl: R.png.appLogo.imgPng,
         ),
@@ -36,27 +30,24 @@ class GetStartedScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      context.loc.letGetStarted,
+                      context.loc.youAreAlmostDone,
                       style: TextStyles.h5.txtColor(Colors.white),
                     ),
                   ],
                 ),
               ),
             ),
-            const VSpace(48),
-            IntroImage(
-              height: 291,
-              onboardImg: R.png.man.imgPng,
+            SizedBox(
+              height: 369,
             ),
-            const VSpace(30),
             Text(
-              context.loc.letGetYouStarted(context.loc.ceo),
+              context.loc.youAreAlmostSet,
               style: TextStyles.h6.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 2),
             ),
-            const VSpace(25),
+            const VSpace(16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 43.0),
               child: RichText(
@@ -64,24 +55,9 @@ class GetStartedScreen extends StatelessWidget {
                   text:
                       TextSpan(style: const TextStyle(height: 1.5), children: [
                     TextSpan(
-                      text: context.loc.yourSignUpProcess,
+                      text: context.loc.justFewDocumentUpload,
                       style: TextStyles.body1
                           .copyWith(color: Colors.white70, fontSize: 15),
-                    ),
-                    TextSpan(
-                      text: context.loc.three.toUpperCase(),
-                      style: TextStyles.body1
-                          .copyWith(color: Colors.white, fontSize: 15),
-                    ),
-                    TextSpan(
-                      text: context.loc.yourSignUpProcessSecondPart,
-                      style: TextStyles.body1
-                          .copyWith(color: Colors.white70, fontSize: 15),
-                    ),
-                    TextSpan(
-                      text: context.loc.fun.toUpperCase(),
-                      style: TextStyles.body1
-                          .copyWith(color: Colors.white, fontSize: 15),
                     ),
                   ])),
             ),
@@ -90,13 +66,9 @@ class GetStartedScreen extends StatelessWidget {
               padding: const EdgeInsets.only(right: 27.0, left: 27, bottom: 45),
               child: PrimaryButton(
                 onPressed: () {
-                  if (accountType.name == UserType.normal.name) {
-                    context.push(const AccountCreationScreen());
-                  } else {
-                    context.push(const BusinessAccountCreationMainScreen());
-                  }
+                  context.push(const UploadDocumentMainScreen());
                 },
-                label: context.loc.getStarted,
+                label: context.loc.begin,
                 radius: 20,
                 fullWidth: true,
                 color: theme.background,

@@ -1,16 +1,14 @@
-import 'package:chekinapp/routes/auth/user_biz_account_registration/biz_account/widgets/biz_contact_info.dart';
+import 'package:chekinapp/routes/document_upload/upload_valid_ids.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
-import 'package:chekinapp/routes/auth/user_biz_account_registration/biz_account/biz_info_details.dart';
-import 'package:chekinapp/routes/auth/user_biz_account_registration/biz_account/biz_owner_personal_detaills.dart';
 
-class BusinessAccountCreationMainScreen extends StatelessWidget {
-  const BusinessAccountCreationMainScreen({Key? key}) : super(key: key);
+class UploadDocumentMainScreen extends StatelessWidget {
+  const UploadDocumentMainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
-    int pageIndex = 2;
+    int pageIndex = 0;
     return Scaffold(
         appBar: CustomAppBar(
           leading: true,
@@ -51,7 +49,7 @@ class BusinessAccountCreationMainScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: List.generate(
-                    3,
+                    5,
                     (index) => Flexible(
                       flex: 1,
                       child: CustomContainer(
@@ -70,11 +68,7 @@ class BusinessAccountCreationMainScreen extends StatelessWidget {
               ),
               IndexedStack(
                 index: pageIndex,
-                children: [
-                  BusinessOwnerDetailScreen(),
-                  BusinessInfoDetailScreen(),
-                  BusinessContactInfoScreen(),
-                ],
+                children: [UploadValidIDsScreen()],
               ),
             ],
           ),

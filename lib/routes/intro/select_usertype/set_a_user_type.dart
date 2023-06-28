@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lookapp/export.dart';
-import 'package:lookapp/routes/intro/oboarding/onboarding_screen_view_switcher.dart';
-import 'package:lookapp/routes/intro/select_usertype/usertype_large_screen_device.dart';
-import 'package:lookapp/routes/intro/select_usertype/usertype_small_screen_device.dart';
+import 'package:chekinapp/export.dart';
+import 'package:chekinapp/routes/intro/oboarding/onboarding_screen_view_switcher.dart';
+import 'package:chekinapp/routes/intro/select_usertype/usertype_large_screen_device.dart';
+import 'package:chekinapp/routes/intro/select_usertype/usertype_small_screen_device.dart';
 
 class SetUserTypeScreen extends StatelessWidget {
   const SetUserTypeScreen({Key? key}) : super(key: key);

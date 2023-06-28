@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lookapp/export.dart';
-import 'package:lookapp/routes/auth/user_biz_account_registration/user_details_widget.dart';
+import 'package:chekinapp/export.dart';
+import 'package:chekinapp/routes/auth/user_biz_account_registration/user_details_widget.dart';
 
 import '../phone_number_registration.dart';
 import 'email_form_page_screen.dart';

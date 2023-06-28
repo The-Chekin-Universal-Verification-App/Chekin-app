@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/export.dart';
 
 import '../../../../components/input/base_text_input.dart';
 
@@ -59,7 +59,10 @@ class _BusinessInfoDetailScreenState extends State<BusinessInfoDetailScreen> {
                 const VSpace(42),
                 IndexedStack(
                   index: formIndex,
-                  children: [],
+                  children: [
+                    BusinessNamesSection(),
+                    BusinessAddressAndLocationSection()
+                  ],
                 ),
                 const VSpace(50),
               ],
@@ -75,6 +78,9 @@ class _BusinessInfoDetailScreenState extends State<BusinessInfoDetailScreen> {
                   if (formIndex == 0) {
                     formIndex = 1;
                     setState(() {});
+                  } else if (formIndex == 1) {
+                    ///todo: move the business account creation flow index to the next page
+                    // context.read<AppProvider>();
                   }
                 },
                 label: context.loc.conti,
@@ -191,6 +197,118 @@ class _BusinessNamesSectionState extends State<BusinessNamesSection> {
                 )
               : const SizedBox.shrink(),
           hintText: context.loc.noEmojis,
+        ),
+      ],
+    );
+  }
+}
+
+//
+
+///the country state and local government starts here as well
+class BusinessAddressAndLocationSection extends StatefulWidget {
+  const BusinessAddressAndLocationSection({Key? key}) : super(key: key);
+
+  @override
+  State<BusinessAddressAndLocationSection> createState() =>
+      _BusinessAddressAndLocationSectionState();
+}
+
+class _BusinessAddressAndLocationSectionState
+    extends State<BusinessAddressAndLocationSection> {
+  TextEditingController _city = TextEditingController();
+  TextEditingController _landMark = TextEditingController();
+  TextEditingController _lga = TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    _city.addListener(() {
+      setState(() {});
+    });
+    _landMark.addListener(() {
+      setState(() {});
+    });
+
+    _lga.addListener(() {
+      setState(() {});
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    AppTheme theme = context.watch();
+    return Column(
+      children: [
+        Row(
+          children: [
+            Text(
+              context.loc.cityOfBusiness,
+              style: TextStyles.body1.copyWith(fontWeight: FontWeight.w900),
+            ),
+          ],
+        ),
+        CustomFormTextField(
+          controller: _city,
+          suffix: _city.text.isNotEmpty
+              ? Icon(
+                  Icons.cancel,
+                  color: theme.black,
+                )
+              : const SizedBox.shrink(),
+          hintText: R.S.cityExample,
+        ),
+        const VSpace(25),
+        Row(
+          children: [
+            Text(
+              context.loc.nearestLandMark,
+              style: TextStyles.body1.copyWith(fontWeight: FontWeight.w900),
+            ),
+            Text(
+              '*',
+              style: TextStyles.h5.copyWith(
+                  height: 1.5,
+                  color: theme.redButton,
+                  fontWeight: FontWeight.w900),
+            )
+          ],
+        ),
+        CustomFormTextField(
+          controller: _landMark,
+          suffix: _landMark.text.isNotEmpty
+              ? Icon(
+                  Icons.cancel,
+                  color: theme.black,
+                )
+              : const SizedBox.shrink(),
+          hintText: R.S.landmarkExample,
+        ),
+        const VSpace(20),
+        Row(
+          children: [
+            Text(
+              context.loc.lga,
+              style: TextStyles.body1.copyWith(fontWeight: FontWeight.w900),
+            ),
+            Text(
+              '*',
+              style: TextStyles.h5.copyWith(
+                  height: 1.5,
+                  color: theme.redButton,
+                  fontWeight: FontWeight.w900),
+            )
+          ],
+        ),
+        VSpace(context.sp(5)),
+        CustomFormTextField(
+          controller: _lga,
+          suffix: _lga.text.isNotEmpty
+              ? Icon(
+                  Icons.cancel,
+                  color: theme.black,
+                )
+              : const SizedBox.shrink(),
+          hintText: R.S.localGovernmentExample,
         ),
       ],
     );

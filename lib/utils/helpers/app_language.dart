@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/export.dart';
 
 import '../../core/providers/app_provider.dart';
 import '../../res/language_and_emojis.dart';

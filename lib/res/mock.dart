@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:lookapp/export.dart';
-import 'package:lookapp/res/res.dart';
+import 'package:chekinapp/export.dart';
+import 'package:chekinapp/res/res.dart';
 
 class Mock {
   String get userName => 'Janet Jackson';

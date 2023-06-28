@@ -1,4 +1,4 @@
-# lookapp
+# chekinapp
 
 A new Flutter project.
 

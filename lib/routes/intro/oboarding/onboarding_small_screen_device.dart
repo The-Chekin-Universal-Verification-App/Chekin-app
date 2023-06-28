@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lookapp/core/providers/app_provider.dart';
-import 'package:lookapp/export.dart';
-import 'package:lookapp/res/language_and_emojis.dart';
-import 'package:lookapp/routes/intro/select_usertype/set_a_user_type.dart';
+import 'package:chekinapp/core/providers/app_provider.dart';
+import 'package:chekinapp/export.dart';
+import 'package:chekinapp/res/language_and_emojis.dart';
+import 'package:chekinapp/routes/intro/select_usertype/set_a_user_type.dart';
 import 'package:tuple/tuple.dart';
 import '../../../components/msc/app_bar.dart';
 import '../../../components/msc/chekiapp_logo_icon_item.dart';

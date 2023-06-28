@@ -292,9 +292,24 @@
     "description": "describe location of business"
   },
 
-           "makeKnownBusinessLocation": "Your customers need to know where your business is located.",
+  "makeKnownBusinessLocation": "Your customers need to know where your business is located.",
   "@makeKnownBusinessLocation": {
     "description": "business location made public"
+  },
+
+   "cityOfBusiness": "City of Business",
+  "@cityOfBusiness": {
+    "description": "city of the business"
+  },
+
+     "nearestLandMark": "Nearest Landmark",
+  "@nearestLandMark": {
+    "description": "Nearest land mark"
+  },
+
+       "lgaOfBusiness": "L.G.A of Business",
+  "@lgaOfBusiness": {
+    "description": "local government of user business"
   },
 
 
@@ -302,6 +317,164 @@
   "@weLoveToKnowYouBetter": {
     "description": "know a user better"
   },
+
+    "enterYourMailAddress": "Enter your email addresses",
+  "@enterYourMailAddress": {
+    "description": "Enter your mail address"
+  },
+
+      "contactInfo": "Contact Information",
+  "@contactInfo": {
+    "description": "contact Information"
+  },
+
+   "yourCustomerShouldContactYou": "Your customers should be able to contact you in other to buy your products",
+  "@yourCustomerShouldContactYou": {
+    "description": "Your customers should contact you"
+  },
+
+    "firstEmail": "First email address",
+  "@firstEmail": {
+    "description": "User first mail address"
+  },
+
+      "secondEmail": "Second email address",
+  "@secondEmail": {
+    "description": "User first mail address"
+  },
+
+       "socials": "Socials",
+  "@socials": {
+    "description": "socials "
+  },
+
+       "enterSocialMedia": "Enter your social medial handle",
+  "@enterSocialMedia": {
+    "description": "Enter your social medial handle"
+  },
+
+
+        "enterYourDifferentSocialMedia": "Enter your respective social media handles so your customers can find you to see your products",
+  "@enterYourDifferentSocialMedia": {
+    "description": "Enter your different social medial handle"
+  },
+
+
+         "facebook": "Facebook",
+  "@facebook": {
+    "description": "Facebook social medial handle"
+  },
+
+
+        "twitter": "Twitter",
+  "@twitter": {
+    "description": "Twitter social medial handle"
+  },
+
+
+          "instagram": "Instagram",
+  "@instagram": {
+    "description": "instagram social medial handle"
+  },
+
+
+         "ticTok": "Tictok",
+  "@ticTok": {
+    "description": "Tictok social medial handle"
+  },
+
+
+          "linkedIn": "LinkedIn",
+  "@linkedIn": {
+    "description": "LinkedIn social medial handle"
+  },
+
+
+          "whatsApp": "WhatsApp",
+  "@whatsApp": {
+    "description": "WhatsApp social medial handle"
+  },
+
+
+  "skip": "Skip",
+  "@skip": {
+    "description": "skip a certain process"
+  },
+
+  "documentUpload": "Document Upload",
+  "@documentUpload": {
+    "description": "uploading a valid id document to verify a user"
+  },
+
+   "validBusinessDoc": "Valid Business Document",
+  "@validBusinessDoc": {
+    "description": "uploading a valid business document to verify a user"
+  },
+
+   "pickAnyBusinessDoc": "Pick any of the following business documents you have and upload it.",
+  "@pickAnyBusinessDoc": {
+    "description": "note to user uploading valid id document"
+  },
+
+    "validId": "Valid Identification Card",
+  "@validId": {
+    "description": "user uploading valid id "
+  },
+
+    "pickAnyID": "Pick any of the following id documents you have and upload it.",
+  "@pickAnyID": {
+    "description": "id selection options for user "
+  },
+
+
+    "upload": "Upload",
+  "@upload": {
+    "description": "upload of id"
+  },
+
+    "frontPlease": "Front please",
+  "@frontPlease": {
+    "description": "upload front of document"
+  },
+
+  "youAreAlmostSet": "You’re almost set up",
+  "@youAreAlmostSet": {
+    "description": "almost set"
+  },
+
+
+  "youAreAlmostDone": "You are almost done!",
+  "@youAreAlmostDone": {
+    "description": "almost done"
+  },
+
+
+  "begin": "Begin",
+  "@begin": {
+    "description": "begin"
+  },
+
+
+ "justFewDocumentUpload": "We just require a few document uploads. This is for verification sake and authentication",
+  "@justFewDocumentUpload": {
+    "description": "just few document upload"
+  },
+
+   "uploading": "Uploading...",
+  "@uploading": {
+    "description": "uploading in progress"
+  },
+
+     "uploading": "Completed",
+  "@uploading": {
+    "description": "uploading in progress"
+  },
+
+       "errorOccurred": "Error occurred. Re-upload",
+  "@errorOccurred": {
+    "description": "uploading error"
+  },
+
 
     "ceo": "C.E.O",
   "@ceo": {

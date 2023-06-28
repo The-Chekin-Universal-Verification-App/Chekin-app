@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lookapp/export.dart';
-
+import 'package:chekinapp/export.dart';
 
 class TermsAndConditionWidget extends StatelessWidget {
   const TermsAndConditionWidget({
@@ -27,7 +26,7 @@ class TermsAndConditionWidget extends StatelessWidget {
                     .copyWith(color: theme.primary, fontSize: 13)),
             Text(context.loc.and,
                 style:
-                TextStyles.body2.copyWith(color: theme.txt, fontSize: 13)),
+                    TextStyles.body2.copyWith(color: theme.txt, fontSize: 13)),
             Text(context.loc.privacyPolicy,
                 style: TextStyles.body2
                     .copyWith(color: theme.primary, fontSize: 13)),

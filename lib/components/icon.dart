@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/export.dart';
 
 class SvgIcon extends StatelessWidget {
   const SvgIcon(this.icon, {this.size, this.color, this.isSvg = true, Key? key})

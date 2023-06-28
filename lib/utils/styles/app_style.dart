@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:lookapp/export.dart';
+import 'package:chekinapp/export.dart';
 
 class Durations {
   static Duration get fastest => .15.seconds;
@@ -206,11 +206,13 @@ class Corners {
   static double get s12 => 12;
 
   static BorderRadius get s12Border => BorderRadius.all(s12Radius);
+  static BorderRadius get s20Border => BorderRadius.all(s20Radius);
 
   static Radius get s12Radius => Radius.circular(s12);
+  static Radius get s20Radius => Radius.circular(s20);
 
   static double get s16 => 16;
-  static double get s20 => 120;
+  static double get s20 => 20;
 
   static BorderRadius get s16Border => BorderRadius.all(s16Radius);
 
