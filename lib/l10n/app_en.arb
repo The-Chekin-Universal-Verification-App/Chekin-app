@@ -476,6 +476,47 @@
   },
 
 
+      "validBusinessDoc": "Valid Business Document",
+  "@validBusinessDoc": {
+    "description": "upload business document"
+  },
+
+      "pickAnyBusinessDoc": "Pick any of the following business documents you have and upload it.",
+  "@pickAnyBusinessDoc": {
+    "description": "upload business document of choice"
+  },
+
+
+
+  "socialMediaScreenShot": "Social Media Screenshot",
+  "@socialMediaScreenShot": {
+  "description": "upload social media screen shots"
+  },
+
+
+  "takeScreenShot": "Take a screenshot of any two of your social media business handles while logged in and upload here",
+  "@takeScreenShot": {
+  "description": "take you social media screen shots for identification"
+  },
+
+
+  "addNew": "Add New",
+  "@addNew": {
+  "description": "take you social media screen shots for identification"
+  },
+
+  "completed": "Completed",
+  "@completed": {
+  "description": "completed task"
+  },
+
+
+  "tapToUpload": "Tap to upload",
+  "@tapToUpload": {
+  "description": "to upload a file"
+  },
+
+
     "ceo": "C.E.O",
   "@ceo": {
     "description": "a  business owner"

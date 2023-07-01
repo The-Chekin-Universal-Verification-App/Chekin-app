@@ -92,6 +92,11 @@
     "linkedIn": "eLinkedIn",
     "whatsApp": "eWhatsApp",
       "skip": "eSkip",
+       "validId": "eValid Identification Card",
+           "pickAnyID": "ePick any of the following id documents you have and upload it.",
+    "upload": "eUpload",
+    "frontPlease": "eFront please",
+
         "documentUpload": "eDocument Upload",
          "validBusinessDoc": "eValid Business Document",
          "pickAnyBusinessDoc": "ePick any of the following business documents you have and upload it.",
@@ -99,6 +104,16 @@
       "youAreAlmostDone": "eYou are almost done!",
   "begin": "eBegin",
     "justFewDocumentUpload": "eWe just require a few document uploads. This is for verification sake and authentication",
+   "uploading": "eUploading...",
+     "uploading": "eCompleted",
+       "errorOccurred": "eError occurred. Re-upload",
+      "validBusinessDoc": "eValid Business Document",
+      "pickAnyBusinessDoc": "ePick any of the following business documents you have and upload it.",
+  "socialMediaScreenShot": "eSocial Media Screenshot",
+  "takeScreenShot": "eTake a screenshot of any two of your social media business handles while logged in and upload here",
+  "addNew": "eAdd New",
+  "completed": "eCompleted",
+  "tapToUpload": "eTap to upload",
 
     "weLoveToKnowYouBetter": "eWe at ChekiApp would love to know you better",
     "privacyPolicy": "ePrivacy Policy"

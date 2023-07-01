@@ -50,27 +50,17 @@ class _UploadValidIDsScreenState extends State<UploadValidIDsScreen> {
                   style: TextStyles.body1,
                 ),
                 const VSpace(34),
-                Container(
-                  height: 50,
-                  padding: EdgeInsets.symmetric(horizontal: context.sp(10)),
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                        color: theme.primary,
-                      ),
-                      borderRadius: Corners.s20Border),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Value Here',
-                        style: TextStyles.body1,
-                      ),
-                      Icon(
-                        Icons.keyboard_arrow_down,
-                        size: 30,
-                      )
-                    ],
-                  ),
+                CustomBottomSheetSelector(
+                  heightFraction: 0.3,
+                  onSelectItem: (item) {
+                    print(item);
+                  },
+                  items: [
+                    'Voters card',
+                    'International Passport',
+                    'Drivers License',
+                    'National Id Number Slip'
+                  ],
                 ),
                 const VSpace(34),
                 Align(
@@ -85,8 +75,8 @@ class _UploadValidIDsScreenState extends State<UploadValidIDsScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
-                              height: 50,
-                              width: 50,
+                              height: 114,
+                              width: 114,
                               child: SvgPicture.asset(
                                 R.png.cloudUploading.svg,
                               )),
@@ -113,7 +103,10 @@ class _UploadValidIDsScreenState extends State<UploadValidIDsScreen> {
                   ),
                 ),
                 const VSpace(30),
-                UploadIndicator(),
+                UploadIndicator(
+                  uploadValue: 0.4,
+                  status: 'Completed',
+                ),
               ],
             ),
 
@@ -141,11 +134,163 @@ class _UploadValidIDsScreenState extends State<UploadValidIDsScreen> {
   }
 }
 
+class CustomBottomSheetSelector extends StatefulWidget {
+  const CustomBottomSheetSelector(
+      {super.key, this.onSelectItem, required this.items, this.heightFraction});
+
+  ///the desired height of the bottom sheet from[0-1]
+  final double? heightFraction;
+  final Function(dynamic selectedItem)? onSelectItem;
+  final List<String> items;
+  @override
+  State<CustomBottomSheetSelector> createState() =>
+      _CustomBottomSheetSelectorState();
+}
+
+class _CustomBottomSheetSelectorState extends State<CustomBottomSheetSelector> {
+  String selectedValue = 'Value';
+
+  @override
+  Widget build(BuildContext context) {
+    AppTheme theme = context.watch();
+    return Container(
+      height: 50,
+      padding: EdgeInsets.symmetric(horizontal: context.sp(10)),
+      decoration: BoxDecoration(
+          border: Border.all(
+            color: theme.primary,
+          ),
+          borderRadius: Corners.s20Border),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            selectedValue,
+            style: TextStyles.body1,
+          ),
+          Icon(
+            Icons.keyboard_arrow_down,
+            size: 30,
+          )
+        ],
+      ),
+    ).clickable(() {
+      showModalBottomSheet(
+          // elevation: 1,
+          barrierColor: const Color(0xff969691).withOpacity(0.57),
+          shape: RoundedRectangleBorder(borderRadius: Corners.s8Border),
+          context: context,
+          builder: (_) => Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    height: widget.heightFraction != null
+                        ? (context.heightPx * widget.heightFraction!)
+                        : context.heightPx * 0.3,
+                    child: ListView.builder(
+                        itemCount: widget.items.length,
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        itemBuilder: (_, index) {
+                          String? selected;
+                          return Center(
+                              child: GestureDetector(
+                            onTap: () {
+                              if (widget.onSelectItem != null) {
+                                widget.onSelectItem!(widget.items[index]);
+                              } else {
+                                selected = widget.items[index];
+                              }
+                              selectedValue = widget.items[index];
+                              setState(() {});
+                              Navigator.of(context).pop();
+                            },
+                            child: Material(
+                              color: selected == widget.items[index]
+                                  ? theme.redButton
+                                  : Colors.transparent,
+                              borderRadius: Corners.s10Border,
+                              child: Container(
+                                margin: const EdgeInsets.only(top: 8),
+                                alignment: Alignment.center,
+                                height: 50,
+                                child: Text(
+                                  widget.items[index],
+                                  style: TextStyles.h5.copyWith(
+                                      color: theme.greyWeak,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                              ),
+                            ),
+                          ));
+                        }),
+                  )
+                ],
+              ));
+    });
+  }
+}
+// class CustomBottomSheetSelector extends StatelessWidget {
+//   const CustomBottomSheetSelector(
+//       {super.key, this.onSelectItem, this.heightFraction});
+//
+//   ///the desired height of the bottom sheet from[0-1]
+//   final double? heightFraction;
+//   final Function(dynamic selectedItem)? onSelectItem;
+//   @override
+//   Widget build(BuildContext context) {
+//     AppTheme theme = context.watch();
+//     return Container(
+//       height: 50,
+//       padding: EdgeInsets.symmetric(horizontal: context.sp(10)),
+//       decoration: BoxDecoration(
+//           border: Border.all(
+//             color: theme.primary,
+//           ),
+//           borderRadius: Corners.s20Border),
+//       child: Row(
+//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//         children: [
+//           Text(
+//             'Value Here',
+//             style: TextStyles.body1,
+//           ),
+//           Icon(
+//             Icons.keyboard_arrow_down,
+//             size: 30,
+//           )
+//         ],
+//       ),
+//     ).clickable(() {
+//       showModalBottomSheet(
+//           // elevation: 1,
+//           barrierColor: const Color(0xff969691).withOpacity(0.57),
+//           shape: RoundedRectangleBorder(borderRadius: Corners.s8Border),
+//           context: context,
+//           builder: (_) => Column(
+//                 mainAxisSize: MainAxisSize.min,
+//                 children: [
+//                   Container(
+//                     height: heightFraction != null
+//                         ? (context.heightPx * heightFraction!)
+//                         : context.heightPx * 0.3,
+//                     child: Column(
+//                       children: [Text('hi')],
+//                     ),
+//                   )
+//                 ],
+//               ));
+//     });
+//   }
+// }
+
 class UploadIndicator extends StatelessWidget {
   const UploadIndicator({
     super.key,
+    this.status,
+    this.uploadValue = 0,
   });
-  final double uploadState = 0.0;
+  final double uploadValue;
+  final String? status;
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
@@ -154,7 +299,7 @@ class UploadIndicator extends StatelessWidget {
         ClipRRect(
           borderRadius: Corners.s8Border,
           child: LinearProgressIndicator(
-            value: uploadState,
+            value: uploadValue,
             minHeight: 20,
             backgroundColor: theme.greyTextFieldFill,
           ),
@@ -164,20 +309,16 @@ class UploadIndicator extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              '$uploadState%',
+              '${(uploadValue * 100).truncate()}%',
               style: TextStyles.body3.copyWith(
                   fontWeight: FontWeight.w500, fontSize: 14, color: theme.txt),
             ),
             Text(
-              uploadState == 0
-                  ? context.loc.upload
-                  : uploadState < 1
-                      ? context.loc.login
-                      : uploadState == 1
-                          ? context.loc.welcomeTo
-                          : context.loc.upload,
+              status ?? context.loc.upload,
               style: TextStyles.body3.copyWith(
-                  fontWeight: FontWeight.w500, fontSize: 14, color: theme.txt),
+                  fontWeight: FontWeight.w500,
+                  fontSize: 14,
+                  color: uploadValue < 1 ? theme.txt : theme.greenButton),
             ),
             Text(
               '100%',
