@@ -1,5 +1,4 @@
 import 'package:chekinapp/routes/auth/user_biz_account_registration/biz_account/you_are_almost_done_screen.dart';
-import 'package:chekinapp/routes/document_upload/upload_document_main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 

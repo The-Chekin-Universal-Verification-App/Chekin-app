@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
-import 'package:chekinapp/routes/auth/user_biz_account_registration/biz_account/biz_owner_personal_detaills.dart';
 
 import '../../../core/providers/auth_provider.dart';
 import '../../auth/user_biz_account_registration/account_creation_main_screen.dart';

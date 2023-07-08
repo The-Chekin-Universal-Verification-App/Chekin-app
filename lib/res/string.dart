@@ -20,7 +20,10 @@ class Strings {
   String get cityExample => 'eg Jos';
   String get landmarkExample => 'eg a Bank or Market';
   String get localGovernmentExample => 'eg a Jos North';
-  // String get singMeUp => " I’m new, Sign me up!";
+  String get productName => " Lux-330458";
+  String get productName2 => " Shoe Max";
+  String get productName3 => "VAnewx";
+  String get storeName => "Kicks Store";
 
   ///fot the on boarding part
   // String get introOneTitle => 'Welcome to ';

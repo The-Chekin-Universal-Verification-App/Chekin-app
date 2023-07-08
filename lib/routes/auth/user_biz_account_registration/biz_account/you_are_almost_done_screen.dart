@@ -37,9 +37,15 @@ class YouAreAlmostDoneScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(
-              height: 369,
+            const VSpace(90),
+            Align(
+              alignment: Alignment.center,
+              child: IntroImage(
+                height: 291,
+                onboardImg: R.png.secureDocument.imgPng,
+              ),
             ),
+            const VSpace(10),
             Text(
               context.loc.youAreAlmostSet,
               style: TextStyles.h6.copyWith(
@@ -61,7 +67,7 @@ class YouAreAlmostDoneScreen extends StatelessWidget {
                     ),
                   ])),
             ),
-            const VSpace(106),
+            const VSpace(90),
             Padding(
               padding: const EdgeInsets.only(right: 27.0, left: 27, bottom: 45),
               child: PrimaryButton(

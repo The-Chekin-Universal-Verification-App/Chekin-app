@@ -13,7 +13,6 @@ export 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 export 'dart:developer';
 export 'dart:convert';
-export 'package:json_annotation/json_annotation.dart';
 export 'package:freezed_annotation/freezed_annotation.dart';
 export 'package:flutter/foundation.dart';
 export 'dart:io' show Platform;

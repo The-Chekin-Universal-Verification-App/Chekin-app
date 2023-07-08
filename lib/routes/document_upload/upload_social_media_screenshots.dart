@@ -70,8 +70,7 @@ class _UploadSocialMediaScreenShotScreenState
                     children: [
                       FileUploadItem(
                         comparingItem: '',
-
-                        // onTapItem: () {},
+                        isUploaded: true,
                       ),
                       if (uploadedImg.isNotEmpty) ...[
                         const HSpace(5),
@@ -144,7 +143,11 @@ class _FileUploadItemState extends State<FileUploadItem> {
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
     return DashedRect(
-        color: theme.primary,
+        color: (selectedItem.isNotEmpty &&
+                    widget.comparingItem == selectedItem[0]) ||
+                widget.isUploaded == true
+            ? Colors.transparent
+            : theme.primary,
         fChild: (selectedItem.isNotEmpty &&
                     widget.comparingItem == selectedItem[0]) ||
                 widget.isUploaded == true
@@ -158,11 +161,12 @@ class _FileUploadItemState extends State<FileUploadItem> {
                   children: [
                     if (selectedItem.isNotEmpty) ...[
                       const SizedBox(
-                          height: 99,
-                          width: 99,
+                          height: 80,
+                          width: 80,
                           child: Icon(
                             Icons.check_circle,
-                            size: 30,
+                            size: 75.0,
+                            color: Colors.white,
                           )),
                     ],
 
@@ -180,84 +184,121 @@ class _FileUploadItemState extends State<FileUploadItem> {
                   ],
                 ),
               )
-            : SizedBox(
-                height: 179,
-                width: 165,
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    if (selectedItem.isNotEmpty) ...[
-                      Positioned(
-                        right: 5.0,
-                        top: 5,
-                        child: Column(
+            : selectedItem.isNotEmpty &&
+                    widget.comparingItem == selectedItem[0] &&
+                    widget.isUploaded == false
+                ? CustomContainer(
+                    color: theme.redButton,
+                    height: 179,
+                    width: 165,
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        if (selectedItem.isNotEmpty) ...[
+                          const SizedBox(
+                              height: 80,
+                              width: 80,
+                              child: Icon(
+                                Icons.cancel_rounded,
+                                size: 75.0,
+                                color: Colors.white,
+                              )),
+                        ],
+
+                        ///
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            SizedBox(
-                                height: 35,
-                                width: 35,
-                                child: SvgPicture.asset(
-                                  R.png.cloudUploading.svg,
-                                )),
                             Text(
-                              context.loc.tapToUpload,
-                              style: TextStyles.body3
-                                  .copyWith(fontWeight: FontWeight.w900),
+                              'cancel',
+                              style: TextStyles.body1.copyWith(
+                                  fontWeight: FontWeight.w900,
+                                  color: Colors.white),
                             ),
                           ],
-                        ).rippleClick(widget.onTapUploadImage != null
-                            ? widget.onTapUploadImage!(selectedItem[0])
-                            : () {}),
-                      ),
-                    ],
+                        ),
+                      ],
+                    ),
+                  )
+                : SizedBox(
+                    height: 179,
+                    width: 165,
+                    child: Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        if (selectedItem.isNotEmpty) ...[
+                          Positioned(
+                            right: 5.0,
+                            top: 5,
+                            child: Column(
+                              children: [
+                                SizedBox(
+                                    height: 35,
+                                    width: 35,
+                                    child: SvgPicture.asset(
+                                      R.png.cloudUploading.svg,
+                                    )),
+                                Text(
+                                  context.loc.tapToUpload,
+                                  style: TextStyles.body3
+                                      .copyWith(fontWeight: FontWeight.w900),
+                                ),
+                              ],
+                            ).rippleClick(widget.onTapUploadImage != null
+                                ? widget.onTapUploadImage!(selectedItem[0])
+                                : () {}),
+                          ),
+                        ],
 
-                    ///
-                    selectedItem.isNotEmpty
-                        ? Icon(
-                            Icons.file_present_rounded,
-                            size: 90,
-                            color: theme.greyWeak.withOpacity(0.3),
-                          ) //this icons shows when a file is picked from gallery or camera
-                        : Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              SizedBox(
-                                  height: 99,
-                                  width: 99,
-                                  child: SvgPicture.asset(
-                                    R.png.cloudUploading.svg,
-                                  )),
-                              Row(
+                        ///
+                        selectedItem.isNotEmpty
+                            ? Icon(
+                                Icons.file_present_rounded,
+                                size: 90,
+                                color: theme.greyWeak.withOpacity(0.3),
+                              ) //this icons shows when a file is picked from gallery or camera
+                            : Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  Text(
-                                    widget.label ?? context.loc.frontPlease,
-                                    style: TextStyles.body1
-                                        .copyWith(fontWeight: FontWeight.w900),
+                                  SizedBox(
+                                      height: 99,
+                                      width: 99,
+                                      child: SvgPicture.asset(
+                                        R.png.cloudUploading.svg,
+                                      )),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        widget.label ?? context.loc.frontPlease,
+                                        style: TextStyles.body1.copyWith(
+                                            fontWeight: FontWeight.w900),
+                                      ),
+                                      Text(
+                                        '*',
+                                        style: TextStyles.h5.copyWith(
+                                            height: 1.5,
+                                            color: widget.isRequired
+                                                ? theme.redButton
+                                                : Colors.transparent,
+                                            fontWeight: FontWeight.w900),
+                                      )
+                                    ],
                                   ),
-                                  Text(
-                                    '*',
-                                    style: TextStyles.h5.copyWith(
-                                        height: 1.5,
-                                        color: widget.isRequired
-                                            ? theme.redButton
-                                            : Colors.transparent,
-                                        fontWeight: FontWeight.w900),
-                                  )
                                 ],
-                              ),
-                            ],
-                          ).clickable(() {
-                            selectedItem.add('Mikelite');
-                            if (widget.onItemSelected != null) {
-                              widget.onItemSelected!(selectedItem[0]);
-                            } else {
-                              null;
-                            }
-                            setState(() {});
-                          }), //this show no file is picked yet and when we tap a file is picked from storage
-                  ],
-                ),
-              ));
+                              ).clickable(() {
+                                selectedItem.add('Mikelite');
+                                if (widget.onItemSelected != null) {
+                                  widget.onItemSelected!(selectedItem[0]);
+                                } else {
+                                  null;
+                                }
+                                setState(() {});
+                              }), //this show no file is picked yet and when we tap a file is picked from storage
+                      ],
+                    ),
+                  ));
   }
 }

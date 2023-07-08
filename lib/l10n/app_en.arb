@@ -516,6 +516,304 @@
   "description": "to upload a file"
   },
 
+    "showUsHoldingID": "Show us your face holding your valid id",
+  "@showUsHoldingID": {
+  "description": "hold the id with selfie"
+  },
+
+
+   "selfieWithID": "Selfie Holding valid ID",
+  "@selfieWithID": {
+  "description": "hold the id with selfie with it"
+  },
+
+
+   "setProfilePicture": "Lastly, Set a Profile Picture",
+  "@setProfilePicture": {
+  "description": "set Profile picture"
+  },
+
+   "uploadAProfilePicture": "Upload a profile picture",
+  "@uploadAProfilePicture": {
+  "description": "user to upload a Profile picture"
+  },
+
+
+   "payment": "Payment",
+  "@payment": {
+  "description": "user payment"
+  },
+
+
+   "chooseSubscription": "Choose your subscription",
+  "@chooseSubscription": {
+  "description": "asking user to Choose preferred subscription"
+  },
+
+
+   "pickSubscription": "Pick a subscription, pay and begin your journey with us.",
+  "@pickSubscription": {
+  "description": "choose subscription note"
+  },
+
+
+   "thisAmountNotRefundable": "This amount is none- refundable",
+  "@thisAmountNotRefundable": {
+  "description": "non refundable amount"
+  },
+
+
+   "quarterly": "QUARTERLY - ₦28,545 (3 MONTHS)",
+  "@quarterly": {
+  "description": "quarterly"
+  },
+
+
+   "semiAnnual": "SEMI-ANNUALLY - ₦50,562 (6 MONTHS)",
+  "@semiAnnual": {
+  "description": "semiAnnual"
+  },
+
+
+   "yearly": "YEARLY - ₦97,530",
+  "@yearly": {
+  "description": "yearly"
+  },
+
+
+   "oneReview": "ONE review within the subscription period",
+  "@oneReview": {
+  "description": "one review within subscription period"
+  },
+
+
+
+   "haveToRenewSub": "Have to renew your subscription after 3 MONTHS for benefits.",
+  "@haveToRenewSub": {
+  "description": "have to renew Sub"
+  },
+
+
+   "getEverything": "Get everything in the quarterly plan.",
+  "@getEveryThing": {
+  "description": "one review within subscription period"
+  },
+
+
+   "getPercentageOff": "Get 11% Off, Save N13,000. ",
+  "@getPercentageOff": {
+  "description": " 11% Off, Save N13,000"
+  },
+
+
+   "advertisingInterviewVideo": "Advertising Interview Video to share on LookApp Social Media Pages.",
+  "@advertisingInterviewVideo": {
+  "description": "interview video"
+  },
+
+
+   "getEverythingSemiAnnualPlan": "Get everything in the semi annual Plan. ",
+  "@getEverythingSemiAnnualPlan": {
+  "description": "everything in the semi annual Plan."
+  },
+
+
+   "getFourteenPercentOff": "Get 14.5% Off, Save N16,500. ",
+  "@getFourteenPercentOff": {
+  "description": "Get 14.5% Off, Save N16,500"
+  },
+
+
+   "advertisingInterviewVideo": "Advertising Interview Video to share on LookApp Social Media Pages.",
+  "@advertisingInterviewVideo": {
+  "description": "interview video"
+  },
+
+
+   "paymentConfirmed": "Payment Confirmed!",
+  "@paymentConfirmed": {
+  "description": "Payment confirmed"
+  },
+
+   "errorOccurred": "An error occur!",
+  "@errorOccurred": {
+  "description": "Error occured"
+  },
+
+   "redirecting": "Redirecting...",
+  "@redirecting": {
+  "description": "redirecting user"
+  },
+
+   "verificationPending": "Verification pending",
+  "@verificationPending": {
+  "description": "verification pending"
+  },
+
+
+   "oneMoreStep": "One more step!",
+  "@oneMoreStep": {
+  "description": "one step more"
+  },
+
+
+
+   "weWillSendAgent": "We will be sending an agent to physically verify your store and products in other to get your lux code.",
+  "@weWillSendAgent": {
+  "description": "agent will be sent to your shop"
+  },
+
+
+   "thisMayTakeFiveWorkingDays": "NB. THIS MAY TAKE 2 - 5 WORKING DAYS",
+  "@thisMayTakeFiveWorkingDays": {
+  "description": "verification duration "
+  },
+
+
+
+   "congratulation": "Congratulations🎉",
+  "@congratulation": {
+  "description": "congratulation on verification completion "
+  },
+
+
+   "verificationSuccessful": "Verification successful",
+  "@verificationSuccessful": {
+  "description": "user account verification Successful"
+  },
+
+
+
+   "congratNote": "Yay! Congratulations, your verification was successful. Below is your unique LUX CODE. Copy and show off to your customers on your social media pages and stores",
+  "@congratNote": {
+  "description": "congratulation note to user on account verification completion"
+  },
+
+
+   "processing": "Processing...",
+  "@processing": {
+  "description": "a processing action"
+  },
+
+
+   "copyAnContinue": "Copy and continue",
+  "@copyAnContinue": {
+  "description": "copy code and then  continue"
+  },
+
+
+
+   "getAdvertBanner": "Get a complimentary banner advertisement for free on LookApp for one month.",
+  "@getAdvertBanner": {
+  "description": "Get a complimentary banner advertisement"
+  },
+
+
+   "welcomeBack": "Welcome Back",
+  "@welcomeBack": {
+  "description": "welcome a user"
+  },
+
+   "signIn": "Sign in",
+  "@signIn": {
+  "description": "sign a user in"
+  },
+   "signIn": "Sign in",
+  "@signIn": {
+  "description": "sign a user in"
+  },
+
+
+  "password": "Password",
+  "@password": {
+  "description": "password"
+  },
+    "forgotPassword": "Forgot Password?",
+  "@forgotPassword": {
+  "description": "user forgot Password"
+  },
+
+  "search": "Search",
+  "@search": {
+  "description": "search for an item"
+  },
+
+  "hello": "Hello",
+  "@hello": {
+  "description": "a hello greetings"
+  },
+
+   "checkInAndOut": "Check in and check out your products",
+  "@checkInAndOut": {
+  "description": "check out and in the app"
+  },
+
+   "goodToHaveYou": "It’s good to have you here",
+  "@goodToHaveYou": {
+  "description": "good to have you"
+  },
+
+
+   "topRated": "Top Rated",
+  "@topRated": {
+  "description": "rated high items"
+  },
+
+   "seeAll": "See all",
+  "@seeAll": {
+  "description": "see all"
+  },
+
+   "noData": "No data to display at the moment",
+  "@noData": {
+  "description": "when there is no data to currently display for the user"
+  },
+
+
+   "discover": "Discover",
+  "@discover": {
+  "description": "discover products and others"
+  },
+
+   "discoverNote": "Discover out best and reliable dealers all over the country",
+  "@discover": {
+  "description": "discover products and others"
+  },
+
+   "searchProduct": "Search Product...",
+  "@searchProduct": {
+  "description": "search product"
+  },
+
+   "fashion": "Fashion",
+  "@fashion": {
+  "description": "sorting item by fashion key word "
+  },
+
+
+   "electronics": "Electronics",
+  "@electronics": {
+  "description": "sorting item by electronic key word "
+  },
+
+
+   "sport": "Sports",
+  "@sport": {
+  "description": "sorting item by sport key word "
+  },
+
+
+   "autoMobile": "Automobile",
+  "@autoMobile": {
+  "description": "sorting item by autoMobile key word "
+  },
+
+
+   "popular": "Popular",
+  "@popular": {
+  "description": "popular"
+  },
+
 
     "ceo": "C.E.O",
   "@ceo": {

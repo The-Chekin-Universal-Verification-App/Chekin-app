@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:chekinapp/routes/intro/intro_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'core/providers/app_provider.dart';
-import 'core/providers/auth_provider.dart';
+
 import 'export.dart';
 
 void main() {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => AppProvider()),
+    ChangeNotifierProvider(create: (_) => MainProvider()),
     ChangeNotifierProvider(create: (_) => AuthProvider()),
+    ChangeNotifierProvider(create: (_) => HomeProvider()),
     Provider<BuildContext>(create: (c) => c),
   ], child: const MyApp()));
 }

@@ -119,7 +119,7 @@ class TextStyles {
 
   static TextStyle get caption => workSans.regular.size(FontSizes.s12);
 
-  static TextStyle get button => workSans.light.size(
+  static TextStyle get button => workSans.semiBold.size(
         FontSizes.s18,
       );
 }

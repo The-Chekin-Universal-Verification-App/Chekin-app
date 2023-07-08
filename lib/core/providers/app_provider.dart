@@ -3,7 +3,6 @@ import 'dart:ui';
 import 'package:chekinapp/export.dart';
 
 import '../../res/language_and_emojis.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AppProvider extends BaseProvider {
   ThemeType _theme = ThemeType.light;

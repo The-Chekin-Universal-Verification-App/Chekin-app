@@ -1,3 +1,4 @@
+import 'package:chekinapp/routes/main/main.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 import 'package:chekinapp/routes/intro/oboarding/onboarding_small_screen_device.dart';
@@ -20,7 +21,7 @@ class IntroScreen extends StatelessWidget {
               width: 100,
               child: Image.asset(R.png.appLogo.imgPng)),
         ).clickable(() {
-          context.pushOff(const OnBoardingScreen());
+          context.pushOff(const MainScreen());
         }),
       ),
     );

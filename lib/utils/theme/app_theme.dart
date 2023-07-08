@@ -28,6 +28,7 @@ class AppTheme {
   late Color accentTxt;
   late Color glassWhite;
   late Color greyTextFieldFill;
+  late Color greyText;
   late Color black;
   late Color transparentBlack;
   late Color weakBlack;
@@ -74,6 +75,7 @@ class AppTheme {
           ..greenButton = const Color(0xff249C29)
           ..glassWhite = const Color(0x5affffff)
           ..greyTextFieldFill = const Color(0xfff6f7fa)
+          ..greyText = const Color(0xff50555C)
           ..focus = const Color(0xFF0ee2b1);
 
       default:

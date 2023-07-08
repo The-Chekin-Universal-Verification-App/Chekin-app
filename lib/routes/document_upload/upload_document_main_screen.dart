@@ -1,3 +1,5 @@
+import 'package:chekinapp/routes/document_upload/set_profile_picture.dart';
+import 'package:chekinapp/routes/document_upload/take_selfie_with_id.dart';
 import 'package:chekinapp/routes/document_upload/upload_social_media_screenshots.dart';
 import 'package:chekinapp/routes/document_upload/upload_valid_ids.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +13,7 @@ class UploadDocumentMainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
-    int pageIndex = 2;
+    int pageIndex = 4;
     return Scaffold(
         appBar: CustomAppBar(
           leading: true,
@@ -74,7 +76,9 @@ class UploadDocumentMainScreen extends StatelessWidget {
                 children: [
                   UploadValidIDsScreen(),
                   BusinessDocumentScreen(),
-                  UploadSocialMediaScreenShotScreen()
+                  UploadSocialMediaScreenShotScreen(),
+                  SelfieWithIDScreen(),
+                  UploadProfilePictureScreen(),
                 ],
               ),
             ],
