@@ -25,6 +25,10 @@ class Strings {
   String get productName3 => "VAnewx";
   String get storeName => "Kicks Store";
 
+  ///others
+  String get productInfo =>
+      "Leather backpacks are the most elegant and sophisticated way to carry your books, notebooks and laptop. They are available in a wide range of colors and designs, making them perfect for any occasion. You can find leather backpacks in both men's and women's styles, although they tend to be more popular among men.";
+
   ///fot the on boarding part
   // String get introOneTitle => 'Welcome to ';
   // String get introOneSubTitle =>

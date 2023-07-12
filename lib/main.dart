@@ -1,3 +1,4 @@
+import 'package:chekinapp/routes/discover/discover_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/routes/intro/intro_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -11,6 +12,8 @@ void main() {
     ChangeNotifierProvider(create: (_) => MainProvider()),
     ChangeNotifierProvider(create: (_) => AuthProvider()),
     ChangeNotifierProvider(create: (_) => HomeProvider()),
+    ChangeNotifierProvider(create: (_) => WishListProvider()),
+    ChangeNotifierProvider(create: (_) => DiscoverProvider()),
     Provider<BuildContext>(create: (c) => c),
   ], child: const MyApp()));
 }

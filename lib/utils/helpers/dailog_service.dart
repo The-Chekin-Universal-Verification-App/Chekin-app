@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:chekinapp/core/providers/app_provider.dart';
 import 'package:chekinapp/export.dart';
 
 import '../../res/language_and_emojis.dart';

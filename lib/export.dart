@@ -17,7 +17,10 @@ export 'package:freezed_annotation/freezed_annotation.dart';
 export 'package:flutter/foundation.dart';
 export 'dart:io' show Platform;
 export 'dart:io';
+export 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+export 'package:styled_widget/styled_widget.dart';
 
 export 'core/core.dart';
 export 'res/res.dart';
 export 'utils/utils.dart';
+export 'utils/helpers/helpers.dart';

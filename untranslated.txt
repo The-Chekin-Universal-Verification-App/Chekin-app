@@ -1,5 +1,7 @@
 {
   "es": [
-    "signIn"
+    "signIn",
+    "productInfo",
+    "contactVendor"
   ]
 }

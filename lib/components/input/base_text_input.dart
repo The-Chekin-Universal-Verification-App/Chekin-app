@@ -719,3 +719,209 @@ class _CustomFormTextFieldWithBorderState
     return type;
   }
 }
+
+class CustomReviewTextField extends StatefulWidget {
+  final String? label;
+  final bool? autoFocus;
+  final String? initialValue;
+  final String? hintText;
+  final EdgeInsets? contentPadding;
+  final TextStyle? textStyle;
+  final int? maxLines;
+  final TextEditingController? controller;
+  final TextCapitalization? capitalization;
+  final Function(String)? onChange;
+  final Function(String?)? onSaved;
+  final Function(bool)? onFocusChanged;
+  final Function(FocusNode)? onFocusCreated;
+  final IconData? icon;
+  final bool obscure;
+  final bool readOnly;
+  final bool enabled;
+  final InputType type;
+  final String? errorText;
+  final int? maxLength;
+  final bool isRequired;
+  final Widget? prefix;
+  final Widget? suffix;
+  final List<TextInputFormatter>? formatter;
+  final String? Function(String?)? validator;
+
+  const CustomReviewTextField({
+    Key? key,
+    this.label,
+    this.autoFocus,
+    this.initialValue,
+    this.onChange,
+    this.onSaved,
+    this.hintText,
+    this.readOnly = false,
+    this.onFocusChanged,
+    this.onFocusCreated,
+    this.controller,
+    this.contentPadding,
+    this.capitalization,
+    this.textStyle,
+    this.icon,
+    this.obscure = false,
+    this.maxLines = 1,
+    this.enabled = true,
+    this.type = InputType.txt,
+    this.errorText,
+    this.maxLength,
+    this.isRequired = true,
+    this.prefix,
+    this.suffix,
+    this.formatter,
+    this.validator,
+  }) : super(key: key);
+
+  @override
+  State<CustomReviewTextField> createState() => _CustomReviewTextFieldState();
+}
+
+class _CustomReviewTextFieldState extends State<CustomReviewTextField> {
+  String? _error;
+  bool showStatusIcon = false;
+  @override
+  Widget build(BuildContext context) {
+    AppTheme theme = context.watch();
+    return SizedBox(
+      child: Stack(
+        clipBehavior: Clip.none,
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 0, vertical: 0),
+            child: BaseTextInput(
+              readOnly: widget.readOnly,
+              capitalization:
+                  widget.capitalization ?? TextCapitalization.sentences,
+              label: widget.label,
+              autoFocus: widget.autoFocus,
+              initialValue: widget.initialValue,
+              onChanged: widget.onChange,
+              onFocusCreated: widget.onFocusCreated,
+              style: widget.textStyle ?? TextStyles.h6.bold,
+              onSaved: widget.onSaved,
+              onFocusChanged: widget.onFocusChanged,
+              controller: widget.controller,
+              obscureText: widget.obscure,
+              maxLines: widget.maxLines,
+              hintText: widget.hintText,
+              enabled: widget.enabled,
+              type: _setKeyboardType(),
+              validator: (value) {
+                showStatusIcon = true; //shows the showStatusIcon
+                if (widget.isRequired && value!.isEmpty) {
+                  Future.microtask(() => setState(() {}));
+                  return _error = 'Required';
+                }
+                if (widget.validator != null) {
+                  Future.microtask(() => setState(() {}));
+                  return _error = widget.validator!(value);
+                }
+                Future.microtask(() => setState(() {}));
+                return _error = null;
+              },
+              maxLength: widget.maxLength,
+              formatter: widget.formatter,
+              autoValidate: true,
+              inputDecoration: InputDecoration(
+                prefixIcon: widget.prefix,
+                suffixIcon: widget.suffix ??
+                    (widget.controller != null
+                        ? widget.controller!.text.isNotEmpty
+                            ? Icon(
+                                Icons.cancel,
+                                color: theme.black,
+                              ).clickable(() {
+                                widget.controller?.clear();
+                              })
+                            : const SizedBox.shrink()
+                        : null),
+                contentPadding: widget.contentPadding ??
+                    const EdgeInsets.symmetric(
+                      vertical: 15,
+                      horizontal: 20,
+                    ),
+                border: OutlineInputBorder(
+                  borderRadius: Corners.s20Border,
+                  borderSide:
+                      const BorderSide(color: Colors.transparent, width: 0.02),
+                ),
+                focusedErrorBorder: OutlineInputBorder(
+                  borderRadius: Corners.s20Border,
+                  borderSide:
+                      const BorderSide(color: Colors.transparent, width: 0.02),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: Corners.s12Border,
+                  borderSide:
+                      const BorderSide(color: Colors.transparent, width: 0.02),
+                ),
+                errorBorder: OutlineInputBorder(
+                  borderRadius: Corners.s20Border,
+                  borderSide:
+                      const BorderSide(color: Colors.transparent, width: 0.02),
+                ),
+                disabledBorder: OutlineInputBorder(
+                  borderRadius: Corners.s20Border,
+                  borderSide:
+                      const BorderSide(color: Colors.transparent, width: 0.02),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: Corners.s20Border,
+                  borderSide:
+                      const BorderSide(color: Colors.transparent, width: 0.02),
+                ),
+                icon: widget.icon == null ? null : Icon(widget.icon),
+                hintText: widget.hintText,
+                hintStyle: TextStyles.body2.txtColor(theme.grey),
+                labelText: widget.label,
+                counterText: '',
+                filled: true,
+                fillColor: const Color(0xffF5F5F5),
+                isDense: true,
+                errorStyle: const TextStyle(height: 0, fontSize: 0.0009),
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: -20,
+            left: 15,
+            child: _error != null
+                ? Text(
+                    _error!,
+                    style: TextStyles.caption.txtColor(theme.error),
+                  )
+                : const SizedBox.shrink(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  TextInputType _setKeyboardType() {
+    TextInputType type;
+    switch (widget.type) {
+      case InputType.email:
+        type = TextInputType.emailAddress;
+        break;
+      case InputType.money:
+        type = TextInputType.number;
+        break;
+      case InputType.tel:
+        type = TextInputType.phone;
+        break;
+      case InputType.num:
+        type = const TextInputType.numberWithOptions(decimal: true);
+        break;
+      case InputType.txt:
+        type = TextInputType.text;
+        break;
+      default:
+        type = TextInputType.text;
+    }
+    return type;
+  }
+}

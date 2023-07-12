@@ -23,6 +23,11 @@ mixin _$ProductModel {
   String get productImage => throw _privateConstructorUsedError;
   String get itemName => throw _privateConstructorUsedError;
   String get storeName => throw _privateConstructorUsedError;
+  String get price => throw _privateConstructorUsedError;
+  String get desc => throw _privateConstructorUsedError;
+  String get luxCode => throw _privateConstructorUsedError;
+  bool get isStoreVerified => throw _privateConstructorUsedError;
+  bool get isStoreFavorite => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +41,15 @@ abstract class $ProductModelCopyWith<$Res> {
           ProductModel value, $Res Function(ProductModel) then) =
       _$ProductModelCopyWithImpl<$Res, ProductModel>;
   @useResult
-  $Res call({String productImage, String itemName, String storeName});
+  $Res call(
+      {String productImage,
+      String itemName,
+      String storeName,
+      String price,
+      String desc,
+      String luxCode,
+      bool isStoreVerified,
+      bool isStoreFavorite});
 }
 
 /// @nodoc
@@ -55,6 +68,11 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
     Object? productImage = null,
     Object? itemName = null,
     Object? storeName = null,
+    Object? price = null,
+    Object? desc = null,
+    Object? luxCode = null,
+    Object? isStoreVerified = null,
+    Object? isStoreFavorite = null,
   }) {
     return _then(_value.copyWith(
       productImage: null == productImage
@@ -69,6 +87,26 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.storeName
           : storeName // ignore: cast_nullable_to_non_nullable
               as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as String,
+      desc: null == desc
+          ? _value.desc
+          : desc // ignore: cast_nullable_to_non_nullable
+              as String,
+      luxCode: null == luxCode
+          ? _value.luxCode
+          : luxCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      isStoreVerified: null == isStoreVerified
+          ? _value.isStoreVerified
+          : isStoreVerified // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isStoreFavorite: null == isStoreFavorite
+          ? _value.isStoreFavorite
+          : isStoreFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 }
@@ -81,7 +119,15 @@ abstract class _$$_ProductModelCopyWith<$Res>
       __$$_ProductModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String productImage, String itemName, String storeName});
+  $Res call(
+      {String productImage,
+      String itemName,
+      String storeName,
+      String price,
+      String desc,
+      String luxCode,
+      bool isStoreVerified,
+      bool isStoreFavorite});
 }
 
 /// @nodoc
@@ -98,6 +144,11 @@ class __$$_ProductModelCopyWithImpl<$Res>
     Object? productImage = null,
     Object? itemName = null,
     Object? storeName = null,
+    Object? price = null,
+    Object? desc = null,
+    Object? luxCode = null,
+    Object? isStoreVerified = null,
+    Object? isStoreFavorite = null,
   }) {
     return _then(_$_ProductModel(
       productImage: null == productImage
@@ -112,6 +163,26 @@ class __$$_ProductModelCopyWithImpl<$Res>
           ? _value.storeName
           : storeName // ignore: cast_nullable_to_non_nullable
               as String,
+      price: null == price
+          ? _value.price
+          : price // ignore: cast_nullable_to_non_nullable
+              as String,
+      desc: null == desc
+          ? _value.desc
+          : desc // ignore: cast_nullable_to_non_nullable
+              as String,
+      luxCode: null == luxCode
+          ? _value.luxCode
+          : luxCode // ignore: cast_nullable_to_non_nullable
+              as String,
+      isStoreVerified: null == isStoreVerified
+          ? _value.isStoreVerified
+          : isStoreVerified // ignore: cast_nullable_to_non_nullable
+              as bool,
+      isStoreFavorite: null == isStoreFavorite
+          ? _value.isStoreFavorite
+          : isStoreFavorite // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -120,7 +191,14 @@ class __$$_ProductModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ProductModel with DiagnosticableTreeMixin implements _ProductModel {
   _$_ProductModel(
-      {this.productImage = '', this.itemName = '', this.storeName = ''});
+      {this.productImage = '',
+      this.itemName = '',
+      this.storeName = '',
+      this.price = '',
+      this.desc = '',
+      this.luxCode = '',
+      this.isStoreVerified = false,
+      this.isStoreFavorite = false});
 
   factory _$_ProductModel.fromJson(Map<String, dynamic> json) =>
       _$$_ProductModelFromJson(json);
@@ -134,10 +212,25 @@ class _$_ProductModel with DiagnosticableTreeMixin implements _ProductModel {
   @override
   @JsonKey()
   final String storeName;
+  @override
+  @JsonKey()
+  final String price;
+  @override
+  @JsonKey()
+  final String desc;
+  @override
+  @JsonKey()
+  final String luxCode;
+  @override
+  @JsonKey()
+  final bool isStoreVerified;
+  @override
+  @JsonKey()
+  final bool isStoreFavorite;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProductModel(productImage: $productImage, itemName: $itemName, storeName: $storeName)';
+    return 'ProductModel(productImage: $productImage, itemName: $itemName, storeName: $storeName, price: $price, desc: $desc, luxCode: $luxCode, isStoreVerified: $isStoreVerified, isStoreFavorite: $isStoreFavorite)';
   }
 
   @override
@@ -147,7 +240,12 @@ class _$_ProductModel with DiagnosticableTreeMixin implements _ProductModel {
       ..add(DiagnosticsProperty('type', 'ProductModel'))
       ..add(DiagnosticsProperty('productImage', productImage))
       ..add(DiagnosticsProperty('itemName', itemName))
-      ..add(DiagnosticsProperty('storeName', storeName));
+      ..add(DiagnosticsProperty('storeName', storeName))
+      ..add(DiagnosticsProperty('price', price))
+      ..add(DiagnosticsProperty('desc', desc))
+      ..add(DiagnosticsProperty('luxCode', luxCode))
+      ..add(DiagnosticsProperty('isStoreVerified', isStoreVerified))
+      ..add(DiagnosticsProperty('isStoreFavorite', isStoreFavorite));
   }
 
   @override
@@ -160,13 +258,20 @@ class _$_ProductModel with DiagnosticableTreeMixin implements _ProductModel {
             (identical(other.itemName, itemName) ||
                 other.itemName == itemName) &&
             (identical(other.storeName, storeName) ||
-                other.storeName == storeName));
+                other.storeName == storeName) &&
+            (identical(other.price, price) || other.price == price) &&
+            (identical(other.desc, desc) || other.desc == desc) &&
+            (identical(other.luxCode, luxCode) || other.luxCode == luxCode) &&
+            (identical(other.isStoreVerified, isStoreVerified) ||
+                other.isStoreVerified == isStoreVerified) &&
+            (identical(other.isStoreFavorite, isStoreFavorite) ||
+                other.isStoreFavorite == isStoreFavorite));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, productImage, itemName, storeName);
+  int get hashCode => Object.hash(runtimeType, productImage, itemName,
+      storeName, price, desc, luxCode, isStoreVerified, isStoreFavorite);
 
   @JsonKey(ignore: true)
   @override
@@ -186,7 +291,12 @@ abstract class _ProductModel implements ProductModel {
   factory _ProductModel(
       {final String productImage,
       final String itemName,
-      final String storeName}) = _$_ProductModel;
+      final String storeName,
+      final String price,
+      final String desc,
+      final String luxCode,
+      final bool isStoreVerified,
+      final bool isStoreFavorite}) = _$_ProductModel;
 
   factory _ProductModel.fromJson(Map<String, dynamic> json) =
       _$_ProductModel.fromJson;
@@ -197,6 +307,16 @@ abstract class _ProductModel implements ProductModel {
   String get itemName;
   @override
   String get storeName;
+  @override
+  String get price;
+  @override
+  String get desc;
+  @override
+  String get luxCode;
+  @override
+  bool get isStoreVerified;
+  @override
+  bool get isStoreFavorite;
   @override
   @JsonKey(ignore: true)
   _$$_ProductModelCopyWith<_$_ProductModel> get copyWith =>

@@ -8,3 +8,4 @@ export 'sharedpref.dart';
 export 'dio_exceptions.dart';
 export 'dailog_service.dart';
 export 'enums.dart';
+export 'modal_service.dart';

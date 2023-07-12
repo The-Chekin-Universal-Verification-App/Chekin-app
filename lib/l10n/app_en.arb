@@ -790,6 +790,59 @@
   "description": "sorting item by fashion key word "
   },
 
+   "verified": "verified",
+  "@verified": {
+  "description": "show verified if the user is already verified "
+  },
+
+   "productInfo": "Product Info",
+  "@productInfo": {
+  "description": "information of product "
+  },
+   "reviews": "Reviews",
+  "@reviews": {
+  "description": "reviews"
+  },
+
+  "customersReviews": "Customers Reviews",
+  "@customersReviews": {
+  "description": "reviews from customers"
+  },
+
+  "addReviews": "Add Review",
+  "@addReviews": {
+  "description": "to add review from you"
+  },
+
+  "recent": "Recent",
+  "@recent": {
+  "description": "recents"
+  },
+
+   "howWouldYouRateProduct": "How would you rate this product?",
+  "@howWouldYouRateProduct": {
+  "description": "rate the product"
+  },
+   "writeReview": "Write your review",
+  "@writeReview": {
+  "description": "write you Review"
+  },
+
+ "tellUsWhatYouThink": "Tell us what you think",
+  "@tellUsWhatYouThink": {
+  "description": "tell us what you think"
+  },
+
+ "vendorsContact": "Vendor’s Contacts",
+  "@vendorsContact": {
+  "description": "vendors contact"
+  },
+
+   "contactVendor": "Contact vendor",
+  "@contactVendor": {
+  "description": "contact vendor"
+  },
+
 
    "electronics": "Electronics",
   "@electronics": {
@@ -800,6 +853,155 @@
    "sport": "Sports",
   "@sport": {
   "description": "sorting item by sport key word "
+  },
+
+   "products": "Products",
+  "@products": {
+  "description": "products"
+  },
+
+   "wishlist": "Wishlist",
+  "@wishlist": {
+  "description": "user favorite items"
+  },
+
+   "keepItemInWishlist": "Keep items you wish to buy so you don’t miss them later",
+  "@keepItemInWishlist": {
+  "description": "Keep items user wishes to buy so you don’t miss them later"
+  },
+
+
+    "location": "Location",
+  "@location": {
+  "description": "location"
+  },
+
+    "settings": "Settings",
+  "@settings": {
+  "description": "settings "
+  },
+
+    "online": "Online",
+  "@online": {
+  "description": "online"
+  },
+
+    "manageAccount": "Manage Account",
+  "@manageAccount": {
+  "description": " manage Account"
+  },
+
+
+     "pushNotification": "Push Notification",
+  "@pushNotification": {
+  "description": "receive Push Notification"
+  },
+
+
+     "appPermissions": "App Permissions",
+  "@appPermissions": {
+  "description": "App Permissions"
+  },
+
+
+     "darkMode": "Dark Mode",
+  "@darkMode": {
+  "description": "dark Mode"
+  },
+
+
+     "language": "Language",
+  "@language": {
+  "description": "language"
+  },
+
+     "help": "Help",
+  "@help": {
+  "description": "help"
+  },
+
+     "logout": "Log out",
+  "@logout": {
+  "description": "log out"
+  },
+
+     "editProfile": "Edit Profile",
+  "@editProfile": {
+  "description": "Edit Profile"
+  },
+
+
+     "save": "Save",
+  "@save": {
+  "description": "save item"
+  },
+
+     "updatePassword": "Update password",
+  "@updatePassword": {
+  "description": "Update password"
+  },
+
+     "managePassword": "Manage and change your passwords with ease ",
+  "@managePassword": {
+  "description": "manage user Password"
+  },
+
+
+     "currentPassword": "Current Password",
+  "@currentPassword": {
+  "description": "user current Password"
+  },
+
+
+
+     "yourActiveSub": "Your active subscription ",
+  "@yourActiveSub": {
+  "description": "user Active sub"
+  },
+
+
+     "youHaveVarietyOffer": "You have a variety of offers to chose from. Do ensure to pick the one that is just right for you.",
+  "@youHaveVarietyOffer": {
+  "description": "You have a variety of offers "
+  },
+
+
+     "newPassword": "New Password",
+  "@newPassword": {
+  "description": "user new Password"
+  },
+      "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+  "description": " confirm user new Password"
+  },
+
+     "name": "name",
+  "@name": {
+  "description": "name"
+  },
+
+      "phoneNumber": "Phone Number",
+  "@phoneNumber": {
+  "description": " phone Number"
+  },
+
+     "subscription": "Subscription",
+  "@subscription": {
+  "description": "subscription"
+  },
+     "privacy": "Privacy",
+  "@privacy": {
+  "description": "privacy protection"
+  },
+
+
+    "wordsLeft": "Words left",
+  "@wordsLeft": {
+  "description": "words left"
+  },
+    "submit": "submit",
+  "@submit": {
+  "description": "submit"
   },
 
 

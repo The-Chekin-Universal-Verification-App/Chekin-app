@@ -18,6 +18,7 @@ class AppTheme {
   late Color grey;
   late Color greyStrong;
   late Color greyWeak;
+  late Color greyWeakTwo;
   late Color error;
   late Color focus;
   late Color greenButton;
@@ -65,6 +66,7 @@ class AppTheme {
           ..secondaryVariant = const Color(0xffFFCF44)
           ..accent = const Color(0xffB15DFF)
           ..greyWeak = const Color(0xff8B929E)
+          ..greyWeakTwo = const Color(0xff808080)
           ..grey = const Color(0xff515d5a)
           ..black = Colors.black
           ..transparentBlack = const Color(0xff23262B)

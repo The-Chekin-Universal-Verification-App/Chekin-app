@@ -3,23 +3,27 @@ import 'package:chekinapp/export.dart';
 
 import '../../../components/input/base_text_input.dart';
 
-class UserDetailView extends StatefulWidget {
-  const UserDetailView({Key? key}) : super(key: key);
+class ChangePasswordScreen extends StatefulWidget {
+  const ChangePasswordScreen({Key? key}) : super(key: key);
 
   @override
-  State<UserDetailView> createState() => _UserDetailViewState();
+  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
 }
 
-class _UserDetailViewState extends State<UserDetailView> {
-  TextEditingController _firstName = TextEditingController();
-  TextEditingController _lastName = TextEditingController();
+class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
+  TextEditingController _currentPassword = TextEditingController();
+  TextEditingController _newPassword = TextEditingController();
+  TextEditingController _confirmPassword = TextEditingController();
   @override
   void initState() {
     super.initState();
-    _firstName.addListener(() {
+    _currentPassword.addListener(() {
       setState(() {});
     });
-    _lastName.addListener(() {
+    _newPassword.addListener(() {
+      setState(() {});
+    });
+    _confirmPassword.addListener(() {
       setState(() {});
     });
   }
@@ -45,20 +49,26 @@ class _UserDetailViewState extends State<UserDetailView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const VSpace(23),
-                Text(
-                  context.loc.whatIsYourName,
-                  style: TextStyles.h5,
+                Row(
+                  children: [
+                    SvgIcon(R.png.arrowLeftIcon.svg),
+                    const HSpace(10),
+                    Text(
+                      context.loc.password,
+                      style: TextStyles.h5,
+                    ),
+                  ],
                 ),
                 const VSpace(5),
                 Text(
-                  context.loc.tellUsYourName,
+                  context.loc.managePassword,
                   style: TextStyles.body1,
                 ),
                 const VSpace(42),
                 Row(
                   children: [
                     Text(
-                      context.loc.firstName,
+                      context.loc.currentPassword,
                       style: TextStyles.body1
                           .copyWith(fontWeight: FontWeight.w900),
                     ),
@@ -73,8 +83,8 @@ class _UserDetailViewState extends State<UserDetailView> {
                 ),
                 // VSpace(context.sp(5)),
                 CustomFormTextField(
-                  controller: _firstName,
-                  suffix: _firstName.text.isNotEmpty
+                  controller: _currentPassword,
+                  suffix: _currentPassword.text.isNotEmpty
                       ? Icon(
                           Icons.cancel,
                           color: theme.black,
@@ -86,7 +96,7 @@ class _UserDetailViewState extends State<UserDetailView> {
                 Row(
                   children: [
                     Text(
-                      context.loc.lastName,
+                      context.loc.newPassword,
                       style: TextStyles.body1
                           .copyWith(fontWeight: FontWeight.w900),
                     ),
@@ -101,8 +111,36 @@ class _UserDetailViewState extends State<UserDetailView> {
                 ),
                 VSpace(context.sp(5)),
                 CustomFormTextField(
-                  controller: _lastName,
-                  suffix: _lastName.text.isNotEmpty
+                  controller: _newPassword,
+                  suffix: _newPassword.text.isNotEmpty
+                      ? Icon(
+                          Icons.cancel,
+                          color: theme.black,
+                        )
+                      : const SizedBox.shrink(),
+                  hintText: context.loc.noEmojis,
+                ),
+                const VSpace(25),
+                Row(
+                  children: [
+                    Text(
+                      context.loc.confirmPassword,
+                      style: TextStyles.body1
+                          .copyWith(fontWeight: FontWeight.w900),
+                    ),
+                    Text(
+                      '*',
+                      style: TextStyles.h5.copyWith(
+                          height: 1.5,
+                          color: theme.redButton,
+                          fontWeight: FontWeight.w900),
+                    )
+                  ],
+                ),
+                VSpace(context.sp(5)),
+                CustomFormTextField(
+                  controller: _confirmPassword,
+                  suffix: _confirmPassword.text.isNotEmpty
                       ? Icon(
                           Icons.cancel,
                           color: theme.black,
@@ -119,7 +157,7 @@ class _UserDetailViewState extends State<UserDetailView> {
               ),
               child: PrimaryButton(
                 onPressed: () {},
-                label: context.loc.conti,
+                label: context.loc.updatePassword,
                 radius: 20,
                 fullWidth: true,
                 color: Colors.transparent,

@@ -6,7 +6,6 @@ import 'package:chekinapp/routes/home/top_rated.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 
-import '../../components/msc/loader_state_widget.dart';
 import 'advert_slider.dart';
 
 class HomeScreen extends StatelessWidget {
