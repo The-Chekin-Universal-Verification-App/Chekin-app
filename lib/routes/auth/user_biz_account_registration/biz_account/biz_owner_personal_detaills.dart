@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 
 import '../../../../components/input/base_text_input.dart';
+import '../../../../core/models/business_signup_model.dart';
+import '../../../country_state_city_picke/csc_picker.dart';
 
 class BusinessOwnerDetailScreen extends StatefulWidget {
   const BusinessOwnerDetailScreen({Key? key}) : super(key: key);
@@ -11,11 +13,17 @@ class BusinessOwnerDetailScreen extends StatefulWidget {
       _BusinessOwnerDetailScreenState();
 }
 
-class _BusinessOwnerDetailScreenState extends State<BusinessOwnerDetailScreen> {
+class _BusinessOwnerDetailScreenState extends State<BusinessOwnerDetailScreen>
+    with FormMixin {
   int formIndex = 0;
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
+    int bizAccountPageIndex = context
+        .select((AuthProvider provider) => provider.businessSignUpPageIndex);
+    // business account
+    BusinessSignUpModel businessModel =
+        context.select((AuthProvider provider) => provider.businessSignUpModel);
 
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
@@ -25,69 +33,95 @@ class _BusinessOwnerDetailScreenState extends State<BusinessOwnerDetailScreen> {
             BoxConstraints(minHeight: MediaQuery.of(context).size.height - 120),
 
         ///the 120 is the estimated appbar height and the page index indicator  taking them of allows the rest part of the screens to show up in the visible area
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const VSpace(23),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      context.loc.personalInfo,
-                      style: TextStyles.h5,
-                    ),
-                    Text(
-                      '${formIndex + 1}/2',
-                      style: TextStyles.h5,
-                    ),
-                  ],
-                ),
-                const VSpace(5),
-                Text(
-                  context.loc.whatIsYourName,
-                  style: TextStyles.h7.weight(FontWeight.bold),
-                ),
-                const VSpace(5),
-                Text(
-                  context.loc.asABoss,
-                  style: TextStyles.body1,
-                ),
-                const VSpace(42),
-                IndexedStack(
-                  index: formIndex,
-                  children: [NamesSection(), AddressAndLocationSection()],
-                ),
-                const VSpace(50),
-              ],
-            ),
+        child: Form(
+          key: formKey,
+          onChanged: () {
+            validate(() {
+              setState(() {});
+            }, shouldUnFocus: false);
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const VSpace(23),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        context.loc.personalInfo,
+                        style: TextStyles.h5,
+                      ),
+                      Text(
+                        '${formIndex == 1 ? '<<' : ''} ${formIndex + 1}/2',
+                        style: TextStyles.h5.copyWith(
+                            color: formIndex == 1 ? theme.primary : null),
+                      ).clickable(() {
+                        formIndex = 0;
+                        setState(() {});
+                      }),
+                    ],
+                  ),
+                  const VSpace(5),
+                  Text(
+                    context.loc.whatIsYourName,
+                    style: TextStyles.h7.weight(FontWeight.bold),
+                  ),
+                  const VSpace(5),
+                  Text(
+                    context.loc.asABoss,
+                    style: TextStyles.body1,
+                  ),
+                  const VSpace(42),
+                  IndexedStack(
+                    index: formIndex,
+                    children: [
+                      NamesSection(),
+                      AddressAndLocationSection(),
+                    ],
+                  ),
+                ],
+              ),
 
-            ///for the button
-            Container(
-              padding: const EdgeInsets.only(
-                bottom: 20.0,
+              ///for the button
+              Container(
+                padding: const EdgeInsets.only(
+                  bottom: 20.0,
+                ),
+                child: PrimaryButton(
+                  onPressed: () {
+                    validate(() {
+                      if (formIndex == 0) {
+                        formIndex = 1;
+                        setState(() {});
+                      } else if (formIndex == 1) {
+                        if (businessModel.lga != '') {
+                          context
+                              .read<AuthProvider>()
+                              .setBusinessSignUpPageIndex = 1;
+                        } else {
+                          DialogServices.emptyModalWithNoTitle(context,
+                              title: 'please select your city',
+                              bgColor: theme.redButton);
+                        }
+                      }
+                    });
+                  },
+                  label: context.loc.conti,
+                  radius: 20,
+                  fullWidth: true,
+                  color: isFormValid ? theme.primary : Colors.transparent,
+                  textColor: isFormValid ? Colors.white : theme.black,
+                  borderColor: theme.primary.withOpacity(0.48),
+                  contentPadding: const EdgeInsets.symmetric(vertical: 18),
+                ),
               ),
-              child: PrimaryButton(
-                onPressed: () {
-                  if (formIndex == 0) {
-                    formIndex = 1;
-                    setState(() {});
-                  }
-                },
-                label: context.loc.conti,
-                radius: 20,
-                fullWidth: true,
-                color: Colors.transparent,
-                textColor: theme.black,
-                borderColor: theme.primary.withOpacity(0.48),
-                contentPadding: const EdgeInsets.symmetric(vertical: 18),
-              ),
-            ),
-            // VSpace(20),
-          ], //
+              // VSpace(20),
+            ], //
+          ),
         ),
       ),
     );
@@ -105,6 +139,7 @@ class NamesSection extends StatefulWidget {
 class _NamesSectionState extends State<NamesSection> {
   TextEditingController _firstName = TextEditingController();
   TextEditingController _lastName = TextEditingController();
+  TextEditingController _middleName = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -114,11 +149,17 @@ class _NamesSectionState extends State<NamesSection> {
     _lastName.addListener(() {
       setState(() {});
     });
+    _middleName.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
+    // business account
+    BusinessSignUpModel businessModel =
+        context.select((AuthProvider provider) => provider.businessSignUpModel);
     return Column(
       children: [
         Row(
@@ -138,6 +179,10 @@ class _NamesSectionState extends State<NamesSection> {
         ),
         CustomFormTextField(
           controller: _firstName,
+          onChange: (firstName) {
+            context.read<AuthProvider>().addToBusinessInfo =
+                businessModel.copyWith(firstName: firstName);
+          },
           suffix: _firstName.text.isNotEmpty
               ? Icon(
                   Icons.cancel,
@@ -156,8 +201,12 @@ class _NamesSectionState extends State<NamesSection> {
           ],
         ),
         CustomFormTextField(
-          controller: _firstName,
-          suffix: _firstName.text.isNotEmpty
+          controller: _middleName,
+          onChange: (middleName) {
+            context.read<AuthProvider>().addToBusinessInfo =
+                businessModel.copyWith(middleName: middleName);
+          },
+          suffix: _middleName.text.isNotEmpty
               ? Icon(
                   Icons.cancel,
                   color: theme.black,
@@ -184,6 +233,10 @@ class _NamesSectionState extends State<NamesSection> {
         VSpace(context.sp(5)),
         CustomFormTextField(
           controller: _lastName,
+          onChange: (lastName) {
+            context.read<AuthProvider>().addToBusinessInfo =
+                businessModel.copyWith(lastName: lastName);
+          },
           suffix: _lastName.text.isNotEmpty
               ? Icon(
                   Icons.cancel,
@@ -207,99 +260,37 @@ class AddressAndLocationSection extends StatefulWidget {
 }
 
 class _AddressAndLocationSectionState extends State<AddressAndLocationSection> {
-  TextEditingController _country = TextEditingController();
-  TextEditingController _state = TextEditingController();
-  TextEditingController _lga = TextEditingController();
   @override
   void initState() {
-    super.initState();
-    _country.addListener(() {
-      setState(() {});
-    });
-    _state.addListener(() {
-      setState(() {});
-    });
-
-    _lga.addListener(() {
-      setState(() {});
-    });
+    context.read<AuthProvider>().addToBusinessInfo =
+        BusinessSignUpModel().copyWith(nationality: CscCountry.Nigeria.name);
   }
 
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
+    // business account
+    BusinessSignUpModel businessModel =
+        context.select((AuthProvider provider) => provider.businessSignUpModel);
+
     return Column(
       children: [
-        Row(
-          children: [
-            Text(
-              context.loc.nationality,
-              style: TextStyles.body1.copyWith(fontWeight: FontWeight.w900),
-            ),
-          ],
-        ),
-        CustomFormTextField(
-          controller: _country,
-          suffix: _country.text.isNotEmpty
-              ? Icon(
-                  Icons.cancel,
-                  color: theme.black,
-                )
-              : const SizedBox.shrink(),
-          hintText: context.loc.noEmojis,
-        ),
-        const VSpace(25),
-        Row(
-          children: [
-            Text(
-              context.loc.stateOfOrigin,
-              style: TextStyles.body1.copyWith(fontWeight: FontWeight.w900),
-            ),
-            Text(
-              '*',
-              style: TextStyles.h5.copyWith(
-                  height: 1.5,
-                  color: theme.redButton,
-                  fontWeight: FontWeight.w900),
-            )
-          ],
-        ),
-        CustomFormTextField(
-          controller: _state,
-          suffix: _state.text.isNotEmpty
-              ? Icon(
-                  Icons.cancel,
-                  color: theme.black,
-                )
-              : const SizedBox.shrink(),
-          hintText: context.loc.noEmojis,
-        ),
-        const VSpace(20),
-        Row(
-          children: [
-            Text(
-              context.loc.lga,
-              style: TextStyles.body1.copyWith(fontWeight: FontWeight.w900),
-            ),
-            Text(
-              '*',
-              style: TextStyles.h5.copyWith(
-                  height: 1.5,
-                  color: theme.redButton,
-                  fontWeight: FontWeight.w900),
-            )
-          ],
-        ),
-        VSpace(context.sp(5)),
-        CustomFormTextField(
-          controller: _lga,
-          suffix: _lga.text.isNotEmpty
-              ? Icon(
-                  Icons.cancel,
-                  color: theme.black,
-                )
-              : const SizedBox.shrink(),
-          hintText: context.loc.noEmojis,
+        CSCPicker(
+          layout: Layout.vertical,
+          dropdownDecoration: BoxDecoration(
+              border:
+                  Border(bottom: BorderSide(color: theme.greyWeak, width: .6))),
+          disableCountry: true,
+          defaultCountry: CscCountry.Nigeria,
+          onCountryChanged: (country) {},
+          onStateChanged: (state) {
+            context.read<AuthProvider>().addToBusinessInfo =
+                businessModel.copyWith(state: state ?? '');
+          },
+          onCityChanged: (city) {
+            context.read<AuthProvider>().addToBusinessInfo =
+                businessModel.copyWith(lga: city ?? '');
+          },
         ),
       ],
     );

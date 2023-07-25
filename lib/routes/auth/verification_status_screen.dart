@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
-
+import 'package:flutter/services.dart';
 
 class VerificationStatusScreen extends StatelessWidget {
   const VerificationStatusScreen({Key? key}) : super(key: key);
@@ -47,6 +47,7 @@ class VerificationStatusScreen extends StatelessWidget {
               style: TextStyles.h6.copyWith(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
+                  fontSize: 15,
                   letterSpacing: 2),
             ),
             const VSpace(25),
@@ -66,7 +67,8 @@ class VerificationStatusScreen extends StatelessWidget {
                 style: TextStyles.h6.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.bold,
-                    letterSpacing: 2),
+                    letterSpacing: 2,
+                    fontSize: 15),
               ),
             ),
           ],
@@ -82,7 +84,19 @@ class VerificationSuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
-
+    List<String> verificationCode = [
+      '1',
+      '2',
+      '3',
+      '4',
+      '5',
+      '4',
+      '5',
+      '4',
+      '5',
+      '4',
+      '5',
+    ];
     return Scaffold(
       backgroundColor: theme.primary,
       appBar: CustomAppBar(
@@ -134,24 +148,31 @@ class VerificationSuccessScreen extends StatelessWidget {
               ),
             ),
             const VSpace(20),
-            SizedBox(
-              height: 60,
-              child: FittedBox(
-                child: Row(
-                  children: [
-                    CustomContainer(
-                      borderRadius: Corners.s5Border,
-                      color: Colors.white,
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Center(
-                            child: Text(
-                          '1',
-                          style: TextStyles.h4,
-                        )),
-                      ),
-                    )
-                  ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: SizedBox(
+                height: 60,
+                child: FittedBox(
+                  child: Row(
+                    children: List.generate(
+                        verificationCode.length,
+                        (index) => Padding(
+                              padding: const EdgeInsets.only(right: 8.0),
+                              child: CustomContainer(
+                                borderRadius: Corners.s5Border,
+                                color: Colors.white,
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 4.0, horizontal: 8),
+                                  child: Center(
+                                      child: Text(
+                                    verificationCode[index],
+                                    style: TextStyles.h4,
+                                  )),
+                                ),
+                              ),
+                            )),
+                  ),
                 ),
               ),
             ),
@@ -159,7 +180,38 @@ class VerificationSuccessScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(right: 27.0, left: 27, bottom: 45),
               child: PrimaryButton(
-                onPressed: () {},
+                onPressed: () async {
+                  debugPrint(verificationCode.join(""));
+                  await Clipboard.setData(
+                          ClipboardData(text: verificationCode.join("")))
+                      .then((value) {
+                    DialogServices.emptyModalWithNoTitle(context,
+                        showIcon: false,
+                        bgColor: theme.primary,
+                        fromTop: false,
+                        body: SizedBox(
+                          height: 20,
+                          child: Row(
+                            children: [
+                              Icon(
+                                Icons.check_circle_outline_rounded,
+                                color: theme.background,
+                                size: 20,
+                              ),
+                              const HSpace(10),
+                              Flexible(
+                                child: Text(
+                                  'Code  ${verificationCode.join("")}  copied ',
+                                  style: TextStyles.body3.copyWith(
+                                      color: theme.background,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              )
+                            ],
+                          ),
+                        ));
+                  });
+                },
                 label: context.loc.copyAnContinue,
                 radius: 20,
                 fullWidth: true,

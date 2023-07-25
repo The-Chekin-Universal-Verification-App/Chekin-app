@@ -20,54 +20,73 @@ class WishListScreen extends StatelessWidget {
         context.select((WishListProvider provider) => provider.wishList);
     bool state = context.select((HomeProvider provider) => provider.isBusy);
     return Scaffold(
-      body: Column(
-        children: [
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: Insets.l),
+          child: Column(
+            children: [
+              const VSpace(20),
+              Align(
+                alignment: Alignment.centerLeft,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          context.loc.wishlist,
+                          style: TextStyles.h4.copyWith(fontSize: 32),
+                        ),
+                      ],
+                    ),
+                    const VSpace(5),
                     Text(
-                      context.loc.wishlist,
-                      style: TextStyles.h4.copyWith(fontSize: 32),
+                      context.loc.keepItemInWishlist,
+                      style: TextStyles.body1,
                     ),
                   ],
                 ),
-                const VSpace(5),
-                Text(
-                  context.loc.keepItemInWishlist,
-                  style: TextStyles.body1,
-                ),
-              ],
-            ),
+              ),
+              const VSpace(20),
+              Expanded(
+                  child: LoaderStateItem(
+                key: UniqueKey(),
+                isLoading: state,
+                item: wishList,
+                onListEmptyWidget: const EmptyListWidget(),
+                widgetOnLoadSuccess: ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    itemCount: wishList.length,
+                    scrollDirection: Axis.vertical,
+                    itemBuilder: (_, index) => Column(
+                          ///i used row to cancel out the constrain on the child widget by listview builder widget
+                          children: [
+                            DiscoverItem(
+                              product: ProductModel(
+                                  productImage: R.png.laptop.imgPng,
+                                  itemName: 'Apple MacBook Pro',
+                                  storeName: 'Apple Store',
+                                  isStoreVerified:
+                                      index == wishList.length ~/ 2 ||
+                                              index == wishList.length ~/ 3
+                                          ? true
+                                          : false,
+                                  isStoreFavorite:
+                                      index == wishList.length ~/ 3 ||
+                                              index == wishList.length ~/ 3
+                                          ? true
+                                          : false,
+                                  desc: R.S.productInfo),
+                              onItemTap: () {},
+                              color: const Color(0xff6F7E38),
+                            ),
+                          ],
+                        )),
+              ))
+            ],
           ),
-          Expanded(
-              child: LoaderStateItem(
-            key: UniqueKey(),
-            isLoading: state,
-            item: wishList,
-            widgetOnLoadSuccess: ListView.builder(
-                itemCount: wishList.length,
-                scrollDirection: Axis.vertical,
-                itemBuilder: (_, index) => Row(
-                      ///i used row to cancle out the constrain on the child widget by listview builder widget
-                      children: [
-                        DiscoverItem(
-                          product: ProductModel(
-                              productImage: R.png.laptop.imgPng,
-                              itemName: 'Apple MacBook Pro',
-                              storeName: 'Apple Store',
-                              desc: R.S.productInfo),
-                          onItemTap: () {},
-                          color: const Color(0xff6F7E38),
-                        ),
-                      ],
-                    )),
-          ))
-        ],
+        ),
       ),
     );
   }

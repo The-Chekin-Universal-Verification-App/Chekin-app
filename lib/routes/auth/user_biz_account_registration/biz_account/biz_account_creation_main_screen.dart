@@ -4,16 +4,28 @@ import 'package:chekinapp/export.dart';
 import 'package:chekinapp/routes/auth/user_biz_account_registration/biz_account/biz_info_details.dart';
 import 'package:chekinapp/routes/auth/user_biz_account_registration/biz_account/biz_owner_personal_detaills.dart';
 
+import '../../password_screen.dart';
+
 class BusinessAccountCreationMainScreen extends StatelessWidget {
   const BusinessAccountCreationMainScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
-    int pageIndex = 2;
+    int pageIndex = context
+        .select((AuthProvider provider) => provider.businessSignUpPageIndex);
+
     return Scaffold(
         appBar: CustomAppBar(
           leading: true,
+          onTapLeadingIcon: () {
+            if (pageIndex > 0) {
+              context.read<AuthProvider>().setBusinessSignUpPageIndex =
+                  (pageIndex > 0 ? pageIndex - 1 : 0);
+            } else {
+              context.pop();
+            }
+          },
           titleWidget: ConstrainedBox(
             constraints: const BoxConstraints(maxHeight: 30),
             child: const LogoIconItem(allRoundPadding: 1),
@@ -46,32 +58,22 @@ class BusinessAccountCreationMainScreen extends StatelessWidget {
           physics: const BouncingScrollPhysics(),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 25, right: 20, left: 20),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(
-                    3,
-                    (index) => Flexible(
-                      flex: 1,
-                      child: CustomContainer(
-                        height: 5,
-                        duration: const Duration(milliseconds: 640),
-                        width: context.widthPx * 0.3,
-                        color: pageIndex == index
-                            ? theme.primary
-                            : Colors.blueGrey[100],
-                        borderRadius: BorderRadius.circular(10),
-                        margin: EdgeInsets.only(right: context.sp(5)),
-                      ),
-                    ),
-                  ),
-                ),
+              PageIndexIndicatorItem(
+                pageIndex: pageIndex,
+
+                ///the number passed down with be a figure directly coming from a Provider class which can be watch and updated accordingly
+                ///
+                onTapIndicator: (index) {
+                  context.read<AuthProvider>().setBusinessSignUpPageIndex =
+                      index!; //
+                },
+                itemCounts: 4,
               ),
               IndexedStack(
                 index: pageIndex,
                 children: [
                   BusinessOwnerDetailScreen(),
+                  PasswordScreen(onSuccessIndexPageGoTo: 2),
                   BusinessInfoDetailScreen(),
                   BusinessContactInfoScreen(),
                 ],
@@ -79,5 +81,44 @@ class BusinessAccountCreationMainScreen extends StatelessWidget {
             ],
           ),
         ));
+  }
+}
+
+class PageIndexIndicatorItem extends StatelessWidget {
+  const PageIndexIndicatorItem({
+    super.key,
+    required this.pageIndex,
+    this.onTapIndicator,
+    required this.itemCounts,
+  });
+
+  final int pageIndex;
+  final int itemCounts;
+  final Function(int? index)? onTapIndicator;
+  @override
+  Widget build(BuildContext context) {
+    AppTheme theme = context.watch();
+    return Padding(
+      padding: const EdgeInsets.only(top: 25, right: 20, left: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(
+          itemCounts,
+          (index) => Flexible(
+            flex: 1,
+            child: CustomContainer(
+              height: 5,
+              duration: const Duration(milliseconds: 640),
+              width: context.widthPx * 0.3,
+              color: pageIndex == index ? theme.primary : Colors.blueGrey[100],
+              borderRadius: BorderRadius.circular(10),
+              margin: EdgeInsets.only(right: context.sp(5)),
+            ).clickable(() {
+              onTapIndicator != null ? onTapIndicator!(index) : null;
+            }),
+          ),
+        ),
+      ),
+    );
   }
 }

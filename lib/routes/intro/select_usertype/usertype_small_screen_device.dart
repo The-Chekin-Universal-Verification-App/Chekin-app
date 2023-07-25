@@ -4,6 +4,7 @@ import 'package:chekinapp/routes/intro/oboarding/get_started_screen.dart';
 import 'package:chekinapp/routes/intro/select_usertype/set_a_user_type.dart';
 import '../../../core/providers/app_provider.dart';
 import '../../../core/providers/auth_provider.dart';
+import '../../auth/user_biz_account_registration/account_creation_main_screen.dart';
 
 class SetUserTypeSmallScreen extends StatelessWidget {
   const SetUserTypeSmallScreen({Key? key}) : super(key: key);
@@ -14,6 +15,8 @@ class SetUserTypeSmallScreen extends StatelessWidget {
     List onboards = R.M.getUserTypes(context);
     int pageIndex =
         context.select((AppProvider provider) => provider.onBoardPageIndex);
+    UserType accountType =
+        context.select((AuthProvider provider) => provider.accountType);
     return Scaffold(
         appBar: CustomAppBar(
           leading: true,
@@ -74,6 +77,15 @@ class SetUserTypeSmallScreen extends StatelessWidget {
               physics: const BouncingScrollPhysics(),
               onPageChanged: (val) {
                 context.read<AppProvider>().setOnBoardPageIndex = val;
+
+                ///remember there is a large screen version of this code call [SetUserTypeLargeScreen]  so changes made here should happen there also
+
+                // set the user type also
+                if (val == 1) {
+                  context.read<AuthProvider>().setAccountType = UserType.biz;
+                } else {
+                  context.read<AuthProvider>().setAccountType = UserType.normal;
+                }
               },
               children: [
                 UserTypeBoardingPages(
@@ -108,12 +120,11 @@ class SetUserTypeSmallScreen extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 28.0),
             child: PrimaryButton(
               onPressed: () {
-                if (pageIndex == 1) {
-                  context.read<AuthProvider>().setAccountType = UserType.biz;
+                if (accountType == UserType.biz) {
+                  context.push(const GetStartedScreen());
                 } else {
-                  context.read<AuthProvider>().setAccountType = UserType.normal;
+                  context.push(const AccountCreationScreen());
                 }
-                context.push(const GetStartedScreen());
               },
               label: context.loc.conti,
               radius: 20,

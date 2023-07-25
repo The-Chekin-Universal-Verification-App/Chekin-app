@@ -7,7 +7,7 @@ abstract class BaseService {
 
   late final Dio _dio;
   var options = BaseOptions(
-    baseUrl: "R.N.baseUrl",
+    baseUrl: R.N.baseUrl,
     connectTimeout: 5000,
     receiveTimeout: 20000,
     headers: {

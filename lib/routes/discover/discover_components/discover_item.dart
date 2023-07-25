@@ -52,7 +52,9 @@ class DiscoverItem extends StatelessWidget {
                                   style: TextStyles.h7
                                       .copyWith(fontWeight: FontWeight.w700)),
                               const HSpace(5),
-                              Image.asset(R.png.verified.imgPng)
+                              if (product.isStoreVerified) ...[
+                                Image.asset(R.png.verified.imgPng)
+                              ]
                             ],
                           ),
                           const VSpace(5),
@@ -74,6 +76,9 @@ class DiscoverItem extends StatelessWidget {
                                   child: SvgIcon(
                                     R.png.heart2.svg,
                                     size: 15,
+                                    color: product.isStoreFavorite == true
+                                        ? theme.redButton
+                                        : null,
                                   ),
                                 ),
                               ),
@@ -112,7 +117,9 @@ class DiscoverItem extends StatelessWidget {
                                   style: TextStyles.h7
                                       .copyWith(fontWeight: FontWeight.w700)),
                               const HSpace(5),
-                              Image.asset(R.png.verified.imgPng)
+                              if (product.isStoreVerified) ...[
+                                Image.asset(R.png.verified.imgPng)
+                              ]
                             ],
                           ),
                           const VSpace(10),
@@ -132,8 +139,12 @@ class DiscoverItem extends StatelessWidget {
                                 color: theme.primary.withOpacity(0.15),
                                 child: Center(
                                   child: SvgIcon(
-                                    R.png.heart2.svg,
+                                    R.png.heart.svg, //
                                     size: 15,
+
+                                    color: product.isStoreFavorite == true
+                                        ? theme.redButton
+                                        : null,
                                   ),
                                 ),
                               ),

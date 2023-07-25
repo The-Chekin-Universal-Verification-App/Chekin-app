@@ -1,10 +1,26 @@
-import 'package:chekinapp/routes/main/main.dart';
+import 'package:chekinapp/core/commands/bootstrap_cmd.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
-import 'package:chekinapp/routes/intro/oboarding/onboarding_small_screen_device.dart';
 
-class IntroScreen extends StatelessWidget {
+import 'oboarding/onboarding_main_screen.dart';
+
+class IntroScreen extends StatefulWidget {
   const IntroScreen({Key? key}) : super(key: key);
+
+  @override
+  State<IntroScreen> createState() => _IntroScreenState();
+}
+
+class _IntroScreenState extends State<IntroScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Future.delayed(const Duration(seconds: 2), () {
+        BootStrapCmd(context).bootStrap();
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +37,8 @@ class IntroScreen extends StatelessWidget {
               width: 100,
               child: Image.asset(R.png.appLogo.imgPng)),
         ).clickable(() {
-          context.pushOff(const MainScreen());
+          // DialogServices.messageModalFromTop(context, message: 'Success');
+          context.pushOff(const OnBoardingScreen());
         }),
       ),
     );

@@ -1,6 +1,8 @@
 import 'package:chekinapp/export.dart';
 import 'package:flutter/material.dart';
-
+import '../auth/change_password.dart';
+import '../payment/current_subscription_screen.dart';
+import 'settings.dart';
 import '../reviews/review_screen.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -95,23 +97,30 @@ class SettingsScreen extends StatelessWidget {
             const ChekInAppDivider(),
             const VSpace(10),
             SettingsItem(
-              onItemTap: () {},
+              onItemTap: () {
+                // navigate to account switcher class between user and biz account
+                context.push(const UserTypeProfileAccountSwitcher());
+              },
               title: context.loc.manageAccount,
               imagePath: R.png.personIcon.svg,
             ),
             SettingsItem(
-              onItemTap: () {},
+              onItemTap: () {
+                context.push(const ChangePasswordScreen());
+              },
               imagePath: R.png.passwordProtection.svg,
               title: context.loc.password,
             ),
-            if (userType == UserType.normal) ...[
+            if (userType == UserType.biz) ...[
               SettingsItem(
                 onItemTap: () {},
                 imagePath: R.png.privacyTips.svg,
                 title: context.loc.privacy,
               ),
               SettingsItem(
-                onItemTap: () {},
+                onItemTap: () {
+                  context.push(const CurrentSubscriptionScreen());
+                },
                 imagePath: R.png.paymentIcon.svg,
                 title: context.loc.subscription,
               ),

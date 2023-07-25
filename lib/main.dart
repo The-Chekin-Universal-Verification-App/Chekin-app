@@ -1,4 +1,5 @@
 import 'package:chekinapp/routes/discover/discover_screen.dart';
+import 'package:chekinapp/routes/payment/paywith_card_option.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/routes/intro/intro_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';

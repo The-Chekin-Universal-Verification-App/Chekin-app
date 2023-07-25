@@ -1,5 +1,6 @@
 import 'package:chekinapp/components/input/base_text_input.dart';
 import 'package:chekinapp/export.dart';
+import 'package:chekinapp/routes/intro/select_usertype/set_a_user_type.dart';
 import 'package:chekinapp/routes/main/main.dart';
 import 'package:flutter/material.dart';
 
@@ -116,6 +117,27 @@ class LogInScreen extends StatelessWidget {
               borderColor: theme.primary.withOpacity(0.48),
               contentPadding: const EdgeInsets.symmetric(vertical: 15),
             ),
+            const VSpace(20),
+            Align(
+              alignment: Alignment.center,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    context.loc.iamNew,
+                    style: TextStyles.body2,
+                  ),
+                  const HSpace(1),
+                  Text(
+                    context.loc.signUp,
+                    style: TextStyles.body2.copyWith(color: theme.primary),
+                  ),
+                ],
+              ),
+            ).rippleClick(() {
+              context.push(const SetUserTypeScreen());
+            }),
+            const VSpace(20),
           ],
         ),
       ),

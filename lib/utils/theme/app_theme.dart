@@ -72,7 +72,7 @@ class AppTheme {
           ..transparentBlack = const Color(0xff23262B)
           ..greyStrong = const Color(0xff151918)
           ..error = Colors.redAccent
-          ..redButton = const Color(0xffF97A60)
+          ..redButton = const Color(0xffEE1D52)
           ..blue = Colors.blue
           ..greenButton = const Color(0xff249C29)
           ..glassWhite = const Color(0x5affffff)

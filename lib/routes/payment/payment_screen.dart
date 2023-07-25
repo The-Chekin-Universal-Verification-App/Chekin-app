@@ -1,4 +1,5 @@
 import 'package:chekinapp/routes/document_upload/upload_valid_ids.dart';
+import 'package:chekinapp/routes/payment/paywith_card_option.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 
@@ -175,7 +176,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 ),
                 child: PrimaryButton(
                   onPressed: () {
-                    context.push(const ConfirmedPaymentScreen());
+                    context.push(const AddNewCardScreen());
                   },
                   label: context.loc.conti,
                   radius: 20,

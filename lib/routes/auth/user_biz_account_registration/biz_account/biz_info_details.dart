@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 
 import '../../../../components/input/base_text_input.dart';
+import '../../../../core/models/business_signup_model.dart';
 
 class BusinessInfoDetailScreen extends StatefulWidget {
   const BusinessInfoDetailScreen({Key? key}) : super(key: key);
@@ -16,7 +17,9 @@ class _BusinessInfoDetailScreenState extends State<BusinessInfoDetailScreen> {
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
-
+    // business account
+    BusinessSignUpModel businessModel =
+        context.select((AuthProvider provider) => provider.businessSignUpModel);
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -237,6 +240,9 @@ class _BusinessAddressAndLocationSectionState
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
+    // business account
+    BusinessSignUpModel businessModel =
+        context.select((AuthProvider provider) => provider.businessSignUpModel);
     return Column(
       children: [
         Row(
@@ -249,6 +255,10 @@ class _BusinessAddressAndLocationSectionState
         ),
         CustomFormTextField(
           controller: _city,
+          onChange: (bizCity) {
+            context.read<AuthProvider>().addToBusinessInfo =
+                businessModel.copyWith(cityOfBusiness: bizCity);
+          },
           suffix: _city.text.isNotEmpty
               ? Icon(
                   Icons.cancel,
@@ -275,6 +285,10 @@ class _BusinessAddressAndLocationSectionState
         ),
         CustomFormTextField(
           controller: _landMark,
+          onChange: (landMark) {
+            context.read<AuthProvider>().addToBusinessInfo =
+                businessModel.copyWith(nearestLandmark: landMark);
+          },
           suffix: _landMark.text.isNotEmpty
               ? Icon(
                   Icons.cancel,
@@ -302,6 +316,10 @@ class _BusinessAddressAndLocationSectionState
         VSpace(context.sp(5)),
         CustomFormTextField(
           controller: _lga,
+          onChange: (landMark) {
+            context.read<AuthProvider>().addToBusinessInfo =
+                businessModel.copyWith(nearestLandmark: landMark);
+          },
           suffix: _lga.text.isNotEmpty
               ? Icon(
                   Icons.cancel,

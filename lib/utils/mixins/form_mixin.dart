@@ -5,15 +5,22 @@ mixin FormMixin<T extends StatefulWidget> on State<T> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   AutovalidateMode? autoValidateMode;
 
-  void validate(VoidCallback callback, {VoidCallback? orElse}) {
+  bool _validForm = false;
+  bool get isFormValid => _validForm;
+
+  void validate(VoidCallback callback,
+      {VoidCallback? orElse, bool shouldUnFocus = true}) {
     final FormState? formState = formKey.currentState;
 
     if (formState != null && formState.validate() != false) {
-      FocusScope.of(context).unfocus();
+      shouldUnFocus ? FocusScope.of(context).unfocus() : null;
       formState.save();
+      _validForm = true;
       callback();
     } else {
+      _validForm = false;
       setState(() => autoValidateMode = AutovalidateMode.onUserInteraction);
+
       orElse?.call();
     }
   }

@@ -86,8 +86,19 @@ class Mock {
       storeName: R.S.storeName,
     ),
   ];
+
+  ///
+  ///
+  ///
+  ///
+  /// API endpoints starts here
+  ///
+  static const String api = '/api/v1/';
+
+  final String signUp = '$api/auth/signup/user';
 }
 
+///
 class IntroImage extends StatelessWidget {
   const IntroImage({Key? key, this.onboardImg, this.height}) : super(key: key);
   final String? onboardImg;

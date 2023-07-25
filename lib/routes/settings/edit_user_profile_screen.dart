@@ -1,6 +1,6 @@
 import 'package:chekinapp/export.dart';
 import 'package:flutter/material.dart';
-
+import 'settings.dart';
 import '../../components/input/base_text_input.dart';
 
 class EditUserProfileScreen extends StatefulWidget {
@@ -31,7 +31,13 @@ class _EditUserProfileScreenState extends State<EditUserProfileScreen> {
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
     return Scaffold(
-      appBar: CustomAppBar(title: context.loc.editProfile),
+      appBar: CustomAppBar(
+        titleWidget: Text(
+          context.loc.editProfile,
+          style: TextStyles.h5
+              .copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+      ),
       body: SingleChildScrollView(
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -45,9 +51,7 @@ class _EditUserProfileScreenState extends State<EditUserProfileScreen> {
               Column(
                 children: [
                   Stack(children: [
-                    CircleAvatar(
-                      radius: context.sp(40),
-                    ),
+                    const UserProfileImageItem(),
                     Positioned(
                       right: 3,
                       bottom: 5,
@@ -117,7 +121,7 @@ class _EditUserProfileScreenState extends State<EditUserProfileScreen> {
                   Row(
                     children: [
                       Text(
-                        context.loc.phoneNuber,
+                        context.loc.phoneNumber,
                         style: TextStyles.body1
                             .copyWith(fontWeight: FontWeight.w900),
                       ),
@@ -283,7 +287,7 @@ class _EditBizProfileScreenState extends State<EditBizProfileScreen> {
                   Row(
                     children: [
                       Text(
-                        context.loc.phoneNuber,
+                        context.loc.phoneNumber,
                         style: TextStyles.body1
                             .copyWith(fontWeight: FontWeight.w900),
                       ),

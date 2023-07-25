@@ -970,19 +970,24 @@
   "@newPassword": {
   "description": "user new Password"
   },
+
+     "noWishList": "No wishes here yet!",
+  "@noWishList": {
+  "description": "No item on wish list"
+  },
       "confirmPassword": "Confirm Password",
   "@confirmPassword": {
   "description": " confirm user new Password"
   },
 
-     "name": "name",
+     "name": "Name",
   "@name": {
   "description": "name"
   },
 
-      "phoneNumber": "Phone Number",
+      "phoneNumber": "Phone number",
   "@phoneNumber": {
-  "description": " phone Number"
+  "description": " Phone Number"
   },
 
      "subscription": "Subscription",
@@ -1008,6 +1013,107 @@
    "autoMobile": "Automobile",
   "@autoMobile": {
   "description": "sorting item by autoMobile key word "
+  },
+
+   "addSocial": "Add socials",
+  "@addSocial": {
+  "description": "Add social media button "
+  },
+
+    "editProduct": "Edit product",
+  "@editProduct": {
+  "description": "Edit product"
+  },
+
+
+    "cardNumber": "Card number",
+  "@cardNumber": {
+  "description": " card Number"
+  },
+
+    "pay": "Pay",
+  "@pay": {
+  "description": "Pay "
+  },
+
+    "choosePaymentMethod": "Choose your payment method",
+  "@choosePaymentMethod": {
+  "description": "Choose your payment method"
+  },
+
+
+    "iamNew": "I am new",
+  "@iamNew": {
+  "description": "when a user is new to the app"
+  },
+
+
+    "createAccountPassword": "Create your account password",
+  "@createAccountPassword": {
+  "description": "Create your account password"
+  },
+
+    "tapToSelect": "Tap to select",
+  "@tapToSelect": {
+  "description": "Tap to select"
+  },
+    "typeToSearch": "Start typing to search",
+  "@typeToSearch": {
+  "description": "Start typing to search"
+  },  "city": "city",
+  "@city": {
+  "description": "literal city "
+  },
+   "selectCountry": "Select the country you belong to",
+  "@selectCountry": {
+  "description": "Select the country you belong to"
+  },
+
+
+  "signUp": "Sign me Up",
+  "@signUp": {
+  "description": "sign a user up"
+  },
+
+
+   "pickPaymentMethod": "Pick a payment method",
+  "@pickPaymentMethod": {
+  "description": "Pick a payment method"
+  },
+
+   "addPaymentMethod": "+ Add payment method",
+  "@addPaymentMethod": {
+  "description": "To Add payment method"
+  },
+   "paying": "Paying",
+  "@paying": {
+  "description": "paying"
+  },
+
+
+    "cardHolderName": "Card Holder's Name",
+  "@cardHolderName": {
+  "description": "card Holder Name"
+  },
+
+    "cardExpires": "Card Expires",
+  "@cardExpires": {
+  "description": "When will card expires"
+  },
+
+    "cvv": "CVV",
+  "@cvv": {
+  "description": "Card cvv"
+  },
+
+    "deleteProduct": "Delete product",
+  "@deleteProduct": {
+  "description": "delete  Product "
+  },
+
+   "active": "Active",
+  "@active": {
+  "description": "Active "
   },
 
 

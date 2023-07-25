@@ -11,6 +11,7 @@ class IconRes {
   String get cloudUploading => 'cloud-uploading';
   String get addUserIcon => 'add_user_icon';
   String get eyeOpen => 'eye_open';
+  String get autoRenewal => 'auto_renewal';
   String get passwordProtection => 'password_protection';
   String get paymentIcon => 'payment_icon';
   String get person => 'person';
@@ -26,6 +27,7 @@ class IconRes {
   String get heart2 => 'heart_fill';
   String get messageFavorite => 'message_favorite';
   String get addSquare => 'add_square';
+  String get addSquareFill => 'add_filled';
   String get brokenHeart => 'broken_heart';
   String get menuOutline => 'icon_menu_outline';
   String get menuGrid => 'menu_grid';
@@ -62,7 +64,7 @@ class IconRes {
   String get iphone => 'iphone';
   String get laptop => 'laptop';
   String get location => 'location';
-  String get storeImageOne => 'store_imageOne';
   String get storeImageTwo => 'store_imageTwo';
   String get storeImageThree => 'store_imageThree';
+  String get charmCircleTick => 'charm_circle-tick';
 }

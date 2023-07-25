@@ -100,7 +100,7 @@ class OnBoardingLargeScreen extends StatelessWidget {
                             const VSpace(10),
                             PrimaryButton(
                               onPressed: () {
-                                // SharedPrefs.setBool('isFirstTime', false);
+                                SharedPrefs.setBool('isFirstTime', false);
 
                                 context.push(const SetUserTypeScreen());
                               },

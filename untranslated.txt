@@ -2,6 +2,8 @@
   "es": [
     "signIn",
     "productInfo",
-    "contactVendor"
+    "contactVendor",
+    "editProduct",
+    "deleteProduct"
   ]
 }

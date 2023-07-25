@@ -13,18 +13,6 @@ import '../../../utils/helpers/app_language.dart';
 import 'onboarding_large_screen_device.dart';
 import 'onboarding_screen_view_switcher.dart';
 
-class OnBoardingScreen extends StatelessWidget {
-  const OnBoardingScreen({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const OnBoardingScreenViewSwitcher(
-      smallScreenView: OnBoardingSmallScreen(),
-      largeScreenView: OnBoardingLargeScreen(),
-    );
-  }
-}
-
 class OnBoardingSmallScreen extends StatelessWidget {
   const OnBoardingSmallScreen({Key? key}) : super(key: key);
   @override
@@ -102,7 +90,7 @@ class OnBoardingSmallScreen extends StatelessWidget {
                     const VSpace(10),
                     PrimaryButton(
                       onPressed: () {
-                        // SharedPrefs.setBool('isFirstTime', false);
+                        SharedPrefs.setBool('isFirstTime', false);
 
                         context.push(const SetUserTypeScreen());
                       },
