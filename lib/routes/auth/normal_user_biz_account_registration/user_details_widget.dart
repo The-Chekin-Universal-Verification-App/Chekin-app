@@ -1,35 +1,39 @@
-import 'package:chekinapp/core/commands/sign_up_command.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 
 import '../../../components/input/base_text_input.dart';
 import '../../../core/models/user_signup_model.dart';
-import '../success_registration_screen.dart';
 
-class EmailEntryScreen extends StatefulWidget {
-  const EmailEntryScreen({Key? key}) : super(key: key);
+class UserDetailView extends StatefulWidget {
+  const UserDetailView({Key? key}) : super(key: key);
 
   @override
-  State<EmailEntryScreen> createState() => _EmailEntryScreenState();
+  State<UserDetailView> createState() => _UserDetailViewState();
 }
 
-class _EmailEntryScreenState extends State<EmailEntryScreen> with FormMixin {
+class _UserDetailViewState extends State<UserDetailView> with FormMixin {
   TextEditingController _firstName = TextEditingController();
+  TextEditingController _lastName = TextEditingController();
+  TextEditingController _middleName = TextEditingController();
   @override
   void initState() {
     super.initState();
     _firstName.addListener(() {
       setState(() {});
     });
+    _lastName.addListener(() {
+      setState(() {});
+    });
+    _middleName.addListener(() {
+      setState(() {});
+    });
   }
 
-  int pageIndex = 0;
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
     UserSignUpModel model =
         context.select((AuthProvider provider) => provider.userSignUpModel);
-
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -52,19 +56,19 @@ class _EmailEntryScreenState extends State<EmailEntryScreen> with FormMixin {
                 children: [
                   const VSpace(23),
                   Text(
-                    context.loc.emailLastly,
+                    context.loc.whatIsYourName,
                     style: TextStyles.h5,
                   ),
                   const VSpace(5),
                   Text(
-                    context.loc.wantToReachOut,
+                    context.loc.tellUsYourName,
                     style: TextStyles.body1,
                   ),
                   const VSpace(42),
                   Row(
                     children: [
                       Text(
-                        context.loc.emailAddress,
+                        context.loc.firstName,
                         style: TextStyles.body1
                             .copyWith(fontWeight: FontWeight.w900),
                       ),
@@ -77,20 +81,75 @@ class _EmailEntryScreenState extends State<EmailEntryScreen> with FormMixin {
                       )
                     ],
                   ),
+                  // VSpace(context.sp(5)),
                   CustomFormTextField(
                     controller: _firstName,
-                    onChange: (email) {
+                    onChange: (firstName) {
                       context.read<AuthProvider>().addToUserInfo =
-                          model.copyWith(email: email);
+                          model.copyWith(firstName: firstName);
                     },
-                    suffix: _firstName.text.isNotEmpty
+                    hintText: context.loc.noEmojis,
+                  ),
+                  const VSpace(25),
+                  Row(
+                    children: [
+                      Text(
+                        context.loc.middleName,
+                        style: TextStyles.body1
+                            .copyWith(fontWeight: FontWeight.w900),
+                      ),
+                      Text(
+                        ' ',
+                        style: TextStyles.h5.copyWith(
+                            height: 1.5,
+                            color: theme.redButton,
+                            fontWeight: FontWeight.w900),
+                      )
+                    ],
+                  ),
+                  VSpace(context.sp(5)),
+                  CustomFormTextField(
+                    controller: _middleName,
+                    onChange: (lastName) {
+                      context.read<AuthProvider>().addToUserInfo =
+                          model.copyWith(middleName: lastName);
+                    },
+                    hintText: context.loc.noEmojis,
+                  ),
+                  const VSpace(25),
+                  Row(
+                    children: [
+                      Text(
+                        context.loc.lastName,
+                        style: TextStyles.body1
+                            .copyWith(fontWeight: FontWeight.w900),
+                      ),
+                      Text(
+                        '*',
+                        style: TextStyles.h5.copyWith(
+                            height: 1.5,
+                            color: theme.redButton,
+                            fontWeight: FontWeight.w900),
+                      )
+                    ],
+                  ),
+                  VSpace(context.sp(5)),
+                  CustomFormTextField(
+                    controller: _lastName,
+                    onChange: (lastName) {
+                      context.read<AuthProvider>().addToUserInfo =
+                          model.copyWith(lastName: lastName);
+                    },
+                    suffix: _lastName.text.isNotEmpty
                         ? Icon(
                             Icons.cancel,
                             color: theme.black,
                           )
                         : const SizedBox.shrink(),
-                    hintText: R.S.emailExample,
+                    hintText: context.loc.noEmojis,
                   ),
+
+                  const VSpace(50),
                 ],
               ),
               Container(
@@ -100,15 +159,12 @@ class _EmailEntryScreenState extends State<EmailEntryScreen> with FormMixin {
                 child: PrimaryButton(
                   onPressed: () {
                     validate(() {
-                      load(
-                          () => SignUpCommand(context).normalUserSignUp(model));
+                      context.read<AuthProvider>().setSignUpPageIndex = 2;
                     });
-                    // context.push(const SuccessRegistrationScreen());
                   },
-                  label: context.loc.submit,
+                  label: context.loc.conti,
                   radius: 20,
                   fullWidth: true,
-                  loading: isLoading,
                   color: isFormValid ? theme.primary : Colors.transparent,
                   textColor: isFormValid ? Colors.white : theme.black,
                   borderColor: theme.primary.withOpacity(0.48),

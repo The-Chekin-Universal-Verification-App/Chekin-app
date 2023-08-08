@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 
 import '../../../../components/input/base_text_input.dart';
-import '../../../../core/models/business_signup_model.dart';
 import '../../../country_state_city_picke/csc_picker.dart';
 
 class BusinessOwnerDetailScreen extends StatefulWidget {
@@ -19,8 +18,7 @@ class _BusinessOwnerDetailScreenState extends State<BusinessOwnerDetailScreen>
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
-    int bizAccountPageIndex = context
-        .select((AuthProvider provider) => provider.businessSignUpPageIndex);
+
     // business account
     BusinessSignUpModel businessModel =
         context.select((AuthProvider provider) => provider.businessSignUpModel);
@@ -67,18 +65,22 @@ class _BusinessOwnerDetailScreenState extends State<BusinessOwnerDetailScreen>
                   ),
                   const VSpace(5),
                   Text(
-                    context.loc.whatIsYourName,
+                    formIndex == 1
+                        ? context.loc.whereAreYouFrom
+                        : context.loc.whatIsYourName,
                     style: TextStyles.h7.weight(FontWeight.bold),
                   ),
                   const VSpace(5),
                   Text(
-                    context.loc.asABoss,
+                    formIndex == 1
+                        ? context.loc.weLoveToKnowYouBetter
+                        : context.loc.asABoss,
                     style: TextStyles.body1,
                   ),
                   const VSpace(42),
                   IndexedStack(
                     index: formIndex,
-                    children: [
+                    children: const [
                       NamesSection(),
                       AddressAndLocationSection(),
                     ],
@@ -101,7 +103,7 @@ class _BusinessOwnerDetailScreenState extends State<BusinessOwnerDetailScreen>
                         if (businessModel.lga != '') {
                           context
                               .read<AuthProvider>()
-                              .setBusinessSignUpPageIndex = 1;
+                              .setBusinessSignUpPageIndex = 2;
                         } else {
                           DialogServices.emptyModalWithNoTitle(context,
                               title: 'please select your city',
@@ -140,18 +142,10 @@ class _NamesSectionState extends State<NamesSection> {
   TextEditingController _firstName = TextEditingController();
   TextEditingController _lastName = TextEditingController();
   TextEditingController _middleName = TextEditingController();
+  TextEditingController _personalEmail = TextEditingController();
   @override
   void initState() {
     super.initState();
-    _firstName.addListener(() {
-      setState(() {});
-    });
-    _lastName.addListener(() {
-      setState(() {});
-    });
-    _middleName.addListener(() {
-      setState(() {});
-    });
   }
 
   @override
@@ -183,12 +177,6 @@ class _NamesSectionState extends State<NamesSection> {
             context.read<AuthProvider>().addToBusinessInfo =
                 businessModel.copyWith(firstName: firstName);
           },
-          suffix: _firstName.text.isNotEmpty
-              ? Icon(
-                  Icons.cancel,
-                  color: theme.black,
-                )
-              : const SizedBox.shrink(),
           hintText: context.loc.noEmojis,
         ),
         const VSpace(25),
@@ -206,12 +194,6 @@ class _NamesSectionState extends State<NamesSection> {
             context.read<AuthProvider>().addToBusinessInfo =
                 businessModel.copyWith(middleName: middleName);
           },
-          suffix: _middleName.text.isNotEmpty
-              ? Icon(
-                  Icons.cancel,
-                  color: theme.black,
-                )
-              : const SizedBox.shrink(),
           hintText: context.loc.noEmojis,
         ),
         const VSpace(20),
@@ -237,13 +219,34 @@ class _NamesSectionState extends State<NamesSection> {
             context.read<AuthProvider>().addToBusinessInfo =
                 businessModel.copyWith(lastName: lastName);
           },
-          suffix: _lastName.text.isNotEmpty
-              ? Icon(
-                  Icons.cancel,
-                  color: theme.black,
-                )
-              : const SizedBox.shrink(),
           hintText: context.loc.noEmojis,
+        ),
+        const VSpace(25),
+        Row(
+          children: [
+            Text(
+              context.loc.emailAddress,
+              style: TextStyles.body1.copyWith(fontWeight: FontWeight.w900),
+            ),
+            Text(
+              '*',
+              style: TextStyles.h5.copyWith(
+                  height: 1.5,
+                  color: theme.redButton,
+                  fontWeight: FontWeight.w900),
+            )
+          ],
+        ),
+        VSpace(context.sp(5)),
+        CustomFormTextField(
+          controller: _personalEmail,
+          type: InputType.email,
+          validator: (value) => Validator.email(value),
+          onChange: (email) {
+            context.read<AuthProvider>().addToBusinessInfo =
+                businessModel.copyWith(email: email);
+          },
+          hintText: R.S.emailExample,
         ),
       ],
     );
@@ -261,10 +264,7 @@ class AddressAndLocationSection extends StatefulWidget {
 
 class _AddressAndLocationSectionState extends State<AddressAndLocationSection> {
   @override
-  void initState() {
-    context.read<AuthProvider>().addToBusinessInfo =
-        BusinessSignUpModel().copyWith(nationality: CscCountry.Nigeria.name);
-  }
+  void initState() {}
 
   @override
   Widget build(BuildContext context) {
@@ -280,16 +280,35 @@ class _AddressAndLocationSectionState extends State<AddressAndLocationSection> {
           dropdownDecoration: BoxDecoration(
               border:
                   Border(bottom: BorderSide(color: theme.greyWeak, width: .6))),
-          disableCountry: true,
           defaultCountry: CscCountry.Nigeria,
-          onCountryChanged: (country) {},
+          showStates: true,
+          showLga: true,
+          showCities: false,
+          flagState: CountryFlag.SHOW_IN_DROP_DOWN_ONLY,
+          onCountryChanged: (country) {
+            print('$country lllllll');
+            context.read<AuthProvider>().addToBusinessInfo =
+                businessModel.copyWith(nationality: country);
+          }, //
           onStateChanged: (state) {
-            context.read<AuthProvider>().addToBusinessInfo =
-                businessModel.copyWith(state: state ?? '');
+            if (state == null) {
+              null;
+            } else {
+              // print('$state zzzz');
+              context.read<AuthProvider>().addToBusinessInfo =
+                  businessModel.copyWith(state: state);
+            } //
           },
-          onCityChanged: (city) {
-            context.read<AuthProvider>().addToBusinessInfo =
-                businessModel.copyWith(lga: city ?? '');
+          onLgaChanged: (lga) {
+            if (lga == null) {
+              null;
+            } else {
+              context.read<AuthProvider>().addToBusinessInfo =
+                  businessModel.copyWith(lga: lga);
+            }
+          },
+          onCityChanged: (d) {
+            // print(businessModel.toJson());
           },
         ),
       ],

@@ -20,25 +20,18 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$UserModel {
-  String get name => throw _privateConstructorUsedError;
+  String get firstName => throw _privateConstructorUsedError;
+  String get lastName => throw _privateConstructorUsedError;
+  String get middleName => throw _privateConstructorUsedError;
+  String get nationality => throw _privateConstructorUsedError;
+  String get profileImageUrl => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
-  String get image => throw _privateConstructorUsedError;
-  String get phone_number => throw _privateConstructorUsedError;
-  String get referral_code => throw _privateConstructorUsedError;
-  String get email_verified_at => throw _privateConstructorUsedError;
-  String get created_at => throw _privateConstructorUsedError;
-  String get updated_at => throw _privateConstructorUsedError;
-  String? get accountId => throw _privateConstructorUsedError;
-  String get referral_link => throw _privateConstructorUsedError;
-  String get account_id => throw _privateConstructorUsedError;
-  String get wallet_balance => throw _privateConstructorUsedError;
-  int? get referral_count => throw _privateConstructorUsedError;
-  int get id => throw _privateConstructorUsedError;
-  List<Map<String, dynamic>> get bank_accounts =>
-      throw _privateConstructorUsedError;
-  Map<String, dynamic>? get meta => throw _privateConstructorUsedError;
-  Map<String, dynamic> get wallet => throw _privateConstructorUsedError;
-  Map<String, dynamic> get referral => throw _privateConstructorUsedError;
+  String get role => throw _privateConstructorUsedError;
+  bool get verified => throw _privateConstructorUsedError;
+  String get phoneNumber => throw _privateConstructorUsedError;
+  String get business => throw _privateConstructorUsedError;
+  @JsonKey(name: '_id')
+  String get id => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -52,24 +45,17 @@ abstract class $UserModelCopyWith<$Res> {
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
   $Res call(
-      {String name,
+      {String firstName,
+      String lastName,
+      String middleName,
+      String nationality,
+      String profileImageUrl,
       String email,
-      String image,
-      String phone_number,
-      String referral_code,
-      String email_verified_at,
-      String created_at,
-      String updated_at,
-      String? accountId,
-      String referral_link,
-      String account_id,
-      String wallet_balance,
-      int? referral_count,
-      int id,
-      List<Map<String, dynamic>> bank_accounts,
-      Map<String, dynamic>? meta,
-      Map<String, dynamic> wallet,
-      Map<String, dynamic> referral});
+      String role,
+      bool verified,
+      String phoneNumber,
+      String business,
+      @JsonKey(name: '_id') String id});
 }
 
 /// @nodoc
@@ -85,98 +71,63 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
+    Object? firstName = null,
+    Object? lastName = null,
+    Object? middleName = null,
+    Object? nationality = null,
+    Object? profileImageUrl = null,
     Object? email = null,
-    Object? image = null,
-    Object? phone_number = null,
-    Object? referral_code = null,
-    Object? email_verified_at = null,
-    Object? created_at = null,
-    Object? updated_at = null,
-    Object? accountId = freezed,
-    Object? referral_link = null,
-    Object? account_id = null,
-    Object? wallet_balance = null,
-    Object? referral_count = freezed,
+    Object? role = null,
+    Object? verified = null,
+    Object? phoneNumber = null,
+    Object? business = null,
     Object? id = null,
-    Object? bank_accounts = null,
-    Object? meta = freezed,
-    Object? wallet = null,
-    Object? referral = null,
   }) {
     return _then(_value.copyWith(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      middleName: null == middleName
+          ? _value.middleName
+          : middleName // ignore: cast_nullable_to_non_nullable
+              as String,
+      nationality: null == nationality
+          ? _value.nationality
+          : nationality // ignore: cast_nullable_to_non_nullable
+              as String,
+      profileImageUrl: null == profileImageUrl
+          ? _value.profileImageUrl
+          : profileImageUrl // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
               as String,
-      phone_number: null == phone_number
-          ? _value.phone_number
-          : phone_number // ignore: cast_nullable_to_non_nullable
+      verified: null == verified
+          ? _value.verified
+          : verified // ignore: cast_nullable_to_non_nullable
+              as bool,
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      referral_code: null == referral_code
-          ? _value.referral_code
-          : referral_code // ignore: cast_nullable_to_non_nullable
+      business: null == business
+          ? _value.business
+          : business // ignore: cast_nullable_to_non_nullable
               as String,
-      email_verified_at: null == email_verified_at
-          ? _value.email_verified_at
-          : email_verified_at // ignore: cast_nullable_to_non_nullable
-              as String,
-      created_at: null == created_at
-          ? _value.created_at
-          : created_at // ignore: cast_nullable_to_non_nullable
-              as String,
-      updated_at: null == updated_at
-          ? _value.updated_at
-          : updated_at // ignore: cast_nullable_to_non_nullable
-              as String,
-      accountId: freezed == accountId
-          ? _value.accountId
-          : accountId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      referral_link: null == referral_link
-          ? _value.referral_link
-          : referral_link // ignore: cast_nullable_to_non_nullable
-              as String,
-      account_id: null == account_id
-          ? _value.account_id
-          : account_id // ignore: cast_nullable_to_non_nullable
-              as String,
-      wallet_balance: null == wallet_balance
-          ? _value.wallet_balance
-          : wallet_balance // ignore: cast_nullable_to_non_nullable
-              as String,
-      referral_count: freezed == referral_count
-          ? _value.referral_count
-          : referral_count // ignore: cast_nullable_to_non_nullable
-              as int?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      bank_accounts: null == bank_accounts
-          ? _value.bank_accounts
-          : bank_accounts // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
-      meta: freezed == meta
-          ? _value.meta
-          : meta // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      wallet: null == wallet
-          ? _value.wallet
-          : wallet // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      referral: null == referral
-          ? _value.referral
-          : referral // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as String,
     ) as $Val);
   }
 }
@@ -189,24 +140,17 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {String name,
+      {String firstName,
+      String lastName,
+      String middleName,
+      String nationality,
+      String profileImageUrl,
       String email,
-      String image,
-      String phone_number,
-      String referral_code,
-      String email_verified_at,
-      String created_at,
-      String updated_at,
-      String? accountId,
-      String referral_link,
-      String account_id,
-      String wallet_balance,
-      int? referral_count,
-      int id,
-      List<Map<String, dynamic>> bank_accounts,
-      Map<String, dynamic>? meta,
-      Map<String, dynamic> wallet,
-      Map<String, dynamic> referral});
+      String role,
+      bool verified,
+      String phoneNumber,
+      String business,
+      @JsonKey(name: '_id') String id});
 }
 
 /// @nodoc
@@ -220,98 +164,63 @@ class __$$_UserModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? name = null,
+    Object? firstName = null,
+    Object? lastName = null,
+    Object? middleName = null,
+    Object? nationality = null,
+    Object? profileImageUrl = null,
     Object? email = null,
-    Object? image = null,
-    Object? phone_number = null,
-    Object? referral_code = null,
-    Object? email_verified_at = null,
-    Object? created_at = null,
-    Object? updated_at = null,
-    Object? accountId = freezed,
-    Object? referral_link = null,
-    Object? account_id = null,
-    Object? wallet_balance = null,
-    Object? referral_count = freezed,
+    Object? role = null,
+    Object? verified = null,
+    Object? phoneNumber = null,
+    Object? business = null,
     Object? id = null,
-    Object? bank_accounts = null,
-    Object? meta = freezed,
-    Object? wallet = null,
-    Object? referral = null,
   }) {
     return _then(_$_UserModel(
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
+      firstName: null == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String,
+      lastName: null == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String,
+      middleName: null == middleName
+          ? _value.middleName
+          : middleName // ignore: cast_nullable_to_non_nullable
+              as String,
+      nationality: null == nationality
+          ? _value.nationality
+          : nationality // ignore: cast_nullable_to_non_nullable
+              as String,
+      profileImageUrl: null == profileImageUrl
+          ? _value.profileImageUrl
+          : profileImageUrl // ignore: cast_nullable_to_non_nullable
               as String,
       email: null == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String,
-      image: null == image
-          ? _value.image
-          : image // ignore: cast_nullable_to_non_nullable
+      role: null == role
+          ? _value.role
+          : role // ignore: cast_nullable_to_non_nullable
               as String,
-      phone_number: null == phone_number
-          ? _value.phone_number
-          : phone_number // ignore: cast_nullable_to_non_nullable
+      verified: null == verified
+          ? _value.verified
+          : verified // ignore: cast_nullable_to_non_nullable
+              as bool,
+      phoneNumber: null == phoneNumber
+          ? _value.phoneNumber
+          : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      referral_code: null == referral_code
-          ? _value.referral_code
-          : referral_code // ignore: cast_nullable_to_non_nullable
+      business: null == business
+          ? _value.business
+          : business // ignore: cast_nullable_to_non_nullable
               as String,
-      email_verified_at: null == email_verified_at
-          ? _value.email_verified_at
-          : email_verified_at // ignore: cast_nullable_to_non_nullable
-              as String,
-      created_at: null == created_at
-          ? _value.created_at
-          : created_at // ignore: cast_nullable_to_non_nullable
-              as String,
-      updated_at: null == updated_at
-          ? _value.updated_at
-          : updated_at // ignore: cast_nullable_to_non_nullable
-              as String,
-      accountId: freezed == accountId
-          ? _value.accountId
-          : accountId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      referral_link: null == referral_link
-          ? _value.referral_link
-          : referral_link // ignore: cast_nullable_to_non_nullable
-              as String,
-      account_id: null == account_id
-          ? _value.account_id
-          : account_id // ignore: cast_nullable_to_non_nullable
-              as String,
-      wallet_balance: null == wallet_balance
-          ? _value.wallet_balance
-          : wallet_balance // ignore: cast_nullable_to_non_nullable
-              as String,
-      referral_count: freezed == referral_count
-          ? _value.referral_count
-          : referral_count // ignore: cast_nullable_to_non_nullable
-              as int?,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      bank_accounts: null == bank_accounts
-          ? _value._bank_accounts
-          : bank_accounts // ignore: cast_nullable_to_non_nullable
-              as List<Map<String, dynamic>>,
-      meta: freezed == meta
-          ? _value._meta
-          : meta // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      wallet: null == wallet
-          ? _value._wallet
-          : wallet // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
-      referral: null == referral
-          ? _value._referral
-          : referral // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as String,
     ));
   }
 }
@@ -320,115 +229,58 @@ class __$$_UserModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
   _$_UserModel(
-      {this.name = '',
+      {this.firstName = '',
+      this.lastName = '',
+      this.middleName = '',
+      this.nationality = '',
+      this.profileImageUrl = '',
       this.email = '',
-      this.image = '',
-      this.phone_number = '',
-      this.referral_code = '',
-      this.email_verified_at = '',
-      this.created_at = '',
-      this.updated_at = '',
-      this.accountId = '',
-      this.referral_link = '',
-      this.account_id = '',
-      this.wallet_balance = '',
-      this.referral_count = 0,
-      this.id = 0,
-      final List<Map<String, dynamic>> bank_accounts = const [],
-      final Map<String, dynamic>? meta = const {},
-      final Map<String, dynamic> wallet = const {},
-      final Map<String, dynamic> referral = const {}})
-      : _bank_accounts = bank_accounts,
-        _meta = meta,
-        _wallet = wallet,
-        _referral = referral;
+      this.role = '',
+      this.verified = false,
+      this.phoneNumber = '',
+      this.business = '',
+      @JsonKey(name: '_id') this.id = ''});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>
       _$$_UserModelFromJson(json);
 
   @override
   @JsonKey()
-  final String name;
+  final String firstName;
+  @override
+  @JsonKey()
+  final String lastName;
+  @override
+  @JsonKey()
+  final String middleName;
+  @override
+  @JsonKey()
+  final String nationality;
+  @override
+  @JsonKey()
+  final String profileImageUrl;
   @override
   @JsonKey()
   final String email;
   @override
   @JsonKey()
-  final String image;
+  final String role;
   @override
   @JsonKey()
-  final String phone_number;
+  final bool verified;
   @override
   @JsonKey()
-  final String referral_code;
+  final String phoneNumber;
   @override
   @JsonKey()
-  final String email_verified_at;
+  final String business;
   @override
-  @JsonKey()
-  final String created_at;
-  @override
-  @JsonKey()
-  final String updated_at;
-  @override
-  @JsonKey()
-  final String? accountId;
-  @override
-  @JsonKey()
-  final String referral_link;
-  @override
-  @JsonKey()
-  final String account_id;
-  @override
-  @JsonKey()
-  final String wallet_balance;
-  @override
-  @JsonKey()
-  final int? referral_count;
-  @override
-  @JsonKey()
-  final int id;
-  final List<Map<String, dynamic>> _bank_accounts;
-  @override
-  @JsonKey()
-  List<Map<String, dynamic>> get bank_accounts {
-    if (_bank_accounts is EqualUnmodifiableListView) return _bank_accounts;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_bank_accounts);
-  }
-
-  final Map<String, dynamic>? _meta;
-  @override
-  @JsonKey()
-  Map<String, dynamic>? get meta {
-    final value = _meta;
-    if (value == null) return null;
-    if (_meta is EqualUnmodifiableMapView) return _meta;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(value);
-  }
-
-  final Map<String, dynamic> _wallet;
-  @override
-  @JsonKey()
-  Map<String, dynamic> get wallet {
-    if (_wallet is EqualUnmodifiableMapView) return _wallet;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_wallet);
-  }
-
-  final Map<String, dynamic> _referral;
-  @override
-  @JsonKey()
-  Map<String, dynamic> get referral {
-    if (_referral is EqualUnmodifiableMapView) return _referral;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_referral);
-  }
+  @JsonKey(name: '_id')
+  final String id;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'UserModel(name: $name, email: $email, image: $image, phone_number: $phone_number, referral_code: $referral_code, email_verified_at: $email_verified_at, created_at: $created_at, updated_at: $updated_at, accountId: $accountId, referral_link: $referral_link, account_id: $account_id, wallet_balance: $wallet_balance, referral_count: $referral_count, id: $id, bank_accounts: $bank_accounts, meta: $meta, wallet: $wallet, referral: $referral)';
+    return 'UserModel(firstName: $firstName, lastName: $lastName, middleName: $middleName, nationality: $nationality, profileImageUrl: $profileImageUrl, email: $email, role: $role, verified: $verified, phoneNumber: $phoneNumber, business: $business, id: $id)';
   }
 
   @override
@@ -436,24 +288,17 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'UserModel'))
-      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('firstName', firstName))
+      ..add(DiagnosticsProperty('lastName', lastName))
+      ..add(DiagnosticsProperty('middleName', middleName))
+      ..add(DiagnosticsProperty('nationality', nationality))
+      ..add(DiagnosticsProperty('profileImageUrl', profileImageUrl))
       ..add(DiagnosticsProperty('email', email))
-      ..add(DiagnosticsProperty('image', image))
-      ..add(DiagnosticsProperty('phone_number', phone_number))
-      ..add(DiagnosticsProperty('referral_code', referral_code))
-      ..add(DiagnosticsProperty('email_verified_at', email_verified_at))
-      ..add(DiagnosticsProperty('created_at', created_at))
-      ..add(DiagnosticsProperty('updated_at', updated_at))
-      ..add(DiagnosticsProperty('accountId', accountId))
-      ..add(DiagnosticsProperty('referral_link', referral_link))
-      ..add(DiagnosticsProperty('account_id', account_id))
-      ..add(DiagnosticsProperty('wallet_balance', wallet_balance))
-      ..add(DiagnosticsProperty('referral_count', referral_count))
-      ..add(DiagnosticsProperty('id', id))
-      ..add(DiagnosticsProperty('bank_accounts', bank_accounts))
-      ..add(DiagnosticsProperty('meta', meta))
-      ..add(DiagnosticsProperty('wallet', wallet))
-      ..add(DiagnosticsProperty('referral', referral));
+      ..add(DiagnosticsProperty('role', role))
+      ..add(DiagnosticsProperty('verified', verified))
+      ..add(DiagnosticsProperty('phoneNumber', phoneNumber))
+      ..add(DiagnosticsProperty('business', business))
+      ..add(DiagnosticsProperty('id', id));
   }
 
   @override
@@ -461,59 +306,42 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserModel &&
-            (identical(other.name, name) || other.name == name) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.middleName, middleName) ||
+                other.middleName == middleName) &&
+            (identical(other.nationality, nationality) ||
+                other.nationality == nationality) &&
+            (identical(other.profileImageUrl, profileImageUrl) ||
+                other.profileImageUrl == profileImageUrl) &&
             (identical(other.email, email) || other.email == email) &&
-            (identical(other.image, image) || other.image == image) &&
-            (identical(other.phone_number, phone_number) ||
-                other.phone_number == phone_number) &&
-            (identical(other.referral_code, referral_code) ||
-                other.referral_code == referral_code) &&
-            (identical(other.email_verified_at, email_verified_at) ||
-                other.email_verified_at == email_verified_at) &&
-            (identical(other.created_at, created_at) ||
-                other.created_at == created_at) &&
-            (identical(other.updated_at, updated_at) ||
-                other.updated_at == updated_at) &&
-            (identical(other.accountId, accountId) ||
-                other.accountId == accountId) &&
-            (identical(other.referral_link, referral_link) ||
-                other.referral_link == referral_link) &&
-            (identical(other.account_id, account_id) ||
-                other.account_id == account_id) &&
-            (identical(other.wallet_balance, wallet_balance) ||
-                other.wallet_balance == wallet_balance) &&
-            (identical(other.referral_count, referral_count) ||
-                other.referral_count == referral_count) &&
-            (identical(other.id, id) || other.id == id) &&
-            const DeepCollectionEquality()
-                .equals(other._bank_accounts, _bank_accounts) &&
-            const DeepCollectionEquality().equals(other._meta, _meta) &&
-            const DeepCollectionEquality().equals(other._wallet, _wallet) &&
-            const DeepCollectionEquality().equals(other._referral, _referral));
+            (identical(other.role, role) || other.role == role) &&
+            (identical(other.verified, verified) ||
+                other.verified == verified) &&
+            (identical(other.phoneNumber, phoneNumber) ||
+                other.phoneNumber == phoneNumber) &&
+            (identical(other.business, business) ||
+                other.business == business) &&
+            (identical(other.id, id) || other.id == id));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      name,
+      firstName,
+      lastName,
+      middleName,
+      nationality,
+      profileImageUrl,
       email,
-      image,
-      phone_number,
-      referral_code,
-      email_verified_at,
-      created_at,
-      updated_at,
-      accountId,
-      referral_link,
-      account_id,
-      wallet_balance,
-      referral_count,
-      id,
-      const DeepCollectionEquality().hash(_bank_accounts),
-      const DeepCollectionEquality().hash(_meta),
-      const DeepCollectionEquality().hash(_wallet),
-      const DeepCollectionEquality().hash(_referral));
+      role,
+      verified,
+      phoneNumber,
+      business,
+      id);
 
   @JsonKey(ignore: true)
   @override
@@ -531,64 +359,44 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
 
 abstract class _UserModel implements UserModel {
   factory _UserModel(
-      {final String name,
+      {final String firstName,
+      final String lastName,
+      final String middleName,
+      final String nationality,
+      final String profileImageUrl,
       final String email,
-      final String image,
-      final String phone_number,
-      final String referral_code,
-      final String email_verified_at,
-      final String created_at,
-      final String updated_at,
-      final String? accountId,
-      final String referral_link,
-      final String account_id,
-      final String wallet_balance,
-      final int? referral_count,
-      final int id,
-      final List<Map<String, dynamic>> bank_accounts,
-      final Map<String, dynamic>? meta,
-      final Map<String, dynamic> wallet,
-      final Map<String, dynamic> referral}) = _$_UserModel;
+      final String role,
+      final bool verified,
+      final String phoneNumber,
+      final String business,
+      @JsonKey(name: '_id') final String id}) = _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
       _$_UserModel.fromJson;
 
   @override
-  String get name;
+  String get firstName;
+  @override
+  String get lastName;
+  @override
+  String get middleName;
+  @override
+  String get nationality;
+  @override
+  String get profileImageUrl;
   @override
   String get email;
   @override
-  String get image;
+  String get role;
   @override
-  String get phone_number;
+  bool get verified;
   @override
-  String get referral_code;
+  String get phoneNumber;
   @override
-  String get email_verified_at;
+  String get business;
   @override
-  String get created_at;
-  @override
-  String get updated_at;
-  @override
-  String? get accountId;
-  @override
-  String get referral_link;
-  @override
-  String get account_id;
-  @override
-  String get wallet_balance;
-  @override
-  int? get referral_count;
-  @override
-  int get id;
-  @override
-  List<Map<String, dynamic>> get bank_accounts;
-  @override
-  Map<String, dynamic>? get meta;
-  @override
-  Map<String, dynamic> get wallet;
-  @override
-  Map<String, dynamic> get referral;
+  @JsonKey(name: '_id')
+  String get id;
   @override
   @JsonKey(ignore: true)
   _$$_UserModelCopyWith<_$_UserModel> get copyWith =>

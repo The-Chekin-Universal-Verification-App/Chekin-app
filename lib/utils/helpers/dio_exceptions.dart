@@ -44,9 +44,9 @@ class DioExceptions implements Exception {
   String _handleError(int? statusCode, dynamic error) {
     switch (statusCode) {
       case 400:
-        return 'Bad request ${error['error']}';
+        return 'Ooh! sorry ${error['message']}';
       case 401:
-        return 'Unauthorized ${error['error']}';
+        return 'Unauthorized ${error['message']}';
       case 403:
         return 'Forbidden';
       case 404:
@@ -74,13 +74,16 @@ class DioExceptions implements Exception {
 
   showNotification() {
     BuildContext? context = R.N.nav?.context;
-    DialogServices.showNetworkExceptionModal(context!,
-        title: "Error",
-        body: Text(
-          message,
-          textAlign: TextAlign.center,
-          style: TextStyles.h7,
-        ));
+    // DialogServices.showNetworkExceptionModal(context!,
+    //     title: "Error",
+    //     body: Text(
+    //       message,
+    //       textAlign: TextAlign.center,
+    //       style: TextStyles.h7,
+    //     ));
+
+    DialogServices.messageModalFromTop(context!,
+        message: message, notificationType: NotificationType.error);
   }
 }
 
@@ -104,12 +107,15 @@ class NetworkExceptions implements Exception {
 
   showNotification() {
     BuildContext? context = R.N.nav?.context;
-    DialogServices.showNetworkExceptionModal(context!,
-        title: "Error",
-        body: Text(
-          message,
-          textAlign: TextAlign.center,
-          style: TextStyles.h7,
-        ));
+    // DialogServices.showNetworkExceptionModal(context!,
+    //     title: "Error",
+    //     body: Text(
+    //       message,
+    //       textAlign: TextAlign.center,
+    //       style: TextStyles.h7,
+    //     ));
+
+    DialogServices.messageModalFromTop(context!,
+        message: message, notificationType: NotificationType.error);
   }
 }

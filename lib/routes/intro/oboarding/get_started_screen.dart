@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 
-import '../../../core/providers/auth_provider.dart';
-import '../../auth/user_biz_account_registration/account_creation_main_screen.dart';
-import '../../auth/user_biz_account_registration/biz_account/biz_account_creation_main_screen.dart';
+import '../../auth/normal_user_biz_account_registration/account_creation_main_screen.dart';
+import '../../auth/normal_user_biz_account_registration/biz_account/biz_account_creation_main_screen.dart';
 
 class GetStartedScreen extends StatelessWidget {
   const GetStartedScreen({Key? key}) : super(key: key);

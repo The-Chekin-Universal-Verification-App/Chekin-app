@@ -2,6 +2,8 @@ import 'package:chekinapp/routes/document_upload/upload_document_main_screen.dar
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 
+import '../../login_screen.dart';
+
 class YouAreAlmostDoneScreen extends StatelessWidget {
   const YouAreAlmostDoneScreen({Key? key}) : super(key: key);
 
@@ -72,7 +74,9 @@ class YouAreAlmostDoneScreen extends StatelessWidget {
               padding: const EdgeInsets.only(right: 27.0, left: 27, bottom: 45),
               child: PrimaryButton(
                 onPressed: () {
-                  context.push(const UploadDocumentMainScreen());
+                  UserCommand(context).getUser();
+                  context.push(const LogInScreen());
+                  // context.push(const UploadDocumentMainScreen());
                 },
                 label: context.loc.begin,
                 radius: 20,

@@ -348,9 +348,15 @@
     "description": "socials "
   },
 
-       "enterSocialMedia": "Enter your social medial handle",
+       "enterSocialMedia": "Enter your social medial handle (Optional)",
   "@enterSocialMedia": {
     "description": "Enter your social medial handle"
+  },
+
+
+       "enterYourPassword": "Enter password",
+  "@enterYourPassword": {
+    "description": "Enter your password"
   },
 
 
@@ -1057,10 +1063,66 @@
   "@tapToSelect": {
   "description": "Tap to select"
   },
+
+
     "typeToSearch": "Start typing to search",
   "@typeToSearch": {
   "description": "Start typing to search"
-  },  "city": "city",
+  },
+
+    "firstPhoneNumber": "First phone number",
+  "@firstPhoneNumber": {
+  "description": "First phone number"
+  },
+
+    "secondPhoneNumber": "Second phone number",
+  "@secondPhoneNumber": {
+  "description": "Second phone number"
+  },
+
+    "verifyMail": "Verify mail",
+  "@verifyMail": {
+  "description": "verify user mail"
+  },
+
+
+    "verify": "Verify",
+  "@verify": {
+  "description": "verify "
+  },
+
+
+    "notGetMail": "Did not get mail?",
+  "@notGetMail": {
+  "description": "no mail received "
+  },
+
+
+     "reSend": "Resend",
+  "@resend": {
+  "description": "send again"
+  },
+
+
+     "countryOfBusiness": "Country of Business",
+  "@countryOfBusiness": {
+  "description": "select country of business"
+  },
+
+
+     "stateOfBusiness": "State of Business",
+  "@stateOfBusiness": {
+  "description": "select State of business"
+  },
+
+
+    "followEmailLink": "Enter the OTP code that has been sent to your email address.",
+  "@followEmailLink": {
+  "description": "get otp from mail"
+  },
+
+
+    "city": "city",
   "@city": {
   "description": "literal city "
   },
@@ -1120,6 +1182,28 @@
    "popular": "Popular",
   "@popular": {
   "description": "popular"
+  },
+
+
+  "pleaseEnterOTP": "Please enter the OTP sent to your email",
+  "@pleaseEnterOTP": {
+  "description": "Enter OTP"
+  },
+
+  "resetPassword": "Reset your password",
+  "@resetPassword": {
+  "description": "reset your password"
+  },
+
+  "pleaseEnterPassword": "Please enter your new password",
+  "@pleaseEnterPassword": {
+  "description": "Enter Password"
+  },
+
+
+  "goBack": "<< Go back",
+  "@goBack": {
+  "description": "To go back"
   },
 
 

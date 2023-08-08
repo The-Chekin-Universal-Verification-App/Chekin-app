@@ -702,7 +702,7 @@ class MoneyInputFormatter extends TextInputFormatter {
 }
 
 class DateFormatter {
-  Future<String> customDatePickerFormat(
+  static Future<String> customDatePickerFormat(
       {String formatStyle = 'dd-mm-yyyy',
       required BuildContext context}) async {
     final DateFormat _dayMonthYearFormat = DateFormat('dd-MM-yyyy');

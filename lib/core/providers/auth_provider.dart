@@ -1,7 +1,6 @@
 import 'package:chekinapp/core/core.dart';
 
-import '../../utils/helpers/enums.dart';
-import '../models/business_signup_model.dart';
+import '../../export.dart';
 import '../models/user_signup_model.dart';
 
 class AuthProvider extends BaseProvider {
@@ -19,8 +18,12 @@ class AuthProvider extends BaseProvider {
   String get token => _token;
 
   set setUserToken(String val) {
+    // debugPrint(val);
     _token = val;
     notifyListeners();
+
+    /// set the user token to be used later in the future
+    SharedPrefs.setString('token', val);
   }
 
   //user object
@@ -45,7 +48,7 @@ class AuthProvider extends BaseProvider {
   set setSignUpPageIndex(int value) {
     _currentNormalUserSignUpIndex = value;
     notifyListeners();
-  }
+  } //
 
   ///for business account
   int _currentBusinessSignUpIndex = 0;
@@ -78,12 +81,26 @@ class AuthProvider extends BaseProvider {
   BusinessSignUpModel get businessSignUpModel => _businessSignUpModel;
 
   set addToBusinessInfo(BusinessSignUpModel model) {
-    print('business Now working ${model.toJson()}');
-
     _businessSignUpModel = model;
     notifyListeners();
+    print('business Now working ${_businessSignUpModel.toJson()}');
 
     /// to make this works we would get what is in [businessSignUpModel] then do a .copyWith method before calling add to user Info method from the form in the widget try
+    ///to maintain consistency
+  }
+
+  ///section for user log in
+
+  SignInModel _userSignInModel = SignInModel.init();
+
+  SignInModel get userSignInModel => _userSignInModel;
+
+  set addToUserSignInInfo(SignInModel model) {
+    // print('Now working ${model.toJson()}');
+    _userSignInModel = model;
+    notifyListeners();
+
+    /// to make this works we would get what is in [userSignInModel]then do a .copyWith method before calling add to user Info method from the form in the widget try
     ///to maintain consistency
   }
 }

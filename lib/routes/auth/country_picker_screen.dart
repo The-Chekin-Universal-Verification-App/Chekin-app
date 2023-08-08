@@ -1,6 +1,5 @@
 import 'package:chekinapp/export.dart';
 import 'package:country_picker/country_picker.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/input/base_text_input.dart';
@@ -17,14 +16,14 @@ class CountryPickerScreen extends StatefulWidget {
 
 class _CountryPickerScreenState extends State<CountryPickerScreen>
     with FormMixin {
-  TextEditingController _country = TextEditingController();
+  // TextEditingController _country = TextEditingController();
   @override
   void initState() {
     super.initState();
 
-    _country.addListener(() {
-      setState(() {});
-    });
+    // _country.addListener(() {
+    //   setState(() {});
+    // });
   }
 
   int pageIndex = 0;
@@ -75,92 +74,107 @@ class _CountryPickerScreenState extends State<CountryPickerScreen>
                     style: TextStyles.body1,
                   ),
                   const VSpace(42),
-                  Row(
-                    children: [
-                      Text(
-                        context.loc.nationality,
-                        style: TextStyles.body1
-                            .copyWith(fontWeight: FontWeight.w900),
-                      ),
-                      Text(
-                        '*',
-                        style: TextStyles.h5.copyWith(
-                            height: 1.5,
-                            color: theme.redButton,
-                            fontWeight: FontWeight.w900),
-                      )
-                    ],
-                  ),
+                  // Row(
+                  //   children: [
+                  //     Text(
+                  //       context.loc.nationality,
+                  //       style: TextStyles.body1
+                  //           .copyWith(fontWeight: FontWeight.w900),
+                  //     ),
+                  //     Text(
+                  //       '*',
+                  //       style: TextStyles.h5.copyWith(
+                  //           height: 1.5,
+                  //           color: theme.redButton,
+                  //           fontWeight: FontWeight.w900),
+                  //     )
+                  //   ],
+                  // ),
                   CSCPicker(
                     layout: Layout.vertical,
                     showCities: false,
+                    showLga: false,
+                    flagState: CountryFlag.SHOW_IN_DROP_DOWN_ONLY,
                     onCityChanged: (c) {},
-                    onCountryChanged: (c) {},
+                    onCountryChanged: (country) {
+                      ///write data to business model if ACCOUNT TYPE is biz
+                      if (accountType == UserType.biz) {
+                        context.read<AuthProvider>().addToBusinessInfo =
+                            businessModel.copyWith(nationality: country);
+                      } else {
+                        ///write data to normal user model if ACCOUNT TYPE is normal user
+
+                        context.read<AuthProvider>().addToUserInfo =
+                            model.copyWith(nationality: country);
+                      }
+                    },
                     onStateChanged: (s) {},
                     onLgaChanged: (l) {
-                      print(l);
+                      // print(l);
                     },
                   ),
-                  CustomFormTextField(
-                    controller: _country,
-                    enabled: false,
-                    hintText: context.loc.tapToSelect,
-                    suffix: UnconstrainedBox(
-                      child: CustomContainer(
-                        height: 30,
-                        width: 50,
-                        borderRadius: Corners.s5Border,
-                        color: Colors.transparent,
-                        // border: Border.all(color: theme.greyWeak),
-                        child: Icon(
-                          Icons.keyboard_arrow_down_rounded,
-                          size: 25,
-                        ),
-                      ),
-                    ),
-                  ).clickable(() {
-                    showCountryPicker(
-                        context: context,
-                        countryListTheme: CountryListThemeData(
-                          flagSize: 25,
-                          backgroundColor: Colors.white,
-                          textStyle: const TextStyle(
-                              fontSize: 16, color: Colors.blueGrey),
-                          bottomSheetHeight:
-                              500, // Optional. Country list modal height
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(10.0),
-                            topRight: Radius.circular(10.0),
-                          ),
-                          //Optional. Styles the search field.
-                          inputDecoration: InputDecoration(
-                            labelText: context.loc.search,
-                            hintText: context.loc.typeToSearch,
-                            prefixIcon: const Icon(Icons.search),
-                            border: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                color: const Color(0xFF8C98A8).withOpacity(0.2),
-                              ),
-                            ),
-                          ),
-                        ),
-                        // onSelect: (Country value) {},
-                        onSelect: (Country country) {
-                          _country.text = country.name;
-// print(country.)
-                          ///write data to business model if ACCOUNT TYPE is biz
-                          if (accountType == UserType.biz) {
-                            context.read<AuthProvider>().addToBusinessInfo =
-                                businessModel.copyWith(
-                                    nationality: country.name);
-                          } else {
-                            ///write data to normal user model if ACCOUNT TYPE is normal user
 
-                            context.read<AuthProvider>().addToUserInfo =
-                                model.copyWith(nationality: country.name);
-                          }
-                        });
-                  }),
+                  ///
+                  // CustomFormTextField(
+                  //   controller: _country,
+                  //   enabled: false,
+                  //   hintText: context.loc.tapToSelect,
+                  //   suffix: UnconstrainedBox(
+                  //     child: CustomContainer(
+                  //       height: 30,
+                  //       width: 50,
+                  //       borderRadius: Corners.s5Border,
+                  //       color: Colors.transparent,
+                  //       // border: Border.all(color: theme.greyWeak),
+                  //       child: Icon(
+                  //         Icons.keyboard_arrow_down_rounded,
+                  //         size: 25,
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ).clickable(() {
+                  //   showCountryPicker(
+                  //       context: context,
+                  //       countryListTheme: CountryListThemeData(
+                  //         flagSize: 25,
+                  //         backgroundColor: Colors.white,
+                  //         textStyle: const TextStyle(
+                  //             fontSize: 16, color: Colors.blueGrey),
+                  //         bottomSheetHeight:
+                  //             500, // Optional. Country list modal height
+                  //         borderRadius: const BorderRadius.only(
+                  //           topLeft: Radius.circular(10.0),
+                  //           topRight: Radius.circular(10.0),
+                  //         ),
+                  //         //Optional. Styles the search field.
+                  //         inputDecoration: InputDecoration(
+                  //           labelText: context.loc.search,
+                  //           hintText: context.loc.typeToSearch,
+                  //           prefixIcon: const Icon(Icons.search),
+                  //           border: OutlineInputBorder(
+                  //             borderSide: BorderSide(
+                  //               color: const Color(0xFF8C98A8).withOpacity(0.2),
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //       // onSelect: (Country value) {},
+                  //       onSelect: (Country country) {
+                  //         _country.text = country.name;
+                  //
+                  //         ///write data to business model if ACCOUNT TYPE is biz
+                  //         if (accountType == UserType.biz) {
+                  //           context.read<AuthProvider>().addToBusinessInfo =
+                  //               businessModel.copyWith(
+                  //                   nationality: country.name);
+                  //         } else {
+                  //           ///write data to normal user model if ACCOUNT TYPE is normal user
+                  //
+                  //           context.read<AuthProvider>().addToUserInfo =
+                  //               model.copyWith(nationality: country.name);
+                  //         }
+                  //       });
+                  // }),
                   const VSpace(50),
                 ],
               ),

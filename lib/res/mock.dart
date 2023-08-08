@@ -93,9 +93,19 @@ class Mock {
   ///
   /// API endpoints starts here
   ///
-  static const String api = '/api/v1/';
+  static const String api = '/api/v1';
 
   final String signUp = '$api/auth/signup/user';
+  final String signUpBiz = '$api/auth/signup/business';
+  final String logIn = '$api/auth/login';
+  final String getUser = '$api/user';
+  final String verifyMail = '$api/auth/verify-user';
+  final String resendOTP = '$api/auth/request-verification';
+  final String forgotPassword = '$api/auth/forgot-password';
+  final String resetPassword = '$api/auth/reset-password';
+  final String changePassword = '$api/user/change-password';
+  String getBusiness(String searchPath) => '$api/business/$searchPath';
+  String getLex = '$api/business/lux-code';
 }
 
 ///

@@ -1,12 +1,10 @@
 import 'package:chekinapp/export.dart';
 
-class SignUpService extends BaseService {
-  Future<Response?> normalUserSignUp(Map<String, dynamic> payload) async {
-    payload.removeWhere((key, value) => value == null || value == '');
-
+class UserService extends BaseService {
+  Future<Response?> getUser(String token) async {
     Response? response;
     try {
-      response = await post(R.M.signUp, payload);
+      response = await get(R.M.getUser, token: token);
       return response;
     } on DioError catch (err) {
       DioExceptions.fromDioError(err).showNotification();

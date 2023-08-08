@@ -1,3 +1,4 @@
+import 'package:chekinapp/routes/auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/core/providers/app_provider.dart';
 import 'package:chekinapp/export.dart';
@@ -81,6 +82,7 @@ class OnBoardingSmallScreen extends StatelessWidget {
                     PrimaryButton(
                       onPressed: () {
                         SharedPrefs.setBool('isFirstTime', false);
+                        context.push(const LogInScreen());
                       },
                       label: context.loc.login,
                       radius: 20,

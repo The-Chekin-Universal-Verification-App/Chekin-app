@@ -5,38 +5,29 @@ part 'user_model.g.dart';
 
 @freezed
 class UserModel with _$UserModel {
-  factory UserModel({
-    @Default('') String name,
-    @Default('') String email,
-    @Default('') String image,
-    @Default('') String phone_number,
-    @Default('') String referral_code,
-    @Default('') String email_verified_at,
-    @Default('') String created_at,
-    @Default('') String updated_at,
-    @Default('') String? accountId,
-    @Default('') String referral_link,
-    @Default('') String account_id,
-    @Default('') String wallet_balance,
-    @Default(0) int? referral_count,
-    @Default(0) int id,
-    @Default([]) List<Map<String, dynamic>> bank_accounts,
-    @Default({}) Map<String, dynamic>? meta,
-    @Default({}) Map<String, dynamic> wallet,
-    @Default({}) Map<String, dynamic> referral,
-  }) = _UserModel;
+  factory UserModel(
+      {@Default('') String firstName,
+      @Default('') String lastName,
+      @Default('') String middleName,
+      @Default('') String nationality,
+      @Default('') String profileImageUrl,
+      @Default('') String email,
+      @Default('') String role,
+      @Default(false) bool verified,
+      @Default('') String phoneNumber,
+      @Default('') String business,
+      @Default('') @JsonKey(name: '_id') String id}) = _UserModel;
 
   factory UserModel.fromJson(Map<String, dynamic> json) =>
       _$UserModelFromJson(json);
 
   static UserModel init() {
     return UserModel(
-      name: '',
+      firstName: '',
       email: '',
-      phone_number: '',
-      updated_at: '',
-      referral_link: '',
-      bank_accounts: [],
+      lastName: '',
+      profileImageUrl: '',
+      phoneNumber: '',
     );
   }
 }

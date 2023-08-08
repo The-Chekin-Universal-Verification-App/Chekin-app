@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 
 import '../../res/language_and_emojis.dart';
+import 'package:feather_icons/feather_icons.dart';
 
 class DialogServices {
   static showLanguageCountry(BuildContext context) async {
@@ -289,6 +290,7 @@ class DialogServices {
       Color? bgColor,
       bool fromTop = true,
       bool autoPop = true,
+      NotificationType notificationType = NotificationType.success,
       Duration? closeDuration,
       double screenFraction = 0.08}) {
     bool dialogIsOpen = true;
@@ -305,7 +307,7 @@ class DialogServices {
     return showGeneralDialog(
       barrierLabel: "Label",
       barrierDismissible: true,
-      barrierColor: Colors.transparent.withOpacity(0.3),
+      barrierColor: Colors.transparent.withOpacity(0.1),
       transitionDuration: const Duration(milliseconds: 990),
       context: context,
       pageBuilder: (context, anim1, anim2) {
@@ -321,29 +323,38 @@ class DialogServices {
                 right: Insets.m,
                 bottom: 50),
             decoration: BoxDecoration(
-              color: bgColor ?? Colors.green,
+              color: bgColor ??
+                  (notificationType == NotificationType.success
+                      ? Colors.green.shade500
+                      : Colors.red.shade500),
               borderRadius: BorderRadius.circular(8),
             ),
             child: Material(
               color: Colors.transparent,
               child: Padding(
                 padding:
-                    EdgeInsets.symmetric(horizontal: Insets.l, vertical: 15.0),
+                    EdgeInsets.symmetric(horizontal: Insets.l, vertical: 20.0),
                 child: Stack(
+                  clipBehavior: Clip.none,
                   alignment: Alignment.centerLeft,
                   children: [
-                    Transform.rotate(
-                      angle: 0.8,
-                      child: icon ??
-                          Icon(
-                            Icons.tag_faces,
-                            color: Colors.grey.shade300.withOpacity(0.4),
-                            size: 60,
-                          ),
+                    Positioned(
+                      left: -25,
+                      child: Transform.rotate(
+                        angle: 0.8,
+                        child: icon ??
+                            Icon(
+                              notificationType == NotificationType.success
+                                  ? FeatherIcons.smile
+                                  : FeatherIcons.frown,
+                              color: Colors.grey.shade300.withOpacity(0.4),
+                              size: 40,
+                            ),
+                      ),
                     ),
                     Text(
                       message,
-                      style: TextStyles.body1.copyWith(color: Colors.white),
+                      style: TextStyles.h7.copyWith(color: Colors.white),
                     )
                   ],
                 ),
@@ -368,3 +379,5 @@ class DialogServices {
     });
   }
 }
+
+enum NotificationType { success, error }

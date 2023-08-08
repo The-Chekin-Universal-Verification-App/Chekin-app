@@ -4,32 +4,30 @@ import 'package:chekinapp/export.dart';
 import '../../../components/input/base_text_input.dart';
 import '../../../core/models/user_signup_model.dart';
 
-class UserDetailView extends StatefulWidget {
-  const UserDetailView({Key? key}) : super(key: key);
+class EmailEntryScreen extends StatefulWidget {
+  const EmailEntryScreen({Key? key}) : super(key: key);
 
   @override
-  State<UserDetailView> createState() => _UserDetailViewState();
+  State<EmailEntryScreen> createState() => _EmailEntryScreenState();
 }
 
-class _UserDetailViewState extends State<UserDetailView> with FormMixin {
+class _EmailEntryScreenState extends State<EmailEntryScreen> with FormMixin {
   TextEditingController _firstName = TextEditingController();
-  TextEditingController _lastName = TextEditingController();
   @override
   void initState() {
     super.initState();
     _firstName.addListener(() {
       setState(() {});
     });
-    _lastName.addListener(() {
-      setState(() {});
-    });
   }
 
+  int pageIndex = 0;
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
     UserSignUpModel model =
         context.select((AuthProvider provider) => provider.userSignUpModel);
+
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -52,19 +50,19 @@ class _UserDetailViewState extends State<UserDetailView> with FormMixin {
                 children: [
                   const VSpace(23),
                   Text(
-                    context.loc.whatIsYourName,
+                    context.loc.emailLastly,
                     style: TextStyles.h5,
                   ),
                   const VSpace(5),
                   Text(
-                    context.loc.tellUsYourName,
+                    context.loc.wantToReachOut,
                     style: TextStyles.body1,
                   ),
                   const VSpace(42),
                   Row(
                     children: [
                       Text(
-                        context.loc.firstName,
+                        context.loc.emailAddress,
                         style: TextStyles.body1
                             .copyWith(fontWeight: FontWeight.w900),
                       ),
@@ -77,12 +75,11 @@ class _UserDetailViewState extends State<UserDetailView> with FormMixin {
                       )
                     ],
                   ),
-                  // VSpace(context.sp(5)),
                   CustomFormTextField(
                     controller: _firstName,
-                    onChange: (firstName) {
+                    onChange: (email) {
                       context.read<AuthProvider>().addToUserInfo =
-                          model.copyWith(firstName: firstName);
+                          model.copyWith(email: email);
                     },
                     suffix: _firstName.text.isNotEmpty
                         ? Icon(
@@ -90,41 +87,8 @@ class _UserDetailViewState extends State<UserDetailView> with FormMixin {
                             color: theme.black,
                           )
                         : const SizedBox.shrink(),
-                    hintText: context.loc.noEmojis,
+                    hintText: R.S.emailExample,
                   ),
-                  const VSpace(25),
-                  Row(
-                    children: [
-                      Text(
-                        context.loc.lastName,
-                        style: TextStyles.body1
-                            .copyWith(fontWeight: FontWeight.w900),
-                      ),
-                      Text(
-                        '*',
-                        style: TextStyles.h5.copyWith(
-                            height: 1.5,
-                            color: theme.redButton,
-                            fontWeight: FontWeight.w900),
-                      )
-                    ],
-                  ),
-                  VSpace(context.sp(5)),
-                  CustomFormTextField(
-                    controller: _lastName,
-                    onChange: (lastName) {
-                      context.read<AuthProvider>().addToUserInfo =
-                          model.copyWith(lastName: lastName);
-                    },
-                    suffix: _lastName.text.isNotEmpty
-                        ? Icon(
-                            Icons.cancel,
-                            color: theme.black,
-                          )
-                        : const SizedBox.shrink(),
-                    hintText: context.loc.noEmojis,
-                  ),
-                  const VSpace(50),
                 ],
               ),
               Container(
@@ -134,12 +98,13 @@ class _UserDetailViewState extends State<UserDetailView> with FormMixin {
                 child: PrimaryButton(
                   onPressed: () {
                     validate(() {
-                      context.read<AuthProvider>().setSignUpPageIndex = 2;
+                      load(() => AuthCommand(context).normalUserSignUp(model));
                     });
                   },
-                  label: context.loc.conti,
+                  label: context.loc.submit,
                   radius: 20,
                   fullWidth: true,
+                  loading: isLoading,
                   color: isFormValid ? theme.primary : Colors.transparent,
                   textColor: isFormValid ? Colors.white : theme.black,
                   borderColor: theme.primary.withOpacity(0.48),

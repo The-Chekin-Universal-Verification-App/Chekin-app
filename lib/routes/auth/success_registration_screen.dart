@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:chekinapp/core/providers/auth_provider.dart';
 import 'package:chekinapp/export.dart';
+
+import '../main/mainscreen.dart';
 
 String getAccountType(BuildContext context, UserType userType) {
   switch (userType) {
@@ -119,9 +120,7 @@ class SuccessRegistrationScreen extends StatelessWidget {
                 ),
                 child: PrimaryButton(
                   onPressed: () {
-                    // SharedPrefs.setBool('isFirstTime', false);
-
-                    // context.push(const AccountCreationScreen());
+                    context.push(const MainScreen());
                   },
                   label: context.loc.getIn,
                   radius: 20,

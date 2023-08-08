@@ -3,7 +3,7 @@ import 'package:chekinapp/export.dart';
 import 'package:chekinapp/routes/intro/oboarding/get_started_screen.dart';
 import 'package:chekinapp/routes/intro/select_usertype/set_a_user_type.dart';
 
-import '../../auth/user_biz_account_registration/account_creation_main_screen.dart';
+import '../../auth/normal_user_biz_account_registration/account_creation_main_screen.dart';
 
 class SetUserTypeLargeScreen extends StatelessWidget {
   const SetUserTypeLargeScreen({Key? key}) : super(key: key);

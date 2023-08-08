@@ -1,6 +1,5 @@
 import 'package:chekinapp/export.dart';
 import 'package:chekinapp/routes/auth/auth.dart';
-import 'package:chekinapp/routes/intro/oboarding/onboarding_small_screen_device.dart';
 import 'package:flutter/material.dart';
 
 import '../../routes/intro/oboarding/onboarding_main_screen.dart';
@@ -47,13 +46,4 @@ class BootStrapCmd extends BaseCommand {
       }
     });
   }
-
-  // bootStrap() {
-  //   BuildContext context = rootNav!.context;
-  //
-  //   Future.delayed(2.seconds, () async {
-  //     Navigator.pushReplacement(
-  //         context, RouteHelper.slide(() => const OnBoardingScreen()));
-  //   });
-  // }
 }

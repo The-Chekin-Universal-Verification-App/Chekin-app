@@ -536,6 +536,7 @@ class CSCPicker extends StatefulWidget {
     this.layout = Layout.horizontal,
     this.showStates = true,
     this.showCities = true,
+    this.showCountry = true,
     this.showLga = true,
     this.defaultCountry,
     this.currentCountry,
@@ -552,6 +553,10 @@ class CSCPicker extends StatefulWidget {
     this.lgaDropdownLabel = "LGA",
     this.countryFilter,
     this.currentLga,
+    this.lgaFieldTitle,
+    this.cityFieldTitle,
+    this.stateFieldTitle,
+    this.countryFieldTitle,
   }) : super(key: key);
 
   final ValueChanged<String>? onCountryChanged;
@@ -569,7 +574,7 @@ class CSCPicker extends StatefulWidget {
   ///Parameters to change style of CSC Picker
   final TextStyle? selectedItemStyle, dropdownHeadingStyle, dropdownItemStyle;
   final BoxDecoration? dropdownDecoration, disabledDropdownDecoration;
-  final bool showStates, showCities, showLga;
+  final bool showCountry, showStates, showCities, showLga;
   final CountryFlag flagState;
   final Layout layout;
   final double? searchBarRadius;
@@ -586,6 +591,10 @@ class CSCPicker extends StatefulWidget {
   final String stateDropdownLabel;
   final String cityDropdownLabel;
   final String lgaDropdownLabel;
+  final String? lgaFieldTitle;
+  final String? cityFieldTitle;
+  final String? stateFieldTitle;
+  final String? countryFieldTitle;
 
   final List<CscCountry>? countryFilter;
 
@@ -657,7 +666,7 @@ class CSCPickerState extends State<CSCPicker> {
   ///Read JSON country data from assets
   Future<dynamic> getNgnStateLGAResponse() async {
     var res = await rootBundle.loadString('assets/nigeria_state_lga.json');
-    print('Ok getting lga');
+    // print('Ok getting lga');
     return jsonDecode(res);
   }
 
@@ -874,64 +883,68 @@ class CSCPickerState extends State<CSCPicker> {
             ? Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Row(
-                    children: [
-                      Text(
-                        context.loc.nationality,
-                        style: TextStyles.body1
-                            .copyWith(fontWeight: FontWeight.w900),
-                      ),
-                    ],
-                  ),
+                  if (widget.showCountry) ...[
+                    Row(
+                      children: [
+                        Text(
+                          widget.countryFieldTitle ?? context.loc.nationality,
+                          style: TextStyles.body1
+                              .copyWith(fontWeight: FontWeight.w900),
+                        ),
+                      ],
+                    ),
+                    const VSpace(15),
+                    countryDropdown(),
+                    const SizedBox(
+                      height: 10.0,
+                    ),
+                  ],
+                  if (widget.showStates) ...[
+                    Row(
+                      children: [
+                        Text(
+                          widget.stateFieldTitle ?? context.loc.stateOfOrigin,
+                          style: TextStyles.body1
+                              .copyWith(fontWeight: FontWeight.w900),
+                        ),
+                        Text(
+                          '*',
+                          style: TextStyles.h5.copyWith(
+                              height: 1.5,
+                              color: theme.redButton,
+                              fontWeight: FontWeight.w900),
+                        )
+                      ],
+                    ),
+                    const VSpace(15),
+                    stateDropdown(),
+                  ],
+                  if (widget.showStates && widget.showCities) ...[
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                          widget.cityFieldTitle ?? context.loc.city,
+                          style: TextStyles.body1
+                              .copyWith(fontWeight: FontWeight.w900),
+                        ),
+                        Text(
+                          '*',
+                          style: TextStyles.h5.copyWith(
+                              height: 1.5,
+                              color: theme.redButton,
+                              fontWeight: FontWeight.w900),
+                        )
+                      ],
+                    ),
+                    const VSpace(15),
+                    cityDropdown()
+                  ],
                   const VSpace(15),
-                  countryDropdown(),
-                  const SizedBox(
-                    height: 10.0,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        context.loc.stateOfOrigin,
-                        style: TextStyles.body1
-                            .copyWith(fontWeight: FontWeight.w900),
-                      ),
-                      Text(
-                        '*',
-                        style: TextStyles.h5.copyWith(
-                            height: 1.5,
-                            color: theme.redButton,
-                            fontWeight: FontWeight.w900),
-                      )
-                    ],
-                  ),
-                  const VSpace(15),
-                  stateDropdown(),
-                  SizedBox(
-                    height: 10.0,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        context.loc.city,
-                        style: TextStyles.body1
-                            .copyWith(fontWeight: FontWeight.w900),
-                      ),
-                      Text(
-                        '*',
-                        style: TextStyles.h5.copyWith(
-                            height: 1.5,
-                            color: theme.redButton,
-                            fontWeight: FontWeight.w900),
-                      )
-                    ],
-                  ),
 
-                  const VSpace(15),
-                  cityDropdown(),
-                  const VSpace(15),
-
-                  ///
-                  //
+                  ///for nigeria lga
 
                   if (widget.showStates == true &&
                       widget.showLga == true &&
@@ -939,7 +952,7 @@ class CSCPickerState extends State<CSCPicker> {
                     Row(
                       children: [
                         Text(
-                          context.loc.lga,
+                          widget.lgaFieldTitle ?? context.loc.lga,
                           style: TextStyles.body1
                               .copyWith(fontWeight: FontWeight.w900),
                         ),

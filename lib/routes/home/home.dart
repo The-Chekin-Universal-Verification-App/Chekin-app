@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:chekinapp/components/input/base_text_input.dart';
+import 'package:chekinapp/core/commands/business_command.dart';
 import 'package:chekinapp/routes/home/popular.dart';
 import 'package:chekinapp/routes/home/top_rated.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
-
+    UserModel user = context.select((AuthProvider provider) => provider.user);
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -33,8 +34,8 @@ class HomeScreen extends StatelessWidget {
                         radius: 25,
                         // backgroundImage: AssetImage(R.png.man.imgPng),
 
-                        child: Image.asset(
-                          R.png.man.imgPng,
+                        child: Image.network(
+                          user.profileImageUrl,
                           errorBuilder: (BuildContext context, _, d) =>
                               const Icon(Icons.person),
                         ),
@@ -78,7 +79,9 @@ class HomeScreen extends StatelessWidget {
                         ],
                       ),
                     ),
-                  ),
+                  ).clickable(() {
+                    // UserCommand(context).getUser();
+                  }),
                 ],
               ),
               const VSpace(15),
@@ -87,7 +90,8 @@ class HomeScreen extends StatelessWidget {
                   Text(context.loc.hello,
                       style: TextStyles.h4
                           .copyWith(fontWeight: FontWeight.w400, fontSize: 28)),
-                  Text(R.S.userName,
+                  const HSpace(10),
+                  Text(user.firstName,
                       style: TextStyles.h3.copyWith(fontSize: 30)),
                 ],
               ),
@@ -102,7 +106,10 @@ class HomeScreen extends StatelessWidget {
                     R.png.search.svg,
                     size: 22,
                   ),
-                ),
+                ).clickable(() {
+                  print('ok');
+                  BusinessCommand(context).getBusiness();
+                }),
                 suffix: UnconstrainedBox(
                   child: SvgIcon(
                     R.png.filter.svg,

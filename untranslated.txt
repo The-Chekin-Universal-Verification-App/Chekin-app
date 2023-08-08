@@ -4,6 +4,7 @@
     "productInfo",
     "contactVendor",
     "editProduct",
-    "deleteProduct"
+    "deleteProduct",
+    "resetPassword"
   ]
 }

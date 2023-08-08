@@ -8,8 +8,8 @@ abstract class BaseService {
   late final Dio _dio;
   var options = BaseOptions(
     baseUrl: R.N.baseUrl,
-    connectTimeout: 5000,
-    receiveTimeout: 20000,
+    connectTimeout: 30000,
+    receiveTimeout: 30000,
     headers: {
       HttpHeaders.contentTypeHeader: 'application/json',
       HttpHeaders.acceptHeader: 'application/json',

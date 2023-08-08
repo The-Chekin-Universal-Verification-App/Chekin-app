@@ -17,7 +17,10 @@ class Strings {
   String get skip => 'Skip';
   String get appName => 'ChekiApp!';
   String get emailExample => 'e.g. name@gmail.com';
+  String get nameExample => 'e.g. Nike store';
+  String get descriptionExample => 'We sell...';
   String get cityExample => 'eg Jos';
+  String get dateExample => 'e.g. 19th September 2002';
   String get landmarkExample => 'eg a Bank or Market';
   String get localGovernmentExample => 'eg a Jos North';
   String get productName => " Lux-330458";

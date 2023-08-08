@@ -185,7 +185,7 @@ class _$_UserSignUpModel
       this.firstName = '',
       this.middleName = '',
       this.lastName = '',
-      this.nationality = '',
+      this.nationality = 'Nigeria',
       this.phoneNumber = ''});
 
   factory _$_UserSignUpModel.fromJson(Map<String, dynamic> json) =>

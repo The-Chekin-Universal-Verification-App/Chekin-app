@@ -49,9 +49,7 @@ class PrimaryButton extends StatelessWidget {
           children: [
             Text(
               label,
-              style: TextStyles.button
-                  .txtColor(textColor ?? theme.accentTxt)
-                  .semiBold,
+              style: TextStyles.h7.txtColor(textColor ?? theme.accentTxt).bold,
             ),
             if (loading) ...[HSpace(Insets.m), const Spinner()],
           ],
@@ -196,7 +194,8 @@ class _BaseBtnState extends State<BaseBtn> {
         child: Opacity(
           opacity: widget.onPressed != null ? 1 : .7,
           child: Padding(
-            padding: widget.contentPadding ?? const EdgeInsets.all(18),
+            padding: widget.contentPadding ??
+                const EdgeInsets.symmetric(vertical: 15),
             child: widget.child,
           ),
         ),

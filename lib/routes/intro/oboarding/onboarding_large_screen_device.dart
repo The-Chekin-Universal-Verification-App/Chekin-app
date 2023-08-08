@@ -5,6 +5,7 @@ import 'package:tuple/tuple.dart';
 import '../../../core/providers/app_provider.dart';
 import '../../../res/language_and_emojis.dart';
 import '../../../utils/helpers/app_language.dart';
+import '../../auth/login_screen.dart';
 import 'onboarding_small_screen_device.dart';
 import '../select_usertype/set_a_user_type.dart';
 
@@ -90,6 +91,7 @@ class OnBoardingLargeScreen extends StatelessWidget {
                             PrimaryButton(
                               onPressed: () {
                                 SharedPrefs.setBool('isFirstTime', false);
+                                context.push(const LogInScreen());
                               },
                               label: context.loc.login,
                               radius: 20,

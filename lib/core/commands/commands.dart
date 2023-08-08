@@ -1,5 +1,6 @@
 export 'base_cmd.dart';
-// export 'chat_cmd.dart';
+export 'auth_command.dart';
+export 'user_command.dart';
 // export 'login_cmd.dart';
 // export 'signup_cmd.dart';
 // export 'setup_cmd.dart';

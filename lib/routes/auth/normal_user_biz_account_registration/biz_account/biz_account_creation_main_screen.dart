@@ -1,10 +1,11 @@
-import 'package:chekinapp/routes/auth/user_biz_account_registration/biz_account/widgets/biz_contact_info.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
-import 'package:chekinapp/routes/auth/user_biz_account_registration/biz_account/biz_info_details.dart';
-import 'package:chekinapp/routes/auth/user_biz_account_registration/biz_account/biz_owner_personal_detaills.dart';
 
 import '../../password_screen.dart';
+import '../../phone_number_registration.dart';
+import 'biz_info_details.dart';
+import 'biz_owner_personal_detaills.dart';
+import 'components/biz_contact_info.dart';
 
 class BusinessAccountCreationMainScreen extends StatelessWidget {
   const BusinessAccountCreationMainScreen({Key? key}) : super(key: key);
@@ -67,13 +68,14 @@ class BusinessAccountCreationMainScreen extends StatelessWidget {
                   context.read<AuthProvider>().setBusinessSignUpPageIndex =
                       index!; //
                 },
-                itemCounts: 4,
+                itemCounts: 5,
               ),
               IndexedStack(
                 index: pageIndex,
-                children: [
+                children: const [
+                  PhoneNumberRegistrationWidget(),
                   BusinessOwnerDetailScreen(),
-                  PasswordScreen(onSuccessIndexPageGoTo: 2),
+                  PasswordScreen(),
                   BusinessInfoDetailScreen(),
                   BusinessContactInfoScreen(),
                 ],

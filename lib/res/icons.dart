@@ -11,6 +11,7 @@ class IconRes {
   String get cloudUploading => 'cloud-uploading';
   String get addUserIcon => 'add_user_icon';
   String get eyeOpen => 'eye_open';
+  String get eye => 'eye_slash';
   String get autoRenewal => 'auto_renewal';
   String get passwordProtection => 'password_protection';
   String get paymentIcon => 'payment_icon';
@@ -55,7 +56,7 @@ class IconRes {
   String get clock => 'clock';
   String get speechBubbleMark => 'speech_bubble_mark';
   String get secureDocument => 'secure_document';
-  String get youngManSittingWithLaptop => 'young_man_sitting_with_laptop';
+  String get youngManSittingWithLaptop => 'young_man_sitting';
   String get advert => 'advert';
   String get bag => 'bag';
   String get silverLadyShoe => 'silver_lady_shoe';

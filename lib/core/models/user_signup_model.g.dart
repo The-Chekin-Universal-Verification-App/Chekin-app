@@ -13,7 +13,7 @@ _$_UserSignUpModel _$$_UserSignUpModelFromJson(Map<String, dynamic> json) =>
       firstName: json['firstName'] as String? ?? '',
       middleName: json['middleName'] as String? ?? '',
       lastName: json['lastName'] as String? ?? '',
-      nationality: json['nationality'] as String? ?? '',
+      nationality: json['nationality'] as String? ?? 'Nigeria',
       phoneNumber: json['phoneNumber'] as String? ?? '',
     );
 

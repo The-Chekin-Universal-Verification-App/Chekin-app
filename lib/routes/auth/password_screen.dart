@@ -97,6 +97,8 @@ class _PasswordScreenState extends State<PasswordScreen> with FormMixin {
                   // VSpace(context.sp(5)),
                   CustomFormTextField(
                     controller: _password,
+                    type: InputType.pwd,
+                    validator: Validator.password(),
                     onChange: (password) {
                       ///write data to business model if ACCOUNT TYPE is biz
                       if (accountType == UserType.biz) {

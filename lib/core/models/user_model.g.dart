@@ -7,49 +7,32 @@ part of 'user_model.dart';
 // **************************************************************************
 
 _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
-      name: json['name'] as String? ?? '',
+      firstName: json['firstName'] as String? ?? '',
+      lastName: json['lastName'] as String? ?? '',
+      middleName: json['middleName'] as String? ?? '',
+      nationality: json['nationality'] as String? ?? '',
+      profileImageUrl: json['profileImageUrl'] as String? ?? '',
       email: json['email'] as String? ?? '',
-      image: json['image'] as String? ?? '',
-      phone_number: json['phone_number'] as String? ?? '',
-      referral_code: json['referral_code'] as String? ?? '',
-      email_verified_at: json['email_verified_at'] as String? ?? '',
-      created_at: json['created_at'] as String? ?? '',
-      updated_at: json['updated_at'] as String? ?? '',
-      accountId: json['accountId'] as String? ?? '',
-      referral_link: json['referral_link'] as String? ?? '',
-      account_id: json['account_id'] as String? ?? '',
-      wallet_balance: json['wallet_balance'] as String? ?? '',
-      referral_count: json['referral_count'] as int? ?? 0,
-      id: json['id'] as int? ?? 0,
-      bank_accounts: (json['bank_accounts'] as List<dynamic>?)
-              ?.map((e) => e as Map<String, dynamic>)
-              .toList() ??
-          const [],
-      meta: json['meta'] as Map<String, dynamic>? ?? const {},
-      wallet: json['wallet'] as Map<String, dynamic>? ?? const {},
-      referral: json['referral'] as Map<String, dynamic>? ?? const {},
+      role: json['role'] as String? ?? '',
+      verified: json['verified'] as bool? ?? false,
+      phoneNumber: json['phoneNumber'] as String? ?? '',
+      business: json['business'] as String? ?? '',
+      id: json['_id'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_UserModelToJson(_$_UserModel instance) =>
     <String, dynamic>{
-      'name': instance.name,
+      'firstName': instance.firstName,
+      'lastName': instance.lastName,
+      'middleName': instance.middleName,
+      'nationality': instance.nationality,
+      'profileImageUrl': instance.profileImageUrl,
       'email': instance.email,
-      'image': instance.image,
-      'phone_number': instance.phone_number,
-      'referral_code': instance.referral_code,
-      'email_verified_at': instance.email_verified_at,
-      'created_at': instance.created_at,
-      'updated_at': instance.updated_at,
-      'accountId': instance.accountId,
-      'referral_link': instance.referral_link,
-      'account_id': instance.account_id,
-      'wallet_balance': instance.wallet_balance,
-      'referral_count': instance.referral_count,
-      'id': instance.id,
-      'bank_accounts': instance.bank_accounts,
-      'meta': instance.meta,
-      'wallet': instance.wallet,
-      'referral': instance.referral,
+      'role': instance.role,
+      'verified': instance.verified,
+      'phoneNumber': instance.phoneNumber,
+      'business': instance.business,
+      '_id': instance.id,
     };
 
 _$_WalletModel _$$_WalletModelFromJson(Map<String, dynamic> json) =>

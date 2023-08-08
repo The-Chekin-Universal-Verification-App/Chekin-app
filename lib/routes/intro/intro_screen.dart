@@ -37,7 +37,6 @@ class _IntroScreenState extends State<IntroScreen> {
               width: 100,
               child: Image.asset(R.png.appLogo.imgPng)),
         ).clickable(() {
-          // DialogServices.messageModalFromTop(context, message: 'Success');
           context.pushOff(const OnBoardingScreen());
         }),
       ),

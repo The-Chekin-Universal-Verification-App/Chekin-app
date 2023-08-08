@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 import 'package:chekinapp/routes/intro/oboarding/get_started_screen.dart';
 import 'package:chekinapp/routes/intro/select_usertype/set_a_user_type.dart';
-import '../../../core/providers/app_provider.dart';
-import '../../../core/providers/auth_provider.dart';
-import '../../auth/user_biz_account_registration/account_creation_main_screen.dart';
+
+import '../../auth/normal_user_biz_account_registration/account_creation_main_screen.dart';
 
 class SetUserTypeSmallScreen extends StatelessWidget {
   const SetUserTypeSmallScreen({Key? key}) : super(key: key);
