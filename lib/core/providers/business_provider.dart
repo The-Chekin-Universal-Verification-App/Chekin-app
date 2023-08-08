@@ -5,7 +5,7 @@ class BusinessProvider extends BaseProvider {
   BusinessModel _business = BusinessModel.init();
   List _searchedBusiness = [];
 
-  set setBusiness(List businessListJson) {
+  setBusiness(List businessListJson, {int currentPage = 1, int limit = 10}) {
     _searchedBusiness = businessListJson;
     notifyListeners();
   }

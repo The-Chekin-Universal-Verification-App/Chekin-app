@@ -104,7 +104,7 @@ class Mock {
   final String forgotPassword = '$api/auth/forgot-password';
   final String resetPassword = '$api/auth/reset-password';
   final String changePassword = '$api/user/change-password';
-  String getBusiness(String searchPath) => '$api/business/$searchPath';
+  final String getBusiness = '$api/business/';
   String getLex = '$api/business/lux-code';
 }
 

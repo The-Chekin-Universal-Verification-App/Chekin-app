@@ -10,7 +10,7 @@ class BusinessCommand extends BaseCommand {
   BusinessProvider get business => getProvider();
 
   Future<void> getBusiness(
-      {String page = '1', String limit = '1', String search = 'lux'}) async {
+      {String page = '1', String limit = '1', String search = ''}) async {
     Response? res;
 
     BusinessService service = BusinessService();
@@ -29,13 +29,19 @@ class BusinessCommand extends BaseCommand {
     }
   }
 
-  String _getPath({String page = '1', String limit = '', String search = ''}) {
+  String _getPath({String page = '', String limit = '', String search = ''}) {
     String searchKey = "?page=$page&limit=$limit&search=$search";
 
-    if (limit == '') {
-      searchKey = "?page=$page&search=$search";
+    if (limit == '' && search == '' && page == '') {
+      searchKey = '';
+    } else if (limit == '' && search == '') {
+      searchKey = "?page=$page";
+    } else if (search == '') {
+      searchKey = "?page=$page&limit=$limit";
     } else if (limit == '') {
       searchKey = "?page=$page&search=$search";
+    } else if (page == '') {
+      searchKey = "";
     } else {
       searchKey = "?page=$page&limit=$limit&search=$search";
     }
