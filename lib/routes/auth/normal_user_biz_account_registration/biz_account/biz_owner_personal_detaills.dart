@@ -195,6 +195,7 @@ class _NamesSectionState extends State<NamesSection> {
                 businessModel.copyWith(middleName: middleName);
           },
           hintText: context.loc.noEmojis,
+          isRequired: false,
         ),
         const VSpace(20),
         Row(

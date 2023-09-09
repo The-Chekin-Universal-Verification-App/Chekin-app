@@ -46,6 +46,7 @@ class IconRes {
   String get platformProtection => 'platform_management_security';
   String get privacyTips => 'privacy_tips';
   String get editDoc => 'edit_doc';
+  String get document => 'document';
 
   ///png image part
   String get appLogoGrey => 'grey_app_logo';

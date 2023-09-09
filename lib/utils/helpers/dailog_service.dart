@@ -75,6 +75,7 @@ class DialogServices {
       bool fromTop = true,
       bool autoPop = true,
       Duration? closeDuration,
+      TransitionType transitionType = TransitionType.slide,
       double screenFraction = 0.4}) {
     bool dialogIsOpen = true;
 
@@ -120,22 +121,16 @@ class DialogServices {
                         ? Align(
                             alignment: Alignment.center,
                             child: SizedBox(
-                              height: 20,
+                              height: 40,
                               width: 40,
-                              child: Stack(
-                                clipBehavior: Clip.none,
-                                children: [
-                                  Positioned(
-                                    top: -45.0,
-                                    child: CircleAvatar(
-                                      radius: 28,
-                                      child: iconPath == null
-                                          ? Image.asset(
-                                              R.png.charmCircleTick.svg)
-                                          : Image.asset(iconPath),
-                                    ),
-                                  ),
-                                ],
+                              child: CircleAvatar(
+                                radius: 28,
+                                backgroundColor: Theme.of(context)
+                                    .primaryColor
+                                    .withOpacity(0.2),
+                                child: iconPath == null
+                                    ? SvgPicture.asset(R.png.bell.svg)
+                                    : Image.asset(iconPath),
                               ),
                             ),
                           )
@@ -150,13 +145,28 @@ class DialogServices {
         );
       },
       transitionBuilder: (modalContext, anim1, anim2, child) {
-        return SlideTransition(
-          position: Tween(
-                  begin: Offset(0, fromTop == true ? -1 : 1),
-                  end: const Offset(0, 0))
-              .animate(anim1),
-          child: child,
-        );
+        if (transitionType == TransitionType.fadeScale) {
+          return FadeScaleTransition(
+            animation: anim1,
+            child: child,
+          );
+        } else if (transitionType == TransitionType.slide) {
+          return SlideTransition(
+            position: Tween(
+                    begin: Offset(0, fromTop == true ? -1 : 1),
+                    end: const Offset(0, 0))
+                .animate(anim1),
+            child: child,
+          );
+        } else {
+          return SlideTransition(
+            position: Tween(
+                    begin: Offset(0, fromTop == true ? -1 : 1),
+                    end: const Offset(0, 0))
+                .animate(anim1),
+            child: child,
+          );
+        }
       },
     ).then((value) {
       dialogIsOpen = false;
@@ -381,3 +391,5 @@ class DialogServices {
 }
 
 enum NotificationType { success, error }
+
+enum TransitionType { fade, fadeScale, slide, scale }

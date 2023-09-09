@@ -1,10 +1,13 @@
 import 'package:chekinapp/routes/discover/discover_screen.dart';
 import 'package:chekinapp/routes/payment/paywith_card_option.dart';
+import 'package:chekinapp/utils/imagepicker/provider/image_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/routes/intro/intro_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
+import 'core/providers/business_provider.dart';
+import 'core/providers/product_provider.dart';
 import 'export.dart';
 
 void main() {
@@ -14,7 +17,10 @@ void main() {
     ChangeNotifierProvider(create: (_) => AuthProvider()),
     ChangeNotifierProvider(create: (_) => HomeProvider()),
     ChangeNotifierProvider(create: (_) => WishListProvider()),
+    ChangeNotifierProvider(create: (_) => BusinessProvider()),
+    ChangeNotifierProvider(create: (_) => ImageProviders()),
     ChangeNotifierProvider(create: (_) => DiscoverProvider()),
+    ChangeNotifierProvider(create: (_) => ProductProvider()),
     Provider<BuildContext>(create: (c) => c),
   ], child: const MyApp()));
 }

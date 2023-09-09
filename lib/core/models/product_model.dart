@@ -7,12 +7,15 @@ part 'product_model.g.dart';
 @freezed
 class ProductModel with _$ProductModel {
   factory ProductModel({
-    @Default('') String productImage,
-    @Default('') String itemName,
-    @Default('') String storeName,
-    @Default('') String price,
-    @Default('') String desc,
-    @Default('') String luxCode,
+    @Default('') @JsonKey(name: '_id') String id,
+    @Default('') String business,
+    @Default('') String name,
+    @Default('') String info,
+    @Default('') String category,
+    @Default([]) List images,
+    @Default(0) double price,
+    @Default('') String createdAt,
+    @Default('') String updatedAt,
     @Default(false) bool isStoreVerified,
     @Default(false) bool isStoreFavorite,
   }) = _ProductModel;
@@ -21,6 +24,6 @@ class ProductModel with _$ProductModel {
       _$ProductModelFromJson(json);
 
   static ProductModel init() {
-    return ProductModel(itemName: '', storeName: '');
+    return ProductModel(name: '', info: '');
   }
 }

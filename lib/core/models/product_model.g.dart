@@ -8,24 +8,30 @@ part of 'product_model.dart';
 
 _$_ProductModel _$$_ProductModelFromJson(Map<String, dynamic> json) =>
     _$_ProductModel(
-      productImage: json['productImage'] as String? ?? '',
-      itemName: json['itemName'] as String? ?? '',
-      storeName: json['storeName'] as String? ?? '',
-      price: json['price'] as String? ?? '',
-      desc: json['desc'] as String? ?? '',
-      luxCode: json['luxCode'] as String? ?? '',
+      id: json['_id'] as String? ?? '',
+      business: json['business'] as String? ?? '',
+      name: json['name'] as String? ?? '',
+      info: json['info'] as String? ?? '',
+      category: json['category'] as String? ?? '',
+      images: json['images'] as List<dynamic>? ?? const [],
+      price: (json['price'] as num?)?.toDouble() ?? 0,
+      createdAt: json['createdAt'] as String? ?? '',
+      updatedAt: json['updatedAt'] as String? ?? '',
       isStoreVerified: json['isStoreVerified'] as bool? ?? false,
       isStoreFavorite: json['isStoreFavorite'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$$_ProductModelToJson(_$_ProductModel instance) =>
     <String, dynamic>{
-      'productImage': instance.productImage,
-      'itemName': instance.itemName,
-      'storeName': instance.storeName,
+      '_id': instance.id,
+      'business': instance.business,
+      'name': instance.name,
+      'info': instance.info,
+      'category': instance.category,
+      'images': instance.images,
       'price': instance.price,
-      'desc': instance.desc,
-      'luxCode': instance.luxCode,
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
       'isStoreVerified': instance.isStoreVerified,
       'isStoreFavorite': instance.isStoreFavorite,
     };

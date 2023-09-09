@@ -1,6 +1,8 @@
 import 'package:chekinapp/export.dart';
 import 'package:flutter/material.dart';
 
+import '../../core/commands/product_command.dart';
+
 class LoaderStateItem extends StatefulWidget {
   const LoaderStateItem({
     Key? key,
@@ -8,12 +10,13 @@ class LoaderStateItem extends StatefulWidget {
     required this.item,
     required this.widgetOnLoadSuccess,
     this.onListEmptyWidget,
+    this.onRefreshNoData,
   }) : super(key: key);
   final bool isLoading;
   final List<dynamic> item;
   final Widget widgetOnLoadSuccess;
   final Widget? onListEmptyWidget;
-
+  final Future<void> Function()? onRefreshNoData;
   @override
   State<LoaderStateItem> createState() => _LoaderStateItemState();
 }
@@ -31,12 +34,29 @@ class _LoaderStateItemState extends State<LoaderStateItem> {
         ),
       );
     } else if (widget.isLoading == false && widget.item.isEmpty) {
-      return Center(
-        child: widget.onListEmptyWidget ??
-            Text(
-              context.loc.noData,
-              style: TextStyles.body1,
-            ),
+      return RefreshIndicator(
+        onRefresh: widget.onRefreshNoData ?? () async {},
+        child: Center(
+          child: SingleChildScrollView(
+              child: widget.onListEmptyWidget ??
+                  Column(
+                    children: [
+                      CircleAvatar(
+                          backgroundColor:
+                              Theme.of(context).primaryColor.withOpacity(0.09),
+                          radius: 26,
+                          child: SvgIcon(
+                            R.png.document.svg,
+                            color: Colors.grey.shade500,
+                          )),
+                      const VSpace(10),
+                      Text(
+                        context.loc.noData,
+                        style: TextStyles.body1,
+                      ),
+                    ],
+                  )),
+        ),
       );
     } else if (widget.isLoading == false && widget.item.isNotEmpty) {
       return widget.widgetOnLoadSuccess;

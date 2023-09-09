@@ -9,6 +9,7 @@ part of 'business_model.dart';
 _$_BusinessModel _$$_BusinessModelFromJson(Map<String, dynamic> json) =>
     _$_BusinessModel(
       id: json['_id'] as String? ?? '',
+      v: json['__v'] as int? ?? 0,
       owner: json['owner'] as String? ?? '',
       name: json['name'] as String? ?? '',
       description: json['description'] as String? ?? '',
@@ -30,12 +31,14 @@ _$_BusinessModel _$$_BusinessModelFromJson(Map<String, dynamic> json) =>
       paymentOption: json['paymentOption'] as String? ?? '',
       isActive: json['isActive'] as bool? ?? false,
       currentSubscription: json['currentSubscription'] as String? ?? '',
+      businessImage: json['businessImage'] as String? ?? '',
       luxCode: json['luxCode'] as String? ?? '',
     );
 
 Map<String, dynamic> _$$_BusinessModelToJson(_$_BusinessModel instance) =>
     <String, dynamic>{
       '_id': instance.id,
+      '__v': instance.v,
       'owner': instance.owner,
       'name': instance.name,
       'description': instance.description,
@@ -57,5 +60,20 @@ Map<String, dynamic> _$$_BusinessModelToJson(_$_BusinessModel instance) =>
       'paymentOption': instance.paymentOption,
       'isActive': instance.isActive,
       'currentSubscription': instance.currentSubscription,
+      'businessImage': instance.businessImage,
       'luxCode': instance.luxCode,
+    };
+
+_$_MakeBusinessReviewModel _$$_MakeBusinessReviewModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_MakeBusinessReviewModel(
+      rating: json['rating'] as String? ?? '',
+      review: json['review'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$$_MakeBusinessReviewModelToJson(
+        _$_MakeBusinessReviewModel instance) =>
+    <String, dynamic>{
+      'rating': instance.rating,
+      'review': instance.review,
     };

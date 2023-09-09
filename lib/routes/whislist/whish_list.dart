@@ -64,9 +64,9 @@ class WishListScreen extends StatelessWidget {
                           children: [
                             DiscoverItem(
                               product: ProductModel(
-                                  productImage: R.png.laptop.imgPng,
-                                  itemName: 'Apple MacBook Pro',
-                                  storeName: 'Apple Store',
+                                  images: [R.png.laptop.imgPng],
+                                  name: 'Apple MacBook Pro',
+                                  business: 'Apple Store',
                                   isStoreVerified:
                                       index == wishList.length ~/ 2 ||
                                               index == wishList.length ~/ 3
@@ -77,7 +77,7 @@ class WishListScreen extends StatelessWidget {
                                               index == wishList.length ~/ 3
                                           ? true
                                           : false,
-                                  desc: R.S.productInfo),
+                                  info: R.S.productInfo),
                               onItemTap: () {},
                               color: const Color(0xff6F7E38),
                             ),

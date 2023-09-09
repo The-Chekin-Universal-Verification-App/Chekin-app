@@ -69,8 +69,24 @@ abstract class BaseService {
     return res;
   }
 
-  Future<Response> put() async {
-    Response res = await _dio.put('');
+  Future<Response> put(String path,
+      {required dynamic data,
+      String? token,
+      int? retry,
+      bool isImageFile = false,
+      Function(int totalLoad, int currentLoad)? onSendProgress}) async {
+    if (token != null) {
+      _dio.options.headers["Authorization"] = "Bearer $token";
+
+      if (retry != null) {
+        _dioRetry(retry: retry);
+      }
+    }
+    if (isImageFile) {
+      _dio.options.headers["Content-Type"] = "multipart/form-data";
+    }
+    Response res =
+        await _dio.put(path, data: data, onSendProgress: onSendProgress);
     return res;
   }
 

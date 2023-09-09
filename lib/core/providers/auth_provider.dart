@@ -1,6 +1,5 @@
-import 'package:chekinapp/core/core.dart';
-
 import '../../export.dart';
+import '../models/business_model.dart';
 import '../models/user_signup_model.dart';
 
 class AuthProvider extends BaseProvider {
@@ -28,15 +27,53 @@ class AuthProvider extends BaseProvider {
 
   //user object
   UserModel _user = UserModel.init();
+  UserModel _userCopy = UserModel.init();
 
   UserModel get user => _user;
+  UserModel get userCopy => _userCopy;
 
   set setUser(Map<String, dynamic> userObject) {
     if (userObject.isEmpty) {
       null;
     } else {
       _user = UserModel.fromJson(userObject);
+      _userCopy = _userCopy.copyWith(verified: _user.verified);
+
+      ///this create a copy of user info
+      ///>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>..
+
+      ///if the account is a business account execute the code block below
+      // execute the below code block if the account is a business account
+      if (_user.business.runtimeType != String && _user.business != null) {
+        setBusiness = _user.business;
+        setAccountType = UserType.biz;
+      } else if (_user.business.runtimeType == String &&
+          _user.business.isNOtEmpty) {
+        //this mean the account is business but we are only get the business id number during get user detail endpoint  which returns only the business ID if the account is a
+        //business account
+        setAccountType = UserType.biz;
+      } else {
+        setAccountType = UserType.normal;
+      }
     }
+    notifyListeners();
+  }
+
+  ///get a business information if the account is a business account
+  BusinessModel _business = BusinessModel.init();
+  BusinessModel get business => _business;
+  set setBusiness(Map<String, dynamic> businessObject) {
+    if (businessObject.isEmpty) {
+      null;
+    } else {
+      _business = BusinessModel.fromJson(businessObject);
+    }
+    notifyListeners();
+  }
+
+  ///use the copyWith method to persist the data already stored there
+  set updateUser(UserModel user) {
+    _userCopy = user;
     notifyListeners();
   }
 
@@ -68,7 +105,7 @@ class AuthProvider extends BaseProvider {
   UserSignUpModel get userSignUpModel => _userSignUpModel;
 
   set addToUserInfo(UserSignUpModel model) {
-    print('Now working ${model.toJson()}');
+    // print('Now working ${model.toJson()}');
     _userSignUpModel = model;
     notifyListeners();
 
@@ -83,10 +120,15 @@ class AuthProvider extends BaseProvider {
   set addToBusinessInfo(BusinessSignUpModel model) {
     _businessSignUpModel = model;
     notifyListeners();
-    print('business Now working ${_businessSignUpModel.toJson()}');
+    // print('business Now working ${_businessSignUpModel.toJson()}');
 
     /// to make this works we would get what is in [businessSignUpModel] then do a .copyWith method before calling add to user Info method from the form in the widget try
     ///to maintain consistency
+  }
+
+  clearBusinessInfo() {
+    _businessSignUpModel = BusinessSignUpModel.init();
+    notifyListeners();
   }
 
   ///section for user log in

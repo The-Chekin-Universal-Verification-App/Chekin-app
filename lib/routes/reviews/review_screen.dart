@@ -5,19 +5,33 @@ import 'package:chekinapp/routes/reviews/social_media_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/icon_button.dart';
+import '../../components/msc/loader_state_widget.dart';
+import '../../core/commands/business_command.dart';
+import '../../core/models/business_review_model.dart';
+import '../../core/providers/business_provider.dart';
 import '../discover/vendor_store.dart';
 
-class ReviewScreen extends StatefulWidget {
-  const ReviewScreen({Key? key}) : super(key: key);
+class ProductReviewScreen extends StatefulWidget {
+  const ProductReviewScreen({Key? key}) : super(key: key);
 
   @override
-  State<ReviewScreen> createState() => _ReviewScreenState();
+  State<ProductReviewScreen> createState() => _ProductReviewScreenState();
 }
 
-class _ReviewScreenState extends State<ReviewScreen> with ScaffoldKeyMixin {
+class _ProductReviewScreenState extends State<ProductReviewScreen>
+    with ScaffoldKeyMixin {
+  @override
+  initState() {
+    super.initState();
+    // DiscoverProvider selectedProd = Provider.of(context, listen: false);
+    // BusinessCommand(context).getBusinessReviews(
+    //     businessId: selectedProd
+    //         .selectedProduct.business); // this get the review on business
+  }
+
+  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
-    int dexK = 0;
     AppTheme theme = context.watch();
     ProductModel selectedProduct =
         context.select((DiscoverProvider provider) => provider.selectedProduct);
@@ -55,7 +69,7 @@ class _ReviewScreenState extends State<ReviewScreen> with ScaffoldKeyMixin {
                                       radius: 18,
                                       child: SvgIcon(
                                         R.png.heart2.svg,
-                                        size: 20,
+                                        size: 18,
                                         color: theme.redButton,
                                       ),
                                     ),
@@ -65,7 +79,24 @@ class _ReviewScreenState extends State<ReviewScreen> with ScaffoldKeyMixin {
                           const VSpace(3),
                           SizedBox(
                               height: 232,
-                              child: Image.asset(selectedProduct.productImage)),
+                              child: PageView.builder(
+                                onPageChanged: (index) {
+                                  currentIndex = index;
+                                  setState(() {});
+                                },
+                                itemCount: selectedProduct.images.length,
+                                itemBuilder: (BuildContext context, int index) {
+                                  return Image.network(
+                                    selectedProduct.images[index],
+                                    errorBuilder: (e, c, d) => const SizedBox(
+                                        child: Icon(
+                                      Icons.image_outlined,
+                                      size: 232 / 2,
+                                      color: Colors.black54,
+                                    )),
+                                  );
+                                },
+                              )),
                           const VSpace(39),
                           SizedBox(
                             height: 10,
@@ -75,14 +106,15 @@ class _ReviewScreenState extends State<ReviewScreen> with ScaffoldKeyMixin {
                                   4,
                                   (index) => CustomContainer(
                                         borderRadius: Corners.s8Border,
-                                        color: dexK == index
+                                        color: currentIndex == index
                                             ? theme.primary
                                             : theme.primary.withOpacity(0.15),
                                         margin: const EdgeInsets.symmetric(
                                             horizontal: 5),
                                         height: 5,
-                                        width:
-                                            dexK == index ? context.sp(20) : 18,
+                                        width: currentIndex == index
+                                            ? context.sp(20)
+                                            : 18,
                                       )),
                             ),
                           ),
@@ -104,7 +136,7 @@ class _ReviewScreenState extends State<ReviewScreen> with ScaffoldKeyMixin {
                       Wrap(
                         children: [
                           Text(
-                            selectedProduct.storeName,
+                            selectedProduct.business,
                             style: TextStyles.body1
                                 .copyWith(fontWeight: FontWeight.w500),
                           ),
@@ -123,7 +155,7 @@ class _ReviewScreenState extends State<ReviewScreen> with ScaffoldKeyMixin {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        selectedProduct.storeName,
+                        selectedProduct.name,
                         style:
                             TextStyles.h6.copyWith(fontWeight: FontWeight.w700),
                       ),
@@ -164,7 +196,7 @@ class _ReviewScreenState extends State<ReviewScreen> with ScaffoldKeyMixin {
                     ],
                   ),
                   const VSpace(14),
-                  Text(selectedProduct.desc,
+                  Text(selectedProduct.info,
                       style:
                           TextStyles.body2.copyWith(color: theme.greyWeakTwo)),
                   const VSpace(25),
@@ -177,7 +209,7 @@ class _ReviewScreenState extends State<ReviewScreen> with ScaffoldKeyMixin {
                         children: [
                           SvgIcon(R.png.messageFavorite.svg),
                           const HSpace(10),
-                          Text(context.loc.reviews,
+                          Text(context.loc.seeStoreReviews,
                               style: TextStyles.h6
                                   .copyWith(fontWeight: FontWeight.w500)),
                         ],
@@ -222,13 +254,13 @@ class AddReviewScreen extends StatefulWidget {
 
 class _AddReviewScreenState extends State<AddReviewScreen>
     with ScaffoldKeyMixin {
-  bool setReviewVisibility = false;
+  bool setReviewVisibility = true;
   bool setBottomVisibility = true;
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
-    ProductModel selectedProduct =
-        context.select((DiscoverProvider provider) => provider.selectedProduct);
+    List<BusinessReviewModel> reviews =
+        context.select((BusinessProvider provider) => provider.reviews);
     return Scaffold(
       key: scaffoldKey,
       appBar: CustomAppBar(
@@ -245,6 +277,7 @@ class _AddReviewScreenState extends State<AddReviewScreen>
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  const VSpace(10),
                   PrimaryButton(
                     onPressed: () {
                       setState(() {
@@ -266,7 +299,7 @@ class _AddReviewScreenState extends State<AddReviewScreen>
                     fullWidth: true,
                   ),
                   const SizedBox(
-                    height: 38,
+                    height: 15,
                   )
                 ],
               ),
@@ -373,109 +406,56 @@ class _AddReviewScreenState extends State<AddReviewScreen>
         ],
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: SingleChildScrollView(
-            physics: const BouncingScrollPhysics(),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const VSpace(20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(context.loc.customersReviews,
-                        style: TextStyles.h6
-                            .copyWith(fontWeight: FontWeight.w500)),
-                    Row(
-                      children: [
-                        Text(context.loc.recent,
-                            style: TextStyles.h6
-                                .copyWith(fontWeight: FontWeight.w500)),
-                        const HSpace(5),
-                        Icon(
-                          setReviewVisibility
-                              ? Icons.keyboard_arrow_down_outlined
-                              : Icons.keyboard_arrow_right_rounded,
-                          color: theme.greyWeakTwo,
-                        ),
-                      ],
-                    )
-                  ],
-                ).clickable(() {
-                  setReviewVisibility = !setReviewVisibility;
-                  setState(() {});
-                }),
-                const VSpace(20),
-                ColorBox(
-                    onTap: () {},
-                    color: theme.primary,
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          child: Row(
-                            // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              CircleAvatar(
-                                backgroundColor: Colors.transparent,
-                                backgroundImage: AssetImage(
-                                  selectedProduct.productImage,
-                                ),
-                                onBackgroundImageError: (_, err) => Icon(
-                                  Icons.image_outlined,
-                                  color: theme.grey,
-                                ),
-                              ),
-                              const HSpace(5),
-                              Expanded(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      'Frank',
-                                      maxLines: 1,
-                                      overflow: TextOverflow.ellipsis,
-                                      style: TextStyles.body2.copyWith(
-                                        fontWeight: FontWeight.w700,
-                                      ),
-                                    ),
-                                    Text(
-                                      '8hrs ago',
-                                      style: TextStyles.body2.copyWith(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 13),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: List.generate(
-                                      5,
-                                      (index) => Icon(
-                                            Icons.star_rounded,
-                                            color: theme.greyWeakTwo,
-                                            size: 15,
-                                          )),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        const VSpace(14),
-                        Text(
-                          '“A very lovely product. Got mine on time as negotiated and in perfect condition. I recommend you buy from them”',
-                          textAlign: TextAlign.center,
-                          style: TextStyles.body2.copyWith(
-                              color: theme.greyWeakTwo,
-                              fontWeight: FontWeight.w500,
-                              fontSize: 13),
-                        ),
-                      ],
-                    ))
-              ],
-            ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const VSpace(20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(context.loc.customersReviews,
+                      style:
+                          TextStyles.h6.copyWith(fontWeight: FontWeight.w500)),
+                  Row(
+                    children: [
+                      Text(context.loc.recent,
+                          style: TextStyles.h6
+                              .copyWith(fontWeight: FontWeight.w500)),
+                      const HSpace(5),
+                      Icon(
+                        setReviewVisibility
+                            ? Icons.keyboard_arrow_down_outlined
+                            : Icons.keyboard_arrow_right_rounded,
+                        color: theme.greyWeakTwo,
+                      ),
+                    ],
+                  )
+                ],
+              ).clickable(() {
+                setReviewVisibility = !setReviewVisibility;
+                setState(() {});
+              }),
+              const VSpace(20),
+              Expanded(
+                child: Visibility(
+                  visible: setReviewVisibility,
+                  child: LoaderStateItem(
+                    isLoading: false,
+                    item: reviews,
+                    widgetOnLoadSuccess: RefreshIndicator(
+                      onRefresh: () async {},
+                      child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: reviews.length,
+                          itemBuilder: (BuildContext context, index) =>
+                              ReviewItem(
+                                reviewObject: reviews[index],
+                              )),
+                    ),
+                  ),
+                ),
+              )
+            ],
           ),
         ),
       ),
@@ -483,16 +463,154 @@ class _AddReviewScreenState extends State<AddReviewScreen>
   }
 }
 
-class ChekInAppDivider extends StatelessWidget {
-  const ChekInAppDivider({
+class ReviewItem extends StatefulWidget {
+  const ReviewItem({
     super.key,
+    required this.reviewObject,
   });
+
+  final BusinessReviewModel reviewObject;
+
+  @override
+  State<ReviewItem> createState() => _ReviewItemState();
+}
+
+class _ReviewItemState extends State<ReviewItem> {
+  @override
+  Widget build(BuildContext context) {
+    AppTheme theme = context.watch();
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 7.0),
+      child: ColorBox(
+          onTap: () {},
+          color: theme.primary,
+          child: Column(
+            children: [
+              SizedBox(
+                child: Row(
+                  children: [
+                    CircleAvatar(
+                      backgroundColor: Colors.transparent,
+                      backgroundImage: AssetImage(
+                        R.png.man.imgPng,
+                      ),
+                      onBackgroundImageError: (_, err) => Icon(
+                        Icons.image_outlined,
+                        color: theme.grey,
+                      ),
+                    ),
+                    const HSpace(5),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.reviewObject.user,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyles.body2.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          Text(
+                            '8hrs ago',
+                            style: TextStyles.body2.copyWith(
+                                fontWeight: FontWeight.w500, fontSize: 13),
+                          ),
+                        ],
+                      ),
+                    ),
+                    StarRatingItem(
+                        ratings: widget.reviewObject.rating,
+                        onTapRating: (val) {})
+                  ],
+                ),
+              ),
+              const VSpace(14),
+              Text(
+                widget.reviewObject.review,
+                textAlign: TextAlign.center,
+                style: TextStyles.body2.copyWith(
+                    color: theme.greyWeakTwo,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 13),
+              ),
+            ],
+          )),
+    );
+  }
+}
+
+class StarRatingItem extends StatefulWidget {
+  const StarRatingItem({super.key, required this.ratings, this.onTapRating});
+
+  final String ratings;
+  final Function(int val)? onTapRating;
+  @override
+  State<StarRatingItem> createState() => _StarRatingItemState();
+}
+
+class _StarRatingItemState extends State<StarRatingItem> {
+  @override
+  initState() {
+    super.initState();
+    generateEquivalentRating();
+  }
+
+  List<int> rateEquivalent = [];
+
+  generateEquivalentRating({int? length}) {
+    late int rating;
+    if (length == null) {
+      rating = double.parse(widget.ratings).toInt();
+    } else {
+      setState(() {
+        rating = length;
+      });
+    }
+    rateEquivalent = List.generate(rating, (index) => index);
+  }
 
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
+    return SizedBox(
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: List.generate(5, (index) {
+          return InkWell(
+            borderRadius: Corners.s8Border,
+            onTap: widget.onTapRating == null
+                ? () {
+                    generateEquivalentRating(length: index + 1);
+                  }
+                : () {
+                    generateEquivalentRating(length: index + 1);
+                    widget.onTapRating!(index + 1);
+                  },
+            child: Icon(
+              Icons.star_rounded,
+              color: rateEquivalent.contains(index) == true
+                  ? Colors.yellow.shade800
+                  : theme.greyWeakTwo,
+              size: 15,
+            ),
+          );
+        }),
+      ),
+    );
+  }
+}
+
+class ChekInAppDivider extends StatelessWidget {
+  const ChekInAppDivider({super.key, this.color});
+  final Color? color;
+  @override
+  Widget build(BuildContext context) {
+    AppTheme theme = context.watch();
     return Divider(
-      color: theme.greyWeakTwo,
+      color: color ?? theme.greyWeakTwo,
     );
   }
 }
@@ -541,8 +659,7 @@ class _AddingReviewsFormState extends State<AddingReviewsForm> {
                 onTap: () {},
                 color: const Color(0xFFFFE4CC).withOpacity(.79),
                 child: SizedBox(
-                    height: 120,
-                    child: Image.asset(selectedProduct.productImage)),
+                    height: 120, child: Image.asset(selectedProduct.images[0])),
               ),
               const HSpace(5),
               Column(
@@ -551,7 +668,7 @@ class _AddingReviewsFormState extends State<AddingReviewsForm> {
                   Wrap(
                     children: [
                       Text(
-                        selectedProduct.storeName,
+                        selectedProduct.business,
                         style: TextStyles.body1
                             .copyWith(fontWeight: FontWeight.w500),
                       ),
@@ -564,7 +681,7 @@ class _AddingReviewsFormState extends State<AddingReviewsForm> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        selectedProduct.storeName,
+                        selectedProduct.name,
                         style:
                             TextStyles.h6.copyWith(fontWeight: FontWeight.w700),
                       ),

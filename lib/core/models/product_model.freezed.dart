@@ -20,12 +20,16 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ProductModel {
-  String get productImage => throw _privateConstructorUsedError;
-  String get itemName => throw _privateConstructorUsedError;
-  String get storeName => throw _privateConstructorUsedError;
-  String get price => throw _privateConstructorUsedError;
-  String get desc => throw _privateConstructorUsedError;
-  String get luxCode => throw _privateConstructorUsedError;
+  @JsonKey(name: '_id')
+  String get id => throw _privateConstructorUsedError;
+  String get business => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get info => throw _privateConstructorUsedError;
+  String get category => throw _privateConstructorUsedError;
+  List<dynamic> get images => throw _privateConstructorUsedError;
+  double get price => throw _privateConstructorUsedError;
+  String get createdAt => throw _privateConstructorUsedError;
+  String get updatedAt => throw _privateConstructorUsedError;
   bool get isStoreVerified => throw _privateConstructorUsedError;
   bool get isStoreFavorite => throw _privateConstructorUsedError;
 
@@ -42,12 +46,15 @@ abstract class $ProductModelCopyWith<$Res> {
       _$ProductModelCopyWithImpl<$Res, ProductModel>;
   @useResult
   $Res call(
-      {String productImage,
-      String itemName,
-      String storeName,
-      String price,
-      String desc,
-      String luxCode,
+      {@JsonKey(name: '_id') String id,
+      String business,
+      String name,
+      String info,
+      String category,
+      List<dynamic> images,
+      double price,
+      String createdAt,
+      String updatedAt,
       bool isStoreVerified,
       bool isStoreFavorite});
 }
@@ -65,39 +72,54 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? productImage = null,
-    Object? itemName = null,
-    Object? storeName = null,
+    Object? id = null,
+    Object? business = null,
+    Object? name = null,
+    Object? info = null,
+    Object? category = null,
+    Object? images = null,
     Object? price = null,
-    Object? desc = null,
-    Object? luxCode = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
     Object? isStoreVerified = null,
     Object? isStoreFavorite = null,
   }) {
     return _then(_value.copyWith(
-      productImage: null == productImage
-          ? _value.productImage
-          : productImage // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      itemName: null == itemName
-          ? _value.itemName
-          : itemName // ignore: cast_nullable_to_non_nullable
+      business: null == business
+          ? _value.business
+          : business // ignore: cast_nullable_to_non_nullable
               as String,
-      storeName: null == storeName
-          ? _value.storeName
-          : storeName // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
+      info: null == info
+          ? _value.info
+          : info // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      images: null == images
+          ? _value.images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
+              as double,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
-      desc: null == desc
-          ? _value.desc
-          : desc // ignore: cast_nullable_to_non_nullable
-              as String,
-      luxCode: null == luxCode
-          ? _value.luxCode
-          : luxCode // ignore: cast_nullable_to_non_nullable
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
       isStoreVerified: null == isStoreVerified
           ? _value.isStoreVerified
@@ -120,12 +142,15 @@ abstract class _$$_ProductModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String productImage,
-      String itemName,
-      String storeName,
-      String price,
-      String desc,
-      String luxCode,
+      {@JsonKey(name: '_id') String id,
+      String business,
+      String name,
+      String info,
+      String category,
+      List<dynamic> images,
+      double price,
+      String createdAt,
+      String updatedAt,
       bool isStoreVerified,
       bool isStoreFavorite});
 }
@@ -141,39 +166,54 @@ class __$$_ProductModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? productImage = null,
-    Object? itemName = null,
-    Object? storeName = null,
+    Object? id = null,
+    Object? business = null,
+    Object? name = null,
+    Object? info = null,
+    Object? category = null,
+    Object? images = null,
     Object? price = null,
-    Object? desc = null,
-    Object? luxCode = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
     Object? isStoreVerified = null,
     Object? isStoreFavorite = null,
   }) {
     return _then(_$_ProductModel(
-      productImage: null == productImage
-          ? _value.productImage
-          : productImage // ignore: cast_nullable_to_non_nullable
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
               as String,
-      itemName: null == itemName
-          ? _value.itemName
-          : itemName // ignore: cast_nullable_to_non_nullable
+      business: null == business
+          ? _value.business
+          : business // ignore: cast_nullable_to_non_nullable
               as String,
-      storeName: null == storeName
-          ? _value.storeName
-          : storeName // ignore: cast_nullable_to_non_nullable
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
               as String,
+      info: null == info
+          ? _value.info
+          : info // ignore: cast_nullable_to_non_nullable
+              as String,
+      category: null == category
+          ? _value.category
+          : category // ignore: cast_nullable_to_non_nullable
+              as String,
+      images: null == images
+          ? _value._images
+          : images // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
       price: null == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
+              as double,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
-      desc: null == desc
-          ? _value.desc
-          : desc // ignore: cast_nullable_to_non_nullable
-              as String,
-      luxCode: null == luxCode
-          ? _value.luxCode
-          : luxCode // ignore: cast_nullable_to_non_nullable
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
       isStoreVerified: null == isStoreVerified
           ? _value.isStoreVerified
@@ -191,36 +231,55 @@ class __$$_ProductModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ProductModel with DiagnosticableTreeMixin implements _ProductModel {
   _$_ProductModel(
-      {this.productImage = '',
-      this.itemName = '',
-      this.storeName = '',
-      this.price = '',
-      this.desc = '',
-      this.luxCode = '',
+      {@JsonKey(name: '_id') this.id = '',
+      this.business = '',
+      this.name = '',
+      this.info = '',
+      this.category = '',
+      final List<dynamic> images = const [],
+      this.price = 0,
+      this.createdAt = '',
+      this.updatedAt = '',
       this.isStoreVerified = false,
-      this.isStoreFavorite = false});
+      this.isStoreFavorite = false})
+      : _images = images;
 
   factory _$_ProductModel.fromJson(Map<String, dynamic> json) =>
       _$$_ProductModelFromJson(json);
 
   @override
-  @JsonKey()
-  final String productImage;
+  @JsonKey(name: '_id')
+  final String id;
   @override
   @JsonKey()
-  final String itemName;
+  final String business;
   @override
   @JsonKey()
-  final String storeName;
+  final String name;
   @override
   @JsonKey()
-  final String price;
+  final String info;
   @override
   @JsonKey()
-  final String desc;
+  final String category;
+  final List<dynamic> _images;
   @override
   @JsonKey()
-  final String luxCode;
+  List<dynamic> get images {
+    if (_images is EqualUnmodifiableListView) return _images;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_images);
+  }
+
+  @override
+  @JsonKey()
+  final double price;
+  @override
+  @JsonKey()
+  final String createdAt;
+  @override
+  @JsonKey()
+  final String updatedAt;
   @override
   @JsonKey()
   final bool isStoreVerified;
@@ -230,7 +289,7 @@ class _$_ProductModel with DiagnosticableTreeMixin implements _ProductModel {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ProductModel(productImage: $productImage, itemName: $itemName, storeName: $storeName, price: $price, desc: $desc, luxCode: $luxCode, isStoreVerified: $isStoreVerified, isStoreFavorite: $isStoreFavorite)';
+    return 'ProductModel(id: $id, business: $business, name: $name, info: $info, category: $category, images: $images, price: $price, createdAt: $createdAt, updatedAt: $updatedAt, isStoreVerified: $isStoreVerified, isStoreFavorite: $isStoreFavorite)';
   }
 
   @override
@@ -238,12 +297,15 @@ class _$_ProductModel with DiagnosticableTreeMixin implements _ProductModel {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'ProductModel'))
-      ..add(DiagnosticsProperty('productImage', productImage))
-      ..add(DiagnosticsProperty('itemName', itemName))
-      ..add(DiagnosticsProperty('storeName', storeName))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('business', business))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('info', info))
+      ..add(DiagnosticsProperty('category', category))
+      ..add(DiagnosticsProperty('images', images))
       ..add(DiagnosticsProperty('price', price))
-      ..add(DiagnosticsProperty('desc', desc))
-      ..add(DiagnosticsProperty('luxCode', luxCode))
+      ..add(DiagnosticsProperty('createdAt', createdAt))
+      ..add(DiagnosticsProperty('updatedAt', updatedAt))
       ..add(DiagnosticsProperty('isStoreVerified', isStoreVerified))
       ..add(DiagnosticsProperty('isStoreFavorite', isStoreFavorite));
   }
@@ -253,15 +315,19 @@ class _$_ProductModel with DiagnosticableTreeMixin implements _ProductModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ProductModel &&
-            (identical(other.productImage, productImage) ||
-                other.productImage == productImage) &&
-            (identical(other.itemName, itemName) ||
-                other.itemName == itemName) &&
-            (identical(other.storeName, storeName) ||
-                other.storeName == storeName) &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.business, business) ||
+                other.business == business) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.info, info) || other.info == info) &&
+            (identical(other.category, category) ||
+                other.category == category) &&
+            const DeepCollectionEquality().equals(other._images, _images) &&
             (identical(other.price, price) || other.price == price) &&
-            (identical(other.desc, desc) || other.desc == desc) &&
-            (identical(other.luxCode, luxCode) || other.luxCode == luxCode) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
             (identical(other.isStoreVerified, isStoreVerified) ||
                 other.isStoreVerified == isStoreVerified) &&
             (identical(other.isStoreFavorite, isStoreFavorite) ||
@@ -270,8 +336,19 @@ class _$_ProductModel with DiagnosticableTreeMixin implements _ProductModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, productImage, itemName,
-      storeName, price, desc, luxCode, isStoreVerified, isStoreFavorite);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      business,
+      name,
+      info,
+      category,
+      const DeepCollectionEquality().hash(_images),
+      price,
+      createdAt,
+      updatedAt,
+      isStoreVerified,
+      isStoreFavorite);
 
   @JsonKey(ignore: true)
   @override
@@ -289,12 +366,15 @@ class _$_ProductModel with DiagnosticableTreeMixin implements _ProductModel {
 
 abstract class _ProductModel implements ProductModel {
   factory _ProductModel(
-      {final String productImage,
-      final String itemName,
-      final String storeName,
-      final String price,
-      final String desc,
-      final String luxCode,
+      {@JsonKey(name: '_id') final String id,
+      final String business,
+      final String name,
+      final String info,
+      final String category,
+      final List<dynamic> images,
+      final double price,
+      final String createdAt,
+      final String updatedAt,
       final bool isStoreVerified,
       final bool isStoreFavorite}) = _$_ProductModel;
 
@@ -302,17 +382,24 @@ abstract class _ProductModel implements ProductModel {
       _$_ProductModel.fromJson;
 
   @override
-  String get productImage;
+  @JsonKey(name: '_id')
+  String get id;
   @override
-  String get itemName;
+  String get business;
   @override
-  String get storeName;
+  String get name;
   @override
-  String get price;
+  String get info;
   @override
-  String get desc;
+  String get category;
   @override
-  String get luxCode;
+  List<dynamic> get images;
+  @override
+  double get price;
+  @override
+  String get createdAt;
+  @override
+  String get updatedAt;
   @override
   bool get isStoreVerified;
   @override

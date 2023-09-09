@@ -1,6 +1,14 @@
+import 'package:chekinapp/core/commands/business_command.dart';
+import 'package:chekinapp/core/providers/business_provider.dart';
+import 'package:chekinapp/routes/document_upload/upload_document_main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 import 'dart:math' as math;
+
+import '../../utils/imagepicker/image_picker_choice.dart';
+import '../../utils/imagepicker/provider/image_provider.dart';
+import 'components/bottomsheet_selector.dart';
+import 'components/upload_indicator.dart';
 
 class UploadValidIDsScreen extends StatefulWidget {
   const UploadValidIDsScreen({Key? key}) : super(key: key);
@@ -10,10 +18,16 @@ class UploadValidIDsScreen extends StatefulWidget {
 }
 
 class _UploadValidIDsScreenState extends State<UploadValidIDsScreen> {
+  String documentType = '';
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
 
+    //the image path selected
+    String image = context.select((ImageProviders provider) => provider.image);
+    BusinessProvider business = context.watch<BusinessProvider>();
+    int pageIndex = context
+        .select((UploadProvider provider) => provider.currentUploadIndex);
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -53,7 +67,7 @@ class _UploadValidIDsScreenState extends State<UploadValidIDsScreen> {
                 CustomBottomSheetSelector(
                   heightFraction: 0.3,
                   onSelectItem: (item) {
-                    print(item);
+                    documentType = item;
                   },
                   items: [
                     'Voters card',
@@ -63,50 +77,9 @@ class _UploadValidIDsScreenState extends State<UploadValidIDsScreen> {
                   ],
                 ),
                 const VSpace(34),
-                Align(
-                  alignment: Alignment.center,
-                  child: DashedRect(
-                    color: theme.primary,
-                    fChild: SizedBox(
-                      height: 240,
-                      width: context.sp(335),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                              height: 114,
-                              width: 114,
-                              child: SvgPicture.asset(
-                                R.png.cloudUploading.svg,
-                              )),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                context.loc.frontPlease,
-                                style: TextStyles.body1
-                                    .copyWith(fontWeight: FontWeight.w900),
-                              ),
-                              Text(
-                                '*',
-                                style: TextStyles.h5.copyWith(
-                                    height: 1.5,
-                                    color: theme.redButton,
-                                    fontWeight: FontWeight.w900),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                const DocumentPickerItem(),
                 const VSpace(30),
-                UploadIndicator(
-                  uploadValue: 0.4,
-                  status: 'Completed',
-                ),
+                const UploadIndicatorItem(),
               ],
             ),
 
@@ -116,12 +89,36 @@ class _UploadValidIDsScreenState extends State<UploadValidIDsScreen> {
                 bottom: 20.0,
               ),
               child: PrimaryButton(
-                onPressed: () {},
-                label: context.loc.conti,
+                onPressed: () async {
+                  if (image != '' &&
+                      business.uploadStatus != UploadStatus.completed &&
+                      documentType != '') {
+                    await BusinessCommand(context).updateBusinessDocument(
+                      'idUpload',
+                      image,
+                    );
+                  } else if (documentType == '') {
+                    DialogServices.messageModalFromTop(context,
+                        message:
+                            'Please select the type of document to upload first',
+                        notificationType: NotificationType.error);
+                  } else {
+                    context.read<UploadProvider>().setCurrentUploadIndex =
+                        pageIndex + 1;
+                    // context.read<UploadProvider>().setCurrentUploadIndex = 1;
+                    context.read<BusinessProvider>().resetUploadProgress();
+                    context.read<ImageProviders>().clearSingleImagePath();
+                  }
+                },
+                label: image != '' &&
+                        business.uploadStatus != UploadStatus.completed
+                    ? context.loc.upload
+                    : context.loc.conti,
                 radius: 20,
                 fullWidth: true,
-                color: Colors.transparent,
-                textColor: theme.black,
+                loading: business.isBusy,
+                color: business.isBusy ? theme.primary : Colors.transparent,
+                textColor: business.isBusy ? Colors.white : theme.black,
                 borderColor: theme.primary.withOpacity(0.48),
                 contentPadding: const EdgeInsets.symmetric(vertical: 18),
               ),
@@ -134,200 +131,132 @@ class _UploadValidIDsScreenState extends State<UploadValidIDsScreen> {
   }
 }
 
-class CustomBottomSheetSelector extends StatefulWidget {
-  const CustomBottomSheetSelector(
-      {super.key, this.onSelectItem, required this.items, this.heightFraction});
+class DocumentPickerItem extends StatelessWidget {
+  const DocumentPickerItem(
+      {super.key, this.textTitle, this.useOnlyCamera = false});
 
-  ///the desired height of the bottom sheet from[0-1]
-  final double? heightFraction;
-  final Function(dynamic selectedItem)? onSelectItem;
-  final List<String> items;
-  @override
-  State<CustomBottomSheetSelector> createState() =>
-      _CustomBottomSheetSelectorState();
-}
-
-class _CustomBottomSheetSelectorState extends State<CustomBottomSheetSelector> {
-  String selectedValue = 'Value';
-
+  final String? textTitle;
+  final bool useOnlyCamera;
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
-    return Container(
-      height: 50,
-      padding: EdgeInsets.symmetric(horizontal: context.sp(10)),
-      decoration: BoxDecoration(
-          border: Border.all(
-            color: theme.primary,
-          ),
-          borderRadius: Corners.s20Border),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            selectedValue,
-            style: TextStyles.body1,
-          ),
-          Icon(
-            Icons.keyboard_arrow_down,
-            size: 30,
-          )
-        ],
-      ),
-    ).clickable(() {
-      showModalBottomSheet(
-          // elevation: 1,
-          barrierColor: const Color(0xff969691).withOpacity(0.57),
-          shape: RoundedRectangleBorder(borderRadius: Corners.s8Border),
-          context: context,
-          builder: (_) => Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(
-                    height: widget.heightFraction != null
-                        ? (context.heightPx * widget.heightFraction!)
-                        : context.heightPx * 0.3,
-                    child: ListView.builder(
-                        itemCount: widget.items.length,
-                        padding: const EdgeInsets.symmetric(horizontal: 20),
-                        itemBuilder: (_, index) {
-                          String? selected;
-                          return Center(
-                              child: GestureDetector(
-                            onTap: () {
-                              if (widget.onSelectItem != null) {
-                                widget.onSelectItem!(widget.items[index]);
-                              } else {
-                                selected = widget.items[index];
-                              }
-                              selectedValue = widget.items[index];
-                              setState(() {});
-                              Navigator.of(context).pop();
-                            },
-                            child: Material(
-                              color: selected == widget.items[index]
-                                  ? theme.redButton
-                                  : Colors.transparent,
-                              borderRadius: Corners.s10Border,
-                              child: Container(
-                                margin: const EdgeInsets.only(top: 8),
-                                alignment: Alignment.center,
-                                height: 50,
-                                child: Text(
-                                  widget.items[index],
-                                  style: TextStyles.h5.copyWith(
-                                      color: theme.greyWeak,
-                                      fontWeight: FontWeight.w500),
-                                ),
+
+    //the image path selected
+    String image = context.select((ImageProviders provider) => provider.image);
+    BusinessProvider business = context.watch<BusinessProvider>();
+
+    return Align(
+      alignment: Alignment.center,
+      child: DashedRect(
+        color: theme.primary,
+        fChild: SizedBox(
+            height: 240,
+            width: context.sp(335),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5),
+              child: image != ''
+                  ? Center(
+                      child: Stack(
+                        children: [
+                          Image.file(
+                            File(image),
+                          ),
+                          Positioned(
+                            right: 0,
+                            child: CustomContainer(
+                              height: 35.0,
+                              width: 35.0,
+                              borderRadius: Corners.s5Border,
+                              color: Colors.grey.withOpacity(0.5),
+                              child: Icon(
+                                Icons.close_rounded,
+                                color: theme.redButton,
                               ),
-                            ),
-                          ));
-                        }),
-                  )
-                ],
-              ));
-    });
-  }
-}
-// class CustomBottomSheetSelector extends StatelessWidget {
-//   const CustomBottomSheetSelector(
-//       {super.key, this.onSelectItem, this.heightFraction});
-//
-//   ///the desired height of the bottom sheet from[0-1]
-//   final double? heightFraction;
-//   final Function(dynamic selectedItem)? onSelectItem;
-//   @override
-//   Widget build(BuildContext context) {
-//     AppTheme theme = context.watch();
-//     return Container(
-//       height: 50,
-//       padding: EdgeInsets.symmetric(horizontal: context.sp(10)),
-//       decoration: BoxDecoration(
-//           border: Border.all(
-//             color: theme.primary,
-//           ),
-//           borderRadius: Corners.s20Border),
-//       child: Row(
-//         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//         children: [
-//           Text(
-//             'Value Here',
-//             style: TextStyles.body1,
-//           ),
-//           Icon(
-//             Icons.keyboard_arrow_down,
-//             size: 30,
-//           )
-//         ],
-//       ),
-//     ).clickable(() {
-//       showModalBottomSheet(
-//           // elevation: 1,
-//           barrierColor: const Color(0xff969691).withOpacity(0.57),
-//           shape: RoundedRectangleBorder(borderRadius: Corners.s8Border),
-//           context: context,
-//           builder: (_) => Column(
-//                 mainAxisSize: MainAxisSize.min,
-//                 children: [
-//                   Container(
-//                     height: heightFraction != null
-//                         ? (context.heightPx * heightFraction!)
-//                         : context.heightPx * 0.3,
-//                     child: Column(
-//                       children: [Text('hi')],
-//                     ),
-//                   )
-//                 ],
-//               ));
-//     });
-//   }
-// }
+                            ).clickable(() {
+                              context
+                                  .read<ImageProviders>()
+                                  .clearSingleImagePath();
+                              context
+                                  .read<BusinessProvider>()
+                                  .resetUploadProgress();
+                            }),
+                          )
+                        ],
+                      ),
+                    )
+                  : business.uploadStatus == UploadStatus.completed
+                      ? UnconstrainedBox(
+                          child: CustomContainer(
+                            color: theme.greenButton,
+                            height: context.sp(160),
+                            width: context.sp(210),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                const SizedBox(
+                                    height: 80,
+                                    width: 80,
+                                    child: Icon(
+                                      Icons.check_circle,
+                                      size: 75.0,
+                                      color: Colors.white,
+                                    )),
 
-class UploadIndicator extends StatelessWidget {
-  const UploadIndicator({
-    super.key,
-    this.status,
-    this.uploadValue = 0,
-  });
-  final double uploadValue;
-  final String? status;
-  @override
-  Widget build(BuildContext context) {
-    AppTheme theme = context.watch();
-    return Column(
-      children: [
-        ClipRRect(
-          borderRadius: Corners.s8Border,
-          child: LinearProgressIndicator(
-            value: uploadValue,
-            minHeight: 20,
-            backgroundColor: theme.greyTextFieldFill,
-          ),
-        ),
-        const VSpace(20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              '${(uploadValue * 100).truncate()}%',
-              style: TextStyles.body3.copyWith(
-                  fontWeight: FontWeight.w500, fontSize: 14, color: theme.txt),
-            ),
-            Text(
-              status ?? context.loc.upload,
-              style: TextStyles.body3.copyWith(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14,
-                  color: uploadValue < 1 ? theme.txt : theme.greenButton),
-            ),
-            Text(
-              '100%',
-              style: TextStyles.body3.copyWith(
-                  fontWeight: FontWeight.w500, fontSize: 14, color: theme.txt),
-            ),
-          ],
-        ),
-      ],
+                                ///
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      context.loc.completed,
+                                      style: TextStyles.body1.copyWith(
+                                          fontWeight: FontWeight.w900,
+                                          color: Colors.white),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        )
+                      : Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                                height: 114,
+                                width: 114,
+                                child: SvgPicture.asset(
+                                  R.png.cloudUploading.svg,
+                                )),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  textTitle ?? context.loc.frontPlease,
+                                  style: TextStyles.body1
+                                      .copyWith(fontWeight: FontWeight.w900),
+                                ),
+                                Text(
+                                  '*',
+                                  style: TextStyles.h5.copyWith(
+                                      height: 1.5,
+                                      color: theme.redButton,
+                                      fontWeight: FontWeight.w900),
+                                )
+                              ],
+                            ),
+                          ],
+                        ),
+            )),
+      ).clickable(() {
+        CustomBottomSheet.openBottomSheet(
+            context,
+            sizeFraction: 0.2,
+            ImagePickerChoice(
+              useOnlyCamera: useOnlyCamera,
+            ));
+      }),
     );
   }
 }

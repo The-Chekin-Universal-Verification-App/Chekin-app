@@ -23,7 +23,7 @@ extension ClickableExtensions on Widget {
       children: <Widget>[
         Padding(
           padding:
-              padding ?? const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+              padding ?? const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
           child: this,
         ),
         Positioned(
@@ -33,6 +33,7 @@ extension ClickableExtensions on Widget {
           bottom: 0,
           child: TextButton(
             style: TextButton.styleFrom(
+              foregroundColor: Colors.blueGrey.shade100,
               shape: RoundedRectangleBorder(
                 borderRadius: clickBorderRadius ?? Corners.s8Border,
               ),

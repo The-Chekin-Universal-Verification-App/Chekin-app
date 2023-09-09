@@ -22,6 +22,8 @@ BusinessModel _$BusinessModelFromJson(Map<String, dynamic> json) {
 mixin _$BusinessModel {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: '__v')
+  int get v => throw _privateConstructorUsedError;
   String get owner => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get description => throw _privateConstructorUsedError;
@@ -43,6 +45,7 @@ mixin _$BusinessModel {
   String get paymentOption => throw _privateConstructorUsedError;
   bool get isActive => throw _privateConstructorUsedError;
   String get currentSubscription => throw _privateConstructorUsedError;
+  String get businessImage => throw _privateConstructorUsedError;
   String get luxCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -59,6 +62,7 @@ abstract class $BusinessModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
+      @JsonKey(name: '__v') int v,
       String owner,
       String name,
       String description,
@@ -80,6 +84,7 @@ abstract class $BusinessModelCopyWith<$Res> {
       String paymentOption,
       bool isActive,
       String currentSubscription,
+      String businessImage,
       String luxCode});
 }
 
@@ -97,6 +102,7 @@ class _$BusinessModelCopyWithImpl<$Res, $Val extends BusinessModel>
   @override
   $Res call({
     Object? id = null,
+    Object? v = null,
     Object? owner = null,
     Object? name = null,
     Object? description = null,
@@ -118,6 +124,7 @@ class _$BusinessModelCopyWithImpl<$Res, $Val extends BusinessModel>
     Object? paymentOption = null,
     Object? isActive = null,
     Object? currentSubscription = null,
+    Object? businessImage = null,
     Object? luxCode = null,
   }) {
     return _then(_value.copyWith(
@@ -125,6 +132,10 @@ class _$BusinessModelCopyWithImpl<$Res, $Val extends BusinessModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      v: null == v
+          ? _value.v
+          : v // ignore: cast_nullable_to_non_nullable
+              as int,
       owner: null == owner
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
@@ -208,6 +219,10 @@ class _$BusinessModelCopyWithImpl<$Res, $Val extends BusinessModel>
       currentSubscription: null == currentSubscription
           ? _value.currentSubscription
           : currentSubscription // ignore: cast_nullable_to_non_nullable
+              as String,
+      businessImage: null == businessImage
+          ? _value.businessImage
+          : businessImage // ignore: cast_nullable_to_non_nullable
               as String,
       luxCode: null == luxCode
           ? _value.luxCode
@@ -227,6 +242,7 @@ abstract class _$$_BusinessModelCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
+      @JsonKey(name: '__v') int v,
       String owner,
       String name,
       String description,
@@ -248,6 +264,7 @@ abstract class _$$_BusinessModelCopyWith<$Res>
       String paymentOption,
       bool isActive,
       String currentSubscription,
+      String businessImage,
       String luxCode});
 }
 
@@ -263,6 +280,7 @@ class __$$_BusinessModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
+    Object? v = null,
     Object? owner = null,
     Object? name = null,
     Object? description = null,
@@ -284,6 +302,7 @@ class __$$_BusinessModelCopyWithImpl<$Res>
     Object? paymentOption = null,
     Object? isActive = null,
     Object? currentSubscription = null,
+    Object? businessImage = null,
     Object? luxCode = null,
   }) {
     return _then(_$_BusinessModel(
@@ -291,6 +310,10 @@ class __$$_BusinessModelCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
+      v: null == v
+          ? _value.v
+          : v // ignore: cast_nullable_to_non_nullable
+              as int,
       owner: null == owner
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
@@ -375,6 +398,10 @@ class __$$_BusinessModelCopyWithImpl<$Res>
           ? _value.currentSubscription
           : currentSubscription // ignore: cast_nullable_to_non_nullable
               as String,
+      businessImage: null == businessImage
+          ? _value.businessImage
+          : businessImage // ignore: cast_nullable_to_non_nullable
+              as String,
       luxCode: null == luxCode
           ? _value.luxCode
           : luxCode // ignore: cast_nullable_to_non_nullable
@@ -388,6 +415,7 @@ class __$$_BusinessModelCopyWithImpl<$Res>
 class _$_BusinessModel with DiagnosticableTreeMixin implements _BusinessModel {
   _$_BusinessModel(
       {@JsonKey(name: '_id') this.id = '',
+      @JsonKey(name: '__v') this.v = 0,
       this.owner = '',
       this.name = '',
       this.description = '',
@@ -409,6 +437,7 @@ class _$_BusinessModel with DiagnosticableTreeMixin implements _BusinessModel {
       this.paymentOption = '',
       this.isActive = false,
       this.currentSubscription = '',
+      this.businessImage = '',
       this.luxCode = ''});
 
   factory _$_BusinessModel.fromJson(Map<String, dynamic> json) =>
@@ -417,6 +446,9 @@ class _$_BusinessModel with DiagnosticableTreeMixin implements _BusinessModel {
   @override
   @JsonKey(name: '_id')
   final String id;
+  @override
+  @JsonKey(name: '__v')
+  final int v;
   @override
   @JsonKey()
   final String owner;
@@ -482,11 +514,14 @@ class _$_BusinessModel with DiagnosticableTreeMixin implements _BusinessModel {
   final String currentSubscription;
   @override
   @JsonKey()
+  final String businessImage;
+  @override
+  @JsonKey()
   final String luxCode;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BusinessModel(id: $id, owner: $owner, name: $name, description: $description, lga: $lga, state: $state, city: $city, nearestLandmark: $nearestLandmark, dateEstablished: $dateEstablished, phoneNumber1: $phoneNumber1, phoneNumber2: $phoneNumber2, email1: $email1, email2: $email2, instagram: $instagram, twitter: $twitter, facebook: $facebook, tiktok: $tiktok, linkedIn: $linkedIn, verified: $verified, paymentOption: $paymentOption, isActive: $isActive, currentSubscription: $currentSubscription, luxCode: $luxCode)';
+    return 'BusinessModel(id: $id, v: $v, owner: $owner, name: $name, description: $description, lga: $lga, state: $state, city: $city, nearestLandmark: $nearestLandmark, dateEstablished: $dateEstablished, phoneNumber1: $phoneNumber1, phoneNumber2: $phoneNumber2, email1: $email1, email2: $email2, instagram: $instagram, twitter: $twitter, facebook: $facebook, tiktok: $tiktok, linkedIn: $linkedIn, verified: $verified, paymentOption: $paymentOption, isActive: $isActive, currentSubscription: $currentSubscription, businessImage: $businessImage, luxCode: $luxCode)';
   }
 
   @override
@@ -495,6 +530,7 @@ class _$_BusinessModel with DiagnosticableTreeMixin implements _BusinessModel {
     properties
       ..add(DiagnosticsProperty('type', 'BusinessModel'))
       ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('v', v))
       ..add(DiagnosticsProperty('owner', owner))
       ..add(DiagnosticsProperty('name', name))
       ..add(DiagnosticsProperty('description', description))
@@ -516,6 +552,7 @@ class _$_BusinessModel with DiagnosticableTreeMixin implements _BusinessModel {
       ..add(DiagnosticsProperty('paymentOption', paymentOption))
       ..add(DiagnosticsProperty('isActive', isActive))
       ..add(DiagnosticsProperty('currentSubscription', currentSubscription))
+      ..add(DiagnosticsProperty('businessImage', businessImage))
       ..add(DiagnosticsProperty('luxCode', luxCode));
   }
 
@@ -525,6 +562,7 @@ class _$_BusinessModel with DiagnosticableTreeMixin implements _BusinessModel {
         (other.runtimeType == runtimeType &&
             other is _$_BusinessModel &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.v, v) || other.v == v) &&
             (identical(other.owner, owner) || other.owner == owner) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.description, description) ||
@@ -558,6 +596,8 @@ class _$_BusinessModel with DiagnosticableTreeMixin implements _BusinessModel {
                 other.isActive == isActive) &&
             (identical(other.currentSubscription, currentSubscription) ||
                 other.currentSubscription == currentSubscription) &&
+            (identical(other.businessImage, businessImage) ||
+                other.businessImage == businessImage) &&
             (identical(other.luxCode, luxCode) || other.luxCode == luxCode));
   }
 
@@ -566,6 +606,7 @@ class _$_BusinessModel with DiagnosticableTreeMixin implements _BusinessModel {
   int get hashCode => Object.hashAll([
         runtimeType,
         id,
+        v,
         owner,
         name,
         description,
@@ -587,6 +628,7 @@ class _$_BusinessModel with DiagnosticableTreeMixin implements _BusinessModel {
         paymentOption,
         isActive,
         currentSubscription,
+        businessImage,
         luxCode
       ]);
 
@@ -607,6 +649,7 @@ class _$_BusinessModel with DiagnosticableTreeMixin implements _BusinessModel {
 abstract class _BusinessModel implements BusinessModel {
   factory _BusinessModel(
       {@JsonKey(name: '_id') final String id,
+      @JsonKey(name: '__v') final int v,
       final String owner,
       final String name,
       final String description,
@@ -628,6 +671,7 @@ abstract class _BusinessModel implements BusinessModel {
       final String paymentOption,
       final bool isActive,
       final String currentSubscription,
+      final String businessImage,
       final String luxCode}) = _$_BusinessModel;
 
   factory _BusinessModel.fromJson(Map<String, dynamic> json) =
@@ -636,6 +680,9 @@ abstract class _BusinessModel implements BusinessModel {
   @override
   @JsonKey(name: '_id')
   String get id;
+  @override
+  @JsonKey(name: '__v')
+  int get v;
   @override
   String get owner;
   @override
@@ -679,9 +726,182 @@ abstract class _BusinessModel implements BusinessModel {
   @override
   String get currentSubscription;
   @override
+  String get businessImage;
+  @override
   String get luxCode;
   @override
   @JsonKey(ignore: true)
   _$$_BusinessModelCopyWith<_$_BusinessModel> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+MakeBusinessReviewModel _$MakeBusinessReviewModelFromJson(
+    Map<String, dynamic> json) {
+  return _MakeBusinessReviewModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$MakeBusinessReviewModel {
+  String get rating => throw _privateConstructorUsedError;
+  String get review => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $MakeBusinessReviewModelCopyWith<MakeBusinessReviewModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $MakeBusinessReviewModelCopyWith<$Res> {
+  factory $MakeBusinessReviewModelCopyWith(MakeBusinessReviewModel value,
+          $Res Function(MakeBusinessReviewModel) then) =
+      _$MakeBusinessReviewModelCopyWithImpl<$Res, MakeBusinessReviewModel>;
+  @useResult
+  $Res call({String rating, String review});
+}
+
+/// @nodoc
+class _$MakeBusinessReviewModelCopyWithImpl<$Res,
+        $Val extends MakeBusinessReviewModel>
+    implements $MakeBusinessReviewModelCopyWith<$Res> {
+  _$MakeBusinessReviewModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? rating = null,
+    Object? review = null,
+  }) {
+    return _then(_value.copyWith(
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as String,
+      review: null == review
+          ? _value.review
+          : review // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_MakeBusinessReviewModelCopyWith<$Res>
+    implements $MakeBusinessReviewModelCopyWith<$Res> {
+  factory _$$_MakeBusinessReviewModelCopyWith(_$_MakeBusinessReviewModel value,
+          $Res Function(_$_MakeBusinessReviewModel) then) =
+      __$$_MakeBusinessReviewModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String rating, String review});
+}
+
+/// @nodoc
+class __$$_MakeBusinessReviewModelCopyWithImpl<$Res>
+    extends _$MakeBusinessReviewModelCopyWithImpl<$Res,
+        _$_MakeBusinessReviewModel>
+    implements _$$_MakeBusinessReviewModelCopyWith<$Res> {
+  __$$_MakeBusinessReviewModelCopyWithImpl(_$_MakeBusinessReviewModel _value,
+      $Res Function(_$_MakeBusinessReviewModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? rating = null,
+    Object? review = null,
+  }) {
+    return _then(_$_MakeBusinessReviewModel(
+      rating: null == rating
+          ? _value.rating
+          : rating // ignore: cast_nullable_to_non_nullable
+              as String,
+      review: null == review
+          ? _value.review
+          : review // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_MakeBusinessReviewModel
+    with DiagnosticableTreeMixin
+    implements _MakeBusinessReviewModel {
+  _$_MakeBusinessReviewModel({this.rating = '', this.review = ''});
+
+  factory _$_MakeBusinessReviewModel.fromJson(Map<String, dynamic> json) =>
+      _$$_MakeBusinessReviewModelFromJson(json);
+
+  @override
+  @JsonKey()
+  final String rating;
+  @override
+  @JsonKey()
+  final String review;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'MakeBusinessReviewModel(rating: $rating, review: $review)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'MakeBusinessReviewModel'))
+      ..add(DiagnosticsProperty('rating', rating))
+      ..add(DiagnosticsProperty('review', review));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_MakeBusinessReviewModel &&
+            (identical(other.rating, rating) || other.rating == rating) &&
+            (identical(other.review, review) || other.review == review));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, rating, review);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_MakeBusinessReviewModelCopyWith<_$_MakeBusinessReviewModel>
+      get copyWith =>
+          __$$_MakeBusinessReviewModelCopyWithImpl<_$_MakeBusinessReviewModel>(
+              this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_MakeBusinessReviewModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _MakeBusinessReviewModel implements MakeBusinessReviewModel {
+  factory _MakeBusinessReviewModel({final String rating, final String review}) =
+      _$_MakeBusinessReviewModel;
+
+  factory _MakeBusinessReviewModel.fromJson(Map<String, dynamic> json) =
+      _$_MakeBusinessReviewModel.fromJson;
+
+  @override
+  String get rating;
+  @override
+  String get review;
+  @override
+  @JsonKey(ignore: true)
+  _$$_MakeBusinessReviewModelCopyWith<_$_MakeBusinessReviewModel>
+      get copyWith => throw _privateConstructorUsedError;
 }

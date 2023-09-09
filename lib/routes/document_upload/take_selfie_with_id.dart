@@ -1,6 +1,12 @@
+import 'package:chekinapp/routes/document_upload/upload_document_main_screen.dart';
 import 'package:chekinapp/routes/document_upload/upload_valid_ids.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
+
+import '../../core/commands/business_command.dart';
+import '../../core/providers/business_provider.dart';
+import '../../utils/imagepicker/provider/image_provider.dart';
+import 'components/upload_indicator.dart';
 
 class SelfieWithIDScreen extends StatefulWidget {
   const SelfieWithIDScreen({Key? key}) : super(key: key);
@@ -13,7 +19,11 @@ class _SelfieWithIDScreenState extends State<SelfieWithIDScreen> {
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
-
+    //the image path selected
+    String image = context.select((ImageProviders provider) => provider.image);
+    BusinessProvider business = context.watch<BusinessProvider>();
+    int pageIndex = context
+        .select((UploadProvider provider) => provider.currentUploadIndex);
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -50,50 +60,11 @@ class _SelfieWithIDScreenState extends State<SelfieWithIDScreen> {
                   style: TextStyles.body1,
                 ),
                 const VSpace(34),
-                Align(
-                  alignment: Alignment.center,
-                  child: DashedRect(
-                    color: theme.primary,
-                    fChild: SizedBox(
-                      height: 240,
-                      width: context.sp(335),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                              height: 114,
-                              width: 114,
-                              child: SvgPicture.asset(
-                                R.png.cloudUploading.svg,
-                              )),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                context.loc.frontPlease,
-                                style: TextStyles.body1
-                                    .copyWith(fontWeight: FontWeight.w900),
-                              ),
-                              Text(
-                                '*',
-                                style: TextStyles.h5.copyWith(
-                                    height: 1.5,
-                                    color: theme.redButton,
-                                    fontWeight: FontWeight.w900),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                const DocumentPickerItem(
+                  useOnlyCamera: true,
                 ),
                 const VSpace(30),
-                UploadIndicator(
-                  uploadValue: 0.4,
-                  status: 'Completed',
-                ),
+                const UploadIndicatorItem(),
               ],
             ),
 
@@ -103,12 +74,33 @@ class _SelfieWithIDScreenState extends State<SelfieWithIDScreen> {
                 bottom: 20.0,
               ),
               child: PrimaryButton(
-                onPressed: () {},
-                label: context.loc.conti,
+                onPressed: () async {
+                  if (image != '' &&
+                      business.uploadStatus != UploadStatus.completed) {
+                    await BusinessCommand(context).updateBusinessDocument(
+                      'selfieHoldingId',
+                      image,
+                    );
+                  } else {
+                    context.read<UploadProvider>().setCurrentUploadIndex =
+                        pageIndex + 1;
+                    // context.read<UploadProvider>().setCurrentUploadIndex = 4;
+                    context.read<BusinessProvider>().resetUploadProgress();
+                    context.read<ImageProviders>().clearSingleImagePath();
+                  }
+                },
+                label: image != '' &&
+                        business.uploadStatus != UploadStatus.completed
+                    ? context.loc.upload
+                    : context.loc.conti,
                 radius: 20,
                 fullWidth: true,
-                color: Colors.transparent,
-                textColor: theme.black,
+                loading: business.isBusy,
+                color: image != '' || business.isBusy
+                    ? theme.primary
+                    : Colors.transparent,
+                textColor:
+                    image != '' || business.isBusy ? Colors.white : theme.black,
                 borderColor: theme.primary.withOpacity(0.48),
                 contentPadding: const EdgeInsets.symmetric(vertical: 18),
               ),

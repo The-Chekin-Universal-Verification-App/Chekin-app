@@ -10,6 +10,11 @@
     "description": "to log in user"
   },
 
+  "unVerified": "unVerified",
+  "@unVerified": {
+    "description": "unVerified user"
+  },
+
    "singMeUp": "Im new, Sign me up!",
   "@singMeUp": {
     "description": "to sign up user"
@@ -144,6 +149,13 @@
   "@enterYourPhone": {
     "description": "input phone number"
   },
+
+  "enterYourSecondPhone": "Enter your Second phone number",
+  "@enterYourSecondPhone": {
+    "description": "input 2nd phone number"
+  },
+
+
   "pickCountryCode": "Pick your country code and input the right digits",
   "@pickCountryCode": {
     "description": "pick country code"
@@ -372,7 +384,7 @@
   },
 
 
-        "twitter": "Twitter",
+        "twitter": "Twitter ( X )",
   "@twitter": {
     "description": "Twitter social medial handle"
   },
@@ -810,6 +822,11 @@
   "description": "reviews"
   },
 
+   "seeStoreReviews": "See reviews on this store",
+  "@reviews": {
+  "description": " customers seeing reviews on a store"
+  },
+
   "customersReviews": "Customers Reviews",
   "@customersReviews": {
   "description": "reviews from customers"
@@ -1204,6 +1221,16 @@
   "goBack": "<< Go back",
   "@goBack": {
   "description": "To go back"
+  },
+
+  "editSocialMedia": "Edit your social media handles",
+  "@editSocialMedia": {
+  "description": "edit your social handles"
+  },
+
+    "businesses": "Businesses",
+  "@businesses": {
+  "description": "get all businesses"
   },
 
 

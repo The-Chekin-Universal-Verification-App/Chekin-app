@@ -158,8 +158,10 @@ class _PhoneNumberRegistrationWidgetState
 class BizPhoneNumberInfo extends StatefulWidget {
   const BizPhoneNumberInfo({
     super.key,
+    this.fieldRequired = true,
   });
-
+  final bool
+      fieldRequired; // is am using this to set the required field to NOT Required during business profile update
   @override
   State<BizPhoneNumberInfo> createState() => _BizPhoneNumberInfoState();
 }
@@ -212,10 +214,16 @@ class _BizPhoneNumberInfoState extends State<BizPhoneNumberInfo> {
                       .copyWith(phoneNumber1: number1.phoneNumber ?? "");
                 },
                 validator: (val) {
-                  if (val!.length < 10) {
-                    return 'Enter a valid number';
+                  String? err;
+                  if (widget.fieldRequired == false) {
+                    err = null;
+                  } else if (val!.length < 10) {
+                    err = 'Enter a valid number';
+                  } else {
+                    err = null;
                   }
-                  return null;
+
+                  return err;
                 },
                 selectorConfig: const SelectorConfig(
                   selectorType: PhoneInputSelectorType.BOTTOM_SHEET,
@@ -236,7 +244,7 @@ class _BizPhoneNumberInfoState extends State<BizPhoneNumberInfo> {
               Row(
                 children: [
                   Text(
-                    context.loc.enterYourPhone,
+                    context.loc.enterYourSecondPhone,
                     style:
                         TextStyles.body1.copyWith(fontWeight: FontWeight.w900),
                   ),

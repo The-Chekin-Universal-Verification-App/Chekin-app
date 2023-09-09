@@ -11,6 +11,8 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
+    UserModel user = context.select((AuthProvider provider) => provider.user);
+
     UserType userType =
         context.select((AuthProvider provider) => provider.accountType);
     return Scaffold(
@@ -27,12 +29,15 @@ class SettingsScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                CircleAvatar(
-                  radius: 25,
-                  child: Image.asset(
-                    R.png.man.imgPng,
-                    errorBuilder: (BuildContext context, _, d) =>
-                        const Icon(Icons.person),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(25),
+                  child: CircleAvatar(
+                    radius: 25,
+                    child: Image.network(
+                      user.profileImageUrl,
+                      errorBuilder: (BuildContext context, _, d) =>
+                          const Icon(Icons.person),
+                    ),
                   ),
                 ),
                 const HSpace(9),
@@ -41,14 +46,14 @@ class SettingsScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        R.S.user,
+                        "${user.firstName} ${user.lastName}",
                         overflow: TextOverflow.ellipsis,
                         style: TextStyles.body1
                             .copyWith(fontWeight: FontWeight.w700),
                       ),
                       const VSpace(2),
                       Text(
-                        R.S.emailExample,
+                        user.email,
                         style: TextStyles.body1.copyWith(
                             fontWeight: FontWeight.w500,
                             fontSize: 15,
@@ -64,7 +69,7 @@ class SettingsScreen extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12.0, vertical: 3),
                               child: Text(
-                                R.S.user,
+                                userType.name,
                                 style: TextStyles.body1.copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: Colors.white),

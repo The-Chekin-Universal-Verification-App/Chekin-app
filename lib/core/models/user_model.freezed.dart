@@ -29,7 +29,7 @@ mixin _$UserModel {
   String get role => throw _privateConstructorUsedError;
   bool get verified => throw _privateConstructorUsedError;
   String get phoneNumber => throw _privateConstructorUsedError;
-  String get business => throw _privateConstructorUsedError;
+  dynamic get business => throw _privateConstructorUsedError;
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
 
@@ -54,7 +54,7 @@ abstract class $UserModelCopyWith<$Res> {
       String role,
       bool verified,
       String phoneNumber,
-      String business,
+      dynamic business,
       @JsonKey(name: '_id') String id});
 }
 
@@ -80,7 +80,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? role = null,
     Object? verified = null,
     Object? phoneNumber = null,
-    Object? business = null,
+    Object? business = freezed,
     Object? id = null,
   }) {
     return _then(_value.copyWith(
@@ -120,10 +120,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      business: null == business
+      business: freezed == business
           ? _value.business
           : business // ignore: cast_nullable_to_non_nullable
-              as String,
+              as dynamic,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -149,7 +149,7 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       String role,
       bool verified,
       String phoneNumber,
-      String business,
+      dynamic business,
       @JsonKey(name: '_id') String id});
 }
 
@@ -173,7 +173,7 @@ class __$$_UserModelCopyWithImpl<$Res>
     Object? role = null,
     Object? verified = null,
     Object? phoneNumber = null,
-    Object? business = null,
+    Object? business = freezed,
     Object? id = null,
   }) {
     return _then(_$_UserModel(
@@ -213,10 +213,10 @@ class __$$_UserModelCopyWithImpl<$Res>
           ? _value.phoneNumber
           : phoneNumber // ignore: cast_nullable_to_non_nullable
               as String,
-      business: null == business
+      business: freezed == business
           ? _value.business
           : business // ignore: cast_nullable_to_non_nullable
-              as String,
+              as dynamic,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -273,7 +273,7 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
   final String phoneNumber;
   @override
   @JsonKey()
-  final String business;
+  final dynamic business;
   @override
   @JsonKey(name: '_id')
   final String id;
@@ -322,8 +322,7 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
                 other.verified == verified) &&
             (identical(other.phoneNumber, phoneNumber) ||
                 other.phoneNumber == phoneNumber) &&
-            (identical(other.business, business) ||
-                other.business == business) &&
+            const DeepCollectionEquality().equals(other.business, business) &&
             (identical(other.id, id) || other.id == id));
   }
 
@@ -340,7 +339,7 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
       role,
       verified,
       phoneNumber,
-      business,
+      const DeepCollectionEquality().hash(business),
       id);
 
   @JsonKey(ignore: true)
@@ -368,7 +367,7 @@ abstract class _UserModel implements UserModel {
       final String role,
       final bool verified,
       final String phoneNumber,
-      final String business,
+      final dynamic business,
       @JsonKey(name: '_id') final String id}) = _$_UserModel;
 
   factory _UserModel.fromJson(Map<String, dynamic> json) =
@@ -393,7 +392,7 @@ abstract class _UserModel implements UserModel {
   @override
   String get phoneNumber;
   @override
-  String get business;
+  dynamic get business;
   @override
   @JsonKey(name: '_id')
   String get id;

@@ -66,24 +66,26 @@ class Mock {
 
   List<ProductModel> topRated = [
     ProductModel(
-      productImage: R.png.bag.imgPng,
-      itemName: R.S.productName,
-      storeName: R.S.storeName,
+      images: [R.png.bag.imgPng],
+      name: R.S.productName,
+      business: R.S.storeName,
     ),
     ProductModel(
-      productImage: R.png.silverLadyShoe.imgPng,
-      itemName: R.S.productName2,
-      storeName: R.S.storeName,
+      images: [
+        R.png.silverLadyShoe.imgPng,
+      ],
+      name: R.S.productName3,
+      business: R.S.storeName,
     ),
     ProductModel(
-      productImage: R.png.silverLadyShoe.imgPng,
-      itemName: R.S.productName,
-      storeName: R.S.storeName,
+      images: [R.png.silverLadyShoe.imgPng],
+      name: R.S.productName2,
+      business: R.S.storeName,
     ),
     ProductModel(
-      productImage: R.png.silverLadyShoe.imgPng,
-      itemName: R.S.productName3,
-      storeName: R.S.storeName,
+      images: [R.png.silverLadyShoe.imgPng],
+      name: R.S.productName3,
+      business: R.S.storeName,
     ),
   ];
 
@@ -105,7 +107,14 @@ class Mock {
   final String resetPassword = '$api/auth/reset-password';
   final String changePassword = '$api/user/change-password';
   final String getBusiness = '$api/business/';
-  String getLex = '$api/business/lux-code';
+  final String initPayment = '$api/payment/initialize-dev';
+  final String getLex = '$api/business/lux-code';
+  final String updateProfile = '$api/user/update-profile';
+  final String updateBusiness = '$api/business/update-business';
+  final String getProducts = '$api/product';
+  String getBusinessByID(String bizId) => '$api/business/$bizId';
+  String getBusinessReviews(String bizId) => '$api/user/reviews/$bizId';
+  String reviewABusiness(String bizId) => '$api/user/reviews/$bizId';
 }
 
 ///

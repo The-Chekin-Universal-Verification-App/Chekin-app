@@ -42,7 +42,7 @@ class _LogInScreenState extends State<LogInScreen> with FormMixin {
                   color: Colors.white,
                 ),
               ),
-            ),
+            ).clickable(() {}),
           ),
           const HSpace(20)
         ],
@@ -89,7 +89,7 @@ class _LogInScreenState extends State<LogInScreen> with FormMixin {
                 type: InputType.email,
                 onChange: (email) {
                   context.read<AuthProvider>().addToUserSignInInfo =
-                      model.copyWith(email: email);
+                      model.copyWith(email: email.trim());
                 },
                 prefix: UnconstrainedBox(
                   child: SvgIcon(
@@ -99,12 +99,12 @@ class _LogInScreenState extends State<LogInScreen> with FormMixin {
                 ),
                 hintText: R.S.emailExample,
               ),
-              const VSpace(15),
+              const VSpace(25),
               CustomFormTextFieldWithBorder(
                 type: InputType.pwd,
                 onChange: (password) {
                   context.read<AuthProvider>().addToUserSignInInfo =
-                      model.copyWith(password: password);
+                      model.copyWith(password: password.trim());
                 },
                 prefix: UnconstrainedBox(
                   child: SvgIcon(
@@ -122,7 +122,7 @@ class _LogInScreenState extends State<LogInScreen> with FormMixin {
                   }),
                 ),
                 hintText: context.loc.password,
-                obscure: _hidCharacters,
+                obscure: !_hidCharacters,
               ),
               const VSpace(10),
               Align(

@@ -4,6 +4,9 @@ import 'package:chekinapp/export.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../components/msc/loader_state_widget.dart';
+import '../../core/models/business_model.dart';
+import '../../core/providers/business_provider.dart';
+import '../business/businesses.dart';
 import 'home.dart';
 
 class TopRated extends StatelessWidget {
@@ -20,25 +23,29 @@ class TopRated extends StatelessWidget {
       Color(0xffD4FFE8),
     ];
     List<ProductModel> homeProvider =
-        context.select((HomeProvider provider) => provider.topRated);
+        context.select((HomeProvider provider) => provider.popular);
     bool state = context.select((HomeProvider provider) => provider.isBusy);
+    List<BusinessModel> businesses = context
+        .select((BusinessProvider business) => business.allAvailableBusiness);
+
     return SizedBox(
         height: 180,
         child: LoaderStateItem(
           key: UniqueKey(),
           isLoading: state,
-          item: homeProvider,
+          item: businesses,
           widgetOnLoadSuccess: ListView.builder(
-              itemCount: homeProvider.length,
+              itemCount: businesses.length,
               scrollDirection: Axis.horizontal,
               itemBuilder: (_, index) => Row(
                     children: [
-                      ProductItem(
-                        product: homeProvider[index],
-                        color: colors[random.nextInt(colors.length)],
-                      ),
+                      // BusinessItemCategory(
+                      //   business: businesses[index],
+                      //   color: colors[random.nextInt(colors.length)],
+                      // ),
+                      Text('data')
                     ],
                   )),
-        ));
+        ).center());
   }
 }

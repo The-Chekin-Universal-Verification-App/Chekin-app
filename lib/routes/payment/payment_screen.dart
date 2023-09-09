@@ -3,6 +3,7 @@ import 'package:chekinapp/routes/payment/paywith_card_option.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 
+import '../../core/commands/payment_command.dart';
 import 'confirmedPayment_screen.dart';
 
 enum SubscriptionType { quarterly, semiAnnual, annually }
@@ -95,6 +96,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ).clickable(() {
                     subscription = SubscriptionType.quarterly;
                     setState(() {});
+                    PaymentCommand(context)
+                        .initPayment(paymentOption: "yearly");
                   }),
                   // DashedRect(
                   //   color: subscription == SubscriptionType.quarterly
@@ -206,49 +209,54 @@ class QuarterlyItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DashedRect(
-      color: isActive ? Colors.transparent : Theme.of(context).primaryColor,
-      fChild: Container(
-        color: isActive ? Theme.of(context).primaryColor : Colors.transparent,
-        padding: EdgeInsets.symmetric(vertical: context.sp(20), horizontal: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(context.loc.quarterly,
-                style: TextStyles.body1.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: isActive ? Colors.white : null)),
-            const VSpace(20),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 3,
-                  backgroundColor: isActive ? Colors.white : Colors.black,
-                ),
-                const HSpace(10),
-                Text(context.loc.oneReview,
-                    style: TextStyles.body2
-                        .copyWith(color: isActive ? Colors.white : null)),
-              ],
-            ),
-            const VSpace(10),
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 3,
-                  backgroundColor: isActive ? Colors.white : Colors.black,
-                ),
-                const HSpace(10),
-                Expanded(
-                  child: Text(context.loc.haveToRenewSub,
-                      overflow: TextOverflow.clip,
+    return ColorFiltered(
+      colorFilter: ColorFilter.mode(Colors.grey.withOpacity(0.3),
+          isActive ? BlendMode.lighten : BlendMode.darken),
+      child: DashedRect(
+        color: isActive ? Colors.transparent : Theme.of(context).primaryColor,
+        fChild: Container(
+          color: isActive ? Theme.of(context).primaryColor : Colors.transparent,
+          padding:
+              EdgeInsets.symmetric(vertical: context.sp(20), horizontal: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(context.loc.quarterly,
+                  style: TextStyles.body1.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: isActive ? Colors.white : null)),
+              const VSpace(20),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 3,
+                    backgroundColor: isActive ? Colors.white : Colors.black,
+                  ),
+                  const HSpace(10),
+                  Text(context.loc.oneReview,
                       style: TextStyles.body2
                           .copyWith(color: isActive ? Colors.white : null)),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+              const VSpace(10),
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 3,
+                    backgroundColor: isActive ? Colors.white : Colors.black,
+                  ),
+                  const HSpace(10),
+                  Expanded(
+                    child: Text(context.loc.haveToRenewSub,
+                        overflow: TextOverflow.clip,
+                        style: TextStyles.body2
+                            .copyWith(color: isActive ? Colors.white : null)),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -265,65 +273,70 @@ class SemiAnnualItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DashedRect(
-      color: isActive ? Colors.transparent : Theme.of(context).primaryColor,
-      fChild: Container(
-        color: isActive ? Theme.of(context).primaryColor : Colors.transparent,
-        padding: EdgeInsets.symmetric(vertical: context.sp(20), horizontal: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(context.loc.semiAnnual,
-                style: TextStyles.body1.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: isActive ? Colors.white : null)),
-            const VSpace(20),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 3,
-                  backgroundColor: isActive ? Colors.white : Colors.black,
-                ),
-                const HSpace(10),
-                Text(context.loc.getEverything,
-                    style: TextStyles.body2
-                        .copyWith(color: isActive ? Colors.white : null)),
-              ],
-            ),
-            const VSpace(10),
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 3,
-                  backgroundColor: isActive ? Colors.white : Colors.black,
-                ),
-                const HSpace(10),
-                Expanded(
-                  child: Text(context.loc.getPercentageOff,
-                      overflow: TextOverflow.clip,
+    return ColorFiltered(
+      colorFilter: ColorFilter.mode(Colors.grey.withOpacity(0.3),
+          isActive ? BlendMode.lighten : BlendMode.darken),
+      child: DashedRect(
+        color: isActive ? Colors.transparent : Theme.of(context).primaryColor,
+        fChild: Container(
+          color: isActive ? Theme.of(context).primaryColor : Colors.transparent,
+          padding:
+              EdgeInsets.symmetric(vertical: context.sp(20), horizontal: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(context.loc.semiAnnual,
+                  style: TextStyles.body1.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: isActive ? Colors.white : null)),
+              const VSpace(20),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 3,
+                    backgroundColor: isActive ? Colors.white : Colors.black,
+                  ),
+                  const HSpace(10),
+                  Text(context.loc.getEverything,
                       style: TextStyles.body2
                           .copyWith(color: isActive ? Colors.white : null)),
-                ),
-              ],
-            ),
-            const VSpace(10),
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 3,
-                  backgroundColor: isActive ? Colors.white : Colors.black,
-                ),
-                const HSpace(10),
-                Expanded(
-                  child: Text(context.loc.advertisingInterviewVideo,
-                      overflow: TextOverflow.clip,
-                      style: TextStyles.body2
-                          .copyWith(color: isActive ? Colors.white : null)),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+              const VSpace(10),
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 3,
+                    backgroundColor: isActive ? Colors.white : Colors.black,
+                  ),
+                  const HSpace(10),
+                  Expanded(
+                    child: Text(context.loc.getPercentageOff,
+                        overflow: TextOverflow.clip,
+                        style: TextStyles.body2
+                            .copyWith(color: isActive ? Colors.white : null)),
+                  ),
+                ],
+              ),
+              const VSpace(10),
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 3,
+                    backgroundColor: isActive ? Colors.white : Colors.black,
+                  ),
+                  const HSpace(10),
+                  Expanded(
+                    child: Text(context.loc.advertisingInterviewVideo,
+                        overflow: TextOverflow.clip,
+                        style: TextStyles.body2
+                            .copyWith(color: isActive ? Colors.white : null)),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -340,83 +353,88 @@ class AnnualItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DashedRect(
-      color: isActive ? Colors.transparent : Theme.of(context).primaryColor,
-      fChild: Container(
-        color: isActive ? Theme.of(context).primaryColor : Colors.transparent,
-        padding: EdgeInsets.symmetric(vertical: context.sp(20), horizontal: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(context.loc.yearly,
-                style: TextStyles.body1.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: isActive ? Colors.white : null)),
-            const VSpace(20),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 3,
-                  backgroundColor: isActive ? Colors.white : Colors.black,
-                ),
-                const HSpace(10),
-                Text(context.loc.getEverythingSemiAnnualPlan,
-                    style: TextStyles.body2
-                        .copyWith(color: isActive ? Colors.white : null)),
-              ],
-            ),
-            const VSpace(10),
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 3,
-                  backgroundColor: isActive ? Colors.white : Colors.black,
-                ),
-                const HSpace(10),
-                Expanded(
-                  child: Text(context.loc.getFourteenPercentOff,
-                      overflow: TextOverflow.clip,
-                      style: TextStyles.body2
-                          .copyWith(color: isActive ? Colors.white : null)),
-                ),
-              ],
-            ),
-            const VSpace(10),
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 3,
-                  backgroundColor: isActive ? Colors.white : Colors.black,
-                ),
-                const HSpace(10),
-                Expanded(
-                  child: Text(context.loc.advertisingInterviewVideo,
-                      overflow: TextOverflow.clip,
-                      style: TextStyles.body2
-                          .copyWith(color: isActive ? Colors.white : null)),
-                ),
-              ],
-            ),
-            const VSpace(10),
-            Row(
-              children: [
-                CircleAvatar(
-                  radius: 3,
-                  backgroundColor: isActive ? Colors.white : Colors.black,
-                ),
-                const HSpace(10),
-                Expanded(
-                  child: Text(
-                    context.loc.getAdvertBanner,
-                    overflow: TextOverflow.clip,
-                    style: TextStyles.body2
-                        .copyWith(color: isActive ? Colors.white : null),
+    return ColorFiltered(
+      colorFilter: ColorFilter.mode(Colors.grey.withOpacity(0.3),
+          isActive ? BlendMode.lighten : BlendMode.darken),
+      child: DashedRect(
+        color: isActive ? Colors.transparent : Theme.of(context).primaryColor,
+        fChild: Container(
+          color: isActive ? Theme.of(context).primaryColor : Colors.transparent,
+          padding:
+              EdgeInsets.symmetric(vertical: context.sp(20), horizontal: 10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(context.loc.yearly,
+                  style: TextStyles.body1.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: isActive ? Colors.white : null)),
+              const VSpace(20),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 3,
+                    backgroundColor: isActive ? Colors.white : Colors.black,
                   ),
-                ),
-              ],
-            ),
-          ],
+                  const HSpace(10),
+                  Text(context.loc.getEverythingSemiAnnualPlan,
+                      style: TextStyles.body2
+                          .copyWith(color: isActive ? Colors.white : null)),
+                ],
+              ),
+              const VSpace(10),
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 3,
+                    backgroundColor: isActive ? Colors.white : Colors.black,
+                  ),
+                  const HSpace(10),
+                  Expanded(
+                    child: Text(context.loc.getFourteenPercentOff,
+                        overflow: TextOverflow.clip,
+                        style: TextStyles.body2
+                            .copyWith(color: isActive ? Colors.white : null)),
+                  ),
+                ],
+              ),
+              const VSpace(10),
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 3,
+                    backgroundColor: isActive ? Colors.white : Colors.black,
+                  ),
+                  const HSpace(10),
+                  Expanded(
+                    child: Text(context.loc.advertisingInterviewVideo,
+                        overflow: TextOverflow.clip,
+                        style: TextStyles.body2
+                            .copyWith(color: isActive ? Colors.white : null)),
+                  ),
+                ],
+              ),
+              const VSpace(10),
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 3,
+                    backgroundColor: isActive ? Colors.white : Colors.black,
+                  ),
+                  const HSpace(10),
+                  Expanded(
+                    child: Text(
+                      context.loc.getAdvertBanner,
+                      overflow: TextOverflow.clip,
+                      style: TextStyles.body2
+                          .copyWith(color: isActive ? Colors.white : null),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

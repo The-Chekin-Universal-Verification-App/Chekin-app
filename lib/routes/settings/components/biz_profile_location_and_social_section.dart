@@ -2,7 +2,10 @@ import 'package:chekinapp/export.dart';
 import 'package:chekinapp/routes/settings/components/user_profile_image_item.dart';
 import 'package:flutter/material.dart';
 
+import '../../../core/models/business_model.dart';
 import '../../discover/vendor_store.dart';
+import '../../reviews/review_screen.dart';
+import '../edit_business_profile.dart';
 import '../edit_user_profile_screen.dart';
 import 'edit_profile_button.dart';
 
@@ -48,6 +51,8 @@ class BizProfileLocationAndSocialSection extends StatelessWidget {
       ),
     ];
     AppTheme theme = context.watch();
+    BusinessModel business =
+        context.select((AuthProvider provider) => provider.business);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: Insets.l),
       child: SingleChildScrollView(
@@ -56,24 +61,23 @@ class BizProfileLocationAndSocialSection extends StatelessWidget {
           const VSpace(44),
           Wrap(crossAxisAlignment: WrapCrossAlignment.end, children: [
             Text(
-              'Kicks Store',
+              business.name,
               style: TextStyles.h5.copyWith(fontWeight: FontWeight.w700),
             ),
             const HSpace(2),
-            SizedBox(
-                // height: 25,
-                // width: 25,
-                child: Image.asset(R.png.verified.imgPng)),
+            SizedBox(child: Image.asset(R.png.verified.imgPng)),
           ]),
           const VSpace(3),
           Material(
-            color: theme.greenButton,
+            color: business.verified ? theme.greenButton : theme.redButton,
             borderRadius: Corners.s10Border,
             child: Padding(
               padding:
                   const EdgeInsets.symmetric(horizontal: 12.0, vertical: 3),
               child: Text(
-                isStoreVerified ? context.loc.verified : '',
+                business.verified
+                    ? context.loc.verified
+                    : context.loc.unVerified,
                 style: TextStyles.body3
                     .copyWith(fontWeight: FontWeight.w700, color: Colors.white),
               ),
@@ -81,7 +85,32 @@ class BizProfileLocationAndSocialSection extends StatelessWidget {
           ),
           const VSpace(4),
           EditProfileButton(onPressed: () {
-            context.push(const EditUserProfileScreen());
+            DialogServices.emptyModalWithNoTitle(context,
+                transitionType: TransitionType.fadeScale,
+                autoPop: false,
+                showIcon: false,
+                body: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Select profile to edit', style: TextStyles.h6.bold),
+                    const VSpace(20),
+                    Text(context.loc.personalInfo, style: TextStyles.body1)
+                        .rippleClick(() {
+                      Navigator.of(context).pop();
+                      context.push(const EditUserProfileScreen());
+                    }),
+                    const VSpace(10),
+                    ChekInAppDivider(color: theme.greyWeak),
+                    const VSpace(10),
+                    Text(context.loc.businessInfo, style: TextStyles.body1)
+                        .rippleClick(() {
+                      Navigator.of(context).pop();
+                      context.push(const EditBizProfileScreen());
+                    }),
+                    const VSpace(10),
+                  ],
+                ));
           }),
           const VSpace(32),
           Row(

@@ -40,7 +40,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       surfaceTintColor: Colors.transparent,
       leading: leading
           ? InkWell(
-              highlightColor: Colors.blueGrey.shade200,
+              highlightColor: Colors.blueGrey.shade500.withOpacity(0.2),
               borderRadius: BorderRadius.circular(Corners.s8),
               onTap: onTapLeadingIcon ?? () => Navigator.pop(context),
               child: leadingIcon ??
@@ -70,7 +70,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       titleSpacing: titleSpacing,
       shadowColor: theme.black.withOpacity(0.5),
       systemOverlayStyle: SystemUiOverlayStyle(
-        statusBarColor: theme.surface,
+        statusBarColor:backgroundColor ?? theme.surface,
         statusBarIconBrightness: Brightness.dark,
         systemStatusBarContrastEnforced: true,
         statusBarBrightness: Brightness.dark,

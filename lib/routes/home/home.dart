@@ -2,20 +2,29 @@ import 'dart:math';
 
 import 'package:chekinapp/components/input/base_text_input.dart';
 import 'package:chekinapp/core/commands/business_command.dart';
+import 'package:chekinapp/routes/document_upload/upload_document_main_screen.dart';
 import 'package:chekinapp/routes/home/popular.dart';
 import 'package:chekinapp/routes/home/top_rated.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 
+import '../../core/models/business_model.dart';
+import '../../core/providers/business_provider.dart';
+import '../business/businesses.dart';
+import '../payment/payment_screen.dart';
 import 'advert_slider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
-
+  static Map<String, dynamic> firstMap = {'name': 'John', 'dob': '2/3/23'};
+  static Map<String, dynamic> secondMap = {'name': 'Mark', 'dob': '3/4/24'};
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
     UserModel user = context.select((AuthProvider provider) => provider.user);
+    List<BusinessModel> businesses = context
+        .select((BusinessProvider business) => business.allAvailableBusiness);
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -30,14 +39,16 @@ class HomeScreen extends StatelessWidget {
                   Stack(
                     clipBehavior: Clip.none,
                     children: [
-                      CircleAvatar(
-                        radius: 25,
-                        // backgroundImage: AssetImage(R.png.man.imgPng),
-
-                        child: Image.network(
-                          user.profileImageUrl,
-                          errorBuilder: (BuildContext context, _, d) =>
-                              const Icon(Icons.person),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(25),
+                        child: CircleAvatar(
+                          radius: 25,
+                          child: Image.network(
+                            user.profileImageUrl,
+                            errorBuilder: (context, obj, trac) =>
+                                const Icon(Icons.image_sharp),
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       Positioned(
@@ -80,7 +91,9 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                   ).clickable(() {
-                    // UserCommand(context).getUser();
+                    // context.push(const PaymentScreen());
+                    print(user.business
+                        .toString()); // context.push(UploadDocumentMainScreen());
                   }),
                 ],
               ),
@@ -107,7 +120,6 @@ class HomeScreen extends StatelessWidget {
                     size: 22,
                   ),
                 ).clickable(() {
-                  print('ok');
                   BusinessCommand(context).getBusiness();
                 }),
                 suffix: UnconstrainedBox(
@@ -130,7 +142,9 @@ class HomeScreen extends StatelessWidget {
                   Text(
                     context.loc.seeAll,
                     style: TextStyles.body2.copyWith(color: theme.primary),
-                  ).rippleClick(() {}),
+                  ).rippleClick(() {
+                    // context.push(const BusinessScreen());
+                  }),
                 ],
               ),
               const VSpace(10),
@@ -146,7 +160,9 @@ class HomeScreen extends StatelessWidget {
                   Text(
                     context.loc.seeAll,
                     style: TextStyles.body2.copyWith(color: theme.primary),
-                  ).rippleClick(() {}),
+                  ).rippleClick(() {
+                    // context.push(const BusinessScreen());
+                  }),
                 ],
               ),
               const VSpace(10),
@@ -180,12 +196,12 @@ class ProductItem extends StatelessWidget {
           Expanded(
               flex: 2,
               child: Image.asset(
-                product.productImage,
+                product.images[0],
                 fit: BoxFit.cover,
               )),
           const VSpace(3),
           Text(
-            product.itemName,
+            product.name,
             style: TextStyles.body2
                 .copyWith(fontSize: 13, fontWeight: FontWeight.w500),
           ),
@@ -194,7 +210,7 @@ class ProductItem extends StatelessWidget {
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               Text(
-                product.itemName,
+                product.name,
                 style: TextStyles.body2
                     .copyWith(fontSize: 15, fontWeight: FontWeight.w700),
               ),

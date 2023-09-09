@@ -7,7 +7,6 @@ class SocialMediaHandles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppTheme theme = context.watch();
     return Scaffold(
       body: Column(
         children: [

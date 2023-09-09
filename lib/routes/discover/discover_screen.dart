@@ -1,7 +1,11 @@
+import 'package:chekinapp/core/commands/product_command.dart';
 import 'package:chekinapp/export.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/input/base_text_input.dart';
+import '../../components/msc/loader_state_widget.dart';
+import '../../core/commands/business_command.dart';
+import '../../core/providers/product_provider.dart';
 import '../reviews/review_screen.dart';
 import 'discover_components/discover_item.dart';
 import 'discover_components/sorting_item.dart';
@@ -26,7 +30,6 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
     AppTheme theme = context.watch();
     ViewType viewType =
         context.select((DiscoverProvider provider) => provider.viewType);
-
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: Insets.l),
@@ -189,7 +192,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
               ),
             )
           ],
-          body: ProductViewSection(),
+          body: const ProductViewSection(),
         ),
       ),
     );
@@ -203,107 +206,59 @@ class ProductViewSection extends StatelessWidget {
   Widget build(BuildContext context) {
     ViewType viewType =
         context.select((DiscoverProvider provider) => provider.viewType);
+    List<ProductModel> product =
+        context.select((ProductProvider product) => product.products);
+    return LoaderStateItem(
+        key: UniqueKey(),
+        onRefreshNoData: () async {
+          await ProductCommand(context).getProducts();
+        },
+        isLoading: false,
+        item: product,
+        widgetOnLoadSuccess: RefreshIndicator(
+          onRefresh: () async {
+            await ProductCommand(context).getProducts();
+          },
+          child: viewType == ViewType.listView
+              ? ListView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: product.length,
+                  itemBuilder: (BuildContext context, index) => DiscoverItem(
+                    product: product[index],
+                    onItemTap: () {
+                      //select a product
+                      context.read<DiscoverProvider>().selectAProduct =
+                          product[index];
+                      context.push(const ProductReviewScreen());
 
-    return viewType == ViewType.listView
-        ? ListView(
-            physics: const BouncingScrollPhysics(),
-            children: [
-              DiscoverItem(
-                product: ProductModel(
-                    productImage: R.png.iphone.imgPng,
-                    itemName: 'iPhone 14 Pro Max',
-                    storeName: 'Apple Store',
-                    desc: R.S.productInfo),
-                onItemTap: () {
-                  context.read<DiscoverProvider>().selectAProduct =
-                      ProductModel(
-                          productImage: R.png.iphone.imgPng,
-                          itemName: 'iPhone 14 Pro Max',
-                          storeName: 'Apple Store',
-                          desc: R.S.productInfo);
-                  context.push(const ReviewScreen());
-                },
-              ),
-              DiscoverItem(
-                product: ProductModel(
-                    productImage: R.png.laptop.imgPng,
-                    itemName: 'Apple MacBook Pro',
-                    storeName: 'Apple Store',
-                    desc: R.S.productInfo),
-                onItemTap: () {
-                  context.read<DiscoverProvider>().selectAProduct =
-                      ProductModel(
-                          productImage: R.png.laptop.imgPng,
-                          itemName: 'Apple MacBook Pro',
-                          storeName: 'Apple Store',
-                          desc: R.S.productInfo);
-                  context.push(const ReviewScreen());
-                },
-                color: const Color(0xff6F7E38),
-              ),
-              DiscoverItem(
-                product: ProductModel(
-                    productImage: R.png.galaxyS20.imgPng,
-                    itemName: 'Samsung S20',
-                    storeName: 'Samsung Store',
-                    desc: R.S.productInfo),
-                onItemTap: () {},
-                color: const Color(0xffFF6F7E),
-              ),
-            ],
-          )
-        : GridView(
-            physics: const BouncingScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 15,
-                childAspectRatio: 0.7),
-            children: [
-              DiscoverItem(
-                product: ProductModel(
-                    productImage: R.png.iphone.imgPng,
-                    itemName: 'iPhone 14 Pro Max',
-                    storeName: 'Apple Store',
-                    desc: R.S.productInfo),
-                onItemTap: () {
-                  context.read<DiscoverProvider>().selectAProduct =
-                      ProductModel(
-                          productImage: R.png.iphone.imgPng,
-                          itemName: 'iPhone 14 Pro Max',
-                          storeName: 'Apple Store',
-                          desc: R.S.productInfo);
-                  context.push(const ReviewScreen());
-                },
-              ),
-              DiscoverItem(
-                product: ProductModel(
-                    productImage: R.png.laptop.imgPng,
-                    itemName: 'Apple MacBook Pro',
-                    storeName: 'Apple Store',
-                    desc: R.S.productInfo),
-                onItemTap: () {
-                  context.read<DiscoverProvider>().selectAProduct =
-                      ProductModel(
-                          productImage: R.png.laptop.imgPng,
-                          itemName: 'Apple MacBook Pro',
-                          storeName: 'Apple Store',
-                          desc: R.S.productInfo);
-                  context.push(const ReviewScreen());
-                },
-                color: const Color(0xff6F7E38),
-              ),
-              DiscoverItem(
-                product: ProductModel(
-                    productImage: R.png.galaxyS20.imgPng,
-                    itemName: 'Samsung S20',
-                    storeName: 'Samsung Store',
-                    desc: R.S.productInfo),
-                onItemTap: () {},
-                color: const Color(0xffFF6F7E),
-              ),
-            ],
-          );
+                      BusinessCommand(context).getBusinessReviews(
+                          businessId: product[index]
+                              .business); // this get the review on business
+                    },
+                  ),
+                )
+              : GridView.builder(
+                  physics: const BouncingScrollPhysics(),
+                  itemCount: product.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 15,
+                      childAspectRatio: 0.7),
+                  itemBuilder: (BuildContext context, index) => DiscoverItem(
+                        product: product[index],
+                        onItemTap: () {
+                          //select a product
+                          context.read<DiscoverProvider>().selectAProduct =
+                              product[index];
+                          context.push(const ProductReviewScreen());
+
+                          BusinessCommand(context).getBusinessReviews(
+                              businessId: product[index]
+                                  .business); // this get the review on business
+                        },
+                      )),
+        ));
   }
 }
 

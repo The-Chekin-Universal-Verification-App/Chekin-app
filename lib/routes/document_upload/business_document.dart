@@ -1,6 +1,13 @@
+import 'package:chekinapp/core/providers/business_provider.dart';
+import 'package:chekinapp/routes/document_upload/upload_document_main_screen.dart';
 import 'package:chekinapp/routes/document_upload/upload_valid_ids.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
+
+import '../../core/commands/business_command.dart';
+import '../../utils/imagepicker/provider/image_provider.dart';
+import 'components/bottomsheet_selector.dart';
+import 'components/upload_indicator.dart';
 
 class BusinessDocumentScreen extends StatefulWidget {
   const BusinessDocumentScreen({Key? key}) : super(key: key);
@@ -10,10 +17,15 @@ class BusinessDocumentScreen extends StatefulWidget {
 }
 
 class _BusinessDocumentScreenState extends State<BusinessDocumentScreen> {
+  String documentType = '';
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
-
+    //the image path selected
+    String image = context.select((ImageProviders provider) => provider.image);
+    BusinessProvider business = context.watch<BusinessProvider>();
+    int pageIndex = context
+        .select((UploadProvider provider) => provider.currentUploadIndex);
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -53,58 +65,17 @@ class _BusinessDocumentScreenState extends State<BusinessDocumentScreen> {
                 CustomBottomSheetSelector(
                   heightFraction: 0.3,
                   onSelectItem: (item) {
-                    // print(item);
+                    documentType = item;
                   },
-                  items: [
+                  items: const [
                     'Utility bill(Proof of address)',
                     'C.A.C Documents',
                   ],
                 ),
                 const VSpace(34),
-                Align(
-                  alignment: Alignment.center,
-                  child: DashedRect(
-                    color: theme.primary,
-                    fChild: SizedBox(
-                      height: 240,
-                      width: context.sp(335),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                              height: 114,
-                              width: 114,
-                              child: SvgPicture.asset(
-                                R.png.cloudUploading.svg,
-                              )),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                context.loc.frontPlease,
-                                style: TextStyles.body1
-                                    .copyWith(fontWeight: FontWeight.w900),
-                              ),
-                              Text(
-                                '*',
-                                style: TextStyles.h5.copyWith(
-                                    height: 1.5,
-                                    color: theme.redButton,
-                                    fontWeight: FontWeight.w900),
-                              )
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                DocumentPickerItem(textTitle: context.loc.frontPlease),
                 const VSpace(30),
-                UploadIndicator(
-                  uploadValue: 0.4,
-                  status: 'Completed',
-                ),
+                const UploadIndicatorItem(),
               ],
             ),
 
@@ -114,17 +85,40 @@ class _BusinessDocumentScreenState extends State<BusinessDocumentScreen> {
                 bottom: 20.0,
               ),
               child: PrimaryButton(
-                onPressed: () {},
-                label: context.loc.conti,
+                onPressed: () async {
+                  if (image != '' &&
+                      business.uploadStatus != UploadStatus.completed &&
+                      documentType != '') {
+                    await BusinessCommand(context).updateBusinessDocument(
+                      'cacUtility',
+                      image,
+                    );
+                  } else if (documentType == '') {
+                    DialogServices.messageModalFromTop(context,
+                        message:
+                            'Please select the type of document to upload first',
+                        notificationType: NotificationType.error);
+                  } else {
+                    context.read<UploadProvider>().setCurrentUploadIndex =
+                        pageIndex + 1;
+                    // context.read<UploadProvider>().setCurrentUploadIndex = 2;
+                    context.read<BusinessProvider>().resetUploadProgress();
+                    context.read<ImageProviders>().clearSingleImagePath();
+                  }
+                },
+                label: image != '' &&
+                        business.uploadStatus != UploadStatus.completed
+                    ? context.loc.upload
+                    : context.loc.conti,
                 radius: 20,
                 fullWidth: true,
-                color: Colors.transparent,
-                textColor: theme.black,
+                loading: business.isBusy,
+                color: business.isBusy ? theme.primary : Colors.transparent,
+                textColor: business.isBusy ? Colors.white : theme.black,
                 borderColor: theme.primary.withOpacity(0.48),
                 contentPadding: const EdgeInsets.symmetric(vertical: 18),
               ),
             ),
-            // VSpace(20),
           ], //
         ),
       ),

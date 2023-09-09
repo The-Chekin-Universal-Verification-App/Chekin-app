@@ -243,7 +243,14 @@
 "pleaseEnterPassword": "ePlease enter your new password",
   "pleaseEnterOTP": "ePlease enter the OTP sent to your email",
     "goBack": "<< eGo back",
-
+      "unVerified": "eunVerified",
+  "editSocialMedia": "eEdit your social media handles",
+  "enterYourSecondPhone": "eEnter your Second phone number",
+  "seeStoreReviews": "eSee reviews on this store",
+  "@reviews": {
+  "description": " customers seeing reviews on a store"
+  },
+"businesses": "eBusinesses",
     "reSend": "eResend",
     "followEmailLink": "eFollow the link sent to you to the OTP code sent to you.",
     "privacyPolicy": "ePrivacy Policy"

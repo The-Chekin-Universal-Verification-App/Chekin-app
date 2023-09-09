@@ -67,7 +67,8 @@ class AuthCommand extends BaseCommand {
     }
   }
 
-  Future<void> signIn(SignInModel model) async {
+  Future<void> signIn(SignInModel model,
+      {bool routeToMainOnSuccess = true}) async {
     BuildContext context = rootNav!.context;
     Response? res;
 
@@ -78,9 +79,16 @@ class AuthCommand extends BaseCommand {
         if (res.statusCode == 200 ||
             res.statusCode == 201 && res.data['status'] == "success") {
           auth.setUserToken = res.data['data']['token'];
+          auth.setUser = res.data['data']['user'];
+
+          log(res.data.toString());
 
           InitializationCmd(context).initUser();
-          context.push(const MainScreen());
+          if (routeToMainOnSuccess == true) {
+            context.push(const MainScreen());
+          } else {
+            null;
+          }
         } else if (res.statusCode == 401 &&
             res.data['message'].toString().toLowerCase() ==
                 "User is not verified".toLowerCase()) {
@@ -114,7 +122,15 @@ class AuthCommand extends BaseCommand {
           if (auth.accountType == UserType.normal) {
             context.push(const SuccessRegistrationScreen());
           } else {
-            // this happens whe user create a business account
+            // this happens when user create a business account
+
+            SignInModel model = SignInModel(
+                password: auth.businessSignUpModel.password,
+                email: auth.businessSignUpModel.email);
+
+            ///next
+            //lets log in user to get access token
+            signIn(model, routeToMainOnSuccess: false);
             context.push(const YouAreAlmostDoneScreen());
           }
         }

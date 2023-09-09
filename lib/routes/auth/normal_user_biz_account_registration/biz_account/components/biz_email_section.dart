@@ -5,8 +5,9 @@ import '../../../../../components/input/base_text_input.dart';
 import '../../../../../core/models/business_signup_model.dart';
 
 class EmailSection extends StatefulWidget {
-  const EmailSection({Key? key}) : super(key: key);
-
+  const EmailSection({Key? key, this.fieldRequired = true}) : super(key: key);
+  final bool
+      fieldRequired; // is am using this to set the required field to NOT Required during business profile update
   @override
   State<EmailSection> createState() => _EmailSectionState();
 }
@@ -27,7 +28,7 @@ class _EmailSectionState extends State<EmailSection> {
               style: TextStyles.body1.copyWith(fontWeight: FontWeight.w900),
             ),
             Text(
-              '*',
+              widget.fieldRequired ? '*' : '',
               style: TextStyles.h5.copyWith(
                   height: 1.5,
                   color: theme.redButton,
@@ -41,6 +42,7 @@ class _EmailSectionState extends State<EmailSection> {
                 businessModel.copyWith(email1: firstMail);
           },
           hintText: R.S.emailExample,
+          isRequired: widget.fieldRequired ? true : false,
         ),
         const VSpace(25),
         Row(

@@ -18,15 +18,6 @@ class _UserDetailViewState extends State<UserDetailView> with FormMixin {
   @override
   void initState() {
     super.initState();
-    _firstName.addListener(() {
-      setState(() {});
-    });
-    _lastName.addListener(() {
-      setState(() {});
-    });
-    _middleName.addListener(() {
-      setState(() {});
-    });
   }
 
   @override
@@ -115,6 +106,7 @@ class _UserDetailViewState extends State<UserDetailView> with FormMixin {
                           model.copyWith(middleName: lastName);
                     },
                     hintText: context.loc.noEmojis,
+                    isRequired: false,
                   ),
                   const VSpace(25),
                   Row(

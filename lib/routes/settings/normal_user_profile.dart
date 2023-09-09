@@ -8,6 +8,7 @@ class NormalUserAccountProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
+    UserModel user = context.select((AuthProvider provider) => provider.user);
     return Scaffold(
         appBar: CustomAppBar(
           titleWidget: Text(
@@ -28,15 +29,19 @@ class NormalUserAccountProfile extends StatelessWidget {
               const VSpace(20),
               ProfilePageFieldItem(
                 label: context.loc.name,
-                text: R.S.userName,
+                text: "${user.firstName} ${user.middleName} ${user.lastName}",
               ),
               ProfilePageFieldItem(
                 label: context.loc.emailAddress,
-                text: R.S.emailExample,
+                text: user.email,
               ),
               ProfilePageFieldItem(
                 label: context.loc.phoneNumber,
-                text: '07050298246',
+                text: user.phoneNumber,
+              ),
+              ProfilePageFieldItem(
+                label: context.loc.phoneNumber,
+                text: user.nationality,
               ),
             ],
           ),

@@ -32,8 +32,8 @@ class HomeProvider extends BaseProvider {
 
       setBusy(false);
       notifyListeners();
-      print('first delay');
+      // print('first delay');
     });
-    print('second delay');
+    // print('second delay');
   }
 }

@@ -8,6 +8,7 @@ part 'business_model.g.dart';
 class BusinessModel with _$BusinessModel {
   factory BusinessModel({
     @Default('') @JsonKey(name: '_id') String id,
+    @Default(0) @JsonKey(name: '__v') int v,
     @Default('') String owner,
     @Default('') String name,
     @Default('') String description,
@@ -29,6 +30,7 @@ class BusinessModel with _$BusinessModel {
     @Default('') String paymentOption,
     @Default(false) bool isActive,
     @Default('') String currentSubscription,
+    @Default('') String businessImage,
     @Default('') String luxCode,
   }) = _BusinessModel;
 
@@ -37,5 +39,20 @@ class BusinessModel with _$BusinessModel {
 
   static BusinessModel init() {
     return BusinessModel(name: '', nearestLandmark: '', lga: '');
+  }
+}
+
+@freezed
+class MakeBusinessReviewModel with _$MakeBusinessReviewModel {
+  factory MakeBusinessReviewModel({
+    @Default('') String rating,
+    @Default('') String review,
+  }) = _MakeBusinessReviewModel;
+
+  factory MakeBusinessReviewModel.fromJson(Map<String, dynamic> json) =>
+      _$MakeBusinessReviewModelFromJson(json);
+
+  static MakeBusinessReviewModel init() {
+    return MakeBusinessReviewModel(rating: '', review: '');
   }
 }

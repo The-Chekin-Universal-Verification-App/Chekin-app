@@ -19,6 +19,8 @@ class SuccessRegistrationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
+    UserModel user = context.select((AuthProvider provider) => provider.user);
+
     final accountType =
         context.select((AuthProvider provider) => provider.accountType);
     return Scaffold(
@@ -79,7 +81,7 @@ class SuccessRegistrationScreen extends StatelessWidget {
                             .copyWith(color: Colors.white70, fontSize: 24),
                       ),
                       TextSpan(
-                        text: "${R.S.userName} !",
+                        text: " ${user.firstName} ${user.lastName} !",
                         style: TextStyles.body1
                             .copyWith(color: Colors.white, fontSize: 24),
                       ),

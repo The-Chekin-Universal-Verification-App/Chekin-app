@@ -48,6 +48,10 @@ dependencies:
   country_picker: ^2.0.20
   feather_icons: ^1.2.0
   pinput: ^2.3.0
+  image_picker: ^1.0.2
+  image_cropper: ^5.0.0
+  mime_type: ^1.0.0
+  webview_flutter: ^2.0.8
 
 
 

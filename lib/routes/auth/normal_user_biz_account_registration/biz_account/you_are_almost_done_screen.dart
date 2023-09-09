@@ -75,8 +75,8 @@ class YouAreAlmostDoneScreen extends StatelessWidget {
               child: PrimaryButton(
                 onPressed: () {
                   UserCommand(context).getUser();
-                  context.push(const LogInScreen());
-                  // context.push(const UploadDocumentMainScreen());
+                  // context.push(const LogInScreen());
+                  context.push(const UploadDocumentMainScreen());
                 },
                 label: context.loc.begin,
                 radius: 20,

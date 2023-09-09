@@ -1,8 +1,14 @@
-import 'package:chekinapp/routes/document_upload/upload_valid_ids.dart';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 
+import '../../core/commands/business_command.dart';
+import '../../core/providers/business_provider.dart';
+import '../../utils/imagepicker/image_picker_choice.dart';
+import '../../utils/imagepicker/provider/image_provider.dart';
 import '../payment/payment_screen.dart';
+import 'components/upload_indicator.dart';
 
 class UploadProfilePictureScreen extends StatefulWidget {
   const UploadProfilePictureScreen({Key? key}) : super(key: key);
@@ -14,10 +20,15 @@ class UploadProfilePictureScreen extends StatefulWidget {
 
 class _UploadProfilePictureScreenState
     extends State<UploadProfilePictureScreen> {
+  List<String> uploadedImage = [];
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
-    List<String> uploadedImage = [];
+
+    //the image path selected
+    String image = context.select((ImageProviders provider) => provider.image);
+    BusinessProvider business = context.watch<BusinessProvider>();
+
     return SingleChildScrollView(
       physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.symmetric(horizontal: 25),
@@ -53,26 +64,116 @@ class _UploadProfilePictureScreenState
                   context.loc.uploadAProfilePicture,
                   style: TextStyles.body1,
                 ),
-                uploadedImage.isNotEmpty ? const VSpace(50) : const VSpace(90),
+                image != '' ? const VSpace(50) : const VSpace(90),
                 Align(
                     alignment: Alignment.center,
-                    child: uploadedImage.isNotEmpty
+                    child: image != ''
                         ? CircleAvatar(
-                            radius: 130,
+                            radius: 100,
+                            child: CircleAvatar(
+                              radius: 99,
+                              backgroundColor: Colors.white,
+                              child: Stack(
+                                alignment: Alignment.center,
+                                children: [
+                                  SizedBox(
+                                    height: 185,
+                                    width: 185,
+                                    child: ClipRRect(
+                                      borderRadius:
+                                          BorderRadius.circular(185 / 2),
+                                      child: ColorFiltered(
+                                        colorFilter: const ColorFilter.mode(
+                                            Colors.black26, BlendMode.darken),
+                                        child: Image.file(
+                                          File(image),
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Positioned(
+                                    child: CustomContainer(
+                                      height: 35.0,
+                                      width: 35.0,
+                                      borderRadius: Corners.s5Border,
+                                      color: Colors.grey.withOpacity(0.7),
+                                      child: Icon(
+                                        Icons.close_rounded,
+                                        color: theme.redButton,
+                                      ),
+                                    ).clickable(() {
+                                      context
+                                          .read<ImageProviders>()
+                                          .clearSingleImagePath();
+                                      context
+                                          .read<BusinessProvider>()
+                                          .resetUploadProgress();
+                                    }),
+                                  )
+                                ],
+                              ),
+                            ),
                           )
-                        : SizedBox(
-                            height: 178,
-                            // width: 1,
-                            child: SvgPicture.asset(
-                              R.png.addUserIcon.svg,
-                            ))),
-                uploadedImage.isNotEmpty
-                    ? const VSpace(100)
-                    : const VSpace(153),
-                UploadIndicator(
-                  uploadValue: 0.4,
-                  status: 'Completed',
-                ),
+                        : Column(
+                            children: [
+                              uploadedImage.isNotEmpty
+                                  ? ClipRRect(
+                                      borderRadius:
+                                          BorderRadius.circular(185 / 2),
+                                      child: CustomContainer(
+                                        color: theme.greenButton,
+                                        height: 185,
+                                        width: 186,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            const SizedBox(
+                                                height: 80,
+                                                width: 80,
+                                                child: Icon(
+                                                  Icons.check_circle,
+                                                  size: 75.0,
+                                                  color: Colors.white,
+                                                )),
+
+                                            ///
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(
+                                                  context.loc.completed,
+                                                  style: TextStyles.body1
+                                                      .copyWith(
+                                                          fontWeight:
+                                                              FontWeight.w900,
+                                                          color: Colors.white),
+                                                ),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    )
+                                  : SizedBox(
+                                      height: 178,
+                                      // width: 1,
+                                      child: SvgPicture.asset(
+                                        R.png.addUserIcon.svg,
+                                      )).clickable(() {
+                                      CustomBottomSheet.openBottomSheet(
+                                          context,
+                                          sizeFraction: 0.2,
+                                          const ImagePickerChoice());
+                                    }),
+                            ],
+                          )),
+                image != '' ? const VSpace(100) : const VSpace(153),
+                const UploadIndicatorItem(),
               ],
             ),
 
@@ -82,14 +183,35 @@ class _UploadProfilePictureScreenState
                 bottom: 20.0,
               ),
               child: PrimaryButton(
-                onPressed: () {
-                  context.push(const PaymentScreen());
+                onPressed: () async {
+                  if (image != '' &&
+                      business.uploadStatus != UploadStatus.completed) {
+                    await BusinessCommand(context).updateBusinessDocument(
+                      'businessImage',
+                      image,
+                    );
+
+                    if (business.uploadStatus == UploadStatus.completed) {
+                      setState(() {
+                        uploadedImage.add(image);
+                      });
+                    }
+                  } else {
+                    context.push(const PaymentScreen());
+
+                    // context.read<UploadProvider>().setCurrentUploadIndex = 4;
+                    context.read<BusinessProvider>().resetUploadProgress();
+                    context.read<ImageProviders>().clearSingleImagePath();
+                  }
                 },
-                label: context.loc.conti,
+                label: uploadedImage.isNotEmpty
+                    ? 'Proceed to Payment'
+                    : context.loc.upload,
                 radius: 20,
                 fullWidth: true,
-                color: Colors.transparent,
-                textColor: theme.black,
+                loading: business.isBusy,
+                color: business.isBusy ? theme.primary : Colors.transparent,
+                textColor: business.isBusy ? Colors.white : theme.black,
                 borderColor: theme.primary.withOpacity(0.48),
                 contentPadding: const EdgeInsets.symmetric(vertical: 18),
               ),

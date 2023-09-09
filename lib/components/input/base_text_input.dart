@@ -652,7 +652,7 @@ class _CustomFormTextFieldWithBorderState
                   borderSide: BorderSide(color: theme.redButton, width: 1),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderRadius: Corners.s12Border,
+                  borderRadius: Corners.s20Border,
                   borderSide: BorderSide(color: theme.greenButton, width: 1),
                 ),
                 errorBorder: OutlineInputBorder(
