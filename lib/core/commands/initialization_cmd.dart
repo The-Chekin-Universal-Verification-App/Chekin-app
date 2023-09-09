@@ -19,5 +19,6 @@ class InitializationCmd extends BaseCommand {
   Future<void> refreshUser() async {
     BuildContext context = rootNav!.context;
     UserCommand(context).getUser(); //
+    await BusinessCommand(context).getBusiness(page: '1');
   }
 }

@@ -1,11 +1,13 @@
 import 'dart:math';
 
 import 'package:chekinapp/export.dart';
+import 'package:chekinapp/routes/home/top_rated.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../components/msc/loader_state_widget.dart';
 import '../../core/models/business_model.dart';
 import '../../core/providers/business_provider.dart';
+import 'business_item_category.dart';
 
 class Popular extends StatelessWidget {
   const Popular({
@@ -32,13 +34,15 @@ class Popular extends StatelessWidget {
           item: popular,
           widgetOnLoadSuccess: ListView.builder(
               itemCount: popular.length ~/ 2,
+              physics: const BouncingScrollPhysics(),
+              clipBehavior: Clip.none,
               scrollDirection: Axis.horizontal,
               itemBuilder: (_, index) => Row(
                     children: [
-                      // BusinessItemCategory(
-                      //   business: businesses[index],
-                      //   color: colors[random.nextInt(colors.length)],
-                      // ),
+                      BusinessItemCategory(
+                        businessModel: popular[index],
+                        color: colors[random.nextInt(colors.length)],
+                      ),
                     ],
                   )),
         ).center());

@@ -220,7 +220,7 @@ class _ProductReviewScreenState extends State<ProductReviewScreen>
                       )
                     ],
                   ).clickable(() {
-                    context.push(AddReviewScreen());
+                    context.push(const AddReviewScreen());
                   }),
                   const VSpace(10),
                   const ChekInAppDivider(),

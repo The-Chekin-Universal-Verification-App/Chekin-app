@@ -1,3 +1,4 @@
+import 'package:chekinapp/core/providers/business_provider.dart';
 import 'package:chekinapp/export.dart';
 import 'package:chekinapp/routes/discover/discover_screen.dart';
 import 'package:chekinapp/routes/reviews/review_screen.dart';
@@ -5,6 +6,7 @@ import 'package:chekinapp/routes/reviews/social_media_screen.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/icon_button.dart';
+import '../../core/models/business_model.dart';
 
 class BusinessReviewScreen extends StatefulWidget {
   const BusinessReviewScreen({Key? key}) : super(key: key);
@@ -19,8 +21,8 @@ class _BusinessReviewScreenState extends State<BusinessReviewScreen>
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
-    ProductModel selectedProduct =
-        context.select((DiscoverProvider provider) => provider.selectedProduct);
+    BusinessModel selectedBusiness = context
+        .select((BusinessProvider provider) => provider.selectedBusiness);
     return Scaffold(
       key: scaffoldKey,
       body: SafeArea(
@@ -65,23 +67,14 @@ class _BusinessReviewScreenState extends State<BusinessReviewScreen>
                           const VSpace(3),
                           SizedBox(
                               height: 232,
-                              child: PageView.builder(
-                                onPageChanged: (index) {
-                                  currentIndex = index;
-                                  setState(() {});
-                                },
-                                itemCount: selectedProduct.images.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Image.network(
-                                    selectedProduct.images[index],
-                                    errorBuilder: (e, c, d) => const SizedBox(
-                                        child: Icon(
-                                      Icons.image_outlined,
-                                      size: 232 / 2,
-                                      color: Colors.black54,
-                                    )),
-                                  );
-                                },
+                              child: Image.network(
+                                selectedBusiness.businessImage,
+                                errorBuilder: (e, c, d) => const SizedBox(
+                                    child: Icon(
+                                  Icons.image_outlined,
+                                  size: 232 / 2,
+                                  color: Colors.black54,
+                                )),
                               )),
                           const VSpace(39),
                           SizedBox(
@@ -122,7 +115,7 @@ class _BusinessReviewScreenState extends State<BusinessReviewScreen>
                       Wrap(
                         children: [
                           Text(
-                            selectedProduct.business,
+                            selectedBusiness.name,
                             style: TextStyles.body1
                                 .copyWith(fontWeight: FontWeight.w500),
                           ),
@@ -141,7 +134,7 @@ class _BusinessReviewScreenState extends State<BusinessReviewScreen>
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        selectedProduct.name,
+                        selectedBusiness.owner,
                         style:
                             TextStyles.h6.copyWith(fontWeight: FontWeight.w700),
                       ),

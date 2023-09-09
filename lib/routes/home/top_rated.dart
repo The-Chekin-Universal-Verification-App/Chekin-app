@@ -1,5 +1,5 @@
 import 'dart:math';
-
+import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -7,6 +7,8 @@ import '../../components/msc/loader_state_widget.dart';
 import '../../core/models/business_model.dart';
 import '../../core/providers/business_provider.dart';
 import '../business/businesses.dart';
+import '../reviews/business_review_screen.dart';
+import 'business_item_category.dart';
 import 'home.dart';
 
 class TopRated extends StatelessWidget {
@@ -22,8 +24,6 @@ class TopRated extends StatelessWidget {
       Color(0xffCCE4FF),
       Color(0xffD4FFE8),
     ];
-    List<ProductModel> homeProvider =
-        context.select((HomeProvider provider) => provider.popular);
     bool state = context.select((HomeProvider provider) => provider.isBusy);
     List<BusinessModel> businesses = context
         .select((BusinessProvider business) => business.allAvailableBusiness);
@@ -35,17 +35,19 @@ class TopRated extends StatelessWidget {
           isLoading: state,
           item: businesses,
           widgetOnLoadSuccess: ListView.builder(
-              itemCount: businesses.length,
+              itemCount: businesses.length ~/ 2,
+              physics: const BouncingScrollPhysics(),
+              clipBehavior: Clip.none,
               scrollDirection: Axis.horizontal,
               itemBuilder: (_, index) => Row(
                     children: [
-                      // BusinessItemCategory(
-                      //   business: businesses[index],
-                      //   color: colors[random.nextInt(colors.length)],
-                      // ),
-                      Text('data')
+                      BusinessItemCategory(
+                        businessModel: businesses[index],
+                        color: colors[random.nextInt(colors.length)],
+                      ),
                     ],
                   )),
         ).center());
   }
 }
+

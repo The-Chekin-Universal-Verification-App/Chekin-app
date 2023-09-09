@@ -118,6 +118,17 @@ class BusinessProvider extends BaseProvider {
     isBusy = false;
     notifyListeners();
   }
+
+  ///pick a business to be viewed in business detail
+  ///
+  BusinessModel _selectedBusiness = BusinessModel.init();
+
+  BusinessModel get selectedBusiness => _selectedBusiness;
+
+  set selectABusiness(BusinessModel business) {
+    _selectedBusiness = business;
+    notifyListeners();
+  }
 }
 
 enum UploadStatus { completed, failed, pending, wait, inProgress }
