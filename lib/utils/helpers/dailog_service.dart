@@ -76,7 +76,8 @@ class DialogServices {
       bool autoPop = true,
       Duration? closeDuration,
       TransitionType transitionType = TransitionType.slide,
-      double screenFraction = 0.4}) {
+      double screenFraction = 0.4,
+      double barrierColorOpacity = 0.4}) {
     bool dialogIsOpen = true;
 
     autoPop
@@ -91,7 +92,7 @@ class DialogServices {
     return showGeneralDialog(
       barrierLabel: "Label",
       barrierDismissible: true,
-      barrierColor: Colors.transparent.withOpacity(0.4),
+      barrierColor: Colors.transparent.withOpacity(barrierColorOpacity),
       transitionDuration: const Duration(milliseconds: 620),
       context: context,
       pageBuilder: (context, anim1, anim2) {

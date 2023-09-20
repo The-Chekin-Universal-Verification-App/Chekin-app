@@ -64,7 +64,7 @@ class IconRes {
   String get verified => 'verified';
   String get galaxyS20 => 'galaxy_s20';
   String get iphone => 'iphone';
-  String get laptop => 'laptop';
+  // String get laptop => 'laptop';
   String get location => 'location';
   String get storeImageTwo => 'store_imageTwo';
   String get storeImageThree => 'store_imageThree';

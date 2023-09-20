@@ -64,30 +64,30 @@ class Mock {
     ];
   }
 
-  List<ProductModel> topRated = [
-    ProductModel(
-      images: [R.png.bag.imgPng],
-      name: R.S.productName,
-      business: R.S.storeName,
-    ),
-    ProductModel(
-      images: [
-        R.png.silverLadyShoe.imgPng,
-      ],
-      name: R.S.productName3,
-      business: R.S.storeName,
-    ),
-    ProductModel(
-      images: [R.png.silverLadyShoe.imgPng],
-      name: R.S.productName2,
-      business: R.S.storeName,
-    ),
-    ProductModel(
-      images: [R.png.silverLadyShoe.imgPng],
-      name: R.S.productName3,
-      business: R.S.storeName,
-    ),
-  ];
+  // List<ProductModel> topRated = [
+  //   ProductModel(
+  //     images: [R.png.bag.imgPng],
+  //     name: R.S.productName,
+  //     business: R.S.storeName,
+  //   ),
+  //   ProductModel(
+  //     images: [
+  //       R.png.silverLadyShoe.imgPng,
+  //     ],
+  //     name: R.S.productName3,
+  //     business: R.S.storeName,
+  //   ),
+  //   ProductModel(
+  //     images: [R.png.silverLadyShoe.imgPng],
+  //     name: R.S.productName2,
+  //     business: R.S.storeName,
+  //   ),
+  //   ProductModel(
+  //     images: [R.png.silverLadyShoe.imgPng],
+  //     name: R.S.productName3,
+  //     business: R.S.storeName,
+  //   ),
+  // ];
 
   ///
   ///
@@ -112,6 +112,8 @@ class Mock {
   final String updateProfile = '$api/user/update-profile';
   final String updateBusiness = '$api/business/update-business';
   final String getProducts = '$api/product';
+  final String getWishList = '$api/user/wishlist';
+  String addToWishList(String productId) => '$api/user/wishlist/$productId';
   String getBusinessByID(String bizId) => '$api/business/$bizId';
   String getBusinessReviews(String bizId) => '$api/user/reviews/$bizId';
   String reviewABusiness(String bizId) => '$api/user/reviews/$bizId';

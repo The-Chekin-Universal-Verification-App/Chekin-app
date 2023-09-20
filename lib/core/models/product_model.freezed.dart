@@ -22,7 +22,7 @@ ProductModel _$ProductModelFromJson(Map<String, dynamic> json) {
 mixin _$ProductModel {
   @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
-  String get business => throw _privateConstructorUsedError;
+  BusinessModel? get business => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get info => throw _privateConstructorUsedError;
   String get category => throw _privateConstructorUsedError;
@@ -47,7 +47,7 @@ abstract class $ProductModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
-      String business,
+      BusinessModel? business,
       String name,
       String info,
       String category,
@@ -57,6 +57,8 @@ abstract class $ProductModelCopyWith<$Res> {
       String updatedAt,
       bool isStoreVerified,
       bool isStoreFavorite});
+
+  $BusinessModelCopyWith<$Res>? get business;
 }
 
 /// @nodoc
@@ -73,7 +75,7 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
   @override
   $Res call({
     Object? id = null,
-    Object? business = null,
+    Object? business = freezed,
     Object? name = null,
     Object? info = null,
     Object? category = null,
@@ -89,10 +91,10 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      business: null == business
+      business: freezed == business
           ? _value.business
           : business // ignore: cast_nullable_to_non_nullable
-              as String,
+              as BusinessModel?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -131,6 +133,18 @@ class _$ProductModelCopyWithImpl<$Res, $Val extends ProductModel>
               as bool,
     ) as $Val);
   }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $BusinessModelCopyWith<$Res>? get business {
+    if (_value.business == null) {
+      return null;
+    }
+
+    return $BusinessModelCopyWith<$Res>(_value.business!, (value) {
+      return _then(_value.copyWith(business: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -143,7 +157,7 @@ abstract class _$$_ProductModelCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: '_id') String id,
-      String business,
+      BusinessModel? business,
       String name,
       String info,
       String category,
@@ -153,6 +167,9 @@ abstract class _$$_ProductModelCopyWith<$Res>
       String updatedAt,
       bool isStoreVerified,
       bool isStoreFavorite});
+
+  @override
+  $BusinessModelCopyWith<$Res>? get business;
 }
 
 /// @nodoc
@@ -167,7 +184,7 @@ class __$$_ProductModelCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = null,
-    Object? business = null,
+    Object? business = freezed,
     Object? name = null,
     Object? info = null,
     Object? category = null,
@@ -183,10 +200,10 @@ class __$$_ProductModelCopyWithImpl<$Res>
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
-      business: null == business
+      business: freezed == business
           ? _value.business
           : business // ignore: cast_nullable_to_non_nullable
-              as String,
+              as BusinessModel?,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -232,7 +249,7 @@ class __$$_ProductModelCopyWithImpl<$Res>
 class _$_ProductModel with DiagnosticableTreeMixin implements _ProductModel {
   _$_ProductModel(
       {@JsonKey(name: '_id') this.id = '',
-      this.business = '',
+      this.business = null,
       this.name = '',
       this.info = '',
       this.category = '',
@@ -252,7 +269,7 @@ class _$_ProductModel with DiagnosticableTreeMixin implements _ProductModel {
   final String id;
   @override
   @JsonKey()
-  final String business;
+  final BusinessModel? business;
   @override
   @JsonKey()
   final String name;
@@ -367,7 +384,7 @@ class _$_ProductModel with DiagnosticableTreeMixin implements _ProductModel {
 abstract class _ProductModel implements ProductModel {
   factory _ProductModel(
       {@JsonKey(name: '_id') final String id,
-      final String business,
+      final BusinessModel? business,
       final String name,
       final String info,
       final String category,
@@ -385,7 +402,7 @@ abstract class _ProductModel implements ProductModel {
   @JsonKey(name: '_id')
   String get id;
   @override
-  String get business;
+  BusinessModel? get business;
   @override
   String get name;
   @override

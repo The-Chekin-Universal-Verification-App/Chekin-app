@@ -12,7 +12,7 @@ import 'discover_components/sorting_item.dart';
 
 enum ViewType { gridView, listView }
 
-enum DiscoverSortType { fashion, automobile, sport, electronics }
+enum DiscoverSortType { fashion, automobile, sport, electronics, all }
 
 class DiscoverScreen extends StatefulWidget {
   const DiscoverScreen({Key? key}) : super(key: key);
@@ -23,11 +23,11 @@ class DiscoverScreen extends StatefulWidget {
 
 class _DiscoverScreenState extends State<DiscoverScreen> {
   DiscoverSortType? sortType;
-  // ViewType viewType = ViewType.gridView;
 
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
+
     ViewType viewType =
         context.select((DiscoverProvider provider) => provider.viewType);
     return SafeArea(
@@ -136,6 +136,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                       }),
                     ],
                   ),
+
                   const VSpace(20),
                   SizedBox(
                     height: 80,
@@ -144,8 +145,26 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                       children: [
                         SortingItem(
                           onTap: () {
+                            sortType = DiscoverSortType.all;
+                            setState(() {
+                              context
+                                  .read<ProductProvider>()
+                                  .displayAllProduct();
+                              // sortType!.name;
+                            });
+                          },
+                          label: context.loc.seeAll,
+                          color: sortType == DiscoverSortType.all
+                              ? theme.primary
+                              : null,
+                        ),
+                        SortingItem(
+                          onTap: () {
                             sortType = DiscoverSortType.fashion;
-                            setState(() {});
+                            setState(() {
+                              context.read<ProductProvider>().sortProduct =
+                                  sortType!.name;
+                            });
                           },
                           label: context.loc.fashion,
                           color: sortType == DiscoverSortType.fashion
@@ -155,7 +174,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         SortingItem(
                           onTap: () {
                             sortType = DiscoverSortType.sport;
-                            setState(() {});
+                            setState(() {
+                              context.read<ProductProvider>().sortProduct =
+                                  sortType!.name;
+                            });
                           },
                           label: context.loc.sport,
                           color: sortType == DiscoverSortType.sport
@@ -165,7 +187,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         SortingItem(
                           onTap: () {
                             sortType = DiscoverSortType.electronics;
-                            setState(() {});
+                            setState(() {
+                              context.read<ProductProvider>().sortProduct =
+                                  sortType!.name;
+                            });
                           },
                           label: context.loc.electronics,
                           color: sortType == DiscoverSortType.electronics
@@ -175,7 +200,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         SortingItem(
                           onTap: () {
                             sortType = DiscoverSortType.automobile;
-                            setState(() {});
+                            setState(() {
+                              context.read<ProductProvider>().sortProduct =
+                                  sortType!.name;
+                            });
                           },
                           label: context.loc.autoMobile,
                           color: sortType == DiscoverSortType.automobile
@@ -206,15 +234,14 @@ class ProductViewSection extends StatelessWidget {
   Widget build(BuildContext context) {
     ViewType viewType =
         context.select((DiscoverProvider provider) => provider.viewType);
-    List<ProductModel> product =
-        context.select((ProductProvider product) => product.products);
+    ProductProvider product = context.watch<ProductProvider>();
     return LoaderStateItem(
         key: UniqueKey(),
         onRefreshNoData: () async {
           await ProductCommand(context).getProducts();
         },
         isLoading: false,
-        item: product,
+        item: product.products,
         widgetOnLoadSuccess: RefreshIndicator(
           onRefresh: () async {
             await ProductCommand(context).getProducts();
@@ -222,43 +249,60 @@ class ProductViewSection extends StatelessWidget {
           child: viewType == ViewType.listView
               ? ListView.builder(
                   physics: const BouncingScrollPhysics(),
-                  itemCount: product.length,
+                  itemCount: product.products.length,
                   itemBuilder: (BuildContext context, index) => DiscoverItem(
-                    product: product[index],
+                    product: product.products[index],
                     onItemTap: () {
                       //select a product
                       context.read<DiscoverProvider>().selectAProduct =
-                          product[index];
+                          product.products[index];
                       context.push(const ProductReviewScreen());
 
                       BusinessCommand(context).getBusinessReviews(
-                          businessId: product[index]
-                              .business); // this get the review on business
+                          businessId: product.products[index].business!
+                              .id); // this get the review on business
                     },
+                    onMenuSelected: (SampleItem item) => onMenuItemSelected(
+                        item, context, product.products[index]),
                   ),
                 )
               : GridView.builder(
                   physics: const BouncingScrollPhysics(),
-                  itemCount: product.length,
+                  itemCount: product.products.length,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 10,
                       crossAxisSpacing: 15,
                       childAspectRatio: 0.7),
                   itemBuilder: (BuildContext context, index) => DiscoverItem(
-                        product: product[index],
+                        product: product.products[index],
                         onItemTap: () {
                           //select a product
                           context.read<DiscoverProvider>().selectAProduct =
-                              product[index];
+                              product.products[index];
                           context.push(const ProductReviewScreen());
 
                           BusinessCommand(context).getBusinessReviews(
-                              businessId: product[index]
-                                  .business); // this get the review on business
+                              businessId: product.products[index].business!
+                                  .id); // this get the review on business
                         },
+                        onMenuSelected: (SampleItem item) => onMenuItemSelected(
+                            item, context, product.products[index]),
                       )),
         ));
+  }
+
+  onMenuItemSelected(
+      SampleItem item, BuildContext context, ProductModel product) {
+    (SampleItem item) {
+      if (item == SampleItem.removeFromList) {
+        ProductCommand(context).removeFromWishList(product.id);
+      } else if (item == SampleItem.addToList) {
+        // context.read<WishListProvider>().addToWishList(product[index]);
+
+        ProductCommand(context).addToWishList([product.id]);
+      }
+    };
   }
 }
 

@@ -10,18 +10,18 @@ class BusinessReviewModel with _$BusinessReviewModel {
     @Default('') @JsonKey(name: '_id') String id,
     @Default(0) @JsonKey(name: '__v') int v,
     @Default('') String business,
-    @Default('') String rating,
-    @Default('') String user,
+    @Default(0) int rating,
+    @Default({}) Map<String, dynamic> user,
     @Default('') String review,
     @Default('') String status,
     @Default('') String createdAt,
-    @Default('') String updatedA,
+    @Default('') String updatedAt,
   }) = _BusinessReviewModel;
 
   factory BusinessReviewModel.fromJson(Map<String, dynamic> json) =>
       _$BusinessReviewModelFromJson(json);
 
   static BusinessReviewModel init() {
-    return BusinessReviewModel(user:'',review:'');
+    return BusinessReviewModel(user: {}, review: '');
   }
 }

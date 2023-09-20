@@ -1,5 +1,7 @@
 import 'package:chekinapp/export.dart';
 
+import 'business_model.dart';
+
 part 'product_model.freezed.dart';
 
 part 'product_model.g.dart';
@@ -8,7 +10,7 @@ part 'product_model.g.dart';
 class ProductModel with _$ProductModel {
   factory ProductModel({
     @Default('') @JsonKey(name: '_id') String id,
-    @Default('') String business,
+    @Default(null) BusinessModel? business,
     @Default('') String name,
     @Default('') String info,
     @Default('') String category,

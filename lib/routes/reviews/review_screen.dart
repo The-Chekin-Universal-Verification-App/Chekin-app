@@ -1,4 +1,5 @@
 import 'package:chekinapp/components/input/base_text_input.dart';
+import 'package:chekinapp/core/models/business_model.dart';
 import 'package:chekinapp/export.dart';
 import 'package:chekinapp/routes/discover/discover_screen.dart';
 import 'package:chekinapp/routes/reviews/social_media_screen.dart';
@@ -37,94 +38,88 @@ class _ProductReviewScreenState extends State<ProductReviewScreen>
         context.select((DiscoverProvider provider) => provider.selectedProduct);
     return Scaffold(
       key: scaffoldKey,
-      body: SafeArea(
-        child: NestedScrollView(
-            headerSliverBuilder: (BuildContext context, val) => [
-                  SliverToBoxAdapter(
-                    child: CustomContainer(
-                      color: const Color(0xFCF9BFC9).withOpacity(0.79),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            child: Padding(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: Insets.l),
-                              child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    IcButton(
-                                      SvgIcon(
-                                        R.png.arrowLeftIcon.svg,
-                                        color: theme.black,
-                                        // size: Sizes.hit,
-                                      ),
-                                      onPressed: () => Navigator.pop(context),
-                                      radius: Corners.s0,
-                                    ),
-                                    CircleAvatar(
-                                      backgroundColor:
-                                          theme.primary.withOpacity(0.15),
-                                      radius: 18,
-                                      child: SvgIcon(
-                                        R.png.heart2.svg,
-                                        size: 18,
-                                        color: theme.redButton,
-                                      ),
-                                    ),
-                                  ]),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            CustomContainer(
+              color: const Color(0xFCF9BFC9).withOpacity(0.79),
+              child: Column(
+                children: [
+                  const VSpace(30),
+                  SizedBox(
+                    height: 50,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: Insets.l),
+                      child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IcButton(
+                              SvgIcon(
+                                R.png.arrowLeftIcon.svg,
+                                color: theme.black,
+                                // size: Sizes.hit,
+                              ),
+                              onPressed: () => Navigator.pop(context),
+                              radius: Corners.s0,
                             ),
-                          ),
-                          const VSpace(3),
-                          SizedBox(
-                              height: 232,
-                              child: PageView.builder(
-                                onPageChanged: (index) {
-                                  currentIndex = index;
-                                  setState(() {});
-                                },
-                                itemCount: selectedProduct.images.length,
-                                itemBuilder: (BuildContext context, int index) {
-                                  return Image.network(
-                                    selectedProduct.images[index],
-                                    errorBuilder: (e, c, d) => const SizedBox(
-                                        child: Icon(
-                                      Icons.image_outlined,
-                                      size: 232 / 2,
-                                      color: Colors.black54,
-                                    )),
-                                  );
-                                },
-                              )),
-                          const VSpace(39),
-                          SizedBox(
-                            height: 10,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: List.generate(
-                                  4,
-                                  (index) => CustomContainer(
-                                        borderRadius: Corners.s8Border,
-                                        color: currentIndex == index
-                                            ? theme.primary
-                                            : theme.primary.withOpacity(0.15),
-                                        margin: const EdgeInsets.symmetric(
-                                            horizontal: 5),
-                                        height: 5,
-                                        width: currentIndex == index
-                                            ? context.sp(20)
-                                            : 18,
-                                      )),
+                            CircleAvatar(
+                              backgroundColor: theme.primary.withOpacity(0.15),
+                              radius: 18,
+                              child: SvgIcon(
+                                R.png.heart2.svg,
+                                size: 18,
+                                color: theme.redButton,
+                              ),
                             ),
-                          ),
-                          const VSpace(15),
-                        ],
-                      ),
+                          ]),
                     ),
-                  )
+                  ),
+                  const VSpace(3),
+                  SizedBox(
+                      height: 232,
+                      child: PageView.builder(
+                        onPageChanged: (index) {
+                          currentIndex = index;
+                          setState(() {});
+                        },
+                        itemCount: selectedProduct.images.length,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Image.network(
+                            selectedProduct.images[index],
+                            errorBuilder: (e, c, d) => const SizedBox(
+                                child: Icon(
+                              Icons.image_outlined,
+                              size: 232 / 2,
+                              color: Colors.black54,
+                            )),
+                          );
+                        },
+                      )),
+                  const VSpace(39),
+                  SizedBox(
+                    height: 10,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: List.generate(
+                          4,
+                          (index) => CustomContainer(
+                                borderRadius: Corners.s8Border,
+                                color: currentIndex == index
+                                    ? theme.primary
+                                    : theme.primary.withOpacity(0.15),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 5),
+                                height: 5,
+                                width:
+                                    currentIndex == index ? context.sp(20) : 18,
+                              )),
+                    ),
+                  ),
+                  const VSpace(15),
                 ],
-            body: Padding(
+              ),
+            ),
+            Padding(
               padding: EdgeInsets.symmetric(horizontal: Insets.l),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -136,7 +131,7 @@ class _ProductReviewScreenState extends State<ProductReviewScreen>
                       Wrap(
                         children: [
                           Text(
-                            selectedProduct.business,
+                            selectedProduct.business!.name,
                             style: TextStyles.body1
                                 .copyWith(fontWeight: FontWeight.w500),
                           ),
@@ -160,7 +155,7 @@ class _ProductReviewScreenState extends State<ProductReviewScreen>
                             TextStyles.h6.copyWith(fontWeight: FontWeight.w700),
                       ),
                       Text(
-                        'Lux-330458',
+                        selectedProduct.business!.luxCode,
                         style: TextStyles.body1.copyWith(
                           fontWeight: FontWeight.w700,
                         ),
@@ -224,7 +219,7 @@ class _ProductReviewScreenState extends State<ProductReviewScreen>
                   }),
                   const VSpace(10),
                   const ChekInAppDivider(),
-                  const VSpace(61),
+                  const VSpace(81),
                   PrimaryButton(
                     onPressed: () {
                       CustomBottomSheet.showCustomBottomSheet(
@@ -239,7 +234,9 @@ class _ProductReviewScreenState extends State<ProductReviewScreen>
                   )
                 ],
               ),
-            )),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -256,11 +253,20 @@ class _AddReviewScreenState extends State<AddReviewScreen>
     with ScaffoldKeyMixin {
   bool setReviewVisibility = true;
   bool setBottomVisibility = true;
+
+  @override
+  initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
     List<BusinessReviewModel> reviews =
         context.select((BusinessProvider provider) => provider.reviews);
+    String topRating =
+        context.select((BusinessProvider provider) => provider.topTenRating);
+
     return Scaffold(
       key: scaffoldKey,
       appBar: CustomAppBar(
@@ -325,7 +331,7 @@ class _AddReviewScreenState extends State<AddReviewScreen>
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Text(
-                              "4.0",
+                              double.parse(topRating).toString(),
                               style: TextStyles.h3,
                             ),
                             Text(
@@ -342,18 +348,10 @@ class _AddReviewScreenState extends State<AddReviewScreen>
                               .copyWith(fontWeight: FontWeight.w500),
                         ),
                         const VSpace(10),
-                        SizedBox(
-                          height: 40,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: List.generate(
-                                5,
-                                (index) => Icon(
-                                      Icons.star_rounded,
-                                      color: theme.greyWeakTwo,
-                                    )),
-                          ),
-                        )
+                        StarRatingItem(
+                            ratings: topRating,
+                            startSize: 30,
+                            onTapRating: (val) {})
                       ],
                     ),
                   ),
@@ -479,6 +477,7 @@ class _ReviewItemState extends State<ReviewItem> {
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
+
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 7.0),
       child: ColorBox(
@@ -491,12 +490,13 @@ class _ReviewItemState extends State<ReviewItem> {
                   children: [
                     CircleAvatar(
                       backgroundColor: Colors.transparent,
-                      backgroundImage: AssetImage(
-                        R.png.man.imgPng,
-                      ),
-                      onBackgroundImageError: (_, err) => Icon(
-                        Icons.image_outlined,
-                        color: theme.grey,
+                      child: Image.network(
+                        widget.reviewObject.user['profileImageUrl'],
+                        errorBuilder: (_, k, err) => Icon(
+                          Icons.image_outlined,
+                          color: theme.grey,
+                          size: 25,
+                        ),
                       ),
                     ),
                     const HSpace(5),
@@ -505,7 +505,8 @@ class _ReviewItemState extends State<ReviewItem> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            widget.reviewObject.user,
+                            widget.reviewObject.user['firstName'] +
+                                widget.reviewObject.user['lastName'],
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                             style: TextStyles.body2.copyWith(
@@ -513,7 +514,7 @@ class _ReviewItemState extends State<ReviewItem> {
                             ),
                           ),
                           Text(
-                            '8hrs ago',
+                            widget.reviewObject.updatedAt,
                             style: TextStyles.body2.copyWith(
                                 fontWeight: FontWeight.w500, fontSize: 13),
                           ),
@@ -521,7 +522,7 @@ class _ReviewItemState extends State<ReviewItem> {
                       ),
                     ),
                     StarRatingItem(
-                        ratings: widget.reviewObject.rating,
+                        ratings: widget.reviewObject.rating.toString(),
                         onTapRating: (val) {})
                   ],
                 ),
@@ -542,9 +543,14 @@ class _ReviewItemState extends State<ReviewItem> {
 }
 
 class StarRatingItem extends StatefulWidget {
-  const StarRatingItem({super.key, required this.ratings, this.onTapRating});
+  const StarRatingItem(
+      {super.key,
+      required this.ratings,
+      this.onTapRating,
+      this.startSize = 15});
 
   final String ratings;
+  final double startSize;
   final Function(int val)? onTapRating;
   @override
   State<StarRatingItem> createState() => _StarRatingItemState();
@@ -594,7 +600,7 @@ class _StarRatingItemState extends State<StarRatingItem> {
               color: rateEquivalent.contains(index) == true
                   ? Colors.yellow.shade800
                   : theme.greyWeakTwo,
-              size: 15,
+              size: widget.startSize,
             ),
           );
         }),
@@ -622,135 +628,155 @@ class AddingReviewsForm extends StatefulWidget {
   State<AddingReviewsForm> createState() => _AddingReviewsFormState();
 }
 
-class _AddingReviewsFormState extends State<AddingReviewsForm> {
+class _AddingReviewsFormState extends State<AddingReviewsForm> with FormMixin {
+  MakeBusinessReviewModel model = MakeBusinessReviewModel.init();
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
-    ProductModel selectedProduct =
-        context.select((DiscoverProvider provider) => provider.selectedProduct);
+    BusinessModel selectedBusiness = context
+        .select((BusinessProvider provider) => provider.selectedBusiness);
 
     return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          SizedBox(
-            height: 60,
-            child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  IcButton(
-                    SvgIcon(
-                      R.png.arrowLeftIcon.svg,
-                      color: theme.black,
-                      // size: Sizes.hit,
+      child: Form(
+        key: formKey,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              height: 60,
+              child: Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    IcButton(
+                      SvgIcon(
+                        R.png.arrowLeftIcon.svg,
+                        color: theme.black,
+                        // size: Sizes.hit,
+                      ),
+                      onPressed: () => Navigator.pop(context),
+                      radius: Corners.s0,
                     ),
-                    onPressed: () => Navigator.pop(context),
-                    radius: Corners.s0,
-                  ),
-                  const HSpace(10),
-                  Text(context.loc.addReviews,
-                      style:
-                          TextStyles.h5.copyWith(fontWeight: FontWeight.w700)),
-                ]),
-          ),
-          Row(
-            children: [
-              ColorBox(
-                onTap: () {},
-                color: const Color(0xFFFFE4CC).withOpacity(.79),
-                child: SizedBox(
-                    height: 120, child: Image.asset(selectedProduct.images[0])),
-              ),
-              const HSpace(5),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Wrap(
-                    children: [
-                      Text(
-                        selectedProduct.business,
-                        style: TextStyles.body1
-                            .copyWith(fontWeight: FontWeight.w500),
-                      ),
-                      const HSpace(5),
-                      Image.asset(R.png.verified.imgPng)
-                    ],
-                  ),
-                  const VSpace(5),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        selectedProduct.name,
-                        style:
-                            TextStyles.h6.copyWith(fontWeight: FontWeight.w700),
-                      ),
-                      Text(
-                        'Lux-330458',
-                        style: TextStyles.body1.copyWith(
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              )
-            ],
-          ),
-          const VSpace(10),
-          const ChekInAppDivider(),
-          const VSpace(20),
-          Text(
-            context.loc.howWouldYouRateProduct,
-            style: TextStyles.body1.copyWith(color: theme.greyWeakTwo),
-          ),
-          const VSpace(15),
-          SizedBox(
-            height: 30,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                  5,
-                  (index) => Icon(
-                        Icons.star_rounded,
-                        color: theme.greyWeakTwo,
-                      )),
+                    const HSpace(10),
+                    Text(context.loc.addReviews,
+                        style: TextStyles.h5
+                            .copyWith(fontWeight: FontWeight.w700)),
+                  ]),
             ),
-          ),
-          const VSpace(10),
-          const ChekInAppDivider(),
-          const VSpace(20),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                context.loc.writeReview,
-                style: TextStyles.h7.copyWith(fontWeight: FontWeight.w700),
-              ),
-              const VSpace(5),
-              CustomReviewTextField(
-                hintText: context.loc.tellUsWhatYouThink,
-                maxLines: 6,
-              ),
-              const VSpace(3),
-              Text(
-                '200 ${context.loc.wordsLeft}',
-                style: TextStyles.body2.copyWith(
-                    color: theme.greyWeakTwo, fontWeight: FontWeight.w500),
-              ),
-            ],
-          ),
-          const VSpace(51),
-          PrimaryButton(
-            onPressed: () {
-              context.push(const VendorStore());
-            },
-            label: context.loc.submit,
-            fullWidth: true,
-            radius: Corners.s20,
-          ),
-          const VSpace(21),
-        ],
+            Row(
+              children: [
+                ColorBox(
+                  onTap: () {},
+                  color: const Color(0xFFFFE4CC).withOpacity(.79),
+                  child: SizedBox(
+                      height: 120,
+                      child: Image.network(selectedBusiness.businessImage)),
+                ),
+                const HSpace(5),
+                Flexible(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Flexible(
+                            flex: 2,
+                            child: Text(
+                              selectedBusiness.owner,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyles.body1
+                                  .copyWith(fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                          const HSpace(5),
+                          Image.asset(R.png.verified.imgPng)
+                        ],
+                      ),
+                      const VSpace(5),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            flex: 2,
+                            child: Text(
+                              selectedBusiness.name,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyles.h6
+                                  .copyWith(fontWeight: FontWeight.w700),
+                            ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            selectedBusiness.luxCode,
+                            style: TextStyles.body1.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+            const VSpace(10),
+            const ChekInAppDivider(),
+            const VSpace(20),
+            Text(
+              context.loc.howWouldYouRateBusiness,
+              style: TextStyles.body1.copyWith(color: theme.greyWeakTwo),
+            ),
+            const VSpace(15),
+            StarRatingItem(
+              ratings: '1',
+              startSize: 25,
+              onTapRating: (val) {
+                model = model.copyWith(rating: val.toString());
+              },
+            ),
+            const VSpace(10),
+            const ChekInAppDivider(),
+            const VSpace(20),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  context.loc.writeReview,
+                  style: TextStyles.h7.copyWith(fontWeight: FontWeight.w700),
+                ),
+                const VSpace(5),
+                CustomReviewTextField(
+                  hintText: context.loc.tellUsWhatYouThink,
+                  validator: Validator.string(minLength: 3),
+                  onChange: (val) {
+                    model = model.copyWith(review: val);
+                  },
+                  maxLines: 6,
+                ),
+                const VSpace(3),
+                Text(
+                  '200 ${context.loc.wordsLeft}',
+                  style: TextStyles.body2.copyWith(
+                      color: theme.greyWeakTwo, fontWeight: FontWeight.w500),
+                ),
+              ],
+            ),
+            const VSpace(51),
+            PrimaryButton(
+              onPressed: () {
+                validate(() {
+                  load(() => BusinessCommand(context).reviewBusiness(
+                      businessId: selectedBusiness.id, model: model));
+                });
+                // context.push(const VendorStore());
+              },
+              label: context.loc.submit,
+              fullWidth: true,
+              loading: isLoading,
+              radius: Corners.s20,
+            ),
+            const VSpace(21),
+          ],
+        ),
       ),
     );
   }

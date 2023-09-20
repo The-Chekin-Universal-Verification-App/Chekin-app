@@ -40,6 +40,7 @@ class BusinessModel with _$BusinessModel {
   static BusinessModel init() {
     return BusinessModel(name: '', nearestLandmark: '', lga: '');
   }
+
 }
 
 @freezed

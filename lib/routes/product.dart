@@ -247,7 +247,7 @@ class ProductItem extends StatelessWidget {
                         Wrap(
                           crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
-                            Text(product.business,
+                            Text(product.business!.name,
                                 style: TextStyles.h7
                                     .copyWith(fontWeight: FontWeight.w700)),
                             const HSpace(5),

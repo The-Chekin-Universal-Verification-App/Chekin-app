@@ -8,8 +8,8 @@ abstract class BaseService {
   late final Dio _dio;
   var options = BaseOptions(
     baseUrl: R.N.baseUrl,
-    connectTimeout: 30000,
-    receiveTimeout: 30000,
+    connectTimeout: 60000,
+    receiveTimeout: 60000,
     headers: {
       HttpHeaders.contentTypeHeader: 'application/json',
       HttpHeaders.acceptHeader: 'application/json',
@@ -55,17 +55,26 @@ abstract class BaseService {
       if (pin != null) {
         _dio.options.headers["pin"] = pin;
       }
-      if (retry != null) {
-        _dioRetry(retry: retry);
-      }
     }
-
+    if (retry != null) {
+      _dioRetry(retry: retry);
+    }
     Response res = await _dio.post(path, data: jsonEncode(obj));
     return res;
   }
 
-  Future<Response> delete() async {
-    Response res = await _dio.delete('');
+  Future<Response> delete(String path, Map<String, dynamic> obj,
+      {String? token, String? pin, int? retry}) async {
+    if (token != null) {
+      _dio.options.headers["Authorization"] = "Bearer $token";
+      if (pin != null) {
+        _dio.options.headers["pin"] = pin;
+      }
+    }
+    if (retry != null) {
+      _dioRetry(retry: retry);
+    }
+    Response res = await _dio.delete(path, data: jsonEncode(obj));
     return res;
   }
 

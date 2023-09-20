@@ -102,10 +102,11 @@ class BusinessService extends BaseService {
   }
 
   Future<Response?> getBusinessReview(String token,
-      {required String businessId, String? nextPage}) async {
+      {required String businessId, String nextPage = ''}) async {
     Response? response;
     try {
-      response = await get("${R.M.getBusinessReviews(businessId)}$nextPage",
+      response = await get(
+          "${R.M.getBusinessReviews(businessId)}$nextPage".trim(),
           token: token);
 
       return response;
@@ -126,8 +127,8 @@ class BusinessService extends BaseService {
     Response? response;
 
     try {
-      response = await put(R.M.reviewABusiness(businessId),
-          token: token, data: payload);
+      response =
+          await post(R.M.reviewABusiness(businessId), token: token, payload);
       return response;
     } on DioError catch (err) {
       DioExceptions.fromDioError(err).showNotification();
@@ -157,6 +158,67 @@ class BusinessService extends BaseService {
       NetworkExceptions.fromNetworkError(err).showNotification();
       response = null;
       return response;
+    }
+  }
+
+  Future<Response?> getWishList(String token) async {
+    Response? response;
+    try {
+      response = await get(R.M.getWishList, token: token);
+
+      return response;
+    } on DioError catch (err) {
+      DioExceptions.fromDioError(err).showNotification();
+      response = null;
+
+      return response;
+    } catch (err) {
+      NetworkExceptions.fromNetworkError(err).showNotification();
+      response = null;
+      return response;
+    }
+  }
+
+  Future<List<dynamic>> addToWishList(String token,
+      {required List<String> productId}) async {
+    List<dynamic> result;
+    try {
+      List<Future<dynamic>> futures = [];
+      for (var element in productId) {
+        futures.add(post(R.M.addToWishList(element), {}, token: token));
+      }
+
+      result = await Future.wait(futures);
+      // response = await get(R.M.addToWishList(productId), token: token);
+
+      return result;
+    } on DioError catch (err) {
+      DioExceptions.fromDioError(err).showNotification();
+      result = [];
+
+      return result;
+    } catch (err) {
+      NetworkExceptions.fromNetworkError(err).showNotification();
+      result = [];
+      return result;
+    }
+  }
+
+  Future<Response?> removeFromWishList(String token,
+      {required String productId}) async {
+    Response? res;
+    try {
+      res = await delete(R.M.addToWishList(productId), {}, token: token);
+      return res;
+    } on DioError catch (err) {
+      DioExceptions.fromDioError(err).showNotification();
+      res = null;
+
+      return res;
+    } catch (err) {
+      NetworkExceptions.fromNetworkError(err).showNotification();
+      res = null;
+      return res;
     }
   }
 }

@@ -25,12 +25,12 @@ mixin _$BusinessReviewModel {
   @JsonKey(name: '__v')
   int get v => throw _privateConstructorUsedError;
   String get business => throw _privateConstructorUsedError;
-  String get rating => throw _privateConstructorUsedError;
-  String get user => throw _privateConstructorUsedError;
+  int get rating => throw _privateConstructorUsedError;
+  Map<String, dynamic> get user => throw _privateConstructorUsedError;
   String get review => throw _privateConstructorUsedError;
   String get status => throw _privateConstructorUsedError;
   String get createdAt => throw _privateConstructorUsedError;
-  String get updatedA => throw _privateConstructorUsedError;
+  String get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -48,12 +48,12 @@ abstract class $BusinessReviewModelCopyWith<$Res> {
       {@JsonKey(name: '_id') String id,
       @JsonKey(name: '__v') int v,
       String business,
-      String rating,
-      String user,
+      int rating,
+      Map<String, dynamic> user,
       String review,
       String status,
       String createdAt,
-      String updatedA});
+      String updatedAt});
 }
 
 /// @nodoc
@@ -77,7 +77,7 @@ class _$BusinessReviewModelCopyWithImpl<$Res, $Val extends BusinessReviewModel>
     Object? review = null,
     Object? status = null,
     Object? createdAt = null,
-    Object? updatedA = null,
+    Object? updatedAt = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -95,11 +95,11 @@ class _$BusinessReviewModelCopyWithImpl<$Res, $Val extends BusinessReviewModel>
       rating: null == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       user: null == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Map<String, dynamic>,
       review: null == review
           ? _value.review
           : review // ignore: cast_nullable_to_non_nullable
@@ -112,9 +112,9 @@ class _$BusinessReviewModelCopyWithImpl<$Res, $Val extends BusinessReviewModel>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
-      updatedA: null == updatedA
-          ? _value.updatedA
-          : updatedA // ignore: cast_nullable_to_non_nullable
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
@@ -132,12 +132,12 @@ abstract class _$$_BusinessReviewModelCopyWith<$Res>
       {@JsonKey(name: '_id') String id,
       @JsonKey(name: '__v') int v,
       String business,
-      String rating,
-      String user,
+      int rating,
+      Map<String, dynamic> user,
       String review,
       String status,
       String createdAt,
-      String updatedA});
+      String updatedAt});
 }
 
 /// @nodoc
@@ -159,7 +159,7 @@ class __$$_BusinessReviewModelCopyWithImpl<$Res>
     Object? review = null,
     Object? status = null,
     Object? createdAt = null,
-    Object? updatedA = null,
+    Object? updatedAt = null,
   }) {
     return _then(_$_BusinessReviewModel(
       id: null == id
@@ -177,11 +177,11 @@ class __$$_BusinessReviewModelCopyWithImpl<$Res>
       rating: null == rating
           ? _value.rating
           : rating // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       user: null == user
-          ? _value.user
+          ? _value._user
           : user // ignore: cast_nullable_to_non_nullable
-              as String,
+              as Map<String, dynamic>,
       review: null == review
           ? _value.review
           : review // ignore: cast_nullable_to_non_nullable
@@ -194,9 +194,9 @@ class __$$_BusinessReviewModelCopyWithImpl<$Res>
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
               as String,
-      updatedA: null == updatedA
-          ? _value.updatedA
-          : updatedA // ignore: cast_nullable_to_non_nullable
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -211,12 +211,13 @@ class _$_BusinessReviewModel
       {@JsonKey(name: '_id') this.id = '',
       @JsonKey(name: '__v') this.v = 0,
       this.business = '',
-      this.rating = '',
-      this.user = '',
+      this.rating = 0,
+      final Map<String, dynamic> user = const {},
       this.review = '',
       this.status = '',
       this.createdAt = '',
-      this.updatedA = ''});
+      this.updatedAt = ''})
+      : _user = user;
 
   factory _$_BusinessReviewModel.fromJson(Map<String, dynamic> json) =>
       _$$_BusinessReviewModelFromJson(json);
@@ -232,10 +233,16 @@ class _$_BusinessReviewModel
   final String business;
   @override
   @JsonKey()
-  final String rating;
+  final int rating;
+  final Map<String, dynamic> _user;
   @override
   @JsonKey()
-  final String user;
+  Map<String, dynamic> get user {
+    if (_user is EqualUnmodifiableMapView) return _user;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_user);
+  }
+
   @override
   @JsonKey()
   final String review;
@@ -247,11 +254,11 @@ class _$_BusinessReviewModel
   final String createdAt;
   @override
   @JsonKey()
-  final String updatedA;
+  final String updatedAt;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'BusinessReviewModel(id: $id, v: $v, business: $business, rating: $rating, user: $user, review: $review, status: $status, createdAt: $createdAt, updatedA: $updatedA)';
+    return 'BusinessReviewModel(id: $id, v: $v, business: $business, rating: $rating, user: $user, review: $review, status: $status, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -267,7 +274,7 @@ class _$_BusinessReviewModel
       ..add(DiagnosticsProperty('review', review))
       ..add(DiagnosticsProperty('status', status))
       ..add(DiagnosticsProperty('createdAt', createdAt))
-      ..add(DiagnosticsProperty('updatedA', updatedA));
+      ..add(DiagnosticsProperty('updatedAt', updatedAt));
   }
 
   @override
@@ -280,19 +287,28 @@ class _$_BusinessReviewModel
             (identical(other.business, business) ||
                 other.business == business) &&
             (identical(other.rating, rating) || other.rating == rating) &&
-            (identical(other.user, user) || other.user == user) &&
+            const DeepCollectionEquality().equals(other._user, _user) &&
             (identical(other.review, review) || other.review == review) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
-            (identical(other.updatedA, updatedA) ||
-                other.updatedA == updatedA));
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, v, business, rating, user,
-      review, status, createdAt, updatedA);
+  int get hashCode => Object.hash(
+      runtimeType,
+      id,
+      v,
+      business,
+      rating,
+      const DeepCollectionEquality().hash(_user),
+      review,
+      status,
+      createdAt,
+      updatedAt);
 
   @JsonKey(ignore: true)
   @override
@@ -314,12 +330,12 @@ abstract class _BusinessReviewModel implements BusinessReviewModel {
       {@JsonKey(name: '_id') final String id,
       @JsonKey(name: '__v') final int v,
       final String business,
-      final String rating,
-      final String user,
+      final int rating,
+      final Map<String, dynamic> user,
       final String review,
       final String status,
       final String createdAt,
-      final String updatedA}) = _$_BusinessReviewModel;
+      final String updatedAt}) = _$_BusinessReviewModel;
 
   factory _BusinessReviewModel.fromJson(Map<String, dynamic> json) =
       _$_BusinessReviewModel.fromJson;
@@ -333,9 +349,9 @@ abstract class _BusinessReviewModel implements BusinessReviewModel {
   @override
   String get business;
   @override
-  String get rating;
+  int get rating;
   @override
-  String get user;
+  Map<String, dynamic> get user;
   @override
   String get review;
   @override
@@ -343,7 +359,7 @@ abstract class _BusinessReviewModel implements BusinessReviewModel {
   @override
   String get createdAt;
   @override
-  String get updatedA;
+  String get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$_BusinessReviewModelCopyWith<_$_BusinessReviewModel> get copyWith =>

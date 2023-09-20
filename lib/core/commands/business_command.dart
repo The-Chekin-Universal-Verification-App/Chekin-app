@@ -24,7 +24,10 @@ class BusinessCommand extends BaseCommand {
     BusinessService service = BusinessService();
     String path = _getPath(page: page, limit: limit, search: search);
     try {
+      business.setBusy(true);
       res = await service.getBusiness(auth.token, urlPath: path);
+      business.setBusy(false);
+
       if (res != null) {
         if (res.statusCode == 200 ||
             res.statusCode == 201 && res.data['status'] == "success") {
@@ -35,6 +38,8 @@ class BusinessCommand extends BaseCommand {
         }
       }
     } catch (e) {
+      business.setBusy(false);
+
       /// if services is returning [null] then we would do nothing cause the exception thrown has been handled at the service class logic
       null;
     }
@@ -210,8 +215,10 @@ class BusinessCommand extends BaseCommand {
       if (res != null) {
         if (res.statusCode == 200 ||
             res.statusCode == 201 && res.data['status'] == "success") {
+          Navigator.of(context).pop();
           DialogServices.messageModalFromTop(context,
               message: 'Reviews submitted Successfully!');
+          getBusinessReviews(businessId: businessId);
         }
       }
     } catch (e) {
@@ -238,14 +245,15 @@ class BusinessCommand extends BaseCommand {
     }
     try {
       res = await service.getBusinessReview(auth.token,
-          businessId: businessId, nextPage: nextPage.toString());
+          businessId: businessId,
+          nextPage: nextPage != null ? nextPage.toString() : '');
       if (res != null) {
         if (res.statusCode == 200 ||
             res.statusCode == 201 && res.data['status'] == "success") {
           log(res.data.toString());
-          business.setBusinessReviews(res.data['data'],
-              totalPage: res.data['totalPages'],
-              currentPage: res.data['currentPage']);
+          business.setBusinessReviews(res.data['data']['data'],
+              totalPage: res.data['data']['totalPages'],
+              currentPage: res.data['data']['currentPage']);
         }
       }
     } catch (e) {

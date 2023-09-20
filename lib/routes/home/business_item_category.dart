@@ -25,6 +25,7 @@ class BusinessItemCategory extends StatelessWidget {
       margin: const EdgeInsets.only(right: 10),
       padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 10),
       child: Column(
+        // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
               flex: 2,
@@ -37,28 +38,34 @@ class BusinessItemCategory extends StatelessWidget {
                   size: 35,
                 )),
               )),
-          const VSpace(3),
-          Text(
-            businessModel.name,
-            style: TextStyles.body2
-                .copyWith(fontSize: 13, fontWeight: FontWeight.w500),
+          const VSpace(5),
+          Align(
+            // alignment: Alignment.centerLeft,
+            child: Text(
+              businessModel.name,
+              style: TextStyles.body2
+                  .copyWith(fontSize: 13, fontWeight: FontWeight.w500),
+            ),
           ),
           const VSpace(3),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Flexible(
-                flex: 2,
-                child: Text(
-                  businessModel.owner,
-                  overflow: TextOverflow.ellipsis,
-                  style: TextStyles.body2
-                      .copyWith(fontSize: 15, fontWeight: FontWeight.w700),
+          Align(
+            // alignment: Alignment.centerLeft,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Flexible(
+                  flex: 2,
+                  child: Text(
+                    businessModel.name,
+                    overflow: TextOverflow.ellipsis,
+                    style: TextStyles.body2
+                        .copyWith(fontSize: 15, fontWeight: FontWeight.w700),
+                  ),
                 ),
-              ),
-              const HSpace(5),
-              Image.asset(R.png.verified.imgPng)
-            ],
+                const HSpace(5),
+                Image.asset(R.png.verified.imgPng)
+              ],
+            ),
           ),
         ],
       ),

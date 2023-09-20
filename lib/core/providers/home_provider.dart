@@ -8,7 +8,7 @@ Random random = Random(10);
 
 class HomeProvider extends BaseProvider {
   HomeProvider() {
-    init();
+    // init();
   }
 
   List<ProductModel> _topRated = [];
@@ -19,21 +19,21 @@ class HomeProvider extends BaseProvider {
 
   init() {
     setBusy(true);
-    Future.delayed(
-        const Duration(
-          seconds: 6,
-        ), () {
-      _topRated =
-          List.generate(R.M.topRated.length, (index) => R.M.topRated[index])
-              .toList();
-      _popular =
-          List.generate(R.M.topRated.length, (index) => R.M.topRated[index])
-              .toList();
-
-      setBusy(false);
-      notifyListeners();
-      // print('first delay');
-    });
+    // Future.delayed(
+    //     const Duration(
+    //       seconds: 6,
+    //     ), () {
+    //   _topRated =
+    //       List.generate(R.M.topRated.length, (index) => R.M.topRated[index])
+    //           .toList();
+    //   _popular =
+    //       List.generate(R.M.topRated.length, (index) => R.M.topRated[index])
+    //           .toList();
+    //
+    //   setBusy(false);
+    //   notifyListeners();
+    //   // print('first delay');
+    // });
     // print('second delay');
   }
 }

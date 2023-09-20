@@ -6,7 +6,7 @@ class AuthService extends BaseService {
 
     Response? response;
     try {
-      response = await post(R.M.signUp, payload);
+      response = await post(R.M.signUp, payload, retry: 3);
       return response;
     } on DioError catch (err) {
       DioExceptions.fromDioError(err).showNotification();
@@ -25,7 +25,7 @@ class AuthService extends BaseService {
 
     Response? response;
     try {
-      response = await post(R.M.signUpBiz, payload);
+      response = await post(R.M.signUpBiz, payload, retry: 3);
       return response;
     } on DioError catch (err) {
       DioExceptions.fromDioError(err).showNotification();
@@ -44,7 +44,7 @@ class AuthService extends BaseService {
 
     Response? response;
     try {
-      response = await post(R.M.logIn, payload);
+      response = await post(R.M.logIn, payload, retry: 3);
       return response;
     } on DioError catch (err) {
       if (err.type == DioErrorType.response &&

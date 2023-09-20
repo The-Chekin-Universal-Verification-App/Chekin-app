@@ -839,12 +839,12 @@
 
   "recent": "Recent",
   "@recent": {
-  "description": "recents"
+  "description": "recent"
   },
 
-   "howWouldYouRateProduct": "How would you rate this product?",
-  "@howWouldYouRateProduct": {
-  "description": "rate the product"
+   "howWouldYouRateBusiness": "How would you rate this  business?",
+  "@howWouldYouRateBusiness": {
+  "description": "rate the business"
   },
    "writeReview": "Write your review",
   "@writeReview": {

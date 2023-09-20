@@ -24,7 +24,7 @@ class Popular extends StatelessWidget {
     ];
     List<BusinessModel> popular =
         context.select((BusinessProvider provider) => provider.popular);
-    bool state = context.select((HomeProvider provider) => provider.isBusy);
+    bool state = context.select((BusinessProvider provider) => provider.isBusy);
 
     return SizedBox(
         height: 180,

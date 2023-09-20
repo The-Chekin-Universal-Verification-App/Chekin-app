@@ -150,7 +150,7 @@ class HomeScreen extends StatelessWidget {
                       context.loc.seeAll,
                       style: TextStyles.body2.copyWith(color: theme.primary),
                     ).rippleClick(() {
-                      // context.push(const BusinessScreen());
+                      context.push(const BusinessScreen());
                     }),
                   ],
                 ),
@@ -169,7 +169,7 @@ class HomeScreen extends StatelessWidget {
                       context.loc.seeAll,
                       style: TextStyles.body2.copyWith(color: theme.primary),
                     ).rippleClick(() {
-                      // context.push(const BusinessScreen());
+                      context.push(const BusinessScreen());
                     }),
                   ],
                 ),

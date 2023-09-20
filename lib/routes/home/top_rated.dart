@@ -2,14 +2,10 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 import 'package:flutter/cupertino.dart';
-
 import '../../components/msc/loader_state_widget.dart';
 import '../../core/models/business_model.dart';
 import '../../core/providers/business_provider.dart';
-import '../business/businesses.dart';
-import '../reviews/business_review_screen.dart';
 import 'business_item_category.dart';
-import 'home.dart';
 
 class TopRated extends StatelessWidget {
   const TopRated({
@@ -24,7 +20,7 @@ class TopRated extends StatelessWidget {
       Color(0xffCCE4FF),
       Color(0xffD4FFE8),
     ];
-    bool state = context.select((HomeProvider provider) => provider.isBusy);
+    bool state = context.select((BusinessProvider provider) => provider.isBusy);
     List<BusinessModel> businesses = context
         .select((BusinessProvider business) => business.allAvailableBusiness);
 
@@ -50,4 +46,3 @@ class TopRated extends StatelessWidget {
         ).center());
   }
 }
-

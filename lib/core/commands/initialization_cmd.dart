@@ -13,6 +13,7 @@ class InitializationCmd extends BaseCommand {
     BuildContext context = rootNav!.context;
     BusinessCommand(context).getBusiness(page: '1');
     ProductCommand(context).getProducts();
+    ProductCommand(context).getWishList();
   }
 
 //

@@ -31,7 +31,6 @@ class BusinessProvider extends BaseProvider {
   ///
   setBusiness(List businessListJson,
       {int currentPage = 1, int totalPage = 10, required int pageLimit}) {
-    isBusy = true;
     //
     List<BusinessModel> listOfBusiness =
         businessListJson.map((e) => BusinessModel.fromJson(e)).toList();
@@ -44,7 +43,6 @@ class BusinessProvider extends BaseProvider {
     //if what we are receiving is less than our page limit then we have reached the end of current page we need to move to next page if there is another page
     _reachedEndOfCurrentPage = listOfBusiness.length < pageLimit ? true : false;
     // print(_searchedBusiness);
-    isBusy = false;
     notifyListeners();
   }
 
@@ -92,12 +90,15 @@ class BusinessProvider extends BaseProvider {
     notifyListeners();
   }
 
+//
   //clear what ever is in the business field
   clearSingleBusiness() {
     _fetchedSingleBusiness = BusinessModel.init();
     notifyListeners();
   }
 
+  String _topTenRating = '';
+  String get topTenRating => _topTenRating;
   List<BusinessReviewModel> _reviews = [];
   int _totalReviewPage = 0;
   int _currentReviewPage = 1;
@@ -111,11 +112,22 @@ class BusinessProvider extends BaseProvider {
     List<BusinessReviewModel> listOfBusinessReviews = businessReviewsListJson
         .map((e) => BusinessReviewModel.fromJson(e))
         .toList();
-    //
-    _reviews.addAll(listOfBusinessReviews);
-    _totalReviewPage = totalPage;
-    _currentReviewPage = currentPage;
+    if (_currentReviewPage != currentPage || _totalReviewPage != totalPage) {
+      //
+      _reviews.addAll(listOfBusinessReviews);
+      _totalReviewPage = totalPage;
+      _currentReviewPage = currentPage;
+      _topTenRating = TopTenRating().getTopTenRatings(reviews);
+    } else if (_currentReviewPage == currentPage ||
+        _totalReviewPage == totalPage &&
+            businessReviewsListJson.length > _reviews.length) {
+      ///in the case where it is in the same page and the following condition is true
+      _reviews = listOfBusinessReviews;
+      //just insert what ever that is coming from server into the list holding reviews
+    }
+
     isBusy = false;
+
     notifyListeners();
   }
 
@@ -132,3 +144,56 @@ class BusinessProvider extends BaseProvider {
 }
 
 enum UploadStatus { completed, failed, pending, wait, inProgress }
+
+class TopTenRating {
+  int one = 0;
+  int two = 0;
+  int three = 0;
+  int four = 0;
+  int five = 0;
+
+  List<String> topTenRatings = [];
+
+  String getTopTenRatings(List<BusinessReviewModel> reviews) {
+    topTenRatings = [];
+    if (reviews.isNotEmpty && reviews.length <= 10) {
+      for (var element in reviews) {
+        topTenRatings.add(element.rating.toString());
+      }
+    }
+    return returnHighestRating();
+  }
+
+  String returnHighestRating() {
+    sortHighest();
+    if (one > two && one > three && one > four && one > five) {
+      return '1';
+    } else if (two > one && two > three && two > four && two > five) {
+      return '2';
+    } else if (three > one && three > two && three > four && three > five) {
+      return '3';
+    } else if (four > one && four > two && four > three && four > five) {
+      return '4';
+    } else if (five > one && five > two && five > three && five > four) {
+      return '5';
+    } else {
+      return '';
+    }
+  }
+
+  sortHighest() {
+    for (String e in topTenRatings) {
+      if (e == '1') {
+        one = one + 1;
+      } else if (e == '2') {
+        two = two + 1;
+      } else if (e == '3') {
+        three = three + 1;
+      } else if (e == '4') {
+        four = four + 1;
+      } else if (e == '5') {
+        five = five + 1;
+      }
+    }
+  }
+}
