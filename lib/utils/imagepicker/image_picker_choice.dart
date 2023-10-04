@@ -9,7 +9,7 @@ import 'package:chekinapp/export.dart';
 class ImagePickerChoice extends StatelessWidget {
   const ImagePickerChoice(
       {Key? key,
-      this.addImageToList = true,
+      this.addImageToList = false,
       this.showSuccessNotification = true,
       this.useOnlyCamera = false,
       this.onReturnImagePath})
@@ -41,7 +41,11 @@ class ImagePickerChoice extends StatelessWidget {
                   //call selectAndCropImage to pick image from gallery
                   File imageFile = await UploadFileCommand(context)
                       .cropImage(useCamera: false);
-                  imageProviders.setImage = imageFile.path;
+                  if (addImageToList) {
+                    imageProviders.addImagesToListPath = imageFile.path;
+                  } else {
+                    imageProviders.setImage = imageFile.path;
+                  }
                   await context.push(PreviewImage(
                     imagePath: imageFile.path,
                     isNetworkImage: false,
@@ -74,7 +78,12 @@ class ImagePickerChoice extends StatelessWidget {
                 //call selectAndCropImage to select image from camera
                 File imageFile =
                     await UploadFileCommand(context).cropImage(useCamera: true);
-                imageProviders.setImage = imageFile.path;
+                if (addImageToList) {
+                  imageProviders.addImagesToListPath = imageFile.path;
+                } else {
+                  imageProviders.setImage = imageFile.path;
+                }
+                // imageProviders.setImage = imageFile.path;
                 await context.push(PreviewImage(
                   imagePath: imageFile.path,
                   isNetworkImage: false,

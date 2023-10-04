@@ -8,6 +8,7 @@ class BusinessProvider extends BaseProvider {
 
   ///the above lines works only if the account is a business account
   List<BusinessModel> _searchedBusiness = [];
+  List<BusinessModel> _searchedBusinessCopy = [];
   int _totalPage = 0;
   int _currentPage = 1;
 
@@ -36,6 +37,7 @@ class BusinessProvider extends BaseProvider {
         businessListJson.map((e) => BusinessModel.fromJson(e)).toList();
     //
     _searchedBusiness.addAll(listOfBusiness);
+    _searchedBusinessCopy = _searchedBusiness;
     _totalPage = totalPage;
     _currentPage = currentPage;
     _isLastPage = _currentPage == _totalPage ? true : false;
@@ -43,6 +45,25 @@ class BusinessProvider extends BaseProvider {
     //if what we are receiving is less than our page limit then we have reached the end of current page we need to move to next page if there is another page
     _reachedEndOfCurrentPage = listOfBusiness.length < pageLimit ? true : false;
     // print(_searchedBusiness);
+    notifyListeners();
+  }
+
+  set sortSearchBusinessByCategoryOrKeyWord(String keyWord) {
+    _searchedBusiness = [];
+    // print(keyWord);
+    for (var element in _searchedBusinessCopy) {
+      if (element.name.contains(keyWord) ||
+          element.state.contains(keyWord) ||
+          element.description.contains(keyWord)) {
+        _searchedBusiness.add(element);
+      }
+    }
+    notifyListeners();
+  }
+
+  displayAllBusiness() {
+    _searchedBusiness = _searchedBusinessCopy;
+
     notifyListeners();
   }
 

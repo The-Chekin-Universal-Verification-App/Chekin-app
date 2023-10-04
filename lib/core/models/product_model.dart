@@ -29,3 +29,23 @@ class ProductModel with _$ProductModel {
     return ProductModel(name: '', info: '');
   }
 }
+
+@freezed
+class ProductCategoryModel with _$ProductCategoryModel {
+  factory ProductCategoryModel({
+    @Default('') @JsonKey(name: '_id') String id,
+    @Default(0) @JsonKey(name: '__v') int v,
+    @Default('') String name,
+    @Default('') String createdAt,
+    @Default('') String updatedAt,
+  }) = _ProductCategoryModel;
+
+  factory ProductCategoryModel.fromJson(Map<String, dynamic> json) =>
+      _$ProductCategoryModelFromJson(json);
+
+  static ProductCategoryModel init() {
+    return ProductCategoryModel(
+      name: '',
+    );
+  }
+}

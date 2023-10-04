@@ -37,3 +37,23 @@ Map<String, dynamic> _$$_ProductModelToJson(_$_ProductModel instance) =>
       'isStoreVerified': instance.isStoreVerified,
       'isStoreFavorite': instance.isStoreFavorite,
     };
+
+_$_ProductCategoryModel _$$_ProductCategoryModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_ProductCategoryModel(
+      id: json['_id'] as String? ?? '',
+      v: json['__v'] as int? ?? 0,
+      name: json['name'] as String? ?? '',
+      createdAt: json['createdAt'] as String? ?? '',
+      updatedAt: json['updatedAt'] as String? ?? '',
+    );
+
+Map<String, dynamic> _$$_ProductCategoryModelToJson(
+        _$_ProductCategoryModel instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      '__v': instance.v,
+      'name': instance.name,
+      'createdAt': instance.createdAt,
+      'updatedAt': instance.updatedAt,
+    };

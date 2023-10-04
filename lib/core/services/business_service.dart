@@ -161,6 +161,43 @@ class BusinessService extends BaseService {
     }
   }
 
+  Future<Response?> getMyUploadedProducts(String token,
+      {required String urlPath}) async {
+    Response? response;
+    try {
+      response = await get(R.M.getMyProducts, token: token);
+
+      return response;
+    } on DioError catch (err) {
+      DioExceptions.fromDioError(err).showNotification();
+      response = null;
+
+      return response;
+    } catch (err) {
+      NetworkExceptions.fromNetworkError(err).showNotification();
+      response = null;
+      return response;
+    }
+  }
+
+  Future<Response?> getCategory(String token) async {
+    Response? response;
+    try {
+      response = await get(R.M.getCategory, token: token);
+
+      return response;
+    } on DioError catch (err) {
+      DioExceptions.fromDioError(err).showNotification();
+      response = null;
+
+      return response;
+    } catch (err) {
+      NetworkExceptions.fromNetworkError(err).showNotification();
+      response = null;
+      return response;
+    }
+  }
+
   Future<Response?> getWishList(String token) async {
     Response? response;
     try {
@@ -209,6 +246,94 @@ class BusinessService extends BaseService {
     Response? res;
     try {
       res = await delete(R.M.addToWishList(productId), {}, token: token);
+      return res;
+    } on DioError catch (err) {
+      DioExceptions.fromDioError(err).showNotification();
+      res = null;
+
+      return res;
+    } catch (err) {
+      NetworkExceptions.fromNetworkError(err).showNotification();
+      res = null;
+      return res;
+    }
+  }
+
+  Future<Response?> uploadProducts(String token, FormData payload,
+      {Function(int totalLoad, int currentLoad)? onSendProgress}) async {
+    Response? response;
+
+    try {
+      response = await postImage(R.M.uploadProduct,
+          token: token,
+          data: payload,
+          onSendProgress: onSendProgress,
+          retry: 3);
+      return response;
+    } on DioError catch (err) {
+      DioExceptions.fromDioError(err).showNotification();
+      response = null;
+
+      return response;
+    } catch (err) {
+      NetworkExceptions.fromNetworkError(err).showNotification();
+      response = null;
+      return response;
+    }
+  }
+
+  Future<Response?> addProductToBusinessListOfProduct(String token,
+      {required Map<String, dynamic> payload}) async {
+    payload.removeWhere((key, value) =>
+        value == '' || value == null || value.runtimeType == bool);
+    Response? res;
+
+    try {
+      res = await post(R.M.getProducts, payload, token: token);
+
+      return res;
+    } on DioError catch (err) {
+      DioExceptions.fromDioError(err).showNotification();
+      res = null;
+
+      return res;
+    } catch (err) {
+      NetworkExceptions.fromNetworkError(err).showNotification();
+      res = null;
+      return res;
+    }
+  }
+
+  Future<Response?> editAddedProductOnBusinessProducts(String token,
+      {required Map<String, dynamic> payload,
+      required String productId}) async {
+    payload.removeWhere((key, value) =>
+        value == '' || value == null || value.runtimeType == bool);
+    Response? res;
+
+    try {
+      res = await put(R.M.productId(productId), data: payload, token: token);
+
+      return res;
+    } on DioError catch (err) {
+      DioExceptions.fromDioError(err).showNotification();
+      res = null;
+
+      return res;
+    } catch (err) {
+      NetworkExceptions.fromNetworkError(err).showNotification();
+      res = null;
+      return res;
+    }
+  }
+
+  Future<Response?> deleteAddedProductOnBusinessProducts(String token,
+      {required String productId}) async {
+    Response? res;
+
+    try {
+      res = await delete(R.M.productId(productId), {}, token: token);
+
       return res;
     } on DioError catch (err) {
       DioExceptions.fromDioError(err).showNotification();

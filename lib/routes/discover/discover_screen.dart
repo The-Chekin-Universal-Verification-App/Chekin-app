@@ -22,7 +22,13 @@ class DiscoverScreen extends StatefulWidget {
 }
 
 class _DiscoverScreenState extends State<DiscoverScreen> {
-  DiscoverSortType? sortType;
+  String? sortType;
+  final TextEditingController _searchController = TextEditingController();
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +36,9 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
 
     ViewType viewType =
         context.select((DiscoverProvider provider) => provider.viewType);
+    List<ProductCategoryModel> category =
+        context.watch<ProductProvider>().productCategory;
+
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: Insets.l),
@@ -111,17 +120,29 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                         flex: 2,
                         child: CustomFormTextFieldWithBorder(
                           hintText: context.loc.search,
+                          controller: _searchController,
+                          autoFocus: false,
+                          isRequired: false,
                           prefix: UnconstrainedBox(
                             child: SvgIcon(
                               R.png.search.svg,
                               size: 22,
-                            ),
+                            ).clickable(() {
+                              context.read<ProductProvider>().sortProduct =
+                                  _searchController.text;
+                            }),
                           ),
                           suffix: UnconstrainedBox(
                             child: SvgIcon(
                               R.png.filter.svg,
                               size: 25,
-                            ),
+                            ).clickable(() {
+                              _searchController.clear();
+
+                              context
+                                  .read<ProductProvider>()
+                                  .displayAllProduct();
+                            }),
                           ),
                         ),
                       ),
@@ -145,7 +166,7 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                       children: [
                         SortingItem(
                           onTap: () {
-                            sortType = DiscoverSortType.all;
+                            sortType = DiscoverSortType.all.name;
                             setState(() {
                               context
                                   .read<ProductProvider>()
@@ -154,61 +175,25 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             });
                           },
                           label: context.loc.seeAll,
-                          color: sortType == DiscoverSortType.all
+                          color: sortType == DiscoverSortType.all.name
                               ? theme.primary
                               : null,
                         ),
-                        SortingItem(
-                          onTap: () {
-                            sortType = DiscoverSortType.fashion;
-                            setState(() {
-                              context.read<ProductProvider>().sortProduct =
-                                  sortType!.name;
-                            });
-                          },
-                          label: context.loc.fashion,
-                          color: sortType == DiscoverSortType.fashion
-                              ? theme.primary
-                              : null,
-                        ),
-                        SortingItem(
-                          onTap: () {
-                            sortType = DiscoverSortType.sport;
-                            setState(() {
-                              context.read<ProductProvider>().sortProduct =
-                                  sortType!.name;
-                            });
-                          },
-                          label: context.loc.sport,
-                          color: sortType == DiscoverSortType.sport
-                              ? theme.primary
-                              : null,
-                        ),
-                        SortingItem(
-                          onTap: () {
-                            sortType = DiscoverSortType.electronics;
-                            setState(() {
-                              context.read<ProductProvider>().sortProduct =
-                                  sortType!.name;
-                            });
-                          },
-                          label: context.loc.electronics,
-                          color: sortType == DiscoverSortType.electronics
-                              ? theme.primary
-                              : null,
-                        ),
-                        SortingItem(
-                          onTap: () {
-                            sortType = DiscoverSortType.automobile;
-                            setState(() {
-                              context.read<ProductProvider>().sortProduct =
-                                  sortType!.name;
-                            });
-                          },
-                          label: context.loc.autoMobile,
-                          color: sortType == DiscoverSortType.automobile
-                              ? theme.primary
-                              : null,
+                        ...List.generate(
+                          category.length,
+                          (index) => SortingItem(
+                            onTap: () {
+                              sortType = category[index].name;
+                              setState(() {
+                                context.read<ProductProvider>().sortProduct =
+                                    sortType!;
+                              });
+                            },
+                            label: category[index].name,
+                            color: sortType == category[index].name
+                                ? theme.primary
+                                : null,
+                          ),
                         ),
                       ],
                     ),
@@ -235,6 +220,7 @@ class ProductViewSection extends StatelessWidget {
     ViewType viewType =
         context.select((DiscoverProvider provider) => provider.viewType);
     ProductProvider product = context.watch<ProductProvider>();
+
     return LoaderStateItem(
         key: UniqueKey(),
         onRefreshNoData: () async {

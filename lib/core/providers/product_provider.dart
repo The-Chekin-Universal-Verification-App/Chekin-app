@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chekinapp/core/core.dart';
 
 class ProductProvider extends BaseProvider {
@@ -19,6 +21,27 @@ class ProductProvider extends BaseProvider {
     notifyListeners();
   }
 
+  //-------------------------------------------------------------------------
+  //-------------------------------------------------------------------------
+  ///user uploaded product
+  ///
+  List<ProductModel> _myUploadedProducts = [];
+  List<ProductModel> get myUploadedProducts => _myUploadedProducts;
+  int _myProductCurrentPage = 0;
+  int _myProductTotalPages = 0;
+
+  int get myProductTotalPages => _myProductTotalPages;
+  int get myProductCurrentPage => _myProductCurrentPage;
+
+  setMyProduct(List object,
+      {required int currentPage, required int totalPages}) {
+    _myProductCurrentPage = currentPage;
+    _myProductTotalPages = totalPages;
+    _myUploadedProducts = object.map((e) => ProductModel.fromJson(e)).toList();
+
+    notifyListeners();
+  }
+
   set sortProduct(String keyWord) {
     _products = [];
     // print(keyWord);
@@ -35,6 +58,32 @@ class ProductProvider extends BaseProvider {
   displayAllProduct() {
     _products = _productsCopy;
 
+    notifyListeners();
+  }
+
+  List<String> _uploadedProductsUrl = [];
+  List<String> get uploadedProductsUrl => _uploadedProductsUrl;
+  set keepUploadedProduct(String product) {
+    _uploadedProductsUrl.add(product);
+    notifyListeners();
+  }
+
+  set removeImageFromList(String item) {
+    _uploadedProductsUrl.removeWhere((element) => element == item);
+    notifyListeners();
+  }
+
+  clearImageFromList() {
+    _uploadedProductsUrl = [];
+    notifyListeners();
+  }
+
+  List<ProductCategoryModel> _productCategory = [];
+  List<ProductCategoryModel> get productCategory => _productCategory;
+  set setCategory(List category) {
+    // log(category.toString());
+    _productCategory =
+        category.map((e) => ProductCategoryModel.fromJson(e)).toList();
     notifyListeners();
   }
 }

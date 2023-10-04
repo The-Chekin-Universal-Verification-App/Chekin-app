@@ -98,8 +98,8 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ).clickable(() {
                       // context.push(const PaymentScreen());
-                      print(user.business
-                          .toString()); // context.push(UploadDocumentMainScreen());
+                      // print(user.business
+                      //     .toString()); // context.push(UploadDocumentMainScreen());
                     }),
                   ],
                 ),

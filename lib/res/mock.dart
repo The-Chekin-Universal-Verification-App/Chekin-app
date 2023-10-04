@@ -112,7 +112,11 @@ class Mock {
   final String updateProfile = '$api/user/update-profile';
   final String updateBusiness = '$api/business/update-business';
   final String getProducts = '$api/product';
+  final String getMyProducts = '$api/product/me';
+  String productId(String productId) => '$api/product/$productId';
+  final String getCategory = '$api/category';
   final String getWishList = '$api/user/wishlist';
+  final String uploadProduct = '$api/common/upload-single-file';
   String addToWishList(String productId) => '$api/user/wishlist/$productId';
   String getBusinessByID(String bizId) => '$api/business/$bizId';
   String getBusinessReviews(String bizId) => '$api/user/reviews/$bizId';

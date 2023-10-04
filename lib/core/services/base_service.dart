@@ -103,4 +103,22 @@ abstract class BaseService {
     Response res = await _dio.patch('');
     return res;
   }
+
+  Future<Response> postImage(String path,
+      {required dynamic data,
+      String? token,
+      int? retry,
+      Function(int totalLoad, int currentLoad)? onSendProgress}) async {
+    if (token != null) {
+      _dio.options.headers["Authorization"] = "Bearer $token";
+    }
+    if (retry != null) {
+      _dioRetry(retry: retry);
+    }
+    _dio.options.headers["Content-Type"] = "multipart/form-data";
+
+    Response res =
+        await _dio.post(path, data: data, onSendProgress: onSendProgress);
+    return res;
+  }
 }

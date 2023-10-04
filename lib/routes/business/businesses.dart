@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import '../../components/input/base_text_input.dart';
 import '../../core/models/business_model.dart';
 import '../../core/providers/business_provider.dart';
+import '../../core/providers/product_provider.dart';
 import '../discover/discover_components/sorting_item.dart';
 import '../discover/discover_screen.dart';
 import '../reviews/business_review_screen.dart';
@@ -17,13 +18,21 @@ class BusinessScreen extends StatefulWidget {
 }
 
 class _BusinessScreenState extends State<BusinessScreen> {
-  DiscoverSortType? sortType;
+  String? sortType;
+  final TextEditingController _searchController = TextEditingController();
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
     ViewType viewType =
         context.select((DiscoverProvider provider) => provider.viewType);
+    List<ProductCategoryModel> category =
+        context.watch<ProductProvider>().productCategory;
     return Scaffold(
       appBar: const CustomAppBar(),
       body: Padding(
@@ -57,17 +66,31 @@ class _BusinessScreenState extends State<BusinessScreen> {
                         flex: 2,
                         child: CustomFormTextFieldWithBorder(
                           hintText: context.loc.search,
+                          controller: _searchController,
+                          isRequired: false,
+                          autoFocus: false,
                           prefix: UnconstrainedBox(
                             child: SvgIcon(
                               R.png.search.svg,
                               size: 22,
-                            ),
+                            ).clickable(() {
+                              context
+                                      .read<BusinessProvider>()
+                                      .sortSearchBusinessByCategoryOrKeyWord =
+                                  _searchController.text;
+                            }),
                           ),
                           suffix: UnconstrainedBox(
                             child: SvgIcon(
                               R.png.filter.svg,
                               size: 25,
-                            ),
+                            ).clickable(() {
+                              _searchController.clear();
+//
+                              context
+                                  .read<BusinessProvider>()
+                                  .displayAllBusiness();
+                            }),
                           ),
                         ),
                       ),
@@ -90,43 +113,36 @@ class _BusinessScreenState extends State<BusinessScreen> {
                       children: [
                         SortingItem(
                           onTap: () {
-                            sortType = DiscoverSortType.fashion;
-                            setState(() {});
+                            sortType = DiscoverSortType.all.name;
+                            setState(() {
+                              context
+                                  .read<BusinessProvider>()
+                                  .displayAllBusiness();
+                              // sortType!.name;
+                            });
                           },
-                          label: context.loc.fashion,
-                          color: sortType == DiscoverSortType.fashion
+                          label: context.loc.seeAll,
+                          color: sortType == DiscoverSortType.all.name
                               ? theme.primary
                               : null,
                         ),
-                        SortingItem(
-                          onTap: () {
-                            sortType = DiscoverSortType.sport;
-                            setState(() {});
-                          },
-                          label: context.loc.sport,
-                          color: sortType == DiscoverSortType.sport
-                              ? theme.primary
-                              : null,
-                        ),
-                        SortingItem(
-                          onTap: () {
-                            sortType = DiscoverSortType.electronics;
-                            setState(() {});
-                          },
-                          label: context.loc.electronics,
-                          color: sortType == DiscoverSortType.electronics
-                              ? theme.primary
-                              : null,
-                        ),
-                        SortingItem(
-                          onTap: () {
-                            sortType = DiscoverSortType.automobile;
-                            setState(() {});
-                          },
-                          label: context.loc.autoMobile,
-                          color: sortType == DiscoverSortType.automobile
-                              ? theme.primary
-                              : null,
+                        ...List.generate(
+                          category.length,
+                          (index) => SortingItem(
+                            onTap: () {
+                              sortType = category[index].name;
+                              setState(() {
+                                context
+                                        .read<BusinessProvider>()
+                                        .sortSearchBusinessByCategoryOrKeyWord =
+                                    sortType!;
+                              });
+                            },
+                            label: category[index].name,
+                            color: sortType == category[index].name
+                                ? theme.primary
+                                : null,
+                          ),
                         ),
                       ],
                     ),

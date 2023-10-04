@@ -49,4 +49,9 @@ class ImageProviders extends BaseProvider {
     }
     notifyListeners();
   }
+
+  set removeImageFromList(String item) {
+    _imagesPath.removeWhere((element) => element == item);
+    notifyListeners();
+  }
 }

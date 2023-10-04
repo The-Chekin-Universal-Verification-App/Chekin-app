@@ -360,7 +360,7 @@
     "description": "socials "
   },
 
-       "enterSocialMedia": "Enter your social medial handle (Optional)",
+       "enterSocialMedia": "Enter your social medial handle ",
   "@enterSocialMedia": {
     "description": "Enter your social medial handle"
   },

@@ -426,3 +426,251 @@ abstract class _ProductModel implements ProductModel {
   _$$_ProductModelCopyWith<_$_ProductModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+ProductCategoryModel _$ProductCategoryModelFromJson(Map<String, dynamic> json) {
+  return _ProductCategoryModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$ProductCategoryModel {
+  @JsonKey(name: '_id')
+  String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: '__v')
+  int get v => throw _privateConstructorUsedError;
+  String get name => throw _privateConstructorUsedError;
+  String get createdAt => throw _privateConstructorUsedError;
+  String get updatedAt => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $ProductCategoryModelCopyWith<ProductCategoryModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $ProductCategoryModelCopyWith<$Res> {
+  factory $ProductCategoryModelCopyWith(ProductCategoryModel value,
+          $Res Function(ProductCategoryModel) then) =
+      _$ProductCategoryModelCopyWithImpl<$Res, ProductCategoryModel>;
+  @useResult
+  $Res call(
+      {@JsonKey(name: '_id') String id,
+      @JsonKey(name: '__v') int v,
+      String name,
+      String createdAt,
+      String updatedAt});
+}
+
+/// @nodoc
+class _$ProductCategoryModelCopyWithImpl<$Res,
+        $Val extends ProductCategoryModel>
+    implements $ProductCategoryModelCopyWith<$Res> {
+  _$ProductCategoryModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? v = null,
+    Object? name = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+  }) {
+    return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      v: null == v
+          ? _value.v
+          : v // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_ProductCategoryModelCopyWith<$Res>
+    implements $ProductCategoryModelCopyWith<$Res> {
+  factory _$$_ProductCategoryModelCopyWith(_$_ProductCategoryModel value,
+          $Res Function(_$_ProductCategoryModel) then) =
+      __$$_ProductCategoryModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@JsonKey(name: '_id') String id,
+      @JsonKey(name: '__v') int v,
+      String name,
+      String createdAt,
+      String updatedAt});
+}
+
+/// @nodoc
+class __$$_ProductCategoryModelCopyWithImpl<$Res>
+    extends _$ProductCategoryModelCopyWithImpl<$Res, _$_ProductCategoryModel>
+    implements _$$_ProductCategoryModelCopyWith<$Res> {
+  __$$_ProductCategoryModelCopyWithImpl(_$_ProductCategoryModel _value,
+      $Res Function(_$_ProductCategoryModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = null,
+    Object? v = null,
+    Object? name = null,
+    Object? createdAt = null,
+    Object? updatedAt = null,
+  }) {
+    return _then(_$_ProductCategoryModel(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      v: null == v
+          ? _value.v
+          : v // ignore: cast_nullable_to_non_nullable
+              as int,
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_ProductCategoryModel
+    with DiagnosticableTreeMixin
+    implements _ProductCategoryModel {
+  _$_ProductCategoryModel(
+      {@JsonKey(name: '_id') this.id = '',
+      @JsonKey(name: '__v') this.v = 0,
+      this.name = '',
+      this.createdAt = '',
+      this.updatedAt = ''});
+
+  factory _$_ProductCategoryModel.fromJson(Map<String, dynamic> json) =>
+      _$$_ProductCategoryModelFromJson(json);
+
+  @override
+  @JsonKey(name: '_id')
+  final String id;
+  @override
+  @JsonKey(name: '__v')
+  final int v;
+  @override
+  @JsonKey()
+  final String name;
+  @override
+  @JsonKey()
+  final String createdAt;
+  @override
+  @JsonKey()
+  final String updatedAt;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ProductCategoryModel(id: $id, v: $v, name: $name, createdAt: $createdAt, updatedAt: $updatedAt)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'ProductCategoryModel'))
+      ..add(DiagnosticsProperty('id', id))
+      ..add(DiagnosticsProperty('v', v))
+      ..add(DiagnosticsProperty('name', name))
+      ..add(DiagnosticsProperty('createdAt', createdAt))
+      ..add(DiagnosticsProperty('updatedAt', updatedAt));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_ProductCategoryModel &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.v, v) || other.v == v) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, id, v, name, createdAt, updatedAt);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_ProductCategoryModelCopyWith<_$_ProductCategoryModel> get copyWith =>
+      __$$_ProductCategoryModelCopyWithImpl<_$_ProductCategoryModel>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_ProductCategoryModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _ProductCategoryModel implements ProductCategoryModel {
+  factory _ProductCategoryModel(
+      {@JsonKey(name: '_id') final String id,
+      @JsonKey(name: '__v') final int v,
+      final String name,
+      final String createdAt,
+      final String updatedAt}) = _$_ProductCategoryModel;
+
+  factory _ProductCategoryModel.fromJson(Map<String, dynamic> json) =
+      _$_ProductCategoryModel.fromJson;
+
+  @override
+  @JsonKey(name: '_id')
+  String get id;
+  @override
+  @JsonKey(name: '__v')
+  int get v;
+  @override
+  String get name;
+  @override
+  String get createdAt;
+  @override
+  String get updatedAt;
+  @override
+  @JsonKey(ignore: true)
+  _$$_ProductCategoryModelCopyWith<_$_ProductCategoryModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}

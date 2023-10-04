@@ -36,6 +36,8 @@ class _ProductReviewScreenState extends State<ProductReviewScreen>
     AppTheme theme = context.watch();
     ProductModel selectedProduct =
         context.select((DiscoverProvider provider) => provider.selectedProduct);
+    List<ProductModel> myWishList =
+        context.select((WishListProvider provider) => provider.myWishList);
     return Scaffold(
       key: scaffoldKey,
       body: SingleChildScrollView(
@@ -68,7 +70,9 @@ class _ProductReviewScreenState extends State<ProductReviewScreen>
                               child: SvgIcon(
                                 R.png.heart2.svg,
                                 size: 18,
-                                color: theme.redButton,
+                                color: myWishList.contains(selectedProduct)
+                                    ? theme.redButton
+                                    : null,
                               ),
                             ),
                           ]),
@@ -149,10 +153,15 @@ class _ProductReviewScreenState extends State<ProductReviewScreen>
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        selectedProduct.name,
-                        style:
-                            TextStyles.h6.copyWith(fontWeight: FontWeight.w700),
+                      Flexible(
+                        flex: 2,
+                        child: Text(
+                          selectedProduct.name,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                          style: TextStyles.h6
+                              .copyWith(fontWeight: FontWeight.w700),
+                        ),
                       ),
                       Text(
                         selectedProduct.business!.luxCode,
