@@ -139,10 +139,10 @@ class NamesSection extends StatefulWidget {
 }
 
 class _NamesSectionState extends State<NamesSection> {
-  TextEditingController _firstName = TextEditingController();
-  TextEditingController _lastName = TextEditingController();
-  TextEditingController _middleName = TextEditingController();
-  TextEditingController _personalEmail = TextEditingController();
+  final TextEditingController _firstName = TextEditingController();
+  final TextEditingController _lastName = TextEditingController();
+  final TextEditingController _middleName = TextEditingController();
+  final TextEditingController _personalEmail = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -287,7 +287,7 @@ class _AddressAndLocationSectionState extends State<AddressAndLocationSection> {
           showCities: false,
           flagState: CountryFlag.SHOW_IN_DROP_DOWN_ONLY,
           onCountryChanged: (country) {
-            print('$country lllllll');
+            // print('$country lllllll');
             context.read<AuthProvider>().addToBusinessInfo =
                 businessModel.copyWith(nationality: country);
           }, //

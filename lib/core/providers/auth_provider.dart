@@ -49,7 +49,7 @@ class AuthProvider extends BaseProvider {
         setAccountType = UserType.biz;
       } else if (_user.business.runtimeType == String &&
           _user.business.isNOtEmpty) {
-        //this mean the account is business but we are only get the business id number during get user detail endpoint  which returns only the business ID if the account is a
+        //this mean the account is business but we are only getting the business id number during get user detail endpoint  which returns only the business ID if the account is a
         //business account
         setAccountType = UserType.biz;
       } else {

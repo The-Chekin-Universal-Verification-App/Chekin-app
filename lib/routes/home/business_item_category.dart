@@ -14,7 +14,7 @@ class BusinessItemCategory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(maxHeight: 170, maxWidth: 170),
+      constraints: const BoxConstraints(maxHeight: 180, maxWidth: 170),
       decoration: BoxDecoration(
           borderRadius: Corners.s10Border,
           color: color?.withOpacity(0.7) ??
@@ -23,12 +23,12 @@ class BusinessItemCategory extends StatelessWidget {
           //     color?.withOpacity(0.7) ?? const Color(0xFFF9BFC9).withOpacity(0.7),
           boxShadow: Shadows.small),
       margin: const EdgeInsets.only(right: 10),
-      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10, top: 10),
+      padding: const EdgeInsets.only(top: 2, bottom: 6),
       child: Column(
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-              flex: 2,
+              flex: 1,
               child: Image.network(
                 businessModel.businessImage,
                 fit: BoxFit.cover,
@@ -37,33 +37,40 @@ class BusinessItemCategory extends StatelessWidget {
                   Icons.image_outlined,
                   size: 35,
                 )),
-              )),
-          const VSpace(5),
-          Align(
-            // alignment: Alignment.centerLeft,
-            child: Text(
-              businessModel.name,
-              style: TextStyles.body2
-                  .copyWith(fontSize: 13, fontWeight: FontWeight.w500),
-            ),
-          ),
-          const VSpace(3),
-          Align(
-            // alignment: Alignment.centerLeft,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              ).center()),
+          const VSpace(8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Column(
               children: [
-                Flexible(
-                  flex: 2,
+                Align(
+                  alignment: Alignment.centerLeft,
                   child: Text(
-                    businessModel.name,
-                    overflow: TextOverflow.ellipsis,
+                    businessModel.luxCode,
                     style: TextStyles.body2
-                        .copyWith(fontSize: 15, fontWeight: FontWeight.w700),
+                        .copyWith(fontSize: 13, fontWeight: FontWeight.w500),
                   ),
                 ),
-                const HSpace(5),
-                Image.asset(R.png.verified.imgPng)
+                const VSpace(3),
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Flexible(
+                        flex: 2,
+                        child: Text(
+                          businessModel.name,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyles.body2.copyWith(
+                              fontSize: 15, fontWeight: FontWeight.w700),
+                        ),
+                      ),
+                      const HSpace(5),
+                      Image.asset(R.png.verified.imgPng)
+                    ],
+                  ),
+                ),
               ],
             ),
           ),

@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 
 import '../../core/commands/payment_command.dart';
-import 'confirmedPayment_screen.dart';
 
 enum SubscriptionType { quarterly, semiAnnual, annually }
 

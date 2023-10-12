@@ -238,7 +238,7 @@ class _$_UserModel with DiagnosticableTreeMixin implements _UserModel {
       this.role = '',
       this.verified = false,
       this.phoneNumber = '',
-      this.business = '',
+      this.business = null,
       @JsonKey(name: '_id') this.id = ''});
 
   factory _$_UserModel.fromJson(Map<String, dynamic> json) =>

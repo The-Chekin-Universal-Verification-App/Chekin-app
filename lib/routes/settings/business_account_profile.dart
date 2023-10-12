@@ -6,8 +6,6 @@ import '../../components/input/base_text_input.dart';
 import '../../core/commands/product_command.dart';
 import '../../utils/imagepicker/image_picker_choice.dart';
 import '../../utils/imagepicker/provider/image_provider.dart';
-import '../discover/discover_components/discover_item.dart';
-import '../discover/vendor_store.dart';
 import '../document_upload/upload_valid_ids.dart';
 import 'components/biz_profile_location_and_social_section.dart';
 import 'edit_uploaded_product.dart';
@@ -21,6 +19,7 @@ class BusinessAccountProfile extends StatefulWidget {
 
 class _BusinessAccountProfileState extends State<BusinessAccountProfile> {
   int productVewIndex = 0;
+  late int currentIndex;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +28,8 @@ class _BusinessAccountProfileState extends State<BusinessAccountProfile> {
     //the image path selected
     ProductProvider productProvider = context.watch<ProductProvider>();
     List<String> imageList = context.watch<ImageProviders>().images;
-
+    bool deletingItemBusy = context.select(
+        (ProductProvider productProvider) => productProvider.deleteBusy);
     return Scaffold(
         appBar: const CustomAppBar(),
         body: NestedScrollView(
@@ -93,10 +93,26 @@ class _BusinessAccountProfileState extends State<BusinessAccountProfile> {
                             itemBuilder: (_, index) {
                               if (index == 0) {
                                 return DashedRect(
-                                  fChild: Icon(
-                                    Icons.add_circle_rounded,
-                                    color: Theme.of(context).primaryColor,
-                                    size: 64,
+                                  fChild: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        Icons.add_circle_rounded,
+                                        color: Theme.of(context).primaryColor,
+                                        size: 64,
+                                      ),
+                                      if (productProvider
+                                          .myUploadedProducts.isEmpty) ...[
+                                        const VSpace(5),
+                                        Text(
+                                          'You have no added product yet.\n tap to Add your product',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyles.body1.copyWith(
+                                              color: theme.primary,
+                                              height: 1.4),
+                                        )
+                                      ]
+                                    ],
                                   ),
                                 ).clickable(() {
                                   productVewIndex = 1;
@@ -107,59 +123,106 @@ class _BusinessAccountProfileState extends State<BusinessAccountProfile> {
                               } else {
                                 return ClipRRect(
                                   borderRadius: Corners.s5Border,
-                                  child: ColoredBox(
-                                    color: theme.dividerColor,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        BizUploadedProductItem(
-                                          isNetWorkImage: true,
-                                          imagesPath: productProvider
-                                              .myUploadedProducts[index - 1]
-                                              .images
-                                              .first,
-                                          onTapRemoveItem: () {
-                                            ProductCommand(context)
-                                                .deleteAddedProductOnBusinessProducts(
-                                                    productProvider
-                                                            .myUploadedProducts[
-                                                        index - 1]);
-                                          },
-                                          onTapEditItem: () {
-                                            context.push(
-                                                EditUploadedProductScreen(
-                                                    product: productProvider
-                                                            .myUploadedProducts[
-                                                        index - 1]));
-                                          },
-                                        ),
-                                        const VSpace(2),
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 8.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "NGN${MoneyInputFormatter().toCurrencyString(productProvider.myUploadedProducts[index - 1].price.toString())}",
-                                                style: TextStyles.body1.bold,
+                                  child: Stack(
+                                    children: [
+                                      ColoredBox(
+                                        color: theme.dividerColor,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            BizUploadedProductItem(
+                                              isNetWorkImage: true,
+                                              addEditButton: true,
+                                              imagesPath: productProvider
+                                                  .myUploadedProducts[index - 1]
+                                                  .images
+                                                  .first,
+
+                                              //remove product
+                                              onTapRemoveItem: () {
+                                                //set current index
+                                                setState(() {
+                                                  currentIndex = index;
+                                                });
+
+                                                //call endpoint after widget finish building due to setSate((){}) called
+                                                WidgetsBinding.instance
+                                                    .addPostFrameCallback((_) {
+                                                  ProductCommand(context)
+                                                      .deleteAddedProductOnBusinessProducts(
+                                                          productProvider
+                                                                  .myUploadedProducts[
+                                                              index - 1]);
+                                                });
+                                              },
+                                              onTapEditItem: () {
+                                                context.push(
+                                                    EditUploadedProductScreen(
+                                                        product: productProvider
+                                                                .myUploadedProducts[
+                                                            index - 1]));
+                                              },
+                                            ),
+                                            const VSpace(2),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 8.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    "NGN${MoneyInputFormatter().toCurrencyString(productProvider.myUploadedProducts[index - 1].price.toString())}",
+                                                    style:
+                                                        TextStyles.body1.bold,
+                                                  ),
+                                                  const VSpace(2),
+                                                  Text(
+                                                      productProvider
+                                                          .myUploadedProducts[
+                                                              index - 1]
+                                                          .name,
+                                                      style: TextStyles.body1
+                                                          .copyWith(
+                                                              color:
+                                                                  theme.grey)),
+                                                ],
                                               ),
-                                              const VSpace(2),
-                                              Text(
-                                                  productProvider
-                                                      .myUploadedProducts[
-                                                          index - 1]
-                                                      .name,
-                                                  style: TextStyles.body1
-                                                      .copyWith(
-                                                          color: theme.grey)),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
+                                      ),
+                                      if (deletingItemBusy == true &&
+                                          index == currentIndex) ...[
+                                        Positioned(
+                                          top: 0,
+                                          bottom: 0,
+                                          right: 0,
+                                          left: 0,
+                                          child: UnconstrainedBox(
+                                            child: Container(
+                                              decoration: BoxDecoration(
+                                                  color: theme.greyTextFieldFill
+                                                      .withOpacity(0.6),
+                                                  borderRadius:
+                                                      Corners.s5Border),
+                                              height: 30,
+                                              width: 30,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(5.0),
+                                                child:
+                                                    CircularProgressIndicator(
+                                                  strokeWidth: 1,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                      ]
+                                    ],
                                   ),
                                 );
                               }
@@ -198,16 +261,16 @@ class _BusinessAccountProfileState extends State<BusinessAccountProfile> {
                                                   .primaryColor,
                                               size: 64,
                                             ),
-                                            if (productProvider
-                                                .uploadedProductsUrl
-                                                .isNotEmpty) ...[
-                                              const VSpace(5),
-                                              Text(
-                                                'Add one more Image',
-                                                style: TextStyles.body1
-                                                    .txtColor(theme.primary),
-                                              )
-                                            ]
+                                            const VSpace(5),
+                                            Text(
+                                              productProvider
+                                                      .uploadedProductsUrl
+                                                      .isNotEmpty
+                                                  ? 'Add one more Image'
+                                                  : 'Pick a product picture',
+                                              style: TextStyles.body1
+                                                  .txtColor(theme.primary),
+                                            )
                                           ],
                                         ),
                                 ).clickable(() async {
@@ -221,7 +284,7 @@ class _BusinessAccountProfileState extends State<BusinessAccountProfile> {
                                   if (imageList.isNotEmpty && mounted) {
                                     log('Uploading new product.....');
                                     ProductCommand(context).upLoadProducts(
-                                        imageList, onSuccessAction: () {
+                                        imageList.first, onSuccessAction: () {
                                       context
                                           .read<ImageProviders>()
                                           .clearImagesPath();
@@ -263,6 +326,7 @@ class _BusinessAccountProfileState extends State<BusinessAccountProfile> {
                               } else {
                                 return BizUploadedProductItem(
                                   isNetWorkImage: true,
+                                  addEditButton: false,
                                   imagesPath: productProvider
                                       .uploadedProductsUrl[index - 2],
                                   onTapRemoveItem: () {
@@ -290,11 +354,12 @@ class BizUploadedProductItem extends StatefulWidget {
       required this.imagesPath,
       this.isFileImage = false,
       this.isNetWorkImage = false,
+      this.addEditButton = true,
       this.onTapRemoveItem,
       this.onTapEditItem});
 
   final String imagesPath;
-  final bool isFileImage, isNetWorkImage;
+  final bool isFileImage, isNetWorkImage, addEditButton;
   final Function()? onTapRemoveItem, onTapEditItem;
   @override
   State<BizUploadedProductItem> createState() => _BizUploadedProductItemState();
@@ -308,41 +373,47 @@ class _BizUploadedProductItemState extends State<BizUploadedProductItem> {
       // color: Colors.red,
       child: Stack(
         children: [
-          ClipRRect(
-              borderRadius: Corners.s5Border,
-              child: widget.isFileImage
-                  ? Image.file(
-                      File(
-                        widget.imagesPath,
+          SizedBox(
+            child: Stack(
+              children: [
+                ClipRRect(
+                    borderRadius: Corners.s5Border,
+                    child: widget.isFileImage
+                        ? Image.file(
+                            File(
+                              widget.imagesPath,
+                            ),
+                            fit: BoxFit.cover,
+                          )
+                        : widget.isNetWorkImage
+                            ? Image.network(
+                                widget.imagesPath,
+                                fit: BoxFit.cover,
+                              )
+                            : Image.asset(
+                                widget.imagesPath,
+                                fit: BoxFit.cover,
+                              )),
+                Positioned(
+                    right: 10,
+                    top: 10,
+                    child: CircleAvatar(
+                      radius: 15,
+                      backgroundColor: Colors.transparent.withOpacity(0.1),
+                      child: const Icon(
+                        Icons.more_vert_rounded,
+                        color: Colors.white,
+                        size: 25,
                       ),
-                      fit: BoxFit.cover,
-                    )
-                  : widget.isNetWorkImage
-                      ? Image.network(
-                          widget.imagesPath,
-                          fit: BoxFit.cover,
-                        )
-                      : Image.asset(
-                          widget.imagesPath,
-                          fit: BoxFit.cover,
-                        )),
-          Positioned(
-              right: 10,
-              top: 10,
-              child: CircleAvatar(
-                radius: 15,
-                backgroundColor: Colors.transparent.withOpacity(0.1),
-                child: const Icon(
-                  Icons.more_vert_rounded,
-                  color: Colors.white,
-                  size: 25,
-                ),
-              ).rippleClick(() {
-                debugPrint('more option to uploaded item');
+                    ).rippleClick(() {
+                      debugPrint('more option to uploaded item');
 
-                showActionButtons = !showActionButtons;
-                setState(() {});
-              })),
+                      showActionButtons = !showActionButtons;
+                      setState(() {});
+                    })),
+              ],
+            ),
+          ),
           Positioned(
               top: 10,
               child: Visibility(
@@ -350,7 +421,7 @@ class _BizUploadedProductItemState extends State<BizUploadedProductItem> {
                 child: Column(
                   children: [
                     const VSpace(20),
-                    if (!widget.isFileImage) ...[
+                    if (widget.addEditButton) ...[
                       Transform.scale(
                         scale: 0.7,
                         child: ColorBox(

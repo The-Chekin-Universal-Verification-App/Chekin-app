@@ -21,6 +21,13 @@ class ProductProvider extends BaseProvider {
     notifyListeners();
   }
 
+  bool _deleteBusy = false;
+  bool get deleteBusy => _deleteBusy;
+  set setDeleteBusy(bool val) {
+    _deleteBusy = deleteBusy;
+    notifyListeners();
+  }
+
   //-------------------------------------------------------------------------
   //-------------------------------------------------------------------------
   ///user uploaded product

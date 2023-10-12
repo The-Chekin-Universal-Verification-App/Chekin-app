@@ -66,6 +66,7 @@ class CurrentSubscriptionScreen extends StatelessWidget {
               onItemTap: () {
                 context.push(const PaymentScreen());
               },
+              title: context.loc.renewSub,
               imagePath: R.png.autoRenewal.svg)
         ]),
       ),

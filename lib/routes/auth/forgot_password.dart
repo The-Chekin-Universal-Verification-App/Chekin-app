@@ -25,7 +25,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
 
     return Scaffold(
       appBar: CustomAppBar(
-        onTapLeadingIcon: () {},
+        onTapLeadingIcon: () => Navigator.of(context).pop(),
         leadingIcon: const LogoIconItem(),
       ),
       body: SingleChildScrollView(

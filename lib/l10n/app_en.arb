@@ -1237,6 +1237,36 @@
     "ceo": "C.E.O",
   "@ceo": {
     "description": "a  business owner"
+  },
+
+
+    "completeVerificationNote": "You are required to upload all necessary document to get full access to this app.",
+  "@completeVerificationNote": {
+    "description": "Note for verification completion"
+  },
+
+    "skipForNow": "Skip for now",
+  "@skipForNow": {
+    "description": "Skip for now"
+  },
+
+
+     "renewSub": "Renew subscription",
+  "@renewSub": {
+    "description": "Renew subscription"
+  },
+
+
+     "luxCode": "LuxCode",
+  "@luxCode": {
+    "description": "Business generated LuxCode"
+  },
+
+
+
+    "completeVerification": "Complete your verification",
+  "@completeVerification": {
+    "description": "complete Verification"
   }
 
 

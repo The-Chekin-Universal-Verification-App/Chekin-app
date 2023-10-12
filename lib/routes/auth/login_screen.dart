@@ -4,6 +4,8 @@ import 'package:chekinapp/routes/intro/select_usertype/set_a_user_type.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/routes/auth/forgot_password.dart';
 
+import '../home/home.dart';
+
 class LogInScreen extends StatefulWidget {
   const LogInScreen({Key? key}) : super(key: key);
 

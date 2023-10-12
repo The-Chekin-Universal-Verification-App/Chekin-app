@@ -16,7 +16,7 @@ _$_UserModel _$$_UserModelFromJson(Map<String, dynamic> json) => _$_UserModel(
       role: json['role'] as String? ?? '',
       verified: json['verified'] as bool? ?? false,
       phoneNumber: json['phoneNumber'] as String? ?? '',
-      business: json['business'] ?? '',
+      business: json['business'] ?? null,
       id: json['_id'] as String? ?? '',
     );
 

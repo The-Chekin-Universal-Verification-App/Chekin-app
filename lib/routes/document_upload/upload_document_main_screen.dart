@@ -115,12 +115,13 @@ class _UploadDocumentMainScreen extends StatelessWidget {
                                       borderRadius: Corners.s5Border),
                                 ),
                                 child: Text(
-                                  'I know,Skip',
+                                  'I know, skip',
                                   style: TextStyles.body1.bold
                                       .txtColor(Colors.white),
                                 )),
                           ],
-                        )
+                        ),
+                        const VSpace(10)
                       ],
                     ));
               }),
@@ -156,7 +157,7 @@ class _UploadDocumentMainScreen extends StatelessWidget {
               ),
               IndexedStack(
                 index: pageIndex,
-                children: [
+                children: const [
                   UploadValidIDsScreen(),
                   BusinessDocumentScreen(),
                   UploadSocialMediaScreenShotScreen(),

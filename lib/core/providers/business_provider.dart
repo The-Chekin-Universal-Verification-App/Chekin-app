@@ -4,6 +4,10 @@ import 'package:chekinapp/core/models/business_model.dart';
 import '../models/business_review_model.dart';
 
 class BusinessProvider extends BaseProvider {
+  BusinessProvider() {
+    setTopRated();
+    setPopular();
+  }
   BusinessModel _myBusinessDetail = BusinessModel.init();
 
   ///the above lines works only if the account is a business account
@@ -26,8 +30,18 @@ class BusinessProvider extends BaseProvider {
   List<BusinessModel> _topRated = [];
   List<BusinessModel> _popular = [];
 
-  List<BusinessModel> get topRated => _searchedBusiness; //_topRated;
-  List<BusinessModel> get popular => _searchedBusiness; // _popular;
+  List<BusinessModel> get topRated => _topRated; //_topRated;
+  List<BusinessModel> get popular => _popular; // _popular;
+
+  setTopRated() {
+    _topRated = _searchedBusiness;
+    notifyListeners();
+  }
+
+  setPopular() {
+    _popular = _searchedBusiness;
+    notifyListeners();
+  }
 
   ///
   setBusiness(List businessListJson,

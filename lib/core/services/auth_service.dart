@@ -126,7 +126,7 @@ class AuthService extends BaseService {
 
     Response? response;
     try {
-      response = await post(R.M.changePassword, payload, token: token);
+      response = await patch(R.M.changePassword, payload, token: token);
       return response;
     } on DioError catch (err) {
       DioExceptions.fromDioError(err).showNotification();

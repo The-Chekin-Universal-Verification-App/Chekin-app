@@ -4,9 +4,11 @@ import 'package:chekinapp/core/models/user_signup_model.dart';
 import 'package:chekinapp/routes/auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
+import '../../routes/auth/normal_user_biz_account_registration/biz_account/incomplete_account_kyc_notifier.dart';
 import '../../routes/auth/normal_user_biz_account_registration/reset_password_screen.dart';
 import '../../routes/auth/normal_user_biz_account_registration/biz_account/you_are_almost_done_screen.dart';
 import '../../routes/auth/normal_user_biz_account_registration/email_verification.dart';
+import '../../routes/document_upload/upload_document_main_screen.dart';
 import '../../routes/main/mainscreen.dart';
 import '../models/reset_password_model.dart';
 import 'initialization_cmd.dart';
@@ -67,6 +69,17 @@ class AuthCommand extends BaseCommand {
     }
   }
 
+  checkIfBusinessIsFullyVerified() {
+    BuildContext context = rootNav!.context;
+    if (auth.accountType == UserType.biz) {
+      if (auth.business.verified == false && auth.user.verified == true) {
+        context.push(const IncompleteAccountKYCNotifier());
+      } else {
+        null;
+      }
+    }
+  }
+
   Future<void> signIn(SignInModel model,
       {bool routeToMainOnSuccess = true}) async {
     BuildContext context = rootNav!.context;
@@ -81,7 +94,7 @@ class AuthCommand extends BaseCommand {
           auth.setUserToken = res.data['data']['token'];
           auth.setUser = res.data['data']['user'];
 
-          log(res.data.toString());
+          // log(res.data.toString());
 
           InitializationCmd(context).initUser();
           if (routeToMainOnSuccess == true) {
@@ -89,6 +102,7 @@ class AuthCommand extends BaseCommand {
           } else {
             null;
           }
+          checkIfBusinessIsFullyVerified(); //check when the account is business account and call this function
         } else if (res.statusCode == 401 &&
             res.data['message'].toString().toLowerCase() ==
                 "User is not verified".toLowerCase()) {

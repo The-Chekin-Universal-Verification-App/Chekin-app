@@ -5,6 +5,8 @@
     "contactVendor",
     "editProduct",
     "deleteProduct",
-    "resetPassword"
+    "resetPassword",
+    "renewSub",
+    "luxCode"
   ]
 }

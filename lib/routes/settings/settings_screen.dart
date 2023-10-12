@@ -1,7 +1,9 @@
 import 'package:chekinapp/export.dart';
 import 'package:flutter/material.dart';
 import '../auth/change_password.dart';
+import '../auth/login_screen.dart';
 import '../payment/current_subscription_screen.dart';
+import '../whislist/whish_list.dart';
 import 'settings.dart';
 import '../reviews/review_screen.dart';
 
@@ -118,7 +120,10 @@ class SettingsScreen extends StatelessWidget {
             ),
             if (userType == UserType.biz) ...[
               SettingsItem(
-                onItemTap: () {},
+                onItemTap: () {
+                  MySnackBar(context: context)
+                      .showSnackBar(message: 'Coming soon!');
+                },
                 imagePath: R.png.privacyTips.svg,
                 title: context.loc.privacy,
               ),
@@ -142,37 +147,119 @@ class SettingsScreen extends StatelessWidget {
                 activeColor: theme.primary,
               ),
             ),
+            // SettingsItem(
+            //   onItemTap: () {},
+            //   imagePath: R.png.darkMode.svg,
+            //   title: context.loc.darkMode,
+            //   trailIcon: Switch(
+            //     value: false,
+            //     onChanged: (val) {},
+            //     activeColor: theme.primary,
+            //   ),
+            // ),
             SettingsItem(
-              onItemTap: () {},
-              imagePath: R.png.darkMode.svg,
-              title: context.loc.darkMode,
-              trailIcon: Switch(
-                value: false,
-                onChanged: (val) {},
-                activeColor: theme.primary,
-              ),
-            ),
-            SettingsItem(
-              onItemTap: () {},
+              onItemTap: () {
+                DialogServices.showLanguageCountry(context);
+              },
               imagePath: R.png.languageIcon.svg,
               title: context.loc.language,
             ),
             const ChekInAppDivider(),
             const VSpace(10),
+            // SettingsItem(
+            //   onItemTap: () {},
+            //   imagePath: R.png.platformProtection.svg,
+            //   title: context.loc.appPermissions,
+            // ),
             SettingsItem(
-              onItemTap: () {},
-              imagePath: R.png.platformProtection.svg,
-              title: context.loc.appPermissions,
-            ),
-            SettingsItem(
-              onItemTap: () {},
+              onItemTap: () {
+                MySnackBar(context: context)
+                    .showSnackBar(message: 'Coming soon!');
+              },
               imagePath: R.png.personIcon.svg,
               title: context.loc.help,
             ),
             Align(
               alignment: Alignment.centerLeft,
               child: TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    CustomBottomSheet.openBottomSheet(
+                      context,
+                      sizeFraction: 0.3,
+                      Column(
+                        children: [
+                          Text(
+                            context.loc.logout,
+                            style: TextStyles.h6.copyWith(
+                                fontWeight: FontWeight.w700,
+                                color: theme.redButton),
+                          ),
+                          const VSpace(20),
+                          Divider(
+                            color: theme.dividerColor,
+                          ),
+                          const VSpace(14),
+                          Text(
+                            "Are you sure you want to log out?",
+                            style: TextStyles.body2.copyWith(
+                                fontWeight: FontWeight.w600,
+                                color: theme.black),
+                          ),
+                          const VSpace(24),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  context.pop();
+                                },
+                                style: TextButton.styleFrom(
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 40, vertical: 16),
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius: Corners.s10Border,
+                                      side: BorderSide(color: theme.primary)),
+                                ),
+                                child: Text(
+                                  'cancel',
+                                  style: TextStyles.body3.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: theme.primary),
+                                ),
+                              ),
+                              const HSpace(20),
+                              TextButton(
+                                onPressed: () {
+                                  //
+                                  context.read<MainProvider>().setNavIndex = 0;
+                                  // context.pushOff(const LogInScreen());
+                                  SharedPrefs.remove('token');
+                                  SharedPrefs.remove('user');
+                                  SharedPrefs.remove('refreshToken');
+                                  SharedPrefs.remove('password');
+
+                                  // LoginCmd(context).logOUt(popToLogin: false);
+                                },
+                                style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 40, vertical: 16),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: Corners.s10Border,
+                                    ),
+                                    backgroundColor: theme.primary),
+                                child: Text(
+                                  context.loc.logout,
+                                  style: TextStyles.body3.copyWith(
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
+                  },
                   style: TextButton.styleFrom(
                       backgroundColor: theme.primary.withOpacity(0.04)),
                   child: Text(

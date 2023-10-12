@@ -1,6 +1,7 @@
 import 'package:chekinapp/export.dart';
 import 'package:chekinapp/routes/settings/components/user_profile_image_item.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/models/business_model.dart';
 import '../../discover/vendor_store.dart';
@@ -15,44 +16,91 @@ class BizProfileLocationAndSocialSection extends StatelessWidget {
   });
 
   final bool isStoreVerified = true;
+  Future<void> _launchInWebViewWithoutJavaScript(String url,
+      {bool enableJavaScript = false, required BuildContext context}) async {
+    Uri uri = Uri.parse(url);
+    if (!await launchUrl(
+      uri,
+      mode: LaunchMode.inAppWebView,
+      webViewConfiguration:
+          WebViewConfiguration(enableJavaScript: enableJavaScript),
+    )) {
+      DialogServices.messageModalFromTop(context,
+          message: "Could not open the vendor's address");
+      throw 'Could not launch $url';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    List socialMedia = [
-      SocialMediaItem(
-        mediaHandleName: context.loc.instagram,
-        iconPath: R.png.instagram.svg,
-        bgColor: const Color(0xffFFD6F4),
-      ),
-      SocialMediaItem(
-        mediaHandleName: context.loc.twitter,
-        iconPath: R.png.twitter.svg,
-        bgColor: const Color(0xffCCE4FF),
-      ),
-      SocialMediaItem(
-        mediaHandleName: context.loc.linkedIn,
-        iconPath: R.png.linkedIn.svg,
-        bgColor: const Color(0xff6097EB).withOpacity(0.19),
-      ),
-      SocialMediaItem(
-        mediaHandleName: context.loc.facebook,
-        iconPath: R.png.facebook.svg,
-        bgColor: const Color(0xffC3D9FB),
-      ),
-      SocialMediaItem(
-        mediaHandleName: context.loc.ticTok,
-        iconPath: R.png.tiktok.svg,
-        bgColor: const Color(0xffFFF3E8),
-      ),
-      SocialMediaItem(
-        mediaHandleName: context.loc.whatsApp,
-        iconPath: R.png.whatsapp.svg,
-        bgColor: const Color(0xffD2FFE2),
-      ),
-    ];
     AppTheme theme = context.watch();
     BusinessModel business =
         context.select((AuthProvider provider) => provider.business);
+
+    List socialMedia = [
+      if (business.instagram != '') ...[
+        SocialMediaItem(
+          onItemTap: () {
+            _launchInWebViewWithoutJavaScript(business.instagram,
+                context: context);
+          },
+          mediaHandleName: context.loc.instagram,
+          iconPath: R.png.instagram.svg,
+          bgColor: const Color(0xffFFD6F4),
+        ),
+      ],
+      if (business.twitter != '') ...[
+        SocialMediaItem(
+          onItemTap: () {
+            _launchInWebViewWithoutJavaScript(business.twitter,
+                context: context);
+          },
+          mediaHandleName: context.loc.twitter,
+          iconPath: R.png.twitter.svg,
+          bgColor: const Color(0xffCCE4FF),
+        ),
+      ],
+      if (business.linkedIn != '') ...[
+        SocialMediaItem(
+          onItemTap: () {
+            _launchInWebViewWithoutJavaScript(business.linkedIn,
+                context: context);
+          },
+          mediaHandleName: context.loc.linkedIn,
+          iconPath: R.png.linkedIn.svg,
+          bgColor: const Color(0xff6097EB).withOpacity(0.19),
+        ),
+      ],
+      if (business.facebook != '') ...[
+        SocialMediaItem(
+          onItemTap: () {
+            _launchInWebViewWithoutJavaScript(business.facebook,
+                context: context);
+          },
+          mediaHandleName: context.loc.facebook,
+          iconPath: R.png.facebook.svg,
+          bgColor: const Color(0xffC3D9FB),
+        ),
+      ],
+      if (business.tiktok != '') ...[
+        SocialMediaItem(
+          onItemTap: () {
+            _launchInWebViewWithoutJavaScript(business.tiktok,
+                context: context);
+          },
+          mediaHandleName: context.loc.ticTok,
+          iconPath: R.png.tiktok.svg,
+          bgColor: const Color(0xffFFF3E8),
+        ),
+      ],
+      // SocialMediaItem(
+      //   mediaHandleName: context.loc.whatsApp,
+      //   iconPath: R.png.whatsapp.svg,
+      //   bgColor: const Color(0xffD2FFE2),
+      // ),
+    ];
+
+    print(business);
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: Insets.l),
       child: SingleChildScrollView(
@@ -125,7 +173,7 @@ class BizProfileLocationAndSocialSection extends StatelessWidget {
                       SizedBox(child: SvgPicture.asset(R.png.location.svg)),
                       const HSpace(5),
                       Text(
-                        "location",
+                        context.loc.location,
                         style: TextStyles.body1.copyWith(
                             fontWeight: FontWeight.w500, color: theme.primary),
                       ),
@@ -133,7 +181,7 @@ class BizProfileLocationAndSocialSection extends StatelessWidget {
                   ),
                   const VSpace(4),
                   Text(
-                    'Lagos',
+                    business.state,
                     style: TextStyles.h6.copyWith(
                         fontWeight: FontWeight.w700,
                         color: const Color(0xff130F26)),
@@ -149,13 +197,13 @@ class BizProfileLocationAndSocialSection extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Text(
-                    "luxCode",
+                    context.loc.luxCode,
                     style: TextStyles.body1
                         .copyWith(fontSize: 13, color: theme.primary),
                   ),
                   const VSpace(4),
                   Text(
-                    'Lux-330458',
+                    business.luxCode == '' ? 'null' : business.luxCode,
                     style: TextStyles.h6.copyWith(
                         fontWeight: FontWeight.w700,
                         color: const Color(0xff130F26)),
@@ -175,16 +223,18 @@ class BizProfileLocationAndSocialSection extends StatelessWidget {
                 runSpacing: 10,
                 children: List.generate(socialMedia.length + 1, (index) {
                   if (socialMedia.length == index) {
-                    return SocialMediaItem(
-                      onItemTap: () {
-                        // print('sss');
-                      },
-                      mediaHandleName: context.loc.addSocial,
-                      iconPath: R.png.addSquareFill.svg,
-                      bgColor: const Color(0xff6097EB).withOpacity(0.3),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 8.0, vertical: 8),
-                    );
+                    // return SocialMediaItem(
+                    //   onItemTap: () {
+                    //     // print('sss');
+                    //   },
+                    //   mediaHandleName: context.loc.addSocial,
+                    //   iconPath: R.png.addSquareFill.svg,
+                    //   bgColor: const Color(0xff6097EB).withOpacity(0.3),
+                    //   padding: const EdgeInsets.symmetric(
+                    //       horizontal: 8.0, vertical: 8),
+                    // );
+
+                    return SizedBox();
                   }
                   return socialMedia[index];
                 }),

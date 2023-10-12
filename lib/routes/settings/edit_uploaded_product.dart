@@ -116,6 +116,7 @@ class _EditUploadedProductScreenState extends State<EditUploadedProductScreen>
                                           const VSpace(5),
                                           Text(
                                             'Add one more Image',
+                                            textAlign: TextAlign.center,
                                             style: TextStyles.body1
                                                 .txtColor(theme.primary),
                                           )
@@ -133,11 +134,11 @@ class _EditUploadedProductScreenState extends State<EditUploadedProductScreen>
                               if (imageList.isNotEmpty && mounted) {
                                 log('Uploading new product.....');
                                 ProductCommand(context).upLoadProducts(
-                                    imageList, onSuccessAction: () {
+                                    imageList.first, onSuccessAction: () {
                                   context
                                       .read<ImageProviders>()
                                       .clearImagesPath();
-
+//
                                   ///this would be use to add image to the list
                                   ///only when image was uploaded successfully to storage bucket
                                   if (productProvider
@@ -145,12 +146,17 @@ class _EditUploadedProductScreenState extends State<EditUploadedProductScreen>
                                     List<String> editedImages = model.images
                                         .map((e) => e.toString())
                                         .toList();
-                                    editedImages.addAll(
-                                        productProvider.uploadedProductsUrl);
+                                    editedImages.add(productProvider
+                                        .uploadedProductsUrl.first);
 
                                     model =
                                         model.copyWith(images: editedImages);
                                     setState(() {});
+
+                                    ///clear what has been uploaded from the [uploadedProductsUrl] list
+                                    context
+                                        .read<ProductProvider>()
+                                        .clearImageFromList();
                                   }
                                 });
                               }

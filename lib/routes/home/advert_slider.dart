@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:chekinapp/export.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -13,14 +15,57 @@ class AdvertSlider extends StatelessWidget {
   }
 }
 
-class _AdvertSlider extends StatelessWidget {
+class _AdvertSlider extends StatefulWidget {
   const _AdvertSlider({
-    super.key,
-  });
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  State<_AdvertSlider> createState() => _AdvertSliderState();
+}
+
+class _AdvertSliderState extends State<_AdvertSlider> {
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
+  late Timer _timer;
+
+  @override
+  void initState() {
+    super.initState();
+    _startAutoScroll();
+  }
+
+  void _startAutoScroll() {
+    _timer = Timer.periodic(const Duration(seconds: 6), (timer) {
+      if (_currentPage < 4) {
+        _currentPage++;
+        _pageController.animateToPage(
+          _currentPage,
+          duration: const Duration(milliseconds: 850),
+          curve: Curves.slowMiddle,
+        );
+      } else {
+        _currentPage = 0;
+        _pageController.animateToPage(
+          _currentPage,
+          duration: const Duration(milliseconds: 850),
+          curve: Curves.decelerate,
+        );
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
+
     int sliderIndex =
         context.select((SliderProvider slider) => slider.currentPage);
     return Column(
@@ -28,7 +73,8 @@ class _AdvertSlider extends StatelessWidget {
         SizedBox(
           height: 140,
           child: PageView.builder(
-              itemCount: 5,
+              itemCount: 4,
+              controller: _pageController,
               onPageChanged: (val) {
                 context.read<SliderProvider>().currentPage = val;
               },
@@ -42,7 +88,7 @@ class _AdvertSlider extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: List.generate(
-                5,
+                4,
                 (index) => CustomContainer(
                       borderRadius: Corners.s8Border,
                       color: index == sliderIndex

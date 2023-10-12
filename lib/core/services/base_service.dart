@@ -99,8 +99,19 @@ abstract class BaseService {
     return res;
   }
 
-  Future<Response> patch() async {
-    Response res = await _dio.patch('');
+
+  Future<Response> patch(String path, Map<String, dynamic> obj,
+      {String? token, String? pin, int? retry}) async {
+    if (token != null) {
+      _dio.options.headers["Authorization"] = "Bearer $token";
+      if (pin != null) {
+        _dio.options.headers["pin"] = pin;
+      }
+    }
+    if (retry != null) {
+      _dioRetry(retry: retry);
+    }
+    Response res = await _dio.patch(path, data: jsonEncode(obj));
     return res;
   }
 

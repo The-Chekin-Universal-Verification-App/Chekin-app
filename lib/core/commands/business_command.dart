@@ -143,7 +143,7 @@ class BusinessCommand extends BaseCommand {
       if (res != null) {
         if (res.statusCode == 200 ||
             res.statusCode == 201 && res.data['status'] == "success") {
-          auth.setUser = res.data['data'];
+          auth.setBusiness = res.data['data'];
           business.uploadSuccess = UploadStatus.completed;
           image.clearSingleImagePath();
           DialogServices.messageModalFromTop(

@@ -37,42 +37,54 @@ class _BusinessReviewScreenState extends State<BusinessReviewScreen>
       key: scaffoldKey,
       body: Column(
         children: [
-          CustomContainer(
-            color: const Color(0xFCF9BFC9).withOpacity(0.79),
+          Container(
+            //
+            // color: const Color(0xFCF9BFC9).withOpacity(0.79),
+            height: 232,
+            width: context.widthPx,
+            decoration: BoxDecoration(
+                color: const Color(0xFCF9BFC9).withOpacity(0.79),
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(selectedBusiness.businessImage))),
             child: SafeArea(
               child: Column(
                 children: [
-                  SizedBox(
-                    height: 50,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: Insets.l),
-                      child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            IcButton(
+                  Row(
+                    children: [
+                      SizedBox(
+                        height: 50,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(horizontal: Insets.l),
+                          child: CircleAvatar(
+                            radius: 16,
+                            backgroundColor: theme.greyWeak,
+                            child: IcButton(
                               SvgIcon(
                                 R.png.arrowLeftIcon.svg,
                                 color: theme.black,
-                                // size: Sizes.hit,
+                                size: 20,
                               ),
                               onPressed: () => Navigator.pop(context),
                               radius: Corners.s0,
                             ),
-                          ]),
-                    ),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                   const VSpace(10),
-                  SizedBox(
-                      height: 232,
-                      child: Image.network(
-                        selectedBusiness.businessImage,
-                        errorBuilder: (e, c, d) => const SizedBox(
-                            child: Icon(
-                          Icons.image_outlined,
-                          size: 232 / 2,
-                          color: Colors.black54,
-                        )),
-                      )),
+                  // SizedBox(
+                  //     height: 232,
+                  //     child: Image.network(
+                  //       selectedBusiness.businessImage,
+                  //       errorBuilder: (e, c, d) => const SizedBox(
+                  //           child: Icon(
+                  //         Icons.image_outlined,
+                  //         size: 232 / 2,
+                  //         color: Colors.black54,
+                  //       )),
+                  //     )),
                   const VSpace(39),
                 ],
               ),
@@ -109,12 +121,13 @@ class _BusinessReviewScreenState extends State<BusinessReviewScreen>
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      selectedBusiness.owner,
+                      '',
+                      // selectedBusiness.owner,
                       style:
                           TextStyles.h6.copyWith(fontWeight: FontWeight.w700),
                     ),
                     Text(
-                      'Lux-330458',
+                      selectedBusiness.luxCode,
                       style: TextStyles.body1.copyWith(
                         fontWeight: FontWeight.w700,
                       ),

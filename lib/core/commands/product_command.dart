@@ -184,34 +184,29 @@ class ProductCommand extends BaseCommand {
   }
 
   ///this is use to upload product
-  Future<void> upLoadProducts(List<String> imagePaths,
+  Future<void> upLoadProducts(String imagePath,
       {Function()? onSuccessAction}) async {
-    List<MultipartFile> multipartFiles = [];
-    Map<String, dynamic> payload = {};
     BuildContext context = rootNav!.context;
     Response? res;
-    for (int i = 0; i < imagePaths.length; i++) {
-      String fileName = imagePaths[i];
+    String fileName = imagePath;
+    Map<String, dynamic> payload = {};
+    if (imagePath != '') {
+      fileName = imagePath.split('/').last;
+      String? mimeType = mime(imagePath);
+      String? mimee = mimeType?.split('/')[0];
+      String? type = mimeType?.split('/')[1];
 
-      if (imagePaths[i] != '') {
-        fileName = imagePaths[i].split('/').last;
-        String? mimeType = mime(imagePaths[i]);
-        String? mimee = mimeType?.split('/')[0];
-        String? type = mimeType?.split('/')[1];
-
-        ///add the image to the payload
-        MultipartFile preparedImage = await MultipartFile.fromFile(
-            imagePaths[i].trim(),
-            filename: fileName,
-            contentType: MediaType(mimee!, type!));
-
-        //add image to list of multipartFile
-        multipartFiles.add(preparedImage);
-      }
+      ///add the image to the payload
+      payload = {
+        'image': await MultipartFile.fromFile(imagePath.trim(),
+            filename: fileName, contentType: MediaType(mimee!, type!))
+      };
+      //Add if only it's not an empty string
+      // print(imagePath);
     }
 
-    payload = {'image': multipartFiles};
     final formData = FormData.fromMap(payload);
+
     BusinessService service = BusinessService();
     try {
       product.setBusy(true);
@@ -253,7 +248,7 @@ class ProductCommand extends BaseCommand {
           MySnackBar(context: context)
               .showSnackBar(message: 'Product added successfully!');
           product.clearImageFromList();
-          getProducts();
+          getMyUploadedProducts();
         }
       }
     } catch (e) {
@@ -292,15 +287,14 @@ class ProductCommand extends BaseCommand {
   Future<void> deleteAddedProductOnBusinessProducts(ProductModel model) async {
     BuildContext context = rootNav!.context;
     Response? res;
-    product.setBusy(true);
+
     BusinessService service = BusinessService();
     try {
-      product.setBusy(true);
+      product.setDeleteBusy = true;
 
       res = await service.deleteAddedProductOnBusinessProducts(auth.token,
           productId: model.id);
-      product.setBusy(false);
-
+      product.setDeleteBusy = false;
       if (res != null) {
         if (res.statusCode == 200) {
           Navigator.of(context).pop;
@@ -315,4 +309,59 @@ class ProductCommand extends BaseCommand {
       null;
     }
   }
+
+  ///decommissioned code
+  ///
+  ///
+
+// Future<void> upLoadMultipleProducts(List<String> imagePaths,
+//       {Function()? onSuccessAction}) async {
+//     List<MultipartFile> multipartFiles = [];
+//     Map<String, dynamic> payload = {};
+//     BuildContext context = rootNav!.context;
+//     Response? res;
+//     for (int i = 0; i < imagePaths.length; i++) {
+//       String fileName = imagePaths[i];
+//
+//       if (imagePaths[i] != '') {
+//         fileName = imagePaths[i].split('/').last;
+//         String? mimeType = mime(imagePaths[i]);
+//         String? mimee = mimeType?.split('/')[0];
+//         String? type = mimeType?.split('/')[1];
+//
+//         ///add the image to the payload
+//         MultipartFile preparedImage = await MultipartFile.fromFile(
+//             imagePaths[i].trim(),
+//             filename: fileName,
+//             contentType: MediaType(mimee!, type!));
+//
+//         //add image to list of multipartFile
+//         multipartFiles.add(preparedImage);
+//       }
+//     }
+//
+//     payload = {'image': multipartFiles};
+//     final formData = FormData.fromMap(payload);
+//     BusinessService service = BusinessService();
+//     try {
+//       product.setBusy(true);
+//       res = await service.uploadProducts(auth.token, formData,
+//           onSendProgress: (a, b) {});
+//       product.setBusy(false);
+//
+//       if (res != null) {
+//         if (res.statusCode == 200 && res.data['status'] == 'success') {
+//           log(res.data.toString());
+//           product.keepUploadedProduct = res.data['data']['fileUrl'];
+//
+//           if (onSuccessAction != null) {
+//             onSuccessAction(); //call this onSuccessAction function
+//           }
+//         }
+//       }
+//     } catch (e) {
+//       /// if services is returning [null] then we would do nothing cause the exception thrown has been handled at the service class logic
+//       null;
+//     }
+//   }
 }

@@ -120,13 +120,15 @@ class HomeScreen extends StatelessWidget {
                 const VSpace(15),
                 CustomFormTextFieldWithBorder(
                   hintText: context.loc.search,
+                  isRequired: false,
                   prefix: UnconstrainedBox(
                     child: SvgIcon(
                       R.png.search.svg,
                       size: 22,
                     ),
                   ).clickable(() {
-                    BusinessCommand(context).getBusiness();
+                    //
+                    // BusinessCommand(context).getBusiness();
                   }),
                   suffix: UnconstrainedBox(
                     child: SvgIcon(

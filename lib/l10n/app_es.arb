@@ -253,6 +253,9 @@
 "businesses": "eBusinesses",
     "reSend": "eResend",
     "followEmailLink": "eFollow the link sent to you to the OTP code sent to you.",
+      "completeVerification": "eComplete your verification",
+          "completeVerificationNote": "eYou are required to upload all necessary document to get full access to this app.",
+    "skipForNow": "eSkip for now",
     "privacyPolicy": "ePrivacy Policy"
 
 }
