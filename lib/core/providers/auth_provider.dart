@@ -145,4 +145,11 @@ class AuthProvider extends BaseProvider {
     /// to make this works we would get what is in [userSignInModel]then do a .copyWith method before calling add to user Info method from the form in the widget try
     ///to maintain consistency
   }
+
+  bool _paymentLoading = false;
+  bool get paymentLoading => _paymentLoading;
+  set setBusyPayment(bool val) {
+    _paymentLoading = val;
+    notifyListeners();
+  }
 }

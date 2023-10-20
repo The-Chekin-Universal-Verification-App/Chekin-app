@@ -27,7 +27,7 @@ abstract class BaseService {
         responseBody: true,
         responseHeader: false,
         error: true,
-        compact: true,
+        compact: false,
         maxWidth: 90));
   }
 
@@ -98,7 +98,6 @@ abstract class BaseService {
         await _dio.put(path, data: data, onSendProgress: onSendProgress);
     return res;
   }
-
 
   Future<Response> patch(String path, Map<String, dynamic> obj,
       {String? token, String? pin, int? retry}) async {

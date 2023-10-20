@@ -21,12 +21,53 @@ class BusinessService extends BaseService {
     }
   }
 
+  Future<Response?> getTopRatedBusiness(
+    String token,
+  ) async {
+    Response? response;
+    // print(urlPath);
+    try {
+      response = await get(R.M.getTopRatedBusiness, token: token);
+
+      return response;
+    } on DioError catch (err) {
+      DioExceptions.fromDioError(err).showNotification();
+      response = null;
+
+      return response;
+    } catch (err) {
+      NetworkExceptions.fromNetworkError(err).showNotification();
+      response = null;
+      return response;
+    }
+  }
+
   Future<Response?> getBusinessByID(String token,
       {required String bizID}) async {
     Response? response;
     // print(urlPath);
     try {
       response = await get(R.M.getBusinessByID(bizID), token: token);
+
+      return response;
+    } on DioError catch (err) {
+      DioExceptions.fromDioError(err).showNotification();
+      response = null;
+
+      return response;
+    } catch (err) {
+      NetworkExceptions.fromNetworkError(err).showNotification();
+      response = null;
+      return response;
+    }
+  }
+
+  Future<Response?> confirmBusinessDocUpload(String token,
+      {required String bizID}) async {
+    Response? response;
+    // print(urlPath);
+    try {
+      response = await get(R.M.confirmDocumentUpload(bizID), token: token);
 
       return response;
     } on DioError catch (err) {

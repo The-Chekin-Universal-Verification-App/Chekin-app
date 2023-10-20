@@ -77,3 +77,23 @@ Map<String, dynamic> _$$_MakeBusinessReviewModelToJson(
       'rating': instance.rating,
       'review': instance.review,
     };
+
+_$_BusinessDocUploadModel _$$_BusinessDocUploadModelFromJson(
+        Map<String, dynamic> json) =>
+    _$_BusinessDocUploadModel(
+      idUpload: json['idUpload'] as bool? ?? false,
+      utility: json['utility'] as bool? ?? false,
+      instagramWhenLoggedIn: json['instagramWhenLoggedIn'] as bool? ?? false,
+      facebookWhenLoggedIn: json['facebookWhenLoggedIn'] as bool? ?? false,
+      selfieHoldingId: json['selfieHoldingId'] as bool? ?? false,
+    );
+
+Map<String, dynamic> _$$_BusinessDocUploadModelToJson(
+        _$_BusinessDocUploadModel instance) =>
+    <String, dynamic>{
+      'idUpload': instance.idUpload,
+      'utility': instance.utility,
+      'instagramWhenLoggedIn': instance.instagramWhenLoggedIn,
+      'facebookWhenLoggedIn': instance.facebookWhenLoggedIn,
+      'selfieHoldingId': instance.selfieHoldingId,
+    };

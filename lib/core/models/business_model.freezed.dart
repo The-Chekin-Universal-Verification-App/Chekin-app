@@ -905,3 +905,251 @@ abstract class _MakeBusinessReviewModel implements MakeBusinessReviewModel {
   _$$_MakeBusinessReviewModelCopyWith<_$_MakeBusinessReviewModel>
       get copyWith => throw _privateConstructorUsedError;
 }
+
+BusinessDocUploadModel _$BusinessDocUploadModelFromJson(
+    Map<String, dynamic> json) {
+  return _BusinessDocUploadModel.fromJson(json);
+}
+
+/// @nodoc
+mixin _$BusinessDocUploadModel {
+  bool get idUpload => throw _privateConstructorUsedError;
+  bool get utility => throw _privateConstructorUsedError;
+  bool get instagramWhenLoggedIn => throw _privateConstructorUsedError;
+  bool get facebookWhenLoggedIn => throw _privateConstructorUsedError;
+  bool get selfieHoldingId => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $BusinessDocUploadModelCopyWith<BusinessDocUploadModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $BusinessDocUploadModelCopyWith<$Res> {
+  factory $BusinessDocUploadModelCopyWith(BusinessDocUploadModel value,
+          $Res Function(BusinessDocUploadModel) then) =
+      _$BusinessDocUploadModelCopyWithImpl<$Res, BusinessDocUploadModel>;
+  @useResult
+  $Res call(
+      {bool idUpload,
+      bool utility,
+      bool instagramWhenLoggedIn,
+      bool facebookWhenLoggedIn,
+      bool selfieHoldingId});
+}
+
+/// @nodoc
+class _$BusinessDocUploadModelCopyWithImpl<$Res,
+        $Val extends BusinessDocUploadModel>
+    implements $BusinessDocUploadModelCopyWith<$Res> {
+  _$BusinessDocUploadModelCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? idUpload = null,
+    Object? utility = null,
+    Object? instagramWhenLoggedIn = null,
+    Object? facebookWhenLoggedIn = null,
+    Object? selfieHoldingId = null,
+  }) {
+    return _then(_value.copyWith(
+      idUpload: null == idUpload
+          ? _value.idUpload
+          : idUpload // ignore: cast_nullable_to_non_nullable
+              as bool,
+      utility: null == utility
+          ? _value.utility
+          : utility // ignore: cast_nullable_to_non_nullable
+              as bool,
+      instagramWhenLoggedIn: null == instagramWhenLoggedIn
+          ? _value.instagramWhenLoggedIn
+          : instagramWhenLoggedIn // ignore: cast_nullable_to_non_nullable
+              as bool,
+      facebookWhenLoggedIn: null == facebookWhenLoggedIn
+          ? _value.facebookWhenLoggedIn
+          : facebookWhenLoggedIn // ignore: cast_nullable_to_non_nullable
+              as bool,
+      selfieHoldingId: null == selfieHoldingId
+          ? _value.selfieHoldingId
+          : selfieHoldingId // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_BusinessDocUploadModelCopyWith<$Res>
+    implements $BusinessDocUploadModelCopyWith<$Res> {
+  factory _$$_BusinessDocUploadModelCopyWith(_$_BusinessDocUploadModel value,
+          $Res Function(_$_BusinessDocUploadModel) then) =
+      __$$_BusinessDocUploadModelCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {bool idUpload,
+      bool utility,
+      bool instagramWhenLoggedIn,
+      bool facebookWhenLoggedIn,
+      bool selfieHoldingId});
+}
+
+/// @nodoc
+class __$$_BusinessDocUploadModelCopyWithImpl<$Res>
+    extends _$BusinessDocUploadModelCopyWithImpl<$Res,
+        _$_BusinessDocUploadModel>
+    implements _$$_BusinessDocUploadModelCopyWith<$Res> {
+  __$$_BusinessDocUploadModelCopyWithImpl(_$_BusinessDocUploadModel _value,
+      $Res Function(_$_BusinessDocUploadModel) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? idUpload = null,
+    Object? utility = null,
+    Object? instagramWhenLoggedIn = null,
+    Object? facebookWhenLoggedIn = null,
+    Object? selfieHoldingId = null,
+  }) {
+    return _then(_$_BusinessDocUploadModel(
+      idUpload: null == idUpload
+          ? _value.idUpload
+          : idUpload // ignore: cast_nullable_to_non_nullable
+              as bool,
+      utility: null == utility
+          ? _value.utility
+          : utility // ignore: cast_nullable_to_non_nullable
+              as bool,
+      instagramWhenLoggedIn: null == instagramWhenLoggedIn
+          ? _value.instagramWhenLoggedIn
+          : instagramWhenLoggedIn // ignore: cast_nullable_to_non_nullable
+              as bool,
+      facebookWhenLoggedIn: null == facebookWhenLoggedIn
+          ? _value.facebookWhenLoggedIn
+          : facebookWhenLoggedIn // ignore: cast_nullable_to_non_nullable
+              as bool,
+      selfieHoldingId: null == selfieHoldingId
+          ? _value.selfieHoldingId
+          : selfieHoldingId // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$_BusinessDocUploadModel
+    with DiagnosticableTreeMixin
+    implements _BusinessDocUploadModel {
+  _$_BusinessDocUploadModel(
+      {this.idUpload = false,
+      this.utility = false,
+      this.instagramWhenLoggedIn = false,
+      this.facebookWhenLoggedIn = false,
+      this.selfieHoldingId = false});
+
+  factory _$_BusinessDocUploadModel.fromJson(Map<String, dynamic> json) =>
+      _$$_BusinessDocUploadModelFromJson(json);
+
+  @override
+  @JsonKey()
+  final bool idUpload;
+  @override
+  @JsonKey()
+  final bool utility;
+  @override
+  @JsonKey()
+  final bool instagramWhenLoggedIn;
+  @override
+  @JsonKey()
+  final bool facebookWhenLoggedIn;
+  @override
+  @JsonKey()
+  final bool selfieHoldingId;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'BusinessDocUploadModel(idUpload: $idUpload, utility: $utility, instagramWhenLoggedIn: $instagramWhenLoggedIn, facebookWhenLoggedIn: $facebookWhenLoggedIn, selfieHoldingId: $selfieHoldingId)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'BusinessDocUploadModel'))
+      ..add(DiagnosticsProperty('idUpload', idUpload))
+      ..add(DiagnosticsProperty('utility', utility))
+      ..add(DiagnosticsProperty('instagramWhenLoggedIn', instagramWhenLoggedIn))
+      ..add(DiagnosticsProperty('facebookWhenLoggedIn', facebookWhenLoggedIn))
+      ..add(DiagnosticsProperty('selfieHoldingId', selfieHoldingId));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_BusinessDocUploadModel &&
+            (identical(other.idUpload, idUpload) ||
+                other.idUpload == idUpload) &&
+            (identical(other.utility, utility) || other.utility == utility) &&
+            (identical(other.instagramWhenLoggedIn, instagramWhenLoggedIn) ||
+                other.instagramWhenLoggedIn == instagramWhenLoggedIn) &&
+            (identical(other.facebookWhenLoggedIn, facebookWhenLoggedIn) ||
+                other.facebookWhenLoggedIn == facebookWhenLoggedIn) &&
+            (identical(other.selfieHoldingId, selfieHoldingId) ||
+                other.selfieHoldingId == selfieHoldingId));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, idUpload, utility,
+      instagramWhenLoggedIn, facebookWhenLoggedIn, selfieHoldingId);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_BusinessDocUploadModelCopyWith<_$_BusinessDocUploadModel> get copyWith =>
+      __$$_BusinessDocUploadModelCopyWithImpl<_$_BusinessDocUploadModel>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$_BusinessDocUploadModelToJson(
+      this,
+    );
+  }
+}
+
+abstract class _BusinessDocUploadModel implements BusinessDocUploadModel {
+  factory _BusinessDocUploadModel(
+      {final bool idUpload,
+      final bool utility,
+      final bool instagramWhenLoggedIn,
+      final bool facebookWhenLoggedIn,
+      final bool selfieHoldingId}) = _$_BusinessDocUploadModel;
+
+  factory _BusinessDocUploadModel.fromJson(Map<String, dynamic> json) =
+      _$_BusinessDocUploadModel.fromJson;
+
+  @override
+  bool get idUpload;
+  @override
+  bool get utility;
+  @override
+  bool get instagramWhenLoggedIn;
+  @override
+  bool get facebookWhenLoggedIn;
+  @override
+  bool get selfieHoldingId;
+  @override
+  @JsonKey(ignore: true)
+  _$$_BusinessDocUploadModelCopyWith<_$_BusinessDocUploadModel> get copyWith =>
+      throw _privateConstructorUsedError;
+}

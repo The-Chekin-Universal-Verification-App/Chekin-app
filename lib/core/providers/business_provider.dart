@@ -5,13 +5,13 @@ import '../models/business_review_model.dart';
 
 class BusinessProvider extends BaseProvider {
   BusinessProvider() {
-    setTopRated();
     setPopular();
   }
   BusinessModel _myBusinessDetail = BusinessModel.init();
 
   ///the above lines works only if the account is a business account
   List<BusinessModel> _searchedBusiness = [];
+
   List<BusinessModel> _searchedBusinessCopy = [];
   int _totalPage = 0;
   int _currentPage = 1;
@@ -33,10 +33,10 @@ class BusinessProvider extends BaseProvider {
   List<BusinessModel> get topRated => _topRated; //_topRated;
   List<BusinessModel> get popular => _popular; // _popular;
 
-  setTopRated() {
-    _topRated = _searchedBusiness;
-    notifyListeners();
-  }
+  // setTopRated() {
+  //   _topRated = _searchedBusiness;
+  //   notifyListeners();
+  // }
 
   setPopular() {
     _popular = _searchedBusiness;
@@ -87,6 +87,24 @@ class BusinessProvider extends BaseProvider {
   //so the info can be passed to the update business Api for business update
   set updateBusinessDetail(BusinessModel business) {
     _myBusinessDetail = business;
+    notifyListeners();
+  }
+
+  ///
+  setTopRatedBusiness(
+    List businessListJson,
+  ) {
+    _topRated = [];
+    //
+    List<BusinessModel> listOfBusiness =
+        businessListJson.map((e) => BusinessModel.fromJson(e)).toList();
+    //
+    _topRated.addAll(listOfBusiness);
+
+    // _totalPage = totalPage;
+    // _currentPage = currentPage;
+    // _isLastPage = _currentPage == _totalPage ? true : false;
+
     notifyListeners();
   }
 

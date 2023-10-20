@@ -12,6 +12,7 @@ class InitializationCmd extends BaseCommand {
   Future<void> initUser() async {
     BuildContext context = rootNav!.context;
     BusinessCommand(context).getBusiness(page: '1');
+    BusinessCommand(context).getTopRatedBusiness();
     ProductCommand(context).getProducts();
     ProductCommand(context).getCategory();
     ProductCommand(context).getWishList();

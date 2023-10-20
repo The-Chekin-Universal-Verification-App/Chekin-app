@@ -40,7 +40,6 @@ class BusinessModel with _$BusinessModel {
   static BusinessModel init() {
     return BusinessModel(name: '', nearestLandmark: '', lga: '');
   }
-
 }
 
 @freezed
@@ -55,5 +54,25 @@ class MakeBusinessReviewModel with _$MakeBusinessReviewModel {
 
   static MakeBusinessReviewModel init() {
     return MakeBusinessReviewModel(rating: '', review: '');
+  }
+}
+
+@freezed
+class BusinessDocUploadModel with _$BusinessDocUploadModel {
+  factory BusinessDocUploadModel({
+    @Default(false) bool idUpload,
+    @Default(false) bool utility,
+    @Default(false) bool instagramWhenLoggedIn,
+    @Default(false) bool facebookWhenLoggedIn,
+    @Default(false) bool selfieHoldingId,
+  }) = _BusinessDocUploadModel;
+
+  factory BusinessDocUploadModel.fromJson(Map<String, dynamic> json) =>
+      _$BusinessDocUploadModelFromJson(json);
+
+  static BusinessDocUploadModel init() {
+    return BusinessDocUploadModel(
+      selfieHoldingId: false,
+    );
   }
 }

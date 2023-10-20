@@ -4,6 +4,7 @@ import 'package:chekinapp/core/commands/initialization_cmd.dart';
 import 'package:chekinapp/export.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../routes/auth/normal_user_biz_account_registration/biz_account/incomplete_account_kyc_notifier.dart';
 import '../../utils/imagepicker/provider/image_provider.dart';
 import '../models/business_model.dart';
 import '../providers/business_provider.dart';
@@ -45,6 +46,33 @@ class BusinessCommand extends BaseCommand {
     }
   }
 
+  Future<void> getTopRatedBusiness() async {
+    Response? res;
+
+    BusinessService service = BusinessService();
+    try {
+      // business.setBusy(true);
+      res = await service.getTopRatedBusiness(
+        auth.token,
+      );
+      // business.setBusy(false);
+
+      if (res != null) {
+        if (res.statusCode == 200 ||
+            res.statusCode == 201 && res.data['status'] == "success") {
+          business.setTopRatedBusiness(
+            res.data['data'],
+          );
+        }
+      }
+    } catch (e) {
+      business.setBusy(false);
+
+      /// if services is returning [null] then we would do nothing cause the exception thrown has been handled at the service class logic
+      null;
+    }
+  }
+
   ///get business by ID
   Future<void> getBusinessByID({required String bizID}) async {
     Response? res;
@@ -62,6 +90,40 @@ class BusinessCommand extends BaseCommand {
           business.setSingleBusiness(
             res.data['data']['data'],
           );
+        }
+      }
+    } catch (e) {
+      /// if services is returning [null] then we would do nothing cause the exception thrown has been handled at the service class logic
+      null;
+    }
+  }
+
+  ///get check why a user is not yet verified if he has not fully uploaded his required document
+  Future<void> confirmBusinessDocumentUpload({required String bizID}) async {
+    BuildContext context = rootNav!.context;
+    Response? res;
+
+    BusinessService service = BusinessService();
+
+    try {
+      res = await service.confirmBusinessDocUpload(
+        auth.token,
+        bizID: bizID,
+      );
+      if (res != null) {
+        log(res.data);
+        if (res.statusCode == 200 ||
+            res.statusCode == 201 && res.data['status'] == "success") {
+          BusinessDocUploadModel bizStatus =
+              BusinessDocUploadModel.fromJson(res.data);
+
+          if (res.data['data']['idUpload'] == false ||
+              res.data['data']['utility'] == false ||
+              res.data['data']['instagramWhenLoggedIn'] == false ||
+              res.data['data']['facebookWhenLoggedIn'] == false ||
+              res.data['data']['facebookWhenLoggedIn'] == false) {
+            context.push(const IncompleteAccountKYCNotifier());
+          }
         }
       }
     } catch (e) {

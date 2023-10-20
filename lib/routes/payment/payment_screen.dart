@@ -20,6 +20,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
+    bool paymentLoading =
+        context.select((AuthProvider auth) => auth.paymentLoading);
     return Scaffold(
       appBar: CustomAppBar(
         leading: true,
@@ -51,148 +53,181 @@ class _PaymentScreenState extends State<PaymentScreen> {
           const HSpace(20)
         ],
       ),
-      body: SingleChildScrollView(
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.symmetric(horizontal: 25),
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-              minHeight: MediaQuery.of(context).size.height - 120),
+      body: Stack(
+        children: [
+          AbsorbPointer(
+            absorbing: paymentLoading,
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                    minHeight: MediaQuery.of(context).size.height - 120),
 
-          ///the 120 is the estimated appbar height and the page index indicator  taking them of allows the rest part of the screens to show up in the visible area
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const VSpace(23),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        context.loc.chooseSubscription,
-                        style: TextStyles.h5,
-                      ),
-                    ],
-                  ),
-                  const VSpace(5),
-                  Text(
-                    context.loc.pickSubscription,
-                    style: TextStyles.h7.weight(FontWeight.bold),
-                  ),
-                  const VSpace(10),
-                  Text(
-                    context.loc.thisAmountNotRefundable,
-                    style: TextStyles.body1.copyWith(
-                        color: theme.primary, fontWeight: FontWeight.w700),
-                  ),
-                  const VSpace(20),
-                  QuarterlyItem(
-                    isActive: subscription == SubscriptionType.quarterly
-                        ? true
-                        : false,
-                  ).clickable(() {
-                    subscription = SubscriptionType.quarterly;
-                    setState(() {});
-                    PaymentCommand(context)
-                        .initPayment(paymentOption: "yearly");
-                  }),
-                  // DashedRect(
-                  //   color: subscription == SubscriptionType.quarterly
-                  //       ? Colors.transparent
-                  //       : theme.primary,
-                  //   fChild: Container(
-                  //     // height: 160,
-                  //     padding: EdgeInsets.symmetric(
-                  //         vertical: context.sp(20), horizontal: 10),
-                  //     child: Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         Text(context.loc.quarterly,
-                  //             style: TextStyles.body1
-                  //                 .copyWith(fontWeight: FontWeight.w700)),
-                  //         const VSpace(20),
-                  //         Row(
-                  //           crossAxisAlignment: CrossAxisAlignment.center,
-                  //           children: [
-                  //             CircleAvatar(
-                  //               radius: 3,
-                  //               backgroundColor: theme.black,
-                  //             ),
-                  //             const HSpace(10),
-                  //             Text(context.loc.oneReview,
-                  //                 style: TextStyles.body2),
-                  //           ],
-                  //         ),
-                  //         const VSpace(10),
-                  //         Row(
-                  //           children: [
-                  //             CircleAvatar(
-                  //               radius: 3,
-                  //               backgroundColor: theme.black,
-                  //             ),
-                  //             const HSpace(10),
-                  //             Expanded(
-                  //               child: Text(
-                  //                 context.loc.haveToRenewSub,
-                  //                 overflow: TextOverflow.clip,
-                  //               ),
-                  //             ),
-                  //           ],
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ),
-                  // ).clickable(() {
-                  //   subscription = SubscriptionType.quarterly;
-                  //   setState(() {});
-                  // }),
-                  const VSpace(10),
-                  SemiAnnualItem(
-                    isActive: subscription == SubscriptionType.semiAnnual
-                        ? true
-                        : false,
-                  ).clickable(() {
-                    subscription = SubscriptionType.semiAnnual;
-                    setState(() {});
-                  }),
-
-                  const VSpace(10),
-                  AnnualItem(
-                          isActive: subscription == SubscriptionType.annually
+                ///the 120 is the estimated appbar height and the page index indicator  taking them of allows the rest part of the screens to show up in the visible area
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const VSpace(23),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              context.loc.chooseSubscription,
+                              style: TextStyles.h5,
+                            ),
+                          ],
+                        ),
+                        const VSpace(5),
+                        Text(
+                          context.loc.pickSubscription,
+                          style: TextStyles.h7.weight(FontWeight.bold),
+                        ),
+                        const VSpace(10),
+                        Text(
+                          context.loc.thisAmountNotRefundable,
+                          style: TextStyles.body1.copyWith(
+                              color: theme.primary,
+                              fontWeight: FontWeight.w700),
+                        ),
+                        const VSpace(20),
+                        QuarterlyItem(
+                          isActive: subscription == SubscriptionType.quarterly
                               ? true
-                              : false)
-                      .clickable(() {
-                    subscription = SubscriptionType.annually;
-                    setState(() {});
-                  }),
-                  const VSpace(30),
-                ],
-              ),
+                              : false,
+                        ).clickable(() {
+                          subscription = SubscriptionType.quarterly;
+                          setState(() {});
+                          PaymentCommand(context)
+                              .initPayment(paymentOption: "quarterly");
+                        }),
+                        // DashedRect(
+                        //   color: subscription == SubscriptionType.quarterly
+                        //       ? Colors.transparent
+                        //       : theme.primary,
+                        //   fChild: Container(
+                        //     // height: 160,
+                        //     padding: EdgeInsets.symmetric(
+                        //         vertical: context.sp(20), horizontal: 10),
+                        //     child: Column(
+                        //       crossAxisAlignment: CrossAxisAlignment.start,
+                        //       children: [
+                        //         Text(context.loc.quarterly,
+                        //             style: TextStyles.body1
+                        //                 .copyWith(fontWeight: FontWeight.w700)),
+                        //         const VSpace(20),
+                        //         Row(
+                        //           crossAxisAlignment: CrossAxisAlignment.center,
+                        //           children: [
+                        //             CircleAvatar(
+                        //               radius: 3,
+                        //               backgroundColor: theme.black,
+                        //             ),
+                        //             const HSpace(10),
+                        //             Text(context.loc.oneReview,
+                        //                 style: TextStyles.body2),
+                        //           ],
+                        //         ),
+                        //         const VSpace(10),
+                        //         Row(
+                        //           children: [
+                        //             CircleAvatar(
+                        //               radius: 3,
+                        //               backgroundColor: theme.black,
+                        //             ),
+                        //             const HSpace(10),
+                        //             Expanded(
+                        //               child: Text(
+                        //                 context.loc.haveToRenewSub,
+                        //                 overflow: TextOverflow.clip,
+                        //               ),
+                        //             ),
+                        //           ],
+                        //         ),
+                        //       ],
+                        //     ),
+                        //   ),
+                        // ).clickable(() {
+                        //   subscription = SubscriptionType.quarterly;
+                        //   setState(() {});
+                        // }),
+                        const VSpace(10),
+                        SemiAnnualItem(
+                          isActive: subscription == SubscriptionType.semiAnnual
+                              ? true
+                              : false,
+                        ).clickable(() {
+                          subscription = SubscriptionType.semiAnnual;
 
-              ///for the button
-              Container(
-                padding: const EdgeInsets.only(
-                  bottom: 20.0,
-                ),
-                child: PrimaryButton(
-                  onPressed: () {
-                    context.push(const AddNewCardScreen());
-                  },
-                  label: context.loc.conti,
-                  radius: 20,
-                  fullWidth: true,
-                  color: Colors.transparent,
-                  textColor: theme.black,
-                  borderColor: theme.primary.withOpacity(0.48),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 18),
+                          setState(() {});
+
+                          PaymentCommand(context)
+                              .initPayment(paymentOption: "semi-annually");
+                        }),
+
+                        const VSpace(10),
+                        AnnualItem(
+                                isActive:
+                                    subscription == SubscriptionType.annually
+                                        ? true
+                                        : false)
+                            .clickable(() {
+                          subscription = SubscriptionType.annually;
+                          setState(() {});
+                          PaymentCommand(context)
+                              .initPayment(paymentOption: "yearly");
+                        }),
+                        const VSpace(30),
+                      ],
+                    ),
+
+                    ///for the button
+                    Container(
+                      padding: const EdgeInsets.only(
+                        bottom: 20.0,
+                      ),
+                      child: PrimaryButton(
+                        onPressed: () {
+                          context.push(const AddNewCardScreen());
+                        },
+                        label: context.loc.conti,
+                        radius: 20,
+                        fullWidth: true,
+                        color: Colors.transparent,
+                        textColor: theme.black,
+                        borderColor: theme.primary.withOpacity(0.48),
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 18),
+                      ),
+                    ),
+                    // VSpace(20),
+                  ], //
                 ),
               ),
-              // VSpace(20),
-            ], //
+            ),
           ),
-        ),
+          if (paymentLoading) ...[
+            Positioned(
+              top: 0,
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: UnconstrainedBox(
+                child: SizedBox(
+                  height: 30,
+                  width: 30,
+                  child: CircularProgressIndicator(
+                    strokeWidth: 1,
+                  ),
+                ),
+              ),
+            )
+          ]
+        ],
       ),
     );
   }

@@ -21,8 +21,7 @@ class TopRated extends StatelessWidget {
       Color(0xffD4FFE8),
     ];
     bool state = context.select((BusinessProvider provider) => provider.isBusy);
-    List<BusinessModel> businesses = context
-        .select((BusinessProvider business) => business.allAvailableBusiness);
+    List<BusinessModel> businesses = context.watch<BusinessProvider>().topRated;
 
     return SizedBox(
         height: 180,
@@ -31,7 +30,7 @@ class TopRated extends StatelessWidget {
           isLoading: state,
           item: businesses,
           widgetOnLoadSuccess: ListView.builder(
-              itemCount: businesses.length ~/ 2,
+              itemCount: businesses.length,
               physics: const BouncingScrollPhysics(),
               clipBehavior: Clip.none,
               scrollDirection: Axis.horizontal,

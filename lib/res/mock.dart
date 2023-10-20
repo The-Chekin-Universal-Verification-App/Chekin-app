@@ -107,7 +107,10 @@ class Mock {
   final String resetPassword = '$api/auth/reset-password';
   final String changePassword = '$api/user/change-password';
   final String getBusiness = '$api/business/';
+  final String getTopRatedBusiness = '$api/business/top-rated';
   final String initPayment = '$api/payment/initialize-dev';
+   String verifyPayment(String ref) => '$api/payment/verify-status/$ref';
+   String confirmDocumentUpload(String businessId) => '$api//business/confirm-documents/$businessId';
   final String getLex = '$api/business/lux-code';
   final String updateProfile = '$api/user/update-profile';
   final String updateBusiness = '$api/business/update-business';

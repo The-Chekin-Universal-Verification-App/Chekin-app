@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:chekinapp/core/commands/business_command.dart';
 import 'package:chekinapp/core/models/user_signup_model.dart';
 import 'package:chekinapp/routes/auth/auth.dart';
 import 'package:flutter/material.dart';
@@ -69,11 +70,14 @@ class AuthCommand extends BaseCommand {
     }
   }
 
-  checkIfBusinessIsFullyVerified() {
+  checkIfBusinessIsFullyVerified() async {
     BuildContext context = rootNav!.context;
     if (auth.accountType == UserType.biz) {
       if (auth.business.verified == false && auth.user.verified == true) {
-        context.push(const IncompleteAccountKYCNotifier());
+        await BusinessCommand(context)
+            .confirmBusinessDocumentUpload(bizID: auth.business.id);
+
+        // context.push(const IncompleteAccountKYCNotifier());
       } else {
         null;
       }

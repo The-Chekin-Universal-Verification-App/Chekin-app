@@ -25,4 +25,26 @@ class PaymentService extends BaseService {
       return response;
     }
   }
+
+  Future<Response?> verifyPayment(String token, {required String ref}) async {
+    Response? response;
+
+    try {
+      response = await get(
+        R.M.verifyPayment(ref),
+        token: token,
+      );
+
+      return response;
+    } on DioError catch (err) {
+      DioExceptions.fromDioError(err).showNotification();
+      response = null;
+
+      return response;
+    } catch (err) {
+      NetworkExceptions.fromNetworkError(err).showNotification();
+      response = null;
+      return response;
+    }
+  }
 }
