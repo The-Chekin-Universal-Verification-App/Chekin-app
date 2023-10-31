@@ -1,0 +1,13 @@
+{
+  "es": [
+    "business",
+    "signIn",
+    "productInfo",
+    "contactVendor",
+    "editProduct",
+    "deleteProduct",
+    "resetPassword",
+    "renewSub",
+    "luxCode"
+  ]
+}

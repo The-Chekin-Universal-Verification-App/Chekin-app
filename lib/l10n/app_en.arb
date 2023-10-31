@@ -1,0 +1,1283 @@
+{
+  "helloWorld": "Hello World!",
+  "@helloWorld": {
+    "description": "The conventional newborn programmer greeting"
+  }
+,
+
+  "login": "Login",
+  "@login": {
+    "description": "to log in user"
+  },
+
+  "unVerified": "unVerified",
+  "@unVerified": {
+    "description": "unVerified user"
+  },
+
+   "singMeUp": "I'm new, Sign me up!",
+  "@singMeUp": {
+    "description": "to sign up user"
+  },
+
+   "welcomeTo": "Welcome to",
+  "@welcomeTo": {
+    "description": "welcome to note "
+  },
+   "introOneSubTitle": "The one app to go to for verified shop outlets around the country.",
+  "@introOneSubTitle": {
+    "description": " subtitle One on boarding screen"
+  },
+
+   "introTwoSubTitle": "The one app to go to for verified shop outlets around the country.",
+  "@introTwoSubTitle": {
+    "description": " subtitle Two on boarding screen"
+  },
+
+    "introThreeSubTitle": "The one app to go to for verified shop outlets around the country.",
+  "@introThreeSubTitle": {
+    "description": " subtitle Three on boarding screen"
+  }
+,
+    "byClickingTerm": "By clicking this you have agreed to our",
+  "@byClickingTerm": {
+    "description": " the first part of the terms and condition"
+  },
+
+    "termsOfService": "Terms of Service ",
+  "@termsOfService": {
+    "description": " the terms of service part of the terms and condition "
+  }
+,
+    "and": " and  ",
+  "@and": {
+    "description": " the word and "
+  },
+
+  "privacyPolicy": "Privacy Policy",
+  "@privacyPolicy": {
+    "description": " Privacy Policy"
+  },
+
+   "whoAreYou": "Who are you?",
+  "@whoAreYou": {
+    "description": "A quest to know the type of user"
+  },
+
+    "pickProfile": "Pick a profile and start your journey",
+  "@pickProfile": {
+    "description": "pick a picture"
+  },
+
+    "youAreABuyer": "You're a buyer checking for  verified Dealers.",
+  "@youAreABuyer": {
+    "description": "you are a buyer in the app"
+  },
+
+    "meet": "Meet",
+  "@meet": {
+    "description": "meeting someone for the first time during introduction"
+  },
+
+    "a": "a",
+  "@a": {
+    "description": "a "
+  },
+
+    "you": "You",
+  "@you": {
+    "description": "referring to a person"
+  },
+
+    "beVerified": "Be verified. Show off your products and get buyers.",
+  "@beVerified": {
+    "description": "be verified"
+  },
+
+  "conti": "Continue",
+  "@conti": {
+    "description": "to  j proceed"
+  },
+
+    "user": "User",
+  "@user": {
+    "description": "a user of the system"
+  },
+
+   "businessOwner": "Business owner",
+  "@businessOwner": {
+    "description": "a BUSINESS OWNER using the system"
+  },
+
+   "business": "Business",
+  "@business": {
+    "description": "a BUSINESS "
+  },
+
+   "letGetStarted": "Lets get started!",
+  "@letGetStarted": {
+    "description": "let get started note in the get started screen"
+  },
+
+   "letGetYouStarted": "Hey {accountType} Let’s get you started!",
+  "@letGetYouStarted": {
+    "description": "let get you started note with a user account type in the get  started screen"
+  },
+
+   "yourSignUpProcess": "Your sign up process is divided into ",
+  "@yourSignUpProcess": {
+    "description": "sign up process"
+  },
+
+
+ "yourSignUpProcessSecondPart": "  parts. Shouldn't take much time to fill. Trust me, it’s going to be ",
+  "@yourSignUpProcessSecondPart": {
+    "description": "sign up process second part note"
+  },
+
+  "fun": "FUN!",
+  "@fun": {
+    "description": "to enjoy ones self"
+  },
+
+  "three": "Three",
+  "@three": {
+    "description": "the number three"
+  },
+
+   "getStarted": "Get Started!",
+  "@getStarted": {
+    "description": "get started button text"
+  },
+
+"enterYourPhone": "Enter your phone number",
+  "@enterYourPhone": {
+    "description": "input phone number"
+  },
+
+  "enterYourSecondPhone": "Enter your Second phone number",
+  "@enterYourSecondPhone": {
+    "description": "input 2nd phone number"
+  },
+
+
+  "pickCountryCode": "Pick your country code and input the right digits",
+  "@pickCountryCode": {
+    "description": "pick country code"
+  },
+
+   "whatIsYourName": "What’s your name?",
+  "@whatIsYourName": {
+    "description": "a question to the user trying to get his name"
+  },
+
+
+  "tellUsYourName": "Tell us your name so we know what to call you by",
+  "@tellUsYourName": {
+    "description": "a paragraph note to the user trying to get his name"
+  },
+
+  "firstName": "First Name",
+  "@firstName": {
+    "description": "A user first name"
+  },
+
+   "lastName": "Last Name",
+  "@lastName": {
+    "description": "A user last name"
+  },
+
+   "noEmojis": "no emojis or symbols",
+  "@noEmojis": {
+    "description": "no use of Emojis or symbols"
+  },
+
+    "perfect": "Perfect",
+  "@perfect": {
+    "description": "When all is well"
+  },
+
+   "emailLastly": "Lastly, your email address",
+  "@emailLastly": {
+    "description": "request for email address"
+  },
+
+   "emailAddress": "Email Address",
+  "@emailAddress": {
+    "description": "request for email address"
+  },
+
+    "wantToReachOut": "We want to reach out to you on offers and best deals",
+  "@wantToReachOut": {
+    "description": "Trying to reach out"
+  },
+
+    "congratulations": "Congratulations!",
+  "@congratulations": {
+    "description": "congratulating user"
+  },
+
+   "welcome": "Welcome",
+  "@welcome": {
+    "description": "Welcome the user of the app"
+  },
+
+    "accountIsSet": " account is all set!",
+  "@accountIsSet": {
+    "description": "Your account is set"
+  },
+
+
+   "your": "Your",
+  "@your": {
+    "description": "Your "
+  },
+
+
+ "getIn": "Get In!",
+  "@getIn": {
+    "description": "get In "
+  },
+
+  "personalInfo": "Personal Information",
+  "@personalInfo": {
+    "description": "personalInfo of user "
+  },
+
+   "asABoss": "As a Boss, your customers need to trust you. How better than knowing your name",
+  "@asABoss": {
+    "description": "a note under business account registration describing a boss"
+  },
+    "middleName": "Middle Name",
+  "@middleName": {
+    "description": "a user middle name"
+  },
+
+    "nationality": "Nationality",
+  "@nationality": {
+    "description": "country of origin"
+  },
+
+
+    "stateOfOrigin": "State of Origin",
+  "@stateOfOrigin": {
+    "description": "state of origin"
+  },
+
+     "lga": "L.G.A of Origin",
+  "@lga": {
+    "description": "Local government of origin"
+  },
+
+    "whereAreYouFrom": "Where are you from?",
+  "@whereAreYouFrom": {
+    "description": "user location and  origin"
+  },
+
+      "businessInfo": "Business Information",
+  "@businessInfo": {
+    "description": "business info"
+  },
+
+     "aboutBusiness": "Tell us about your business",
+  "@aboutBusiness": {
+    "description": "about business info"
+  },
+
+     "toGetPotentialBuyers": "For you to get potential buyers, customers need to know what your business is all about",
+  "@toGetPotentialBuyers": {
+    "description": "to get potential buyers  note to biz account user"
+  },
+
+     "businessName": "Business Name",
+  "@businessName": {
+    "description": "name of business"
+  },
+
+       "dateOfEstablishment": "Date of Establishment",
+  "@dateOfEstablishment": {
+    "description": "name of establishment"
+  },
+
+       "businessDescription": "Description of Business",
+  "@businessDescription": {
+    "description": "describe business"
+  },
+
+         "businessLocation": "Where is your business located?",
+  "@businessLocation": {
+    "description": "describe location of business"
+  },
+
+  "makeKnownBusinessLocation": "Your customers need to know where your business is located.",
+  "@makeKnownBusinessLocation": {
+    "description": "business location made public"
+  },
+
+   "cityOfBusiness": "City of Business",
+  "@cityOfBusiness": {
+    "description": "city of the business"
+  },
+
+     "nearestLandMark": "Nearest Landmark",
+  "@nearestLandMark": {
+    "description": "Nearest land mark"
+  },
+
+       "lgaOfBusiness": "L.G.A of Business",
+  "@lgaOfBusiness": {
+    "description": "local government of user business"
+  },
+
+
+    "weLoveToKnowYouBetter": "We at Cheki App would love to know you better",
+  "@weLoveToKnowYouBetter": {
+    "description": "know a user better"
+  },
+
+    "enterYourMailAddress": "Enter your email addresses",
+  "@enterYourMailAddress": {
+    "description": "Enter your mail address"
+  },
+
+      "contactInfo": "Contact Information",
+  "@contactInfo": {
+    "description": "contact Information"
+  },
+
+   "yourCustomerShouldContactYou": "Your customers should be able to contact you in other to buy your products",
+  "@yourCustomerShouldContactYou": {
+    "description": "Your customers should contact you"
+  },
+
+    "firstEmail": "First email address",
+  "@firstEmail": {
+    "description": "User first mail address"
+  },
+
+      "secondEmail": "Second email address",
+  "@secondEmail": {
+    "description": "User first mail address"
+  },
+
+       "socials": "Socials",
+  "@socials": {
+    "description": "socials "
+  },
+
+       "enterSocialMedia": "Enter your social medial handle ",
+  "@enterSocialMedia": {
+    "description": "Enter your social medial handle"
+  },
+
+
+       "enterYourPassword": "Enter password",
+  "@enterYourPassword": {
+    "description": "Enter your password"
+  },
+
+
+        "enterYourDifferentSocialMedia": "Enter your respective social media handles so your customers can find you to see your products",
+  "@enterYourDifferentSocialMedia": {
+    "description": "Enter your different social medial handle"
+  },
+
+
+         "facebook": "Facebook",
+  "@facebook": {
+    "description": "Facebook social medial handle"
+  },
+
+
+        "twitter": "Twitter ( X )",
+  "@twitter": {
+    "description": "Twitter social medial handle"
+  },
+
+
+          "instagram": "Instagram",
+  "@instagram": {
+    "description": "instagram social medial handle"
+  },
+
+
+         "ticTok": "TikTok",
+  "@ticTok": {
+    "description": "TikTok social medial handle"
+  },
+
+
+          "linkedIn": "LinkedIn",
+  "@linkedIn": {
+    "description": "LinkedIn social medial handle"
+  },
+
+
+          "whatsApp": "WhatsApp",
+  "@whatsApp": {
+    "description": "WhatsApp social medial handle"
+  },
+
+
+  "skip": "Skip",
+  "@skip": {
+    "description": "skip a certain process"
+  },
+
+  "documentUpload": "Document Upload",
+  "@documentUpload": {
+    "description": "uploading a valid id document to verify a user"
+  },
+
+   "validBusinessDoc": "Valid Business Document",
+  "@validBusinessDoc": {
+    "description": "uploading a valid business document to verify a user"
+  },
+
+   "pickAnyBusinessDoc": "Pick any of the following business documents you have and upload it.",
+  "@pickAnyBusinessDoc": {
+    "description": "note to user uploading valid id document"
+  },
+
+    "validId": "Valid Identification Card",
+  "@validId": {
+    "description": "user uploading valid id "
+  },
+
+    "pickAnyID": "Pick any of the following id documents you have and upload it.",
+  "@pickAnyID": {
+    "description": "id selection options for user "
+  },
+
+
+    "upload": "Upload",
+  "@upload": {
+    "description": "upload of id"
+  },
+
+    "frontPlease": "Front please",
+  "@frontPlease": {
+    "description": "upload front of document"
+  },
+
+  "youAreAlmostSet": "You’re almost set up",
+  "@youAreAlmostSet": {
+    "description": "almost set"
+  },
+
+
+  "youAreAlmostDone": "You are almost done!",
+  "@youAreAlmostDone": {
+    "description": "almost done"
+  },
+
+
+  "begin": "Begin",
+  "@begin": {
+    "description": "begin"
+  },
+
+
+ "justFewDocumentUpload": "We just require a few document uploads. This is for verification sake and authentication",
+  "@justFewDocumentUpload": {
+    "description": "just few document upload"
+  },
+
+   "uploading": "Uploading...",
+  "@uploading": {
+    "description": "uploading in progress"
+  },
+
+     "uploading": "Completed",
+  "@uploading": {
+    "description": "uploading in progress"
+  },
+
+       "errorOccurred": "Error occurred. Re-upload",
+  "@errorOccurred": {
+    "description": "uploading error"
+  },
+
+
+      "validBusinessDoc": "Valid Business Document",
+  "@validBusinessDoc": {
+    "description": "upload business document"
+  },
+
+      "pickAnyBusinessDoc": "Pick any of the following business documents you have and upload it.",
+  "@pickAnyBusinessDoc": {
+    "description": "upload business document of choice"
+  },
+
+
+
+  "socialMediaScreenShot": "Social Media Screenshot",
+  "@socialMediaScreenShot": {
+  "description": "upload social media screen shots"
+  },
+
+
+  "takeScreenShot": "Take a screenshot of any two of your social media business handles while logged in and upload here",
+  "@takeScreenShot": {
+  "description": "take you social media screen shots for identification"
+  },
+
+
+  "addNew": "Add New",
+  "@addNew": {
+  "description": "take you social media screen shots for identification"
+  },
+
+  "completed": "Completed",
+  "@completed": {
+  "description": "completed task"
+  },
+
+
+  "tapToUpload": "Tap to upload",
+  "@tapToUpload": {
+  "description": "to upload a file"
+  },
+
+    "showUsHoldingID": "Show us your face holding your valid id",
+  "@showUsHoldingID": {
+  "description": "hold the id with selfie"
+  },
+
+
+   "selfieWithID": "Selfie Holding valid ID",
+  "@selfieWithID": {
+  "description": "hold the id with selfie with it"
+  },
+
+
+   "setProfilePicture": "Lastly, Set a Profile Picture",
+  "@setProfilePicture": {
+  "description": "set Profile picture"
+  },
+
+   "uploadAProfilePicture": "Upload a profile picture",
+  "@uploadAProfilePicture": {
+  "description": "user to upload a Profile picture"
+  },
+
+
+   "payment": "Payment",
+  "@payment": {
+  "description": "user payment"
+  },
+
+
+   "chooseSubscription": "Choose your subscription",
+  "@chooseSubscription": {
+  "description": "asking user to Choose preferred subscription"
+  },
+
+
+   "pickSubscription": "Pick a subscription, pay and begin your journey with us.",
+  "@pickSubscription": {
+  "description": "choose subscription note"
+  },
+
+
+   "thisAmountNotRefundable": "This amount is none- refundable",
+  "@thisAmountNotRefundable": {
+  "description": "non refundable amount"
+  },
+
+
+   "quarterly": "QUARTERLY -",
+  "@quarterly": {
+  "description": "quarterly"
+  },
+
+
+   "semiAnnual": "SEMI-ANNUALLY -",
+  "@semiAnnual": {
+  "description": "semiAnnual"
+  },
+
+
+   "yearly": "YEARLY -",
+  "@yearly": {
+  "description": "yearly"
+  },
+
+
+   "oneReview": "ONE review within the subscription period",
+  "@oneReview": {
+  "description": "one review within subscription period"
+  },
+
+
+
+   "haveToRenewSub": "Have to renew your subscription after 3 MONTHS for benefits.",
+  "@haveToRenewSub": {
+  "description": "have to renew Sub"
+  },
+
+
+   "getEverything": "Get everything in the quarterly plan.",
+  "@getEveryThing": {
+  "description": "one review within subscription period"
+  },
+
+
+   "getPercentageOff": "Get 11% Off, Save N13,000. ",
+  "@getPercentageOff": {
+  "description": " 11% Off, Save N13,000"
+  },
+
+
+   "advertisingInterviewVideo": "Advertising Interview Video to share on LookApp Social Media Pages.",
+  "@advertisingInterviewVideo": {
+  "description": "interview video"
+  },
+
+
+   "getEverythingSemiAnnualPlan": "Get everything in the semi annual Plan. ",
+  "@getEverythingSemiAnnualPlan": {
+  "description": "everything in the semi annual Plan."
+  },
+
+
+   "getFourteenPercentOff": "Get 14.5% Off, Save N16,500. ",
+  "@getFourteenPercentOff": {
+  "description": "Get 14.5% Off, Save N16,500"
+  },
+
+
+   "advertisingInterviewVideo": "Advertising Interview Video to share on LookApp Social Media Pages.",
+  "@advertisingInterviewVideo": {
+  "description": "interview video"
+  },
+
+
+   "paymentConfirmed": "Payment Confirmed!",
+  "@paymentConfirmed": {
+  "description": "Payment confirmed"
+  },
+
+   "errorOccurred": "An error occur!",
+  "@errorOccurred": {
+  "description": "Error occured"
+  },
+
+   "redirecting": "Redirecting...",
+  "@redirecting": {
+  "description": "redirecting user"
+  },
+
+   "verificationPending": "Verification pending",
+  "@verificationPending": {
+  "description": "verification pending"
+  },
+
+
+   "oneMoreStep": "One more step!",
+  "@oneMoreStep": {
+  "description": "one step more"
+  },
+
+
+
+   "weWillSendAgent": "We will be sending an agent to physically verify your store and products in other to get your lux code.",
+  "@weWillSendAgent": {
+  "description": "agent will be sent to your shop"
+  },
+
+
+   "thisMayTakeFiveWorkingDays": "NB. THIS MAY TAKE 2 - 5 WORKING DAYS",
+  "@thisMayTakeFiveWorkingDays": {
+  "description": "verification duration "
+  },
+
+
+
+   "congratulation": "Congratulations🎉",
+  "@congratulation": {
+  "description": "congratulation on verification completion "
+  },
+
+
+   "verificationSuccessful": "Verification successful",
+  "@verificationSuccessful": {
+  "description": "user account verification Successful"
+  },
+
+
+
+   "congratNote": "Yay! Congratulations, your verification was successful. Below is your unique LUX CODE. Copy and show off to your customers on your social media pages and stores",
+  "@congratNote": {
+  "description": "congratulation note to user on account verification completion"
+  },
+
+
+   "processing": "Processing...",
+  "@processing": {
+  "description": "a processing action"
+  },
+
+
+   "copyAnContinue": "Copy and continue",
+  "@copyAnContinue": {
+  "description": "copy code and then  continue"
+  },
+
+
+
+   "getAdvertBanner": "Get a complimentary banner advertisement for free on LookApp for one month.",
+  "@getAdvertBanner": {
+  "description": "Get a complimentary banner advertisement"
+  },
+
+
+   "welcomeBack": "Welcome Back",
+  "@welcomeBack": {
+  "description": "welcome a user"
+  },
+
+   "signIn": "Sign in",
+  "@signIn": {
+  "description": "sign a user in"
+  },
+   "signIn": "Sign in",
+  "@signIn": {
+  "description": "sign a user in"
+  },
+
+
+  "password": "Password",
+  "@password": {
+  "description": "password"
+  },
+    "forgotPassword": "Forgot Password?",
+  "@forgotPassword": {
+  "description": "user forgot Password"
+  },
+
+  "search": "Search",
+  "@search": {
+  "description": "search for an item"
+  },
+
+  "hello": "Hello",
+  "@hello": {
+  "description": "a hello greetings"
+  },
+
+   "checkInAndOut": "Check in and check out Vendors",
+  "@checkInAndOut": {
+  "description": "check out and in the app"
+  },
+
+   "goodToHaveYou": "It’s good to have you here",
+  "@goodToHaveYou": {
+  "description": "good to have you"
+  },
+
+
+   "topRated": "Top Rated",
+  "@topRated": {
+  "description": "rated high items"
+  },
+
+   "seeAll": "See all",
+  "@seeAll": {
+  "description": "see all"
+  },
+
+   "noData": "No data to display at the moment",
+  "@noData": {
+  "description": "when there is no data to currently display for the user"
+  },
+
+
+   "discover": "Discover",
+  "@discover": {
+  "description": "discover products and others"
+  },
+
+   "discoverNote": "Discover the best and reliable dealers all over the country",
+  "@discover": {
+  "description": "discover products and others"
+  },
+
+   "searchProduct": "Search Product...",
+  "@searchProduct": {
+  "description": "search product"
+  },
+
+   "fashion": "Fashion",
+  "@fashion": {
+  "description": "sorting item by fashion key word "
+  },
+
+   "verified": "verified",
+  "@verified": {
+  "description": "show verified if the user is already verified "
+  },
+
+   "productInfo": "Product Info",
+  "@productInfo": {
+  "description": "information of product "
+  },
+   "reviews": "Reviews",
+  "@reviews": {
+  "description": "reviews"
+  },
+
+   "seeStoreReviews": "See reviews on this store",
+  "@reviews": {
+  "description": " customers seeing reviews on a store"
+  },
+
+  "customersReviews": "Customers Reviews",
+  "@customersReviews": {
+  "description": "reviews from customers"
+  },
+
+  "addReviews": "Add Review",
+  "@addReviews": {
+  "description": "to add review from you"
+  },
+
+  "recent": "Recent",
+  "@recent": {
+  "description": "recent"
+  },
+
+   "howWouldYouRateBusiness": "How would you rate this  business?",
+  "@howWouldYouRateBusiness": {
+  "description": "rate the business"
+  },
+   "writeReview": "Write your review",
+  "@writeReview": {
+  "description": "write you Review"
+  },
+
+ "tellUsWhatYouThink": "Tell us what you think",
+  "@tellUsWhatYouThink": {
+  "description": "tell us what you think"
+  },
+
+ "vendorsContact": "Vendor’s Contacts",
+  "@vendorsContact": {
+  "description": "vendors contact"
+  },
+
+   "contactVendor": "Contact vendor",
+  "@contactVendor": {
+  "description": "contact vendor"
+  },
+
+
+   "electronics": "Electronics",
+  "@electronics": {
+  "description": "sorting item by electronic key word "
+  },
+
+
+   "sport": "Sports",
+  "@sport": {
+  "description": "sorting item by sport key word "
+  },
+
+   "products": "Products",
+  "@products": {
+  "description": "products"
+  },
+
+   "wishlist": "Wishlist",
+  "@wishlist": {
+  "description": "user favorite items"
+  },
+
+   "keepItemInWishlist": "Keep items you wish to buy so you don’t miss them later",
+  "@keepItemInWishlist": {
+  "description": "Keep items user wishes to buy so you don’t miss them later"
+  },
+
+
+    "location": "Location",
+  "@location": {
+  "description": "location"
+  },
+
+    "settings": "Settings",
+  "@settings": {
+  "description": "settings "
+  },
+
+    "online": "Online",
+  "@online": {
+  "description": "online"
+  },
+
+    "manageAccount": "Manage Account",
+  "@manageAccount": {
+  "description": " manage Account"
+  },
+
+
+     "pushNotification": "Push Notification",
+  "@pushNotification": {
+  "description": "receive Push Notification"
+  },
+
+
+     "appPermissions": "App Permissions",
+  "@appPermissions": {
+  "description": "App Permissions"
+  },
+
+
+     "darkMode": "Dark Mode",
+  "@darkMode": {
+  "description": "dark Mode"
+  },
+
+
+     "language": "Language",
+  "@language": {
+  "description": "language"
+  },
+
+     "help": "Help",
+  "@help": {
+  "description": "help"
+  },
+
+     "logout": "Log out",
+  "@logout": {
+  "description": "log out"
+  },
+
+     "editProfile": "Edit Profile",
+  "@editProfile": {
+  "description": "Edit Profile"
+  },
+
+
+     "save": "Save",
+  "@save": {
+  "description": "save item"
+  },
+
+     "updatePassword": "Update password",
+  "@updatePassword": {
+  "description": "Update password"
+  },
+
+     "managePassword": "Manage and change your passwords with ease ",
+  "@managePassword": {
+  "description": "manage user Password"
+  },
+
+
+     "currentPassword": "Current Password",
+  "@currentPassword": {
+  "description": "user current Password"
+  },
+
+
+
+     "yourActiveSub": "Your active subscription ",
+  "@yourActiveSub": {
+  "description": "user Active sub"
+  },
+
+
+     "youHaveVarietyOffer": "You have a variety of offers to chose from. Do ensure to pick the one that is just right for you.",
+  "@youHaveVarietyOffer": {
+  "description": "You have a variety of offers "
+  },
+
+
+     "newPassword": "New Password",
+  "@newPassword": {
+  "description": "user new Password"
+  },
+
+     "noWishList": "No wishes here yet!",
+  "@noWishList": {
+  "description": "No item on wish list"
+  },
+      "confirmPassword": "Confirm Password",
+  "@confirmPassword": {
+  "description": " confirm user new Password"
+  },
+
+     "name": "Name",
+  "@name": {
+  "description": "name"
+  },
+
+      "phoneNumber": "Phone number",
+  "@phoneNumber": {
+  "description": " Phone Number"
+  },
+
+     "subscription": "Subscription",
+  "@subscription": {
+  "description": "subscription"
+  },
+     "privacy": "Privacy",
+  "@privacy": {
+  "description": "privacy protection"
+  },
+
+
+    "wordsLeft": "Words left",
+  "@wordsLeft": {
+  "description": "words left"
+  },
+    "submit": "submit",
+  "@submit": {
+  "description": "submit"
+  },
+
+
+   "autoMobile": "Automobile",
+  "@autoMobile": {
+  "description": "sorting item by autoMobile key word "
+  },
+
+   "addSocial": "Add socials",
+  "@addSocial": {
+  "description": "Add social media button "
+  },
+
+    "editProduct": "Edit product",
+  "@editProduct": {
+  "description": "Edit product"
+  },
+
+
+    "cardNumber": "Card number",
+  "@cardNumber": {
+  "description": " card Number"
+  },
+
+    "pay": "Pay",
+  "@pay": {
+  "description": "Pay "
+  },
+
+    "choosePaymentMethod": "Choose your payment method",
+  "@choosePaymentMethod": {
+  "description": "Choose your payment method"
+  },
+
+
+    "iamNew": "I am new",
+  "@iamNew": {
+  "description": "when a user is new to the app"
+  },
+
+
+    "createAccountPassword": "Create your account password",
+  "@createAccountPassword": {
+  "description": "Create your account password"
+  },
+
+    "tapToSelect": "Tap to select",
+  "@tapToSelect": {
+  "description": "Tap to select"
+  },
+
+
+    "typeToSearch": "Start typing to search",
+  "@typeToSearch": {
+  "description": "Start typing to search"
+  },
+
+    "firstPhoneNumber": "First phone number",
+  "@firstPhoneNumber": {
+  "description": "First phone number"
+  },
+
+    "secondPhoneNumber": "Second phone number",
+  "@secondPhoneNumber": {
+  "description": "Second phone number"
+  },
+
+    "verifyMail": "Verify mail",
+  "@verifyMail": {
+  "description": "verify user mail"
+  },
+
+
+    "verify": "Verify",
+  "@verify": {
+  "description": "verify "
+  },
+
+
+    "notGetMail": "Did not get mail?",
+  "@notGetMail": {
+  "description": "no mail received "
+  },
+
+
+     "reSend": "Resend",
+  "@resend": {
+  "description": "send again"
+  },
+
+
+     "countryOfBusiness": "Country of Business",
+  "@countryOfBusiness": {
+  "description": "select country of business"
+  },
+
+
+     "stateOfBusiness": "State of Business",
+  "@stateOfBusiness": {
+  "description": "select State of business"
+  },
+
+
+    "followEmailLink": "Enter the OTP code that has been sent to your email address.",
+  "@followEmailLink": {
+  "description": "get otp from mail"
+  },
+
+
+    "city": "city",
+  "@city": {
+  "description": "literal city "
+  },
+   "selectCountry": "Select the country you belong to",
+  "@selectCountry": {
+  "description": "Select the country you belong to"
+  },
+
+
+  "signUp": "Sign me Up",
+  "@signUp": {
+  "description": "sign a user up"
+  },
+
+
+   "pickPaymentMethod": "Pick a payment method",
+  "@pickPaymentMethod": {
+  "description": "Pick a payment method"
+  },
+
+   "addPaymentMethod": "+ Add payment method",
+  "@addPaymentMethod": {
+  "description": "To Add payment method"
+  },
+   "paying": "Paying",
+  "@paying": {
+  "description": "paying"
+  },
+
+
+    "cardHolderName": "Card Holder's Name",
+  "@cardHolderName": {
+  "description": "card Holder Name"
+  },
+
+    "cardExpires": "Card Expires",
+  "@cardExpires": {
+  "description": "When will card expires"
+  },
+
+    "cvv": "CVV",
+  "@cvv": {
+  "description": "Card cvv"
+  },
+
+    "deleteProduct": "Delete product",
+  "@deleteProduct": {
+  "description": "delete  Product "
+  },
+
+   "active": "Active",
+  "@active": {
+  "description": "Active "
+  },
+
+
+   "popular": "Popular",
+  "@popular": {
+  "description": "popular"
+  },
+
+
+  "pleaseEnterOTP": "Please enter the OTP sent to your email",
+  "@pleaseEnterOTP": {
+  "description": "Enter OTP"
+  },
+
+  "resetPassword": "Reset your password",
+  "@resetPassword": {
+  "description": "reset your password"
+  },
+
+  "pleaseEnterPassword": "Please enter your new password",
+  "@pleaseEnterPassword": {
+  "description": "Enter Password"
+  },
+
+
+  "goBack": "<< Go back",
+  "@goBack": {
+  "description": "To go back"
+  },
+
+  "editSocialMedia": "Edit your social media handles",
+  "@editSocialMedia": {
+  "description": "edit your social handles"
+  },
+
+    "businesses": "Businesses",
+  "@businesses": {
+  "description": "get all businesses"
+  },
+
+
+    "ceo": "C.E.O",
+  "@ceo": {
+    "description": "a  business owner"
+  },
+
+
+    "completeVerificationNote": "You are required to upload all necessary document to get full access to this app.",
+  "@completeVerificationNote": {
+    "description": "Note for verification completion"
+  },
+
+    "skipForNow": "Skip for now",
+  "@skipForNow": {
+    "description": "Skip for now"
+  },
+
+
+     "renewSub": "Renew subscription",
+  "@renewSub": {
+    "description": "Renew subscription"
+  },
+
+
+     "luxCode": "LuxCode",
+  "@luxCode": {
+    "description": "Business generated LuxCode"
+  },
+
+     "uploadDocuments": "Upload documents",
+  "@uploadDocuments": {
+    "description": "Upload document"
+  },
+
+
+
+    "completeVerification": "Complete your verification",
+  "@completeVerification": {
+    "description": "complete Verification"
+  }
+
+
+}

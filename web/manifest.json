@@ -1,6 +1,6 @@
 {
-    "name": "chekin",
-    "short_name": "chekin",
+    "name": "chekinapp",
+    "short_name": "chekinapp",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
