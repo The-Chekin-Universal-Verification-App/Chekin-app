@@ -2,11 +2,13 @@ import 'package:chekinapp/export.dart';
 import 'package:chekinapp/routes/main/main.dart';
 import 'package:flutter/material.dart';
 
+import '../../../../core/models/business_model.dart';
 import '../../../document_upload/upload_document_main_screen.dart';
 
 class IncompleteAccountKYCNotifier extends StatelessWidget {
-  const IncompleteAccountKYCNotifier({Key? key}) : super(key: key);
-
+  const IncompleteAccountKYCNotifier({Key? key, required this.bizStatus})
+      : super(key: key);
+  final BusinessDocUploadModel bizStatus;
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
@@ -80,23 +82,58 @@ class IncompleteAccountKYCNotifier extends StatelessWidget {
                 context.push(const UploadDocumentMainScreen());
               },
               title: 'Valid ID',
-              isUploaded: false,
+              isUploaded: bizStatus.idUpload,
             ),
             const VSpace(16),
             _ActionItem(
-              onTap: () {},
-              title: 'Valid ID',
-              isUploaded: false,
+              onTap: () {
+                context.push(const UploadDocumentMainScreen());
+              },
+              title: 'Utility',
+              isUploaded: bizStatus.utility,
             ),
             const VSpace(16),
             _ActionItem(
-              onTap: () {},
-              title: 'CAC',
-              isUploaded: true,
+              onTap: () {
+                context.push(const UploadDocumentMainScreen());
+              },
+              title: 'Instagram account screenshot',
+              isUploaded: bizStatus.instagramWhenLoggedIn,
+            ),
+            const VSpace(16),
+            _ActionItem(
+              onTap: () {
+                context.push(const UploadDocumentMainScreen());
+              },
+              title: 'Facebook account screenshot',
+              isUploaded: bizStatus.facebookWhenLoggedIn,
+            ),
+            const VSpace(16),
+            _ActionItem(
+              onTap: () {
+                context.push(const UploadDocumentMainScreen());
+              },
+              title: 'Selfie with valid ID card',
+              isUploaded: bizStatus.selfieHoldingId,
             ),
             const VSpace(40),
             Padding(
-              padding: const EdgeInsets.only(right: 27.0, left: 27, bottom: 45),
+              padding: const EdgeInsets.only(right: 27.0, left: 27, bottom: 10),
+              child: PrimaryButton(
+                onPressed: () {
+                  context.push(const UploadDocumentMainScreen());
+                },
+                label: context.loc.uploadDocuments,
+                radius: 20,
+                fullWidth: true,
+                color: Colors.transparent,
+                textColor: theme.background,
+                borderColor: theme.background,
+                contentPadding: const EdgeInsets.symmetric(vertical: 15),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 27.0, left: 27, bottom: 30),
               child: PrimaryButton(
                 onPressed: () {
                   context.push(const MainScreen());
@@ -138,7 +175,7 @@ class _ActionItem extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: CustomContainer(
-          color: theme.background,
+          color: !isUploaded ? Colors.grey.shade400 : theme.background,
           borderRadius: Corners.s10Border,
           padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
           child: Row(
@@ -152,8 +189,8 @@ class _ActionItem extends StatelessWidget {
                 color: Colors.transparent,
                 child: !isUploaded
                     ? Icon(
-                        Icons.arrow_forward_ios_rounded,
-                        color: theme.greyWeak,
+                        Icons.warning_amber,
+                        color: theme.secondary,
                         size: 25,
                       )
                     : Icon(

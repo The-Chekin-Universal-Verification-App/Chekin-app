@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chekinapp/core/providers/product_provider.dart';
 import 'package:chekinapp/export.dart';
 import 'package:flutter/material.dart';
@@ -89,7 +90,7 @@ class _BusinessAccountProfileState extends State<BusinessAccountProfile> {
                                     crossAxisCount: 2,
                                     crossAxisSpacing: 6,
                                     mainAxisSpacing: 6,
-                                    childAspectRatio: 0.8),
+                                    childAspectRatio: 0.79),
                             itemBuilder: (_, index) {
                               if (index == 0) {
                                 return DashedRect(
@@ -131,38 +132,44 @@ class _BusinessAccountProfileState extends State<BusinessAccountProfile> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            BizUploadedProductItem(
-                                              isNetWorkImage: true,
-                                              addEditButton: true,
-                                              imagesPath: productProvider
-                                                  .myUploadedProducts[index - 1]
-                                                  .images
-                                                  .first,
+                                            SizedBox(
+                                              height: 160,
+                                              width: 155,
+                                              child: BizUploadedProductItem(
+                                                isNetWorkImage: true,
+                                                addEditButton: true,
+                                                imagesPath: productProvider
+                                                    .myUploadedProducts[
+                                                        index - 1]
+                                                    .images
+                                                    .first,
 
-                                              //remove product
-                                              onTapRemoveItem: () {
-                                                //set current index
-                                                setState(() {
-                                                  currentIndex = index;
-                                                });
+                                                //remove product
+                                                onTapRemoveItem: () {
+                                                  //set current index
+                                                  setState(() {
+                                                    currentIndex = index;
+                                                  });
 
-                                                //call endpoint after widget finish building due to setSate((){}) called
-                                                WidgetsBinding.instance
-                                                    .addPostFrameCallback((_) {
-                                                  ProductCommand(context)
-                                                      .deleteAddedProductOnBusinessProducts(
-                                                          productProvider
+                                                  //call endpoint after widget finish building due to setSate((){}) called
+                                                  WidgetsBinding.instance
+                                                      .addPostFrameCallback(
+                                                          (_) {
+                                                    ProductCommand(context)
+                                                        .deleteAddedProductOnBusinessProducts(
+                                                            productProvider
+                                                                    .myUploadedProducts[
+                                                                index - 1]);
+                                                  });
+                                                },
+                                                onTapEditItem: () {
+                                                  context.push(
+                                                      EditUploadedProductScreen(
+                                                          product: productProvider
                                                                   .myUploadedProducts[
-                                                              index - 1]);
-                                                });
-                                              },
-                                              onTapEditItem: () {
-                                                context.push(
-                                                    EditUploadedProductScreen(
-                                                        product: productProvider
-                                                                .myUploadedProducts[
-                                                            index - 1]));
-                                              },
+                                                              index - 1]));
+                                                },
+                                              ),
                                             ),
                                             const VSpace(2),
                                             Padding(
@@ -184,6 +191,8 @@ class _BusinessAccountProfileState extends State<BusinessAccountProfile> {
                                                           .myUploadedProducts[
                                                               index - 1]
                                                           .name,
+                                                      overflow:
+                                                          TextOverflow.ellipsis,
                                                       style: TextStyles.body1
                                                           .copyWith(
                                                               color:
@@ -369,8 +378,10 @@ class _BizUploadedProductItemState extends State<BizUploadedProductItem> {
   bool showActionButtons = false;
   @override
   Widget build(BuildContext context) {
-    return Container(
+    AppTheme theme = context.watch();
+    return SizedBox(
       // color: Colors.red,
+      width: context.widthPx,
       child: Stack(
         children: [
           SizedBox(
@@ -386,8 +397,19 @@ class _BizUploadedProductItemState extends State<BizUploadedProductItem> {
                             fit: BoxFit.cover,
                           )
                         : widget.isNetWorkImage
-                            ? Image.network(
-                                widget.imagesPath,
+                            ? CachedNetworkImage(
+                                imageUrl: widget.imagesPath,
+
+                                ///
+                                errorWidget: (BuildContext context, i, b) {
+                                  return SizedBox(
+                                    child: Icon(
+                                      Icons.image_outlined,
+                                      size: 50,
+                                      color: theme.greyWeak,
+                                    ),
+                                  );
+                                },
                                 fit: BoxFit.cover,
                               )
                             : Image.asset(

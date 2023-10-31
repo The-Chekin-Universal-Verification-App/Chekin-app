@@ -29,7 +29,7 @@ class BusinessModel with _$BusinessModel {
     @Default(false) bool verified,
     @Default('') String paymentOption,
     @Default(false) bool isActive,
-    @Default('') String currentSubscription,
+    @Default('') dynamic currentSubscription,
     @Default('') String businessImage,
     @Default('') String luxCode,
   }) = _BusinessModel;

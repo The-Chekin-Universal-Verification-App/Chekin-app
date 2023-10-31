@@ -15,7 +15,7 @@
     "description": "unVerified user"
   },
 
-   "singMeUp": "Im new, Sign me up!",
+   "singMeUp": "I'm new, Sign me up!",
   "@singMeUp": {
     "description": "to sign up user"
   },
@@ -39,7 +39,7 @@
     "description": " subtitle Three on boarding screen"
   }
 ,
-    "byClickingTerm": "By Clicking this you have agreed to our",
+    "byClickingTerm": "By clicking this you have agreed to our",
   "@byClickingTerm": {
     "description": " the first part of the terms and condition"
   },
@@ -107,6 +107,11 @@
    "businessOwner": "Business owner",
   "@businessOwner": {
     "description": "a BUSINESS OWNER using the system"
+  },
+
+   "business": "Business",
+  "@business": {
+    "description": "a BUSINESS "
   },
 
    "letGetStarted": "Lets get started!",
@@ -325,7 +330,7 @@
   },
 
 
-    "weLoveToKnowYouBetter": "We at ChekiApp would love to know you better",
+    "weLoveToKnowYouBetter": "We at Cheki App would love to know you better",
   "@weLoveToKnowYouBetter": {
     "description": "know a user better"
   },
@@ -396,9 +401,9 @@
   },
 
 
-         "ticTok": "Tictok",
+         "ticTok": "TikTok",
   "@ticTok": {
-    "description": "Tictok social medial handle"
+    "description": "TikTok social medial handle"
   },
 
 
@@ -581,19 +586,19 @@
   },
 
 
-   "quarterly": "QUARTERLY - ₦28,545 (3 MONTHS)",
+   "quarterly": "QUARTERLY -",
   "@quarterly": {
   "description": "quarterly"
   },
 
 
-   "semiAnnual": "SEMI-ANNUALLY - ₦50,562 (6 MONTHS)",
+   "semiAnnual": "SEMI-ANNUALLY -",
   "@semiAnnual": {
   "description": "semiAnnual"
   },
 
 
-   "yearly": "YEARLY - ₦97,530",
+   "yearly": "YEARLY -",
   "@yearly": {
   "description": "yearly"
   },
@@ -761,7 +766,7 @@
   "description": "a hello greetings"
   },
 
-   "checkInAndOut": "Check in and check out your products",
+   "checkInAndOut": "Check in and check out Vendors",
   "@checkInAndOut": {
   "description": "check out and in the app"
   },
@@ -793,7 +798,7 @@
   "description": "discover products and others"
   },
 
-   "discoverNote": "Discover out best and reliable dealers all over the country",
+   "discoverNote": "Discover the best and reliable dealers all over the country",
   "@discover": {
   "description": "discover products and others"
   },
@@ -1260,6 +1265,11 @@
      "luxCode": "LuxCode",
   "@luxCode": {
     "description": "Business generated LuxCode"
+  },
+
+     "uploadDocuments": "Upload documents",
+  "@uploadDocuments": {
+    "description": "Upload document"
   },
 
 

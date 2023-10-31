@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:chekinapp/core/core.dart';
 import 'package:chekinapp/core/models/business_model.dart';
 
@@ -39,6 +41,7 @@ class BusinessProvider extends BaseProvider {
   // }
 
   setPopular() {
+    _popular = [];
     _popular = _searchedBusiness;
     notifyListeners();
   }
@@ -46,28 +49,40 @@ class BusinessProvider extends BaseProvider {
   ///
   setBusiness(List businessListJson,
       {int currentPage = 1, int totalPage = 10, required int pageLimit}) {
+    /// if the current page is 1 this means we are either calling the refresh method or calling the get business endpoint for the first time then clear what ever that is in the list
+    if (currentPage == 1) {
+      _searchedBusiness = [];
+      _searchedBusinessCopy = [];
+    }
     //
     List<BusinessModel> listOfBusiness =
         businessListJson.map((e) => BusinessModel.fromJson(e)).toList();
+
     //
     _searchedBusiness.addAll(listOfBusiness);
     _searchedBusinessCopy = _searchedBusiness;
+
+    ///the API page index info
     _totalPage = totalPage;
     _currentPage = currentPage;
     _isLastPage = _currentPage == _totalPage ? true : false;
 
     //if what we are receiving is less than our page limit then we have reached the end of current page we need to move to next page if there is another page
     _reachedEndOfCurrentPage = listOfBusiness.length < pageLimit ? true : false;
-    // print(_searchedBusiness);
+
+    ///call to set popular business until  the analytic is set up to handle the popular business from the server side
+    setPopular();
     notifyListeners();
   }
 
+  ///by category
   set sortSearchBusinessByCategoryOrKeyWord(String keyWord) {
     _searchedBusiness = [];
     // print(keyWord);
     for (var element in _searchedBusinessCopy) {
       if (element.name.contains(keyWord) ||
           element.state.contains(keyWord) ||
+          element.luxCode.contains(keyWord) ||
           element.description.contains(keyWord)) {
         _searchedBusiness.add(element);
       }
@@ -75,6 +90,7 @@ class BusinessProvider extends BaseProvider {
     notifyListeners();
   }
 
+  ///displays all
   displayAllBusiness() {
     _searchedBusiness = _searchedBusinessCopy;
 
@@ -143,7 +159,7 @@ class BusinessProvider extends BaseProvider {
     notifyListeners();
   }
 
-//
+  ///
   //clear what ever is in the business field
   clearSingleBusiness() {
     _fetchedSingleBusiness = BusinessModel.init();
@@ -194,9 +210,45 @@ class BusinessProvider extends BaseProvider {
     _selectedBusiness = business;
     notifyListeners();
   }
+
+  ///I wrote this code in other to use the proxy provider to updat the business provider one i get data from AuthProvider class to set the current subscription if the user have subscribed
+  AuthProvider? _authProvider;
+  updateBusinessProviderWithAuth(AuthProvider auth) {
+    // log('I am getting something >>>>>>>>>>>>>>  ${auth.user.toJson()}');
+    _authProvider = auth;
+    setSubscriptionTypeOnLogInBusiness();
+  }
+
+  setSubscriptionTypeOnLogInBusiness() {
+    seSubscriptionType =
+        _authProvider!.business.currentSubscription['paymentOption'];
+    _currentSubscriptionInfo = _authProvider!.business.currentSubscription;
+  }
+
+  ///Subscription type
+  ///
+  ///
+  Map<String, dynamic> _currentSubscriptionInfo = {};
+  Map<String, dynamic> get currentSubscriptionInfo => _currentSubscriptionInfo;
+  SubscriptionType _subscriptionType = SubscriptionType.none;
+  SubscriptionType get subscriptionType => _subscriptionType;
+  set seSubscriptionType(String val) {
+    if (val.toLowerCase() == 'quarterly') {
+      _subscriptionType = SubscriptionType.quarterly;
+    } else if (val.toLowerCase() == 'semi-annually') {
+      _subscriptionType = SubscriptionType.semiAnnually;
+    } else if (val.toLowerCase() == 'yearly') {
+      _subscriptionType = SubscriptionType.yearly;
+    } else {
+      _subscriptionType = SubscriptionType.none;
+    }
+    notifyListeners();
+  }
 }
 
 enum UploadStatus { completed, failed, pending, wait, inProgress }
+
+enum SubscriptionType { quarterly, semiAnnually, yearly, none }
 
 class TopTenRating {
   int one = 0;

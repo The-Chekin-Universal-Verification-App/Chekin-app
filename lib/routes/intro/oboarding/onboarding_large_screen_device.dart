@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
 import 'package:tuple/tuple.dart';
 
-import '../../../core/providers/app_provider.dart';
 import '../../../res/language_and_emojis.dart';
 import '../../../utils/helpers/app_language.dart';
 import '../../auth/login_screen.dart';

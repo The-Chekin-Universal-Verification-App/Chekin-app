@@ -77,6 +77,8 @@ class _EmailEntryScreenState extends State<EmailEntryScreen> with FormMixin {
                   ),
                   CustomFormTextField(
                     controller: _firstName,
+                    type: InputType.email,
+                    validator: (value) => Validator.email(value),
                     onChange: (email) {
                       context.read<AuthProvider>().addToUserInfo =
                           model.copyWith(email: email);

@@ -4,13 +4,18 @@ import 'package:chekinapp/core/services/payment_service.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import '../../export.dart';
+import '../../routes/payment/payment_screen.dart';
+import '../providers/business_provider.dart';
 
 class PaymentCommand extends BaseCommand {
   PaymentCommand(super.c);
 
   AuthProvider get auth => getProvider();
-  Future<void> initPayment({required String paymentOption}) async {
+  BusinessProvider get business => getProvider();
+  Future<Map<String, dynamic>> initPayment(
+      {required String paymentOption}) async {
     BuildContext context = rootNav!.context;
+    Map<String, dynamic> result = {};
     Response? res;
 
     PaymentService service = PaymentService();
@@ -24,24 +29,47 @@ class PaymentCommand extends BaseCommand {
         if (res.statusCode == 200 ||
             res.statusCode == 201 && res.data['status'] == "success") {
           log(res.data.toString());
-          context.push(PayStackFundPage(
-            payStackUrl: res.data['data']["authorization_url"],
-            subscriptionRef: res.data['data']["reference"] ?? "",
-            subscriptionTitle: res.data['data']["paymentOption"] ?? "",
-          ));
+          result = res.data['data'];
+          // context.push(PayStackFundPage(
+          //   payStackUrl: res.data['data']["authorization_url"],
+          //   subscriptionRef: res.data['data']["reference"] ?? "",
+          //   subscriptionTitle: res.data['data']["paymentOption"] ?? "",
+          //   subscriptionType: paymentOption,
+          // ));
           // Future.delayed(const Duration(seconds: 2), () {
           //   DialogServices.messageModalFromTop(context,
           //       message: res?.data['message']);
           // });
         }
-      }
+      } else {}
     } catch (e) {
       /// if services is returning [null] then we would do nothing cause the exception thrown has been handled at the service class logic
-      null;
+      result = {};
     }
+    return result;
   }
 
-  Future<void> verifyPayment({required String ref}) async {
+  // Future<void> pay({required String paymentOption}) async {
+  //   // FlutterPaystackPlus.openPaystackPopup(
+  //   //   publicKey: '-Your-public-key-',
+  //   //   // customerEmail: 'youremail@gmail.com',
+  //   //   // context: context,
+  //   //   // secretKey: '-Your-secret-key-',
+  //   //   amount: (500 * 100).toString(),
+  //   //   // reference: DateTime.now().millisecondsSinceEpoch.toString(),
+  //   //   onClosed: () {
+  //   //     debugPrint('Could\'nt finish payment');
+  //   //   },
+  //   //   onSuccess: () async {
+  //   //     debugPrint('successful payment');
+  //   //   },
+  //   //   email: 'meetjahwill@gmail.com',
+  //   //   ref: DateTime.now().millisecondsSinceEpoch.toString(),
+  //   // );
+  // }
+
+  Future<void> verifyPayment(
+      {required String ref, required String subscriptionType}) async {
     BuildContext context = rootNav!.context;
     Response? res;
 
@@ -60,10 +88,12 @@ class PaymentCommand extends BaseCommand {
             DialogServices.messageModalFromTop(context,
                 message: 'Subscription Successfully paid for!');
           });
+          business.seSubscriptionType = subscriptionType;
         } else {
           DialogServices.messageModalFromTop(context,
               message: 'We could not verify if Subscription was Successful ',
               notificationType: NotificationType.error);
+          business.seSubscriptionType = 'none';
         }
       }
     } catch (e) {
@@ -79,8 +109,12 @@ class PayStackFundPage extends StatefulWidget {
     required this.payStackUrl,
     required this.subscriptionRef,
     required this.subscriptionTitle,
+    required this.subscriptionType,
   }) : super(key: key);
-  final String payStackUrl, subscriptionRef, subscriptionTitle;
+  final String payStackUrl,
+      subscriptionRef,
+      subscriptionTitle,
+      subscriptionType;
 
   @override
   State<PayStackFundPage> createState() => _PayStackFundPageState();
@@ -98,18 +132,23 @@ class _PayStackFundPageState extends State<PayStackFundPage> {
             onTapLeadingIcon: () {
               isVerifying = true;
               setState(() {});
-
-              ///call verify endpoint
-              PaymentCommand(context)
-                  .verifyPayment(ref: widget.subscriptionRef);
-              Future.delayed(const Duration(seconds: 3), () {
+              Future.delayed(const Duration(seconds: 1), () {
                 isVerifying = false; // set loader to false
                 setState(() {});
                 Navigator.of(context).pop(); //pop of to the previous screen
               });
+
+              ///call verify endpoint
+              PaymentCommand(context).verifyPayment(
+                  ref: widget.subscriptionRef,
+                  subscriptionType: widget.subscriptionType);
             },
             centerTitle: false,
-            title: widget.subscriptionTitle,
+            titleWidget: Text(
+              '${widget.subscriptionTitle.toTitleCase()} Subscription',
+              style: TextStyles.h5.copyWith(color: Colors.black),
+            ),
+            // title: '${widget.subscriptionTitle.toTitleCase()} Subscription',
           ),
           body: WebView(
             initialUrl: widget.payStackUrl,

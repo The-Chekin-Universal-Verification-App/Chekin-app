@@ -92,19 +92,19 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             ),
                           ),
                           const HSpace(20),
-                          CustomContainer(
-                            height: 40,
-                            width: 40,
-                            // padding: EdgeInsets.all(5),
-                            borderRadius: Corners.s5Border,
-                            color: theme.primary.withOpacity(0.15),
-                            child: Center(
-                              child: SvgIcon(
-                                R.png.menuOutline.svg,
-                                size: context.sp(20),
-                              ),
-                            ),
-                          )
+                          // CustomContainer(
+                          //   height: 40,
+                          //   width: 40,
+                          //   // padding: EdgeInsets.all(5),
+                          //   borderRadius: Corners.s5Border,
+                          //   color: theme.primary.withOpacity(0.15),
+                          //   child: Center(
+                          //     child: SvgIcon(
+                          //       R.png.menuOutline.svg,
+                          //       size: context.sp(20),
+                          //     ),
+                          //   ),
+                          // )
                         ],
                       )
                     ],
@@ -123,6 +123,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                           controller: _searchController,
                           autoFocus: false,
                           isRequired: false,
+                          onFieldSubmitted: (v) {
+                            context.read<ProductProvider>().sortProduct =
+                                _searchController.text;
+                          },
                           prefix: UnconstrainedBox(
                             child: SvgIcon(
                               R.png.search.svg,
@@ -133,9 +137,10 @@ class _DiscoverScreenState extends State<DiscoverScreen> {
                             }),
                           ),
                           suffix: UnconstrainedBox(
-                            child: SvgIcon(
-                              R.png.filter.svg,
-                              size: 25,
+                            child: Icon(
+                              Icons.close_rounded,
+                              size: 22,
+                              color: theme.black,
                             ).clickable(() {
                               _searchController.clear();
 

@@ -44,7 +44,7 @@ mixin _$BusinessModel {
   bool get verified => throw _privateConstructorUsedError;
   String get paymentOption => throw _privateConstructorUsedError;
   bool get isActive => throw _privateConstructorUsedError;
-  String get currentSubscription => throw _privateConstructorUsedError;
+  dynamic get currentSubscription => throw _privateConstructorUsedError;
   String get businessImage => throw _privateConstructorUsedError;
   String get luxCode => throw _privateConstructorUsedError;
 
@@ -83,7 +83,7 @@ abstract class $BusinessModelCopyWith<$Res> {
       bool verified,
       String paymentOption,
       bool isActive,
-      String currentSubscription,
+      dynamic currentSubscription,
       String businessImage,
       String luxCode});
 }
@@ -123,7 +123,7 @@ class _$BusinessModelCopyWithImpl<$Res, $Val extends BusinessModel>
     Object? verified = null,
     Object? paymentOption = null,
     Object? isActive = null,
-    Object? currentSubscription = null,
+    Object? currentSubscription = freezed,
     Object? businessImage = null,
     Object? luxCode = null,
   }) {
@@ -216,10 +216,10 @@ class _$BusinessModelCopyWithImpl<$Res, $Val extends BusinessModel>
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
               as bool,
-      currentSubscription: null == currentSubscription
+      currentSubscription: freezed == currentSubscription
           ? _value.currentSubscription
           : currentSubscription // ignore: cast_nullable_to_non_nullable
-              as String,
+              as dynamic,
       businessImage: null == businessImage
           ? _value.businessImage
           : businessImage // ignore: cast_nullable_to_non_nullable
@@ -263,7 +263,7 @@ abstract class _$$_BusinessModelCopyWith<$Res>
       bool verified,
       String paymentOption,
       bool isActive,
-      String currentSubscription,
+      dynamic currentSubscription,
       String businessImage,
       String luxCode});
 }
@@ -301,7 +301,7 @@ class __$$_BusinessModelCopyWithImpl<$Res>
     Object? verified = null,
     Object? paymentOption = null,
     Object? isActive = null,
-    Object? currentSubscription = null,
+    Object? currentSubscription = freezed,
     Object? businessImage = null,
     Object? luxCode = null,
   }) {
@@ -394,10 +394,10 @@ class __$$_BusinessModelCopyWithImpl<$Res>
           ? _value.isActive
           : isActive // ignore: cast_nullable_to_non_nullable
               as bool,
-      currentSubscription: null == currentSubscription
+      currentSubscription: freezed == currentSubscription
           ? _value.currentSubscription
           : currentSubscription // ignore: cast_nullable_to_non_nullable
-              as String,
+              as dynamic,
       businessImage: null == businessImage
           ? _value.businessImage
           : businessImage // ignore: cast_nullable_to_non_nullable
@@ -511,7 +511,7 @@ class _$_BusinessModel with DiagnosticableTreeMixin implements _BusinessModel {
   final bool isActive;
   @override
   @JsonKey()
-  final String currentSubscription;
+  final dynamic currentSubscription;
   @override
   @JsonKey()
   final String businessImage;
@@ -594,8 +594,8 @@ class _$_BusinessModel with DiagnosticableTreeMixin implements _BusinessModel {
                 other.paymentOption == paymentOption) &&
             (identical(other.isActive, isActive) ||
                 other.isActive == isActive) &&
-            (identical(other.currentSubscription, currentSubscription) ||
-                other.currentSubscription == currentSubscription) &&
+            const DeepCollectionEquality()
+                .equals(other.currentSubscription, currentSubscription) &&
             (identical(other.businessImage, businessImage) ||
                 other.businessImage == businessImage) &&
             (identical(other.luxCode, luxCode) || other.luxCode == luxCode));
@@ -627,7 +627,7 @@ class _$_BusinessModel with DiagnosticableTreeMixin implements _BusinessModel {
         verified,
         paymentOption,
         isActive,
-        currentSubscription,
+        const DeepCollectionEquality().hash(currentSubscription),
         businessImage,
         luxCode
       ]);
@@ -670,7 +670,7 @@ abstract class _BusinessModel implements BusinessModel {
       final bool verified,
       final String paymentOption,
       final bool isActive,
-      final String currentSubscription,
+      final dynamic currentSubscription,
       final String businessImage,
       final String luxCode}) = _$_BusinessModel;
 
@@ -724,7 +724,7 @@ abstract class _BusinessModel implements BusinessModel {
   @override
   bool get isActive;
   @override
-  String get currentSubscription;
+  dynamic get currentSubscription;
   @override
   String get businessImage;
   @override

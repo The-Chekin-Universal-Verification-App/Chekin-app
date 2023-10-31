@@ -17,10 +17,17 @@ void main() {
     ChangeNotifierProvider(create: (_) => AuthProvider()),
     ChangeNotifierProvider(create: (_) => HomeProvider()),
     ChangeNotifierProvider(create: (_) => WishListProvider()),
-    ChangeNotifierProvider(create: (_) => BusinessProvider()),
+    // ChangeNotifierProvider(create: (_) => BusinessProvider()),
     ChangeNotifierProvider(create: (_) => ImageProviders()),
     ChangeNotifierProvider(create: (_) => DiscoverProvider()),
     ChangeNotifierProvider(create: (_) => ProductProvider()),
+    ChangeNotifierProxyProvider<AuthProvider, BusinessProvider>(
+      create: (_) => BusinessProvider(),
+      update: (_, auth, business) {
+        business?.updateBusinessProviderWithAuth(auth);
+        return business as BusinessProvider;
+      },
+    ),
     Provider<BuildContext>(create: (c) => c),
   ], child: const MyApp()));
 }

@@ -3,6 +3,7 @@ import 'package:chekinapp/routes/discover/discover_components/discover_item.dart
 import 'package:flutter/material.dart';
 
 import '../../components/input/base_text_input.dart';
+import '../../components/msc/loader_state_widget.dart';
 import '../../core/models/business_model.dart';
 import '../../core/providers/business_provider.dart';
 import '../../core/providers/product_provider.dart';
@@ -69,6 +70,12 @@ class _BusinessScreenState extends State<BusinessScreen> {
                           controller: _searchController,
                           isRequired: false,
                           autoFocus: false,
+                          onFieldSubmitted: (v) {
+                            context
+                                    .read<BusinessProvider>()
+                                    .sortSearchBusinessByCategoryOrKeyWord =
+                                _searchController.text;
+                          },
                           prefix: UnconstrainedBox(
                             child: SvgIcon(
                               R.png.search.svg,
@@ -80,18 +87,18 @@ class _BusinessScreenState extends State<BusinessScreen> {
                                   _searchController.text;
                             }),
                           ),
-                          suffix: UnconstrainedBox(
-                            child: SvgIcon(
-                              R.png.filter.svg,
-                              size: 25,
-                            ).clickable(() {
-                              _searchController.clear();
-//
-                              context
-                                  .read<BusinessProvider>()
-                                  .displayAllBusiness();
-                            }),
-                          ),
+//                           suffix: UnconstrainedBox(
+//                             child: SvgIcon(
+//                               R.png.filter.svg,
+//                               size: 25,
+//                             ).clickable(() {
+//                               _searchController.clear();
+// //
+//                               context
+//                                   .read<BusinessProvider>()
+//                                   .displayAllBusiness();
+//                             }),
+//                           ),
                         ),
                       ),
                       const HSpace(20),
@@ -166,40 +173,52 @@ class BusinessViewSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool state = context.select((BusinessProvider provider) => provider.isBusy);
+
     ViewType viewType =
         context.select((DiscoverProvider provider) => provider.viewType);
-    List<BusinessModel> businesses = context
-        .select((BusinessProvider business) => business.allAvailableBusiness);
+    List<BusinessModel> businesses =
+        context.watch<BusinessProvider>().allAvailableBusiness;
 
     return viewType == ViewType.listView
-        ? ListView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemCount: businesses.length,
-            itemBuilder: (BuildContext context, index) => BusinessItem(
-              businessObject: businesses[index],
-              onItemTap: () {
-                context.read<BusinessProvider>().selectABusiness =
-                    businesses[index];
-                context.push(const BusinessReviewScreen());
-              },
+        ? LoaderStateItem(
+            key: UniqueKey(),
+            isLoading: state,
+            item: businesses,
+            widgetOnLoadSuccess: ListView.builder(
+              physics: const BouncingScrollPhysics(),
+              itemCount: businesses.length,
+              itemBuilder: (BuildContext context, index) => BusinessItem(
+                businessObject: businesses[index],
+                onItemTap: () {
+                  context.read<BusinessProvider>().selectABusiness =
+                      businesses[index];
+                  context.push(const BusinessReviewScreen());
+                },
+              ),
             ),
-          )
-        : GridView.builder(
-            physics: const BouncingScrollPhysics(),
-            itemCount: businesses.length,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 10,
-                crossAxisSpacing: 15,
-                childAspectRatio: 0.7),
-            itemBuilder: (BuildContext context, index) => BusinessItem(
-                  businessObject: businesses[index],
-                  onItemTap: () {
-                    context.read<BusinessProvider>().selectABusiness =
-                        businesses[index];
-                    context.push(const BusinessReviewScreen());
-                  },
-                ));
+          ).center()
+        : LoaderStateItem(
+            key: UniqueKey(),
+            isLoading: state,
+            item: businesses,
+            widgetOnLoadSuccess: GridView.builder(
+                physics: const BouncingScrollPhysics(),
+                itemCount: businesses.length,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 10,
+                    crossAxisSpacing: 15,
+                    childAspectRatio: 0.7),
+                itemBuilder: (BuildContext context, index) => BusinessItem(
+                      businessObject: businesses[index],
+                      onItemTap: () {
+                        context.read<BusinessProvider>().selectABusiness =
+                            businesses[index];
+                        context.push(const BusinessReviewScreen());
+                      },
+                    )),
+          ).center();
   }
 }
 
@@ -224,6 +243,7 @@ class BusinessItem extends StatelessWidget {
       child: ColorBox(
         color: color ?? theme.primary,
         onTap: onItemTap,
+        padding: const EdgeInsets.symmetric(horizontal: 0),
         child: ConstrainedBox(
           constraints:
               BoxConstraints(maxWidth: context.widthPx, maxHeight: 200),
@@ -234,15 +254,20 @@ class BusinessItem extends StatelessWidget {
                     Flexible(
                         flex: 1,
                         child: ImageItem(
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              bottomLeft: Radius.circular(5),
+                            ),
                             imagePath: businessObject.businessImage)), //
                     const HSpace(10),
                     Flexible(
                       flex: 2,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        // mainAxisAlignment: MainAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text(businessObject.owner,
+                          Text(businessObject.luxCode,
                               style: TextStyles.h6
                                   .copyWith(fontWeight: FontWeight.w500)),
                           const VSpace(5),
@@ -250,6 +275,8 @@ class BusinessItem extends StatelessWidget {
                             crossAxisAlignment: WrapCrossAlignment.center,
                             children: [
                               Text(businessObject.name,
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
                                   style: TextStyles.h7
                                       .copyWith(fontWeight: FontWeight.w700)),
                               const HSpace(5),
@@ -267,36 +294,48 @@ class BusinessItem extends StatelessWidget {
                   ],
                 )
               : Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
-                      child: ImageItem(imagePath: businessObject.businessImage),
+                      flex: 2,
+                      child: CustomContainer(
+                          width: context.widthPx,
+                          color: theme.dividerColor,
+                          child: ImageItem(
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(5),
+                                topRight: Radius.circular(5),
+                              ),
+                              imagePath: businessObject.businessImage)),
                     ),
                     const VSpace(5),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(businessObject.owner,
-                            textAlign: TextAlign.center,
-                            overflow: TextOverflow.ellipsis,
-                            maxLines: 2,
-                            style: TextStyles.h6
-                                .copyWith(fontWeight: FontWeight.w500)),
-                        const VSpace(9),
-                        Wrap(
-                          crossAxisAlignment: WrapCrossAlignment.center,
-                          children: [
-                            Text(businessObject.name,
-                                style: TextStyles.h7
-                                    .copyWith(fontWeight: FontWeight.w700)),
-                            const HSpace(5),
-                            if (businessObject.verified) ...[
-                              Image.asset(R.png.verified.imgPng)
-                            ]
-                          ],
-                        ),
-                        const VSpace(10),
-                      ],
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(businessObject.luxCode,
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 2,
+                              style: TextStyles.h6
+                                  .copyWith(fontWeight: FontWeight.w500)),
+                          const VSpace(9),
+                          Wrap(
+                            crossAxisAlignment: WrapCrossAlignment.center,
+                            children: [
+                              Text(businessObject.name,
+                                  style: TextStyles.h7
+                                      .copyWith(fontWeight: FontWeight.w700)),
+                              const HSpace(5),
+                              if (businessObject.verified) ...[
+                                Image.asset(R.png.verified.imgPng)
+                              ]
+                            ],
+                          ),
+                          const VSpace(10),
+                        ],
+                      ),
                     )
                   ],
                 ),

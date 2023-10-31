@@ -256,6 +256,7 @@
       "completeVerification": "eComplete your verification",
           "completeVerificationNote": "eYou are required to upload all necessary document to get full access to this app.",
     "skipForNow": "eSkip for now",
+         "uploadDocuments": "eUpload documents",
     "privacyPolicy": "ePrivacy Policy"
 
 }

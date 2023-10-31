@@ -531,6 +531,7 @@ class CustomFormTextFieldWithBorder extends StatefulWidget {
   final Function(String?)? onSaved;
   final Function(bool)? onFocusChanged;
   final Function(FocusNode)? onFocusCreated;
+  final Function(String val)? onFieldSubmitted;
   final IconData? icon;
   final bool obscure;
   final bool readOnly;
@@ -571,6 +572,7 @@ class CustomFormTextFieldWithBorder extends StatefulWidget {
     this.suffix,
     this.formatter,
     this.validator,
+    this.onFieldSubmitted,
   }) : super(key: key);
 
   @override
@@ -599,8 +601,11 @@ class _CustomFormTextFieldWithBorderState
               autoFocus: widget.autoFocus,
               initialValue: widget.initialValue,
               onChanged: widget.onChange,
+              onFieldSubmitted: widget.onFieldSubmitted, //
               onFocusCreated: widget.onFocusCreated,
               style: widget.textStyle ?? TextStyles.h6.bold,
+              inputAction: TextInputAction.search,
+
               onSaved: widget.onSaved,
               onFocusChanged: widget.onFocusChanged,
               controller: widget.controller,

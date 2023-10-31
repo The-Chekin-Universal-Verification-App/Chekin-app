@@ -108,13 +108,14 @@ class Mock {
   final String changePassword = '$api/user/change-password';
   final String getBusiness = '$api/business/';
   final String getTopRatedBusiness = '$api/business/top-rated';
-  final String initPayment = '$api/payment/initialize-dev';
-   String verifyPayment(String ref) => '$api/payment/verify-status/$ref';
-   String confirmDocumentUpload(String businessId) => '$api//business/confirm-documents/$businessId';
+  final String initPayment = '$api/payment/initialize';
+  String verifyPayment(String ref) => '$api/payment/verify-status/$ref';
+  String confirmDocumentUpload(String businessId) =>
+      '$api//business/confirm-documents/$businessId';
   final String getLex = '$api/business/lux-code';
   final String updateProfile = '$api/user/update-profile';
   final String updateBusiness = '$api/business/update-business';
-  final String getProducts = '$api/product';
+  final String getProducts = '$api/product'; //
   final String getMyProducts = '$api/product/me';
   String productId(String productId) => '$api/product/$productId';
   final String getCategory = '$api/category';

@@ -9,18 +9,20 @@ class ColorBox extends StatelessWidget {
       required this.child,
       this.boxConstrains,
       this.colorOpacity = .15,
-      this.borderRadius});
+      this.borderRadius,
+      this.padding});
   final Color? color;
   final Widget child;
   final Function() onTap;
   final BoxConstraints? boxConstrains;
   final double colorOpacity;
+  final EdgeInsetsGeometry? padding;
   final BorderRadiusGeometry? borderRadius;
   @override
   Widget build(BuildContext context) {
     return Container(
       constraints: boxConstrains,
-      padding: const EdgeInsets.all(15),
+      padding: padding ?? const EdgeInsets.all(15),
       decoration: BoxDecoration(
         borderRadius: borderRadius ?? Corners.s8Border,
         color: color?.withOpacity(colorOpacity),

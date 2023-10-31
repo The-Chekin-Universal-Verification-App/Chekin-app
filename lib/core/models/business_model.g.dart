@@ -30,7 +30,7 @@ _$_BusinessModel _$$_BusinessModelFromJson(Map<String, dynamic> json) =>
       verified: json['verified'] as bool? ?? false,
       paymentOption: json['paymentOption'] as String? ?? '',
       isActive: json['isActive'] as bool? ?? false,
-      currentSubscription: json['currentSubscription'] as String? ?? '',
+      currentSubscription: json['currentSubscription'] ?? '',
       businessImage: json['businessImage'] as String? ?? '',
       luxCode: json['luxCode'] as String? ?? '',
     );

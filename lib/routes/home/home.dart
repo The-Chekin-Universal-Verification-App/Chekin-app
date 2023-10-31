@@ -12,19 +12,16 @@ import 'package:chekinapp/export.dart';
 import '../../core/models/business_model.dart';
 import '../../core/providers/business_provider.dart';
 import '../business/businesses.dart';
-import '../payment/payment_screen.dart';
 import 'advert_slider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
-  static Map<String, dynamic> firstMap = {'name': 'John', 'dob': '2/3/23'};
-  static Map<String, dynamic> secondMap = {'name': 'Mark', 'dob': '3/4/24'};
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
     UserModel user = context.select((AuthProvider provider) => provider.user);
-    List<BusinessModel> businesses = context
-        .select((BusinessProvider business) => business.allAvailableBusiness);
+    // List<BusinessModel> businesses = context
+    //     .select((BusinessProvider business) => business.allAvailableBusiness);
 
     return Scaffold(
       body: SafeArea(
@@ -121,6 +118,11 @@ class HomeScreen extends StatelessWidget {
                 CustomFormTextFieldWithBorder(
                   hintText: context.loc.search,
                   isRequired: false,
+                  // onFieldSubmitted: (v) {
+                  //   context.read<ProductProvider>().sortProduct =
+                  //       _searchController.text;
+                  //
+                  // },
                   prefix: UnconstrainedBox(
                     child: SvgIcon(
                       R.png.search.svg,
@@ -130,12 +132,12 @@ class HomeScreen extends StatelessWidget {
                     //
                     // BusinessCommand(context).getBusiness();
                   }),
-                  suffix: UnconstrainedBox(
-                    child: SvgIcon(
-                      R.png.filter.svg,
-                      size: 25,
-                    ),
-                  ),
+                  // suffix: UnconstrainedBox(
+                  //   child: SvgIcon(
+                  //     R.png.filter.svg,
+                  //     size: 25,
+                  //   ),
+                  // ),
                 ),
                 const VSpace(20),
                 const AdvertSlider(),

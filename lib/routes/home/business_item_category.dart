@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chekinapp/export.dart';
 import 'package:flutter/material.dart';
 
@@ -13,31 +14,52 @@ class BusinessItemCategory extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppTheme theme = context.watch();
     return Container(
       constraints: const BoxConstraints(maxHeight: 180, maxWidth: 170),
       decoration: BoxDecoration(
-          borderRadius: Corners.s10Border,
-          color: color?.withOpacity(0.7) ??
-              Theme.of(context).colorScheme.background,
-          // color:
-          //     color?.withOpacity(0.7) ?? const Color(0xFFF9BFC9).withOpacity(0.7),
-          boxShadow: Shadows.small),
+        borderRadius: Corners.s10Border,
+        color:
+            color?.withOpacity(0.7) ?? Theme.of(context).colorScheme.background,
+        // color:
+        //     color?.withOpacity(0.7) ?? const Color(0xFFF9BFC9).withOpacity(0.7),
+        //    boxShadow: Shadows.small
+      ),
       margin: const EdgeInsets.only(right: 10),
       padding: const EdgeInsets.only(top: 2, bottom: 6),
       child: Column(
         // crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
-              flex: 1,
-              child: Image.network(
-                businessModel.businessImage,
-                fit: BoxFit.cover,
-                errorBuilder: (a, b, c) => const SizedBox(
-                    child: Icon(
-                  Icons.image_outlined,
-                  size: 35,
-                )),
-              ).center()),
+            flex: 2,
+            child: CustomContainer(
+              width: context.widthPx,
+              color: theme.dividerColor,
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10),
+                topRight: Radius.circular(10),
+              ),
+              // ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    // horizontal: 1.0,
+                    ),
+                child: CachedNetworkImage(
+                  imageUrl: businessModel.businessImage,
+                  fit: BoxFit.cover,
+
+                  ///
+                  errorWidget: (BuildContext context, i, b) {
+                    return const SizedBox(
+                        child: Icon(
+                      Icons.image_outlined,
+                      size: 35,
+                    ));
+                  },
+                ),
+              ),
+            ),
+          ),
           const VSpace(8),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),

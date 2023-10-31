@@ -111,18 +111,22 @@ class BusinessCommand extends BaseCommand {
         bizID: bizID,
       );
       if (res != null) {
-        log(res.data);
+        // print('working status check>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>');
+        log(res.data.toString());
         if (res.statusCode == 200 ||
             res.statusCode == 201 && res.data['status'] == "success") {
           BusinessDocUploadModel bizStatus =
-              BusinessDocUploadModel.fromJson(res.data);
-
+              BusinessDocUploadModel.fromJson(res.data['data']);
           if (res.data['data']['idUpload'] == false ||
               res.data['data']['utility'] == false ||
               res.data['data']['instagramWhenLoggedIn'] == false ||
               res.data['data']['facebookWhenLoggedIn'] == false ||
-              res.data['data']['facebookWhenLoggedIn'] == false) {
-            context.push(const IncompleteAccountKYCNotifier());
+              res.data['data']['selfieHoldingId'] == false) {
+            context.push(IncompleteAccountKYCNotifier(bizStatus: bizStatus));
+          } else {
+            // context.push(IncompleteAccountKYCNotifier(
+            //   bizStatus: bizStatus,
+            // ));
           }
         }
       }

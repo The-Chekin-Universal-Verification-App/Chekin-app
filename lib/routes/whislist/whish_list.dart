@@ -123,7 +123,7 @@ class MySnackBar {
   const MySnackBar({required this.context});
   final BuildContext context;
 
-  showSnackBar({String? message}) {
+  showSnackBar({String? message, Color color = Colors.green}) {
     BuildContext? contxt = R.N.nav?.context ?? context;
     ScaffoldMessenger.of(contxt).showSnackBar(SnackBar(
         backgroundColor: Colors.transparent,
@@ -137,7 +137,7 @@ class MySnackBar {
               right: Insets.m,
               bottom: 50),
           decoration: BoxDecoration(
-            color: Colors.green,
+            color: color,
             borderRadius: BorderRadius.circular(8),
           ),
           child: Material(

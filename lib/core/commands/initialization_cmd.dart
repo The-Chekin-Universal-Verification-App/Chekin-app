@@ -1,6 +1,7 @@
 import 'package:chekinapp/core/commands/product_command.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../utils/helpers/enums.dart';
 import '../providers/auth_provider.dart';
 import 'business_command.dart';
 import 'commands.dart';
@@ -16,7 +17,10 @@ class InitializationCmd extends BaseCommand {
     ProductCommand(context).getProducts();
     ProductCommand(context).getCategory();
     ProductCommand(context).getWishList();
-    ProductCommand(context).getMyUploadedProducts();
+
+    if (auth.accountType == UserType.biz) {
+      ProductCommand(context).getMyUploadedProducts();
+    }
   }
 
 //

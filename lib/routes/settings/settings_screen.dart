@@ -1,5 +1,6 @@
 import 'package:chekinapp/export.dart';
 import 'package:flutter/material.dart';
+import '../../core/models/business_model.dart';
 import '../auth/change_password.dart';
 import '../auth/login_screen.dart';
 import '../payment/current_subscription_screen.dart';
@@ -14,6 +15,8 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
     UserModel user = context.select((AuthProvider provider) => provider.user);
+    BusinessModel biz =
+        context.select((AuthProvider provider) => provider.business);
 
     UserType userType =
         context.select((AuthProvider provider) => provider.accountType);
@@ -71,7 +74,11 @@ class SettingsScreen extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 12.0, vertical: 3),
                               child: Text(
-                                userType.name,
+                                userType == UserType.normal
+                                    ? context.loc.user.toTitleCase()
+                                    : userType == UserType.biz
+                                        ? context.loc.business.toTitleCase()
+                                        : '',
                                 style: TextStyles.body1.copyWith(
                                     fontWeight: FontWeight.w500,
                                     color: Colors.white),
@@ -128,9 +135,19 @@ class SettingsScreen extends StatelessWidget {
                 title: context.loc.privacy,
               ),
               SettingsItem(
-                onItemTap: () {
+                onItemTap:
+                    // !biz.verified
+                    //     ?
+                    () {
                   context.push(const CurrentSubscriptionScreen());
-                },
+                }
+                // : () {
+                //     MySnackBar(context: context).showSnackBar(
+                //         color: Colors.red,
+                //         message:
+                //             'Please your business account is yet to be verified. Kindly the Admin for verification.');
+                //   },
+                ,
                 imagePath: R.png.paymentIcon.svg,
                 title: context.loc.subscription,
               ),

@@ -39,17 +39,25 @@ class _DiscoverItemState extends State<DiscoverItem> {
       child: ColorBox(
         color: widget.color ?? theme.primary,
         onTap: widget.onItemTap,
+        padding: const EdgeInsets.all(0),
         child: ConstrainedBox(
-          constraints:
-              BoxConstraints(maxWidth: context.widthPx, maxHeight: 200),
+          constraints: BoxConstraints(
+              maxWidth: context.widthPx,
+              maxHeight: viewType == ViewType.listView ? 130 : 200),
           child: viewType == ViewType.listView
               ? Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Flexible(
-                        flex: 1,
-                        child: ImageItem(
-                            imagePath: widget.product.images.first)), //
+                      flex: 1,
+                      child: ImageItem(
+                          imageHeight: context.heightPx,
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            bottomLeft: Radius.circular(5),
+                          ),
+                          imagePath: widget.product.images.first),
+                    ), //
                     const HSpace(10),
                     Flexible(
                       flex: 2,
@@ -108,12 +116,17 @@ class _DiscoverItemState extends State<DiscoverItem> {
                             ],
                           ),
                           const VSpace(5),
-                          Wrap(
-                            crossAxisAlignment: WrapCrossAlignment.center,
+                          Row(
+                            // crossAxisAlignment: WrapCrossAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text(widget.product.business!.name,
-                                  style: TextStyles.h7
-                                      .copyWith(fontWeight: FontWeight.w700)),
+                              Flexible(
+                                flex: 2,
+                                child: Text(widget.product.business!.name,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: TextStyles.h7
+                                        .copyWith(fontWeight: FontWeight.w700)),
+                              ),
                               const HSpace(5),
                               if (widget.product.business!.verified) ...[
                                 Image.asset(
@@ -127,11 +140,10 @@ class _DiscoverItemState extends State<DiscoverItem> {
                             crossAxisAlignment: WrapCrossAlignment.center,
                             children: [
                               Text(
-                                  MoneyInputFormatter().toCurrencyString(
-                                      widget.product.price.toString()),
+                                  "NGN${MoneyInputFormatter().toCurrencyString(widget.product.price.toString())}",
                                   style: TextStyles.h7
                                       .copyWith(fontWeight: FontWeight.w500)),
-                              const HSpace(8),
+                              const HSpace(3),
                               FavButton(product: widget.product)
                             ],
                           ),
@@ -141,14 +153,23 @@ class _DiscoverItemState extends State<DiscoverItem> {
                   ],
                 )
               : Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  // mainAxisSize: MainAxisSize.min,
                   children: [
                     Expanded(
-                      child: ImageItem(imagePath: widget.product.images[0]),
+                      flex: 1,
+                      child: ImageItem(
+                          // imageHeight: 200,
+                          minWidth: context.widthPx,
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(5),
+                            topRight: Radius.circular(5),
+                          ),
+                          imagePath: widget.product.images[0]),
                     ),
                     const VSpace(5),
                     Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(widget.product.name,
                             textAlign: TextAlign.center,
@@ -156,7 +177,7 @@ class _DiscoverItemState extends State<DiscoverItem> {
                             maxLines: 2,
                             style: TextStyles.h6
                                 .copyWith(fontWeight: FontWeight.w500)),
-                        const VSpace(9),
+                        const VSpace(2),
                         Wrap(
                           crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
@@ -169,13 +190,12 @@ class _DiscoverItemState extends State<DiscoverItem> {
                             ]
                           ],
                         ),
-                        const VSpace(10),
+                        const VSpace(5),
                         Wrap(
                           crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
                             Text(
-                                MoneyInputFormatter().toCurrencyString(
-                                    widget.product.price.toString()),
+                                "NGN${MoneyInputFormatter().toCurrencyString(widget.product.price.toString())}",
                                 style: TextStyles.h7
                                     .copyWith(fontWeight: FontWeight.w500)),
                             const HSpace(8),
@@ -290,8 +310,8 @@ class _FavButtonState extends State<FavButton>
             duration: const Duration(milliseconds: 100),
             scale: scale,
             child: CustomContainer(
-              height: 25.0,
-              width: 25.0,
+              height: 21.0,
+              width: 21.0,
               borderRadius: Corners.s5Border,
               color: theme.primary.withOpacity(0.15),
               child: Center(
@@ -311,17 +331,23 @@ class _FavButtonState extends State<FavButton>
 }
 
 class ImageItem extends StatelessWidget {
-  const ImageItem({super.key, required this.imagePath, this.imageHeight = 109});
+  const ImageItem(
+      {super.key,
+      required this.imagePath,
+      this.imageHeight = 109,
+      this.minWidth = 150,
+      this.borderRadius});
 
   final String imagePath;
-  final double imageHeight;
+  final double imageHeight, minWidth;
+  final BorderRadius? borderRadius;
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: Corners.s5Border,
+      borderRadius: borderRadius ?? Corners.s5Border,
       child: Container(
         height: imageHeight,
-        constraints: const BoxConstraints(minWidth: 150),
+        constraints: BoxConstraints(minWidth: minWidth),
         child: Image.network(
           imagePath,
           errorBuilder: (context, obj, trac) => const Icon(

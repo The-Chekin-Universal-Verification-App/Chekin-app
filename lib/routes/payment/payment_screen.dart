@@ -1,11 +1,11 @@
+import 'package:chekinapp/core/commands/initialization_cmd.dart';
 import 'package:chekinapp/routes/document_upload/upload_valid_ids.dart';
-import 'package:chekinapp/routes/payment/paywith_card_option.dart';
 import 'package:flutter/material.dart';
 import 'package:chekinapp/export.dart';
+import 'package:flutter_paystack/flutter_paystack.dart';
 
 import '../../core/commands/payment_command.dart';
-
-enum SubscriptionType { quarterly, semiAnnual, annually }
+import '../../core/providers/business_provider.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({Key? key}) : super(key: key);
@@ -16,12 +16,58 @@ class PaymentScreen extends StatefulWidget {
 
 class _PaymentScreenState extends State<PaymentScreen> {
   SubscriptionType? subscription;
+  bool paymentCompleted = false;
+  final plugin = PaystackPlugin();
+  static const publicKey = 'pk_test_63bd747caee4909ad30dbd8ceb1cc74679899b33';
+
+  @override
+  initState() {
+    plugin.initialize(publicKey: publicKey);
+    subscription =
+        Provider.of<BusinessProvider>(context, listen: false).subscriptionType;
+    setState(() {});
+    super.initState();
+  }
+
+  chargeCard(BuildContext context, int amount,
+      {required String userEmail, required String ref}) async {
+    var charge = Charge()
+      ..amount = 100 * amount
+      ..reference = ref
+      ..putCustomField('custom_id', 'CheckinApp')
+      // ..putMetaData("action", "link_debit_card")
+      ..email = userEmail;
+
+    CheckoutResponse response = await plugin.checkout(context,
+        method: CheckoutMethod.card, charge: charge);
+
+    if (response.status == true) {
+      setState(() {
+        paymentCompleted = true;
+      });
+
+      if (mounted) {
+        DialogServices.messageModalFromTop(context,
+            message:
+                "Your ${MoneySymbols.ngn}$amount Funding was Successful Check Your Wallet For Balance ");
+
+        InitializationCmd(context)
+            .refreshUser(); //refresh the app to get new user details
+      }
+    } else {
+      // setState(() {
+      //   paymentCompleted = true;
+      // });
+      null;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     AppTheme theme = context.watch();
     bool paymentLoading =
         context.select((AuthProvider auth) => auth.paymentLoading);
+    UserModel user = context.select((AuthProvider auth) => auth.user);
     return Scaffold(
       appBar: CustomAppBar(
         leading: true,
@@ -99,11 +145,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           isActive: subscription == SubscriptionType.quarterly
                               ? true
                               : false,
-                        ).clickable(() {
+                        ).clickable(() async {
                           subscription = SubscriptionType.quarterly;
                           setState(() {});
-                          PaymentCommand(context)
-                              .initPayment(paymentOption: "quarterly");
+                          Map<String, dynamic> res =
+                              await PaymentCommand(context)
+                                  .initPayment(paymentOption: "quarterly");
+
+                          if (mounted && res != {}) {
+                            chargeCard(context, res['amount'],
+                                userEmail: user.email, ref: res['reference']);
+                          }
                         }),
                         // DashedRect(
                         //   color: subscription == SubscriptionType.quarterly
@@ -157,29 +209,48 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         // }),
                         const VSpace(10),
                         SemiAnnualItem(
-                          isActive: subscription == SubscriptionType.semiAnnual
-                              ? true
-                              : false,
-                        ).clickable(() {
-                          subscription = SubscriptionType.semiAnnual;
+                          isActive:
+                              subscription == SubscriptionType.semiAnnually
+                                  ? true
+                                  : false,
+                        ).clickable(() async {
+                          subscription = SubscriptionType.semiAnnually;
 
                           setState(() {});
 
-                          PaymentCommand(context)
-                              .initPayment(paymentOption: "semi-annually");
+                          // PaymentCommand(context)
+                          //     .initPayment(paymentOption: "semi-annually");
+
+                          Map<String, dynamic> res =
+                              await PaymentCommand(context)
+                                  .initPayment(paymentOption: "semi-annually");
+
+                          if (mounted && res != {}) {
+                            chargeCard(context, res['amount'],
+                                userEmail: user.email, ref: res['reference']);
+                          }
                         }),
 
                         const VSpace(10),
                         AnnualItem(
                                 isActive:
-                                    subscription == SubscriptionType.annually
+                                    subscription == SubscriptionType.yearly
                                         ? true
                                         : false)
-                            .clickable(() {
-                          subscription = SubscriptionType.annually;
+                            .clickable(() async {
+                          subscription = SubscriptionType.yearly;
                           setState(() {});
-                          PaymentCommand(context)
-                              .initPayment(paymentOption: "yearly");
+                          // PaymentCommand(context)
+                          //     .initPayment(paymentOption: "yearly");
+//
+                          Map<String, dynamic> res =
+                              await PaymentCommand(context)
+                                  .initPayment(paymentOption: "yearly");
+
+                          if (mounted && res != {}) {
+                            chargeCard(context, res['amount'],
+                                userEmail: user.email, ref: res['reference']);
+                          }
                         }),
                         const VSpace(30),
                       ],
@@ -192,13 +263,17 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       ),
                       child: PrimaryButton(
                         onPressed: () {
-                          context.push(const AddNewCardScreen());
+                          Navigator.of(context)
+                              .pop(); // context.push(const AddNewCardScreen());
                         },
                         label: context.loc.conti,
                         radius: 20,
                         fullWidth: true,
-                        color: Colors.transparent,
-                        textColor: theme.black,
+                        color: paymentCompleted
+                            ? theme.primary
+                            : Colors.transparent,
+                        textColor:
+                            paymentCompleted ? Colors.white : theme.black,
                         borderColor: theme.primary.withOpacity(0.48),
                         contentPadding:
                             const EdgeInsets.symmetric(vertical: 18),
@@ -237,9 +312,12 @@ class QuarterlyItem extends StatelessWidget {
   const QuarterlyItem({
     super.key,
     this.isActive = false,
+    this.amount,
+    this.expires,
   });
 
   final bool isActive;
+  final String? amount, expires;
 
   @override
   Widget build(BuildContext context) {
@@ -255,7 +333,10 @@ class QuarterlyItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(context.loc.quarterly,
+              Text(
+                  amount == null
+                      ? "${context.loc.quarterly}  ₦28,545 (3 MONTHS)"
+                      : "${context.loc.quarterly} ₦$amount",
                   style: TextStyles.body1.copyWith(
                       fontWeight: FontWeight.w700,
                       color: isActive ? Colors.white : null)),
@@ -301,10 +382,12 @@ class SemiAnnualItem extends StatelessWidget {
   const SemiAnnualItem({
     super.key,
     this.isActive = false,
+    this.amount,
+    this.expires,
   });
 
   final bool isActive;
-
+  final String? amount, expires;
   @override
   Widget build(BuildContext context) {
     return ColorFiltered(
@@ -319,7 +402,10 @@ class SemiAnnualItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(context.loc.semiAnnual,
+              Text(
+                  amount == null
+                      ? "${context.loc.semiAnnual} ₦50,562 (6 MONTHS)"
+                      : "${context.loc.semiAnnual} ₦$amount",
                   style: TextStyles.body1.copyWith(
                       fontWeight: FontWeight.w700,
                       color: isActive ? Colors.white : null)),
@@ -381,10 +467,12 @@ class AnnualItem extends StatelessWidget {
   const AnnualItem({
     super.key,
     this.isActive = false,
+    this.amount,
+    this.expires,
   });
 
   final bool isActive;
-
+  final String? amount, expires;
   @override
   Widget build(BuildContext context) {
     return ColorFiltered(
@@ -399,7 +487,10 @@ class AnnualItem extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(context.loc.yearly,
+              Text(
+                  amount == null
+                      ? "${context.loc.yearly} ₦97,530"
+                      : "${context.loc.yearly} ₦$amount",
                   style: TextStyles.body1.copyWith(
                       fontWeight: FontWeight.w700,
                       color: isActive ? Colors.white : null)),
@@ -474,3 +565,43 @@ class AnnualItem extends StatelessWidget {
     );
   }
 }
+
+// class PayStackPayment {
+//   final plugin = PaystackPlugin();
+//   static const publicKey = 'pk_test_63bd747caee4909ad30dbd8ceb1cc74679899b33';
+//
+//   init() {
+//     plugin.initialize(publicKey: publicKey);
+//   }
+//
+//   // String _getRefrence() {
+//   //   var platForm = (Platform.isIOS) ? 'iOS' : 'Android';
+//   //   final thisDate = DateTime.now().microsecondsSinceEpoch;
+//   //   return 'ChargeFrom${platForm}_$thisDate';
+//   // }
+//
+//   chargeCard(BuildContext context, int amount,
+//       {required String userEmail, required String ref}) async {
+//     var charge = Charge()
+//       ..amount = 100 * amount
+//       ..reference = ref
+//       ..putCustomField('custom_id', 'CheckinApp')
+//       // ..putMetaData("action", "link_debit_card")
+//       ..email = userEmail;
+//
+//     CheckoutResponse response = await plugin.checkout(context,
+//         method: CheckoutMethod.card, charge: charge);
+//
+//     if (response.status == true) {
+//       // if (mounted) {
+//       // context.pushOff(const MainScreen());
+//       DialogServices.messageModalFromTop(context,
+//           message:
+//               "Your ${MoneySymbols.ngn}$amount Funding was Successful Check Your Wallet For Balance ");
+//       // TransactionsCommand(context).getWallet();
+//       // }
+//     } else {
+//       // getSnabar(msg: 'Payment Failed');
+//     }
+//   }
+// }

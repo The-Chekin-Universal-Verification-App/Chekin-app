@@ -22,10 +22,9 @@ class Popular extends StatelessWidget {
       Color(0xffCCE4FF),
       Color(0xffD4FFE8),
     ];
-    List<BusinessModel> popular =
-        context.select((BusinessProvider provider) => provider.popular);
     bool state = context.select((BusinessProvider provider) => provider.isBusy);
-
+    List<BusinessModel> popular = context.watch<BusinessProvider>().popular;
+    // print(popular.length);
     return SizedBox(
         height: 180,
         child: LoaderStateItem(
@@ -33,7 +32,7 @@ class Popular extends StatelessWidget {
           isLoading: state,
           item: popular,
           widgetOnLoadSuccess: ListView.builder(
-              itemCount: popular.length ~/ 2,
+              itemCount: popular.length > 10 ? 10 : popular.length,
               physics: const BouncingScrollPhysics(),
               clipBehavior: Clip.none,
               scrollDirection: Axis.horizontal,
